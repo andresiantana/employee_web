@@ -29,7 +29,7 @@ class PosisiPendanaanBeasiswa extends CI_Controller {
 		$jml = $this->db->get('pencairan_biaya');
 
 		//pengaturan pagination
-		 $config['base_url'] = base_url().'keuangan/Pengeluaran/index';
+		 $config['base_url'] = base_url().'keuangan/PosisiPendanaanBeasiswa/index';
 		 $config['total_rows'] = $jml->num_rows();
 		 $config['per_page'] = '10';
 		 $config['first_page'] = 'Awal';
@@ -51,7 +51,7 @@ class PosisiPendanaanBeasiswa extends CI_Controller {
 	
 		if($nip != '' || $nama != '' || $kode_pengeluaran != '' ||  $tanggal_awal != '' || $tanggal_akhir != ''){
 			$data['data']	= $this->KUPencairanBiayaT->tampilLaporanPendanaanBeasiswa($config['per_page'],$id,$nip,$nama,$kode_pengeluaran,$tanggal_awal,$tanggal_akhir)->result_object();
-			$tr['tr'] = $this->load->view('keuangan/pengeluaran/pencarian',$data,true);
+			$tr['tr'] = $this->load->view('keuangan/posisiPendanaanBeasiswa/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
