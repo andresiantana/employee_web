@@ -4,15 +4,16 @@
         <a class="active-menu" href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
     <li>
-        <a href="#"><i class="fa fa-sitemap"></i> Master<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="#">Master 1</a>
+                <a href="<?php echo base_url('admin/role'); ?>">Role</a>
+                <a href="<?php echo base_url('admin/rolePemakai'); ?>">Role Pemakai</a>
             </li>
         </ul>
     </li>
     <li>
-        <a href="#"><i class="fa fa-sitemap"></i> Transaksi<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-list"></i> Transaksi<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="#">Transaksi 1</a>
@@ -20,7 +21,7 @@
         </ul>
     </li>
     <li>
-        <a href="#"><i class="fa fa-sitemap"></i> Informasi<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-table"></i> Informasi<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="#">Informasi 1</a>
@@ -28,7 +29,7 @@
         </ul>
     </li>
     <li>
-        <a href="#"><i class="fa fa-sitemap"></i> Laporan<span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-bar-chart-o"></i> Laporan<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <a href="#">Laporan 1</a>
