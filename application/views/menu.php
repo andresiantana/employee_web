@@ -7,8 +7,8 @@
         <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="<?php echo base_url('admin/role'); ?>">Role</a>
-                <a href="<?php echo base_url('admin/rolePemakai'); ?>">Role Pemakai</a>
+                <a href="<?php echo base_url('admin/role'); ?>">Role User</a>
+                <a href="<?php echo base_url('admin/rolePemakai'); ?>">List User</a>
             </li>
         </ul>
     </li>
