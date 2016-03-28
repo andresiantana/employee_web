@@ -136,7 +136,7 @@
             <div id="page-inner">
                 <?php echo $_content; ?>
 				<footer>
-                    <p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p>	
+                    <!-- <p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p>	 -->
                 </footer>
             </div>
             <!-- /. PAGE INNER  -->
