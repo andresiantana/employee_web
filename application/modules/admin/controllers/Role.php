@@ -17,19 +17,23 @@ class Role extends CI_Controller {
         $this->load->model('RoleM');
 		//Do your magic here
 	}
+
 	public function index()
 	{
 		$data['judul'] = 'Employee Web';
 		$data['menu'] = 'master';
 		$data['data']	= $this->RoleM->tampilData()->result_object();
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_role'] = $this->session->userdata('nama_role');
 		$this->template->display('admin/role/admin',$data);
 	}
 
-	public function tambah(){
+	public function tambah()
+	{
 		$data['judul'] = 'Employee Web';
 		$data['menu'] = 'master';
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_role'] = $this->session->userdata('nama_role');
 		$this->template->display('admin/role/tambah',$data);
 		
 	}
@@ -38,12 +42,13 @@ class Role extends CI_Controller {
 	{
 		$this->form_validation->set_rules('nama_role', 'Nama Role', 'required');
 
-		if($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE) {
 			$data['judul'] = 'Employee Web';
 			$data['menu'] = 'master';
 			$data['username'] = $this->session->userdata('username');
+			$data['nama_role'] = $this->session->userdata('nama_role');
 			$this->template->display('admin/role/tambah',$data);
-		}else{			
+		} else {			
 			$nama_role = $this->input->post('nama_role');
 
 			$cek_data = $this->RoleM->cekNama($nama_role)->num_rows();
@@ -67,26 +72,30 @@ class Role extends CI_Controller {
 		}
 	}
 
-	public function hapus($id){
+	public function hapus($id)
+	{
 		$hapus = $this->RoleM->delete($id);
-		if($this->db->affected_rows()){
+		if ($this->db->affected_rows()) {
 			$this->session->set_flashdata('info','Data berhasil Dihapus.');
 				redirect('admin/role');
-		}else{
+		} else {
 			$this->session->set_flashdata('info','Data gaa Dihapus.');
 			redirect('admin/role');
 		}
 	}
 
-	public function edit($id = null){		
+	public function edit($id = null)
+	{		
 		$data['judul'] = 'Employee Web';
 		$data['menu'] = 'master';
 		$data['username'] = $this->session->userdata('username');
+		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('role',array('id_role'=>$id))->row();
 		$this->template->display('admin/role/edit',$data);
 	}
 
-	public function update(){
+	public function update()
+	{
 		$id_role = $this->input->post('id_role');
 		$nama_role = $this->input->post('nama_role');
 

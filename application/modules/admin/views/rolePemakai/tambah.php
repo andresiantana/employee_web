@@ -35,14 +35,8 @@
                             <a class="btn btn-danger" href="<?php echo base_url('admin/RolePemakai'); ?>">Batal</a>
                         <?php echo form_close(); ?>
                     </div>
-                    
-                    <!-- /.col-lg-6 (nested) -->
                 </div>
-                <!-- /.row (nested) -->
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
     </div>
-    <!-- /.col-lg-12 -->
 </div>

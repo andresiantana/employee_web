@@ -34,14 +34,17 @@
                             <a class="btn btn-danger" href="<?php echo base_url('admin/RolePemakai'); ?>">Batal</a>
                         <?php echo form_close(); ?>
                     </div>
-                    
-                    <!-- /.col-lg-6 (nested) -->
                 </div>
-                <!-- /.row (nested) -->
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
     </div>
-    <!-- /.col-lg-12 -->
 </div>
+<script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
+<script type="text/javascript">
+    $(document).ready(function(){        
+        var id_role = '<?php echo $editdata->id_role; ?>';
+        if(id_role != ''){
+            $('#id_role').val(id_role);
+        }
+    });
+</script>

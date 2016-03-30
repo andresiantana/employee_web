@@ -4,9 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller {
     var $photo_path;
     var $photo_path_url;
+
 	public function __construct()
 	{
 		parent::__construct();
+        $this->load->library('template');
 		$this->load->helper(array('form','url'));		
 		$this->load->library('session');
         $this->load->library('form_validation');
@@ -18,23 +20,27 @@ class Login extends CI_Controller {
 	}
 
 	public function index() {
-        $this->load->view('admin/login/login');
+        $data = null;
+        $this->template->displayLogin('admin/login/login',$data);
     }
 
     public function cek_login() {
-        $data = array('username' => $this->input->post('username', TRUE),
-                        'password' => $this->input->post('password', TRUE)
-            );
+        $data = array(
+                    'username' => $this->input->post('username', TRUE),
+                    'password' => $this->input->post('password', TRUE),
+                    'nama_role'=>'Admin'
+                );
         $this->load->model('user'); // load model_user
-        $hasil = $this->user->cek_user($data);
+        $hasil = $this->user->cek_user_role($data);
         if ($hasil->num_rows() == 1) {
             foreach ($hasil->result() as $sess) {
                 $sess_data['login'] = 'Sudah Login';
                 $sess_data['username'] = $sess->username;
                 $sess_data['nama_user'] = $sess->nama_lengkap;
+                $sess_data['nama_role'] = $sess->nama_role;
                 $this->session->set_userdata($sess_data);
             }
-            redirect('admin/dashboard');     
+            redirect('admin/Dashboard');     
         }
         else {
             echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
@@ -42,7 +48,8 @@ class Login extends CI_Controller {
     }
 
     public function register() {
-        $this->load->view('admin/login/register');
+        $data = null;
+        $this->template->displayLogin('admin/Login/register',$data);
     }
 
     public function register_proses(){
@@ -51,7 +58,8 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if($this->form_validation->run() == FALSE){
-            $this->load->view('admin/login/register');
+            $data = null;
+            $this->template->displayLogin('admin/Login/register',$data);
         }else{
             $username = $this->input->post('username');
             $nama_lengkap = $this->input->post('nama_lengkap');
@@ -75,12 +83,12 @@ class Login extends CI_Controller {
                 $insert = $this->User->insert($object);
                 if($insert){
                     echo "<script>alert('Data User berhasil disimpan!');
-                        window.location.href='".base_url('admin/login')."';
+                        window.location.href='".base_url('admin/Login')."';
                     </script>";
                 }
             }else{
                 echo "<script>alert('Maaf, username sudah ada!');
-                    window.location.href='".base_url('admin/login/register')."';
+                    window.location.href='".base_url('admin/Login/register')."';
                 </script>";
             }         
         }   

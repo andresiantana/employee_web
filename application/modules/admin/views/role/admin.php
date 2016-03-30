@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-md-12">
-        <!-- Advanced Tables -->
         <div class="panel panel-default">
             <div class="panel-heading">
                  Tabel Role
@@ -32,6 +31,5 @@
                 <a class="btn btn-primary" href="<?php echo base_url('admin/role/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Role</a>
             </div>
         </div>
-        <!--End Advanced Tables -->
     </div>
 </div>

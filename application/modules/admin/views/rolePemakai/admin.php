@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-md-12">
-        <!-- Advanced Tables -->
         <div class="panel panel-default">
             <div class="panel-heading">
                  Tabel User
@@ -25,8 +24,8 @@
                                     <td><?php echo $v->password; ?></td>
                                     <td><?php echo $v->nama_role; ?></td>
                                     <td class="td-actions">
-                                        <a href="<?php echo base_url('admin/rolePemakai/edit/'.$v->username); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Role"><i class="fa fa-edit"> </i></a>
-                                        <a href="<?php echo base_url('admin/rolePemakai/hapus/'.$v->username); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk blokir user" onclick="return confirm('Apakah anda yakin akan memblokir user ini ?')"><i class="fa fa-ban"> </i></a>
+                                        <a href="<?php echo base_url('admin/rolePemakai/edit/'.$v->id_user); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Role"><i class="fa fa-edit"> </i></a>
+                                        <a href="<?php echo base_url('admin/rolePemakai/block/'.$v->id_user); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk blokir user" onclick="return confirm('Apakah anda yakin akan memblokir user ini ?')"><i class="fa fa-ban"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -36,6 +35,5 @@
                 <a class="btn btn-primary" href="<?php echo base_url('admin/rolePemakai/tambah'); ?>"><i class="fa fa-plus"></i> Tambah User</a>                
             </div>
         </div>
-        <!--End Advanced Tables -->
     </div>
 </div>
