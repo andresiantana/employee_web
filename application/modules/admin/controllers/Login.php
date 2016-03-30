@@ -2,7 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-
+    var $photo_path;
+    var $photo_path_url;
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,6 +11,9 @@ class Login extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->model('User');
+        // menentukan path photo (folder penyimpanan)
+        $this->gallery_path = realpath(APPPATH.'../data/images/user');
+        $this->gallery_path_url = base_url().'data/images/user';
 		//Do your magic here
 	}
 

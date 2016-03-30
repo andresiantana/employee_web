@@ -43,7 +43,7 @@ class RolePemakai extends CI_Controller {
 		$data['menu'] = 'master';
 		$data['username'] = $this->session->userdata('username');
 		$data['editdata'] = $this->db->get_where('user',array('username'=>$id))->row();
-		$data['role'] = $this->RoleM->dd_role();
+		$data['role'] = $this->RoleM->dd_role_user();
 		$data['role_selected'] = $this->input->post('id_role') ? $this->input->post('id_role') : ''; // untuk edit ganti '' menjadi data dari database misalnya $row->id_role
 		$this->template->display('admin/rolePemakai/edit',$data);
 	}

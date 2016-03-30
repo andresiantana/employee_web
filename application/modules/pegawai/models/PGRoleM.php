@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class RoleM extends CI_Model {
+class PGRoleM extends CI_Model {
 
 	public function index(){
 
@@ -25,24 +25,14 @@ class RoleM extends CI_Model {
         return $query;
     }
 
-    public function dd_role_user(){
-		// ambil data dari db
-		$names = 'Pegawai';
-		$admin = 'Admin';
-		$this->db->order_by('nama_role','asc');
-		$this->db->not_like('nama_role', $names);
-		$this->db->not_like('nama_role', $admin);
-		$result = $this->db->get('role');
-
-		// membuat array
-		$dd[''] = '--Pilih Role--';
-		if($result->num_rows() > 0){
-			foreach($result->result() as $row){
-				$dd[$row->id_role] = $row->nama_role;
-			}
-		}
-		return $dd;
-	}
+ 	public function select_role_pegawai() {
+ 		$nama = "Pegawai";
+		$this->db->select('id_role,nama_role');
+        $this->db->like('nama_role', $nama);
+        $this->db->limit(1);
+        $query = $this->db->get("role");
+        return $query;
+    }
 
     public function dd_role(){
 		// ambil data dari db

@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url('admin/login'); ?>"><strong>Employee Web</strong></a>
+                <a class="navbar-brand" href="<?php echo base_url('pegawai/login'); ?>"><strong>Employee Web</strong></a>
             </div>
         </nav>
         <!--/. NAV TOP  -->
@@ -36,47 +36,25 @@
             <div class="page-header" style="background-color:transparent;">               
             </div>
             <div id="page-inner">           
-                <div class="row">                    
+                <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="panel panel-default">                            
                             <div class="panel-heading" style="text-align:center;">
-                            Registrasi User
+                            Login Aplikasi
                         </div>
                         <div class="panel-body">
-                            <?php if(validation_errors()){ ?>
-                            <div class="alert alert-warning">
-                                <strong><?php echo validation_errors(); ?></strong>
-                            </div>              
-                            <?php } ?>
-                    
-                            <?php echo form_open("admin/login/register_proses"); ?>
+                            <?php echo form_open("pegawai/login/cek_login"); ?>
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                                     <input class="form-control" name="username" placeholder="Username">
                                 </div>
-                              
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                                    <input class="form-control" name="nama_lengkap" placeholder="Nama Lengkap">
-                                </div>
-
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-phone"></i></span>
-                                    <input class="form-control" name="no_telp" placeholder="No. Telepon/HP">
-                                </div>
-
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-home"></i></span>
-                                    <textarea class="form-control" name="alamat" placeholder="Alamat"></textarea>
-                                </div>
 
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                                    <input class="form-control" type="password" name="password" placeholder="Password">
+                                    <input class="form-control" name="password" placeholder="Password">
                                 </div>
-                                <button class="button btn btn-primary btn-large">Registrasi</button> 
-                                kembali ke </i>&nbsp;<span><a href="<?php echo base_url('admin/login'); ?>">Login</a></span>
+                                <button class="button btn btn-primary btn-large">Log In</button>&nbsp;<i>atau</i>&nbsp;<span><a href="<?php echo base_url('pegawai/registrasi'); ?>">Registrasi</a></span>
                             <?php echo form_close(); ?>
                         </div>
                         </div>

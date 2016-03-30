@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class DataPegawai extends CI_Controller {
 
 	public function __construct()
 	{
@@ -14,24 +14,19 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('User');
+		$this->load->model('Pegawai');
 		//Do your magic here
 	}
-	
+
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
 		$data['judul'] = 'Employee Web';
 		$data['menu'] = 'beranda';
-		$this->template->display('admin/dashboard', $data);
-	}
-
-	public function logout() {
-		$this->session->unset_userdata('username');
-		session_destroy();
-		redirect('admin/login');
+		$this->template->display('pegawai/dataPegawai/index', $data);
 	}
 
 }
 
-/* End of file Dashboard.php */
-/* Location: ./application/controllers/admin/Dashboard.php */
+/* End of file DataPegawai.php */
+/* Location: ./application/modules/pegawai/controllers/DataPegawai.php */

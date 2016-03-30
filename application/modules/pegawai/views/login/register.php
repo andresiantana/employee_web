@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url('admin/login'); ?>"><strong>Employee Web</strong></a>
+                <a class="navbar-brand" href="<?php echo base_url('pegawai/login'); ?>"><strong>Employee Web</strong></a>
             </div>
         </nav>
         <!--/. NAV TOP  -->
@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">                            
                             <div class="panel-heading" style="text-align:center;">
-                            Registrasi User
+                            Registrasi Pegawai
                         </div>
                         <div class="panel-body">
                             <?php if(validation_errors()){ ?>
@@ -50,33 +50,23 @@
                             </div>              
                             <?php } ?>
                     
-                            <?php echo form_open("admin/login/register_proses"); ?>
+                            <?php echo form_open("pegawai/registrasi/register_proses"); ?>
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                                     <input class="form-control" name="username" placeholder="Username">
                                 </div>
-                              
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                                    <input class="form-control" name="nama_lengkap" placeholder="Nama Lengkap">
-                                </div>
 
                                 <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-phone"></i></span>
-                                    <input class="form-control" name="no_telp" placeholder="No. Telepon/HP">
-                                </div>
-
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-fw fa-home"></i></span>
-                                    <textarea class="form-control" name="alamat" placeholder="Alamat"></textarea>
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
+                                    <input class="form-control" type="password" id="password" name="password" placeholder="Password">
                                 </div>
 
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                                    <input class="form-control" type="password" name="password" placeholder="Password">
+                                    <input class="form-control" type="password" id="password_ulang" name="password_ulang" placeholder="Ulangi Password" onblur="cekPassword(this);">
                                 </div>
                                 <button class="button btn btn-primary btn-large">Registrasi</button> 
-                                kembali ke </i>&nbsp;<span><a href="<?php echo base_url('admin/login'); ?>">Login</a></span>
+                                kembali ke </i>&nbsp;<span><a href="<?php echo base_url('pegawai/login'); ?>">Login</a></span>
                             <?php echo form_close(); ?>
                         </div>
                         </div>
@@ -121,6 +111,15 @@
     <!-- Custom Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
 
-    <script></script>
+    <script type="text/javascript">
+        function cekPassword(obj){
+            var pass_ulang = obj.value;
+            var pass_awal = $('#password').val();
+            if(pass_ulang != pass_awal){
+                alert("Password tidak sama dengan sebelumnya");
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>
