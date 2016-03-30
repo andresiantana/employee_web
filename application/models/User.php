@@ -11,6 +11,15 @@ class User extends CI_Model {
         return $query;
 	}
 
+	public function cek_user_role($data) {
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->join('role', 'role.id_role = user.id_role','Left');
+		$this->db->where($data);
+		$query = $this->db->get();
+		return $query;
+	}
+
 	public function cek_user($data) {
 		$query = $this->db->get_where('user', $data);
 		return $query;

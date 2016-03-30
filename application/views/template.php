@@ -101,7 +101,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="<?php echo base_url('admin/dashboard/editProfile/'.$username); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url('admin/dashboard/logout'); ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -125,7 +125,7 @@
 		<div id="page-wrapper">
             <div class="header"> 
                 <h1 class="page-header">
-                    Dashboard <small><?php echo $judul; ?></small>
+                    <?php echo isset($judulHeader) ? $judulHeader : ""; ?> <small></small>
                 </h1>
                 <ol class="breadcrumb">
                     <!-- <li><a href="#">Home</a></li>
@@ -161,11 +161,19 @@
 	
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/jquery.chart.js');?>"></script>
 	
+
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/js/dataTables/jquery.dataTables.js');?>"></script>
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/js/dataTables/dataTables.bootstrap.js');?>"></script>
+        <script>
+            $(document).ready(function () {
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
+
     <!-- Custom Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
 
-    <script>
-
-    </script>
 </body>
 </html>

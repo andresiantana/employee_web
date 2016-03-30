@@ -2,13 +2,14 @@
 
     <li>
         <a class="active-menu" href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a href="<?php echo base_url('admin/rolePemakai'); ?>">Daftar User</a>
     </li>
     <li>
         <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
                 <!--<a href="<?php //echo base_url('admin/role'); ?>">Role User</a>-->
-                <a href="<?php echo base_url('admin/rolePemakai'); ?>">Daftar User</a>
+                
             </li>
         </ul>
     </li>
