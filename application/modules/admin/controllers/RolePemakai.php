@@ -16,8 +16,8 @@ class RolePemakai extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('RoleM');
         $this->load->model('User');
-		//Do your magic here
 	}
+
 	public function index()
 	{
 		$data['judul'] = 'Employee Web';
@@ -27,11 +27,43 @@ class RolePemakai extends CI_Controller {
 		$this->template->display('admin/rolePemakai/admin',$data);
 	}
 
+	public function tambah()
+	{
+		$data['judul'] = 'Employee Web';
+		$data['menu'] = 'master';
+		$data['username'] = $this->session->userdata('username');
+		$data['role'] = $this->db->select('*')
+						->from('role')
+						->where('id_role !=',1)
+						->get()->result_object();
+		$this->template->display('admin/rolePemakai/tambah',$data);
+	}
+
+	public function insert()
+	{
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$role = $this->input->post('role');
+		$data = array(
+					'username' => $username,
+					'password' => $password,
+					'id_role' => $role
+				);
+		$insert = $this->User->insert($data);
+		if ($insert) {
+			$this->session->set_flashdata('success','Data berhasil disimpan!');
+			redirect('admin/RolePemakai');
+		} else {
+			$this->session->set_flashdata('error','Data gagal disimpan!');
+			redirect('admin/RolePemakai/tambah');   
+		}
+	}
+
 	public function hapus($id){
 		$hapus = $this->User->delete($id);
 		if($this->db->affected_rows()){
 			$this->session->set_flashdata('info','Data berhasil Dihapus.');
-				redirect('admin/rolePemakai');
+			redirect('admin/rolePemakai');
 		}else{
 			$this->session->set_flashdata('info','Data gagal Dihapus.');
 			redirect('admin/rolePemakai');
@@ -48,7 +80,8 @@ class RolePemakai extends CI_Controller {
 		$this->template->display('admin/rolePemakai/edit',$data);
 	}
 
-	public function update(){
+	public function update()
+	{
 		$id_role = $this->input->post('id_role');
 		$username = $this->input->post('username');
 		$username_lama = $this->input->post('username_lama');
@@ -62,10 +95,10 @@ class RolePemakai extends CI_Controller {
 
 		$this->db->where('username', $username_lama);
 		$this->db->update('user', $object);
-		if($this->db->affected_rows()){
+		if ($this->db->affected_rows()) {
 			$this->session->set_flashdata('info', 'Data User Pemakai berhasil diedit.');
 			redirect('admin/rolePemakai');
-		}else{
+		} else {
 			$this->session->set_flashdata('info', 'Data User Pemakai gagal diedit.');
 			redirect('admin/rolePemakai');
 		}

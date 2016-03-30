@@ -8,7 +8,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php echo form_open('admin/rolePemakai/update');  ?>
+                        <?php echo form_open('admin/RolePemakai/update');  ?>
                             <?php if(validation_errors()){ ?>
                             <div class="alert alert-warning">
                                 <strong><?php echo validation_errors(); ?></strong>
@@ -30,8 +30,8 @@
                                 ?>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-success">Bersihkan</button>
-                            <a class="btn btn-info" href="<?php echo base_url('admin/rolePemakai'); ?>">Pengaturan Role Pemakai</a>
+                            <button type="reset" class="btn btn-success">Reset</button>
+                            <a class="btn btn-danger" href="<?php echo base_url('admin/RolePemakai'); ?>">Batal</a>
                         <?php echo form_close(); ?>
                     </div>
                     

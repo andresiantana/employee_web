@@ -34,7 +34,8 @@ class Role extends CI_Controller {
 		
 	}
 
-	public function insert(){
+	public function insert()
+	{
 		$this->form_validation->set_rules('nama_role', 'Nama Role', 'required');
 
 		if($this->form_validation->run() == FALSE){

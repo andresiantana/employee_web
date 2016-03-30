@@ -6,4 +6,4 @@
     <div class="alert alert-info">
         <center><strong>Petunjuk!</strong> Silahkan menggunakan menu yang sudah tersedia.</center>
     </div>
-</div> <!-ontrol-group -->
+</div> <!-control-group -->
