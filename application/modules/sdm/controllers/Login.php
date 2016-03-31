@@ -28,13 +28,14 @@ class Login extends CI_Controller {
         $data = array(
                     'username' => $this->input->post('username', TRUE),
                     'password' => $this->input->post('password', TRUE),
-                    'nama_role'=>'Keuangan'
+                    'nama_role'=>'SDM'
                 );
         $this->load->model('user'); // load model_user
         $hasil = $this->user->cek_user_role($data);
         if ($hasil->num_rows() == 1) {
             foreach ($hasil->result() as $sess) {
                 $sess_data['login'] = 'Sudah Login';
+                $sess_data['id_user'] = $sess->id_user;
                 $sess_data['username'] = $sess->username;
                 $sess_data['nama_user'] = $sess->nama_lengkap;
                 $sess_data['nama_role'] = $sess->nama_role;

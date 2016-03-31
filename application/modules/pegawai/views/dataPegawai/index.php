@@ -11,32 +11,32 @@
             </div>              
             <?php } ?>
     
-            <?php echo form_open("pegawai/registrasi/register_proses"); ?>
+            <?php echo form_open_multipart("pegawai/DataPegawai/insert"); ?>
             <div class="col-md-6">
                 <legend>Data Pegawai</legend>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Nama Lengkap</span>
-                    <input class="form-control" name="nama_lengkap" placeholder="Nama Lengkap">
+                    <input class="form-control" type="text" name="nama_lengkap" placeholder="Nama Lengkap">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">NIP</span>
-                    <input class="form-control" name="nip" placeholder="NIP">
+                    <input class="form-control" type="text" name="nip" placeholder="NIP">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">NIDN</span>
-                    <input class="form-control" name="nidn" placeholder="NIDN">
+                    <input class="form-control" type="text" name="nidn" placeholder="NIDN">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Tanggal Lahir</span>
-                    <input class="form-control" name="tanggal_lahir" placeholder="Tanggal Lahir">
+                    <input class="form-control" type="text" name="tanggal_lahir" placeholder="Tanggal Lahir">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">E-mail</span>
-                    <input class="form-control" name="email" placeholder="Email">
+                    <input class="form-control" type="text" name="email" placeholder="Email">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">No. Telp</span>
-                    <input class="form-control" name="no_telp" placeholder="No. Telp">
+                    <input class="form-control" type="text" name="no_telp" placeholder="No. Telp">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Foto</span>
@@ -44,34 +44,34 @@
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Profesi</span>
-                    <input class="form-control" name="profesi" placeholder="Profesi">
+                    <input class="form-control" type="text" name="profesi" placeholder="Profesi">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Fakultas</span>
-                    <input class="form-control" name="fakultas" placeholder="Fakultas">
+                    <input class="form-control" type="text" name="fakultas" placeholder="Fakultas">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Prodi</span>
-                    <input class="form-control" name="prodi" placeholder="Sertifikasi">
+                    <input class="form-control" type="text" name="prodi" placeholder="Sertifikasi">
                 </div> 
                 <div class="form-group input-group">
                     <span class="input-group-addon">Sertifikasi</span>
-                    <input class="form-control" name="sertifikasi" placeholder="Sertifikasi">
+                    <input class="form-control" type="text" name="sertifikasi" placeholder="Sertifikasi">
                 </div> 
             </div>
             <div class="col-md-6">
                 <legend>Data Rekening</legend>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Nama Bank</span>
-                    <input class="form-control" name="nama_bank" placeholder="Nama Bank">
+                    <input class="form-control" type="text" name="nama_bank" placeholder="Nama Bank">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Nomor Rekening</span>
-                    <input class="form-control" name="nomor_rekening" placeholder="Nomor Rekening">
+                    <input class="form-control" type="text" name="nomor_rekening" placeholder="Nomor Rekening">
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Atas Nama</span>
-                    <input class="form-control" name="atasnama_rekening" placeholder="Atas Nama">
+                    <input class="form-control" type="text" name="atasnama_rekening" placeholder="Atas Nama">
                 </div>
             </div>
             <div class="col-md-6">
@@ -90,12 +90,12 @@
                 </div>
                 <div class="form-group input-group">
                     <span class="input-group-addon">Biaya SPP</span>
-                    <input class="form-control" name="biaya_spp" placeholder="Biaya SPP">
+                    <input class="form-control" type="text" name="biaya_spp" placeholder="Biaya SPP">
                 </div>
             </div>
             <div class="col-md-12">
-                <button class="button btn btn-primary btn-large" type="submit">Simpan</button>
-                <button class="button btn btn-primary btn-large" type="reset">Reset</button> 
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="reset" class="btn btn-success">Reset</button>
             </div>
             <?php echo form_close(); ?>
         </div>

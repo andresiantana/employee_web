@@ -10,7 +10,6 @@ class Login extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->model('User');
-		//Do your magic here
 	}
 
 	public function index() {
@@ -18,19 +17,23 @@ class Login extends CI_Controller {
     }
 
     public function cek_login() {
-        $data = array('username' => $this->input->post('username', TRUE),
-                        'password' => $this->input->post('password', TRUE)
-        );
+        $data = array(
+                    'username' => $this->input->post('username', TRUE),
+                    'password' => $this->input->post('password', TRUE),
+                    'nama_role'=>'Pegawai'
+                );
         $this->load->model('user'); // load model_user
-        $hasil = $this->user->cek_user($data);
+        $hasil = $this->user->cek_user_role($data);
         if ($hasil->num_rows() == 1) {
             foreach ($hasil->result() as $sess) {
                 $sess_data['login'] = 'Sudah Login';
+                $sess_data['id_user'] = $sess->id_user;
                 $sess_data['username'] = $sess->username;
                 $sess_data['nama_user'] = $sess->nama_lengkap;
+                $sess_data['nama_role'] = $sess->nama_role;
                 $this->session->set_userdata($sess_data);
             }
-            redirect('pegawai/dataPegawai');     
+            redirect('pegawai/DataPegawai');     
         }
         else {
             echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
