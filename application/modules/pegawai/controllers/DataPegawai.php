@@ -23,13 +23,14 @@ class DataPegawai extends CI_Controller {
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['menu'] = 'dataPegawai';
 		$data['judulHeader'] = 'Data Pegawai';
+		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')))->row();
 		$this->template->display('pegawai/dataPegawai/index', $data);
 	}
 
 	public function insert()
 	{
-	 	$config['upload_path']    = "./data/images/";
-     	$config['allowed_types']  = 'gif|jpg|png|jpeg';
+	 	$config['upload_path']    = "./data/images/pegawai";
+     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
      	$config['max_size']       = '2000';
      	$config['max_width']      = '2000';
      	$config['max_height']     = '2000';
@@ -56,8 +57,22 @@ class DataPegawai extends CI_Controller {
 		$id_user = $this->session->userdata('id_user');
 
 	 	if (!$this->upload->do_upload("foto")) {
-             echo "Error";
-        }else{
+         	echo "<script>alert('Foto gagal diupload!');
+                    window.location.href='".base_url('pegawai/DataPegawai/index')."';
+                </script>";
+        } else if (!$this->upload->do_upload("surat_studi_lanjut")) {
+        	echo "<script>alert('Surat Studi Lanjut gagal diupload!');
+                    window.location.href='".base_url('pegawai/DataPegawai/index')."';
+                </script>";
+        } else if (!$this->upload->do_upload("surat_lulus_seleksi")) {
+        	echo "<script>alert('Surat Lulus Seleksi gagal diupload!');
+                    window.location.href='".base_url('pegawai/DataPegawai/index')."';
+                </script>";
+        } else if (!$this->upload->do_upload("surat_terima_beasiswa")) {
+        	echo "<script>alert('Surat Terima Beasiswa gagal diupload!');
+                    window.location.href='".base_url('pegawai/DataPegawai/index')."';
+                </script>";
+        } else {
            $data = array(
 					'nama_lengkap' => $nama_lengkap,
 					'nip' => $nip,
