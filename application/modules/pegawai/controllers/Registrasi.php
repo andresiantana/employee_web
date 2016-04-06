@@ -6,6 +6,7 @@ class Registrasi extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+        $this->load->library('template');
 		$this->load->helper(array('form','url'));		
 		$this->load->library('session');
         $this->load->library('form_validation');
@@ -16,7 +17,8 @@ class Registrasi extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('pegawai/login/register');
+		$data = null;
+        $this->template->displayLogin('pegawai/login/register',$data);
 	}
 
     public function register_proses(){

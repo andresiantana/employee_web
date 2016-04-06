@@ -16,7 +16,6 @@ class Login extends CI_Controller {
         // menentukan path photo (folder penyimpanan)
         $this->gallery_path = realpath(APPPATH.'../data/images/user');
         $this->gallery_path_url = base_url().'data/images/user';
-		//Do your magic here
 	}
 
 	public function index() {

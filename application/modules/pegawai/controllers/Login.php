@@ -6,14 +6,16 @@ class Login extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+        $this->load->library('template');
 		$this->load->helper(array('form','url'));		
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->model('User');
 	}
 
-	public function index() {
-        $this->load->view('pegawai/login/login');
+    public function index() {
+        $data = null;
+        $this->template->displayLogin('pegawai/login/login',$data);
     }
 
     public function cek_login() {
