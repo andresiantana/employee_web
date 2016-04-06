@@ -1,13 +1,13 @@
 <ul class="nav" id="main-menu">
 
     <li>
-        <a class="active-menu" href="<?php echo base_url('keuangan/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a <?php if($menu == 'beranda'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
     </li>
     <li>
         <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="#">Master 1</a>             
+                <a <?php if($menu == 'coa'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Coa'); ?>">Coa</a>
             </li>
         </ul>
     </li>

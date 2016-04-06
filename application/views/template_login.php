@@ -61,8 +61,8 @@
     <!-- Metis Menu Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery.metisMenu.js');?>"></script>
     <!-- Morris Chart Js -->
-    <script src="<?php echo base_url('assets/template/Bluebox/assets/js/morris/raphael-2.1.0.min.js');?>"></script>
-    <script src="<?php echo base_url('assets/template/Bluebox/assets/js/morris/morris.js');?>"></script>
+    <!-- // <script src="<?php echo base_url('assets/template/Bluebox/assets/js/morris/raphael-2.1.0.min.js');?>"></script> -->
+    <!-- // <script src="<?php echo base_url('assets/template/Bluebox/assets/js/morris/morris.js');?>"></script> -->
 	
 	<script src="<?php echo base_url('assets/template/Bluebox/assets/js/easypiechart.js');?>"></script>
 	<script src="<?php echo base_url('assets/template/Bluebox/assets/js/easypiechart-data.js');?>"></script>
@@ -70,6 +70,6 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/jquery.chart.js');?>"></script>
 	
     <!-- Custom Js -->
-    <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
+    <!-- // <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script> -->
 </body>
 </html>
