@@ -16,7 +16,8 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
-                <button class="button btn btn-primary btn-large">Log In</button><!-- &nbsp;<i>atau</i>&nbsp;<span><a href="<?php echo base_url('admin/login/register'); ?>">Registrasi</a></span> -->
+                <button class="button btn btn-primary btn-large">Log In</button>
+                &nbsp;<span><a href="<?php echo base_url('admin/Login/resetPassword'); ?>">Lupa Password?</a></span>
             <?php echo form_close(); ?>
         </div>
         </div>
