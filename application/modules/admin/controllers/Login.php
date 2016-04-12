@@ -12,7 +12,7 @@ class Login extends CI_Controller {
 		$this->load->helper(array('form','url'));		
 		$this->load->library('session');
         $this->load->library('form_validation');
-        $this->load->model('User');
+        $this->load->model('ADUserM');
         // menentukan path photo (folder penyimpanan)
         $this->gallery_path = realpath(APPPATH.'../data/images/user');
         $this->gallery_path_url = base_url().'data/images/user';
@@ -24,6 +24,7 @@ class Login extends CI_Controller {
     }
 
     public function cek_login() {
+        $user_aktif = false;
         $data = array(
                     'username' => $this->input->post('username', TRUE),
                     'password' => $this->input->post('password', TRUE),
@@ -39,8 +40,17 @@ class Login extends CI_Controller {
                 $sess_data['nama_user'] = $sess->nama_lengkap;
                 $sess_data['nama_role'] = $sess->nama_role;
                 $this->session->set_userdata($sess_data);
+                if($sess->user_aktif == true){
+                    $user_aktif = true;
+                }else{
+                    $user_aktif = false;
+                }
             }
-            redirect('admin/Dashboard');     
+            if($user_aktif == true){
+                redirect('admin/Dashboard');     
+            }else{
+                echo "<script>alert('Username telah di Suspend/tidak aktif, Silahkan hubungi Admin');history.go(-1);</script>";
+            }   
         }
         else {
             echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
@@ -78,11 +88,11 @@ class Login extends CI_Controller {
                 'id_role'=>''
             );
 
-            $cek_data = $this->User->cek_data($username);
+            $cek_data = $this->ADUserM->cek_data($username);
             if(empty($cek_data)){
-                $insert = $this->User->insert($object);
+                $insert = $this->ADUserM->insert($object);
                 if($insert){
-                    echo "<script>alert('Data User berhasil disimpan!');
+                    echo "<script>alert('Data berhasil disimpan!');
                         window.location.href='".base_url('admin/Login')."';
                     </script>";
                 }

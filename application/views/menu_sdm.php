@@ -1,7 +1,7 @@
 <ul class="nav" id="main-menu">
 
     <li>
-        <a <?php if($menu == 'beranda'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('admin/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>        
+        <a <?php if($menu == 'beranda'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>        
     </li>
     <li>
         <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>

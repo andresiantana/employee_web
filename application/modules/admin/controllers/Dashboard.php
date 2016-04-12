@@ -13,8 +13,8 @@ class Dashboard extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('text');
 		$this->load->helper('form');		
-		$this->load->model('User');
-		$this->load->model('RoleM');
+		$this->load->model('ADUserM');
+		$this->load->model('ADRoleM');
 	}
 	
 	public function index()
@@ -40,7 +40,7 @@ class Dashboard extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('user',array('username'=>$id))->row();
-		$data['role'] = $this->RoleM->dd_role_user();
+		$data['role'] = $this->ADRoleM->dd_role_user();
 		$data['role_selected'] = $this->input->post('id_role') ? $this->input->post('id_role') : ''; // untuk edit ganti '' menjadi data dari database misalnya $row->id_role
 		$this->template->display('admin/edit_profile',$data);
 	}

@@ -13,8 +13,8 @@ class RolePemakai extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('form','url'));
-        $this->load->model('RoleM');
-        $this->load->model('User');
+        $this->load->model('ADRoleM');
+        $this->load->model('ADUserM');
 	}
 
 	public function index()
@@ -50,7 +50,7 @@ class RolePemakai extends CI_Controller {
 					'password' => $password,
 					'id_role' => $role
 				);
-		$insert = $this->User->insert($data);
+		$insert = $this->ADUserM->insert($data);
 		if ($insert) {
 			$this->session->set_flashdata('success','Data berhasil disimpan!');
 			redirect('admin/RolePemakai');
@@ -81,7 +81,7 @@ class RolePemakai extends CI_Controller {
 
 	public function hapus($id)
 	{
-		$hapus = $this->User->delete($id);
+		$hapus = $this->ADUserM->delete($id);
 		if($this->db->affected_rows()){
 			$this->session->set_flashdata('info','Data berhasil Dihapus.');
 			redirect('admin/rolePemakai');
@@ -98,7 +98,7 @@ class RolePemakai extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('user',array('id_user'=>$id))->row();
-		$data['role'] = $this->RoleM->dd_role_user();
+		$data['role'] = $this->ADRoleM->dd_role_user();
 		$data['role_selected'] = $this->input->post('id_role') ? $this->input->post('id_role') : ''; // untuk edit ganti '' menjadi data dari database misalnya $row->id_role
 		$this->template->display('admin/rolePemakai/edit',$data);
 	}

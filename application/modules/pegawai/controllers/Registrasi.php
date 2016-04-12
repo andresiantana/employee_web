@@ -11,7 +11,7 @@ class Registrasi extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->model('User');
-        $this->load->model('PGRoleM');
+        $this->load->model('RoleM');
 		//Do your magic here
 	}
 
@@ -34,7 +34,7 @@ class Registrasi extends CI_Controller {
             $password = $this->input->post('password');
             $no_telp = $this->input->post('no_telp');
             $alamat = $this->input->post('alamat');
-            $role = $this->PGRoleM->select_role_pegawai();
+            $role = $this->RoleM->select_role_pegawai();
             if($nama_lengkap == ''){
             	$nama_lengkap = $username;
             }

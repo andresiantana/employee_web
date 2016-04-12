@@ -14,15 +14,14 @@ class Role extends CI_Controller {
 		$this->load->helper(array('form','url'));		
 		$this->load->library('session');
         $this->load->library('form_validation');
-        $this->load->model('RoleM');
-		//Do your magic here
+        $this->load->model('ADRoleM');
 	}
 
 	public function index()
 	{
 		$data['judul'] = 'Employee Web';
 		$data['menu'] = 'master';
-		$data['data']	= $this->RoleM->tampilData()->result_object();
+		$data['data']	= $this->ADRoleM->tampilData()->result_object();
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$this->template->display('admin/role/admin',$data);
@@ -51,7 +50,7 @@ class Role extends CI_Controller {
 		} else {			
 			$nama_role = $this->input->post('nama_role');
 
-			$cek_data = $this->RoleM->cekNama($nama_role)->num_rows();
+			$cek_data = $this->ADRoleM->cekNama($nama_role)->num_rows();
 			if($cek_data > 0){
 				echo "<script>alert('Nama Role ".$nama_role." sudah ada pada database sebelumnya !');
                     window.location.href='".base_url('admin/role/tambah')."';
@@ -62,7 +61,7 @@ class Role extends CI_Controller {
 					'nama_role'=>$nama_role
 				);
 
-				$insert = $this->RoleM->insert($object);
+				$insert = $this->ADRoleM->insert($object);
 				if($insert){
 					echo "<script>alert('Data Role berhasil disimpan!');
 	                    window.location.href='".base_url('admin/role')."';
@@ -74,7 +73,7 @@ class Role extends CI_Controller {
 
 	public function hapus($id)
 	{
-		$hapus = $this->RoleM->delete($id);
+		$hapus = $this->ADRoleM->delete($id);
 		if ($this->db->affected_rows()) {
 			$this->session->set_flashdata('info','Data berhasil Dihapus.');
 				redirect('admin/role');

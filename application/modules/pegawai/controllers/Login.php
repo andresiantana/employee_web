@@ -19,6 +19,7 @@ class Login extends CI_Controller {
     }
 
     public function cek_login() {
+        $user_aktif = false;
         $data = array(
                     'username' => $this->input->post('username', TRUE),
                     'password' => $this->input->post('password', TRUE),
@@ -34,8 +35,17 @@ class Login extends CI_Controller {
                 $sess_data['nama_user'] = $sess->nama_lengkap;
                 $sess_data['nama_role'] = $sess->nama_role;
                 $this->session->set_userdata($sess_data);
+                if($sess->user_aktif == true){
+                    $user_aktif = true;
+                }else{
+                    $user_aktif = false;
+                }
             }
-            redirect('pegawai/DataPegawai');     
+            if($user_aktif == true){
+                redirect('pegawai/Dashboard');     
+            }else{
+                echo "<script>alert('Username telah di Suspend/tidak aktif, Silahkan hubungi Admin');history.go(-1);</script>";
+            } 
         }
         else {
             echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";

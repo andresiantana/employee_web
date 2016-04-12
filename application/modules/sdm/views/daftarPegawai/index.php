@@ -51,7 +51,7 @@
                                     <td><?php echo $v->surat_studi_lanjut; ?></td>
                                     <td><?php echo $v->surat_lulus_seleksi; ?></td>
                                     <td><?php echo $v->surat_terima_beasiswa; ?></td>
-                                    <td><?php echo $v->biaya_spp; ?></td>
+                                    <td style="text-align:right;"><?php echo $v->username; ?></td>
                                     <td><?php echo $v->username; ?></td>
                                     <td class="td-actions">
                                         <a href="#" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Role"><i class="fa fa-edit"> </i></a>

@@ -101,10 +101,10 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="<?php echo base_url('admin/dashboard/editProfile/'.$username); ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="<?php echo site_url().strtolower($nama_role)."/Dashboard/editProfile/".$username; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo base_url('admin/dashboard/logout'); ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo site_url().strtolower($nama_role)."/Dashboard/logout"; ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -167,13 +167,30 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/dataTables/dataTables.bootstrap.js');?>"></script>
         <script>
             $(document).ready(function () {
-            $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
     </script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
+    <script type="text/javascript">
+        $('.numbers-only').keyup(function() {
+            var d = $(this).attr('numeric');
+            var value = $(this).val();
+            var orignalValue = value;
+            value = value.replace(/[0-9]*/g, "");
+            var msg = "Only Integer Values allowed.";
 
+            if (d == 'decimal') {
+            value = value.replace(/\./, "");
+            msg = "Only Numeric Values allowed.";
+            }
+
+            if (value != '') {
+              orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+              $(this).val(orignalValue);
+            }
+        });
+    </script>
 </body>
 </html>
