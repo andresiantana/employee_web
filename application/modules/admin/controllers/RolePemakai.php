@@ -61,10 +61,18 @@ class RolePemakai extends CI_Controller {
 	}
 
 
-	public function block($id)
+	public function block_aktif($id)
 	{
+		$aksi = $this->input->get('aksi');
+		$status = '';
+
+		if($aksi == 'aktif'){
+			$status = true;
+		}else{
+			$status = false;
+		}
 		$object = array(
-			'user_aktif'=>FALSE,
+			'user_aktif'=>$status,
 		);
 
 		$this->db->where('id_user', $id);

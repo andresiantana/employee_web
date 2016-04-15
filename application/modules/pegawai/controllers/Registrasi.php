@@ -60,7 +60,7 @@ class Registrasi extends CI_Controller {
                 }
             }else{
                 echo "<script>alert('Maaf, username sudah ada!');
-                    window.location.href='".base_url('pegawai/login/register')."';
+                    window.location.href='".base_url('pegawai/Registrasi')."';
                 </script>";
             }         
         }   

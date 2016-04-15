@@ -48,9 +48,9 @@
                                     <td><?php echo $v->nomor_rekening; ?></td>
                                     <td><?php echo $v->atasnama_rekening; ?></td>
                                     <td><?php echo $v->sertifikasi; ?></td>
-                                    <td><?php echo $v->surat_studi_lanjut; ?></td>
-                                    <td><?php echo $v->surat_lulus_seleksi; ?></td>
-                                    <td><?php echo $v->surat_terima_beasiswa; ?></td>
+                                    <td><a href="<?php echo realpath(APPPATH . '../data/file/pegawai/'.$v->surat_studi_lanjut); ?>"><?php echo $v->surat_studi_lanjut; ?></a></td>
+                                    <td><a href="<?php echo realpath(APPPATH . '../data/file/pegawai/'.$v->surat_lulus_seleksi); ?>"><?php echo $v->surat_lulus_seleksi; ?></a></td>
+                                    <td><a href="<?php echo base_url().'data/file/pegawai/'.$v->surat_terima_beasiswa; ?>"><?php echo $v->surat_terima_beasiswa; ?></a></td>
                                     <td><?php echo number_format($v->biaya_spp); ?></td>
                                     <td style="text-align:right;"><?php echo $v->username; ?></td>
                                     <td class="td-actions">

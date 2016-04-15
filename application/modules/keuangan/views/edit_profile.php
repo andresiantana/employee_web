@@ -47,12 +47,6 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
                     <input class="form-control" type="password" id="password_ulang" name="password_ulang" placeholder="Ulangi Password" onblur="cekPassword(this);">
                 </div>
-                <div class="form-group">
-                    <label>Nama Role</label>
-                    <?php                  
-                        echo form_dropdown('id_role', $role, $role_selected, $nama_role);
-                    ?>
-                </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-success">Reset</button>
                 <a class="btn btn-danger" href="<?php echo base_url('keuangan/dashboard'); ?>">Batal</a>
