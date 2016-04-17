@@ -12,7 +12,7 @@ class DaftarPegawai extends CI_Controller {
 		$this->load->library('template');				
 		$this->load->library('session');
         $this->load->library('form_validation');
-        $this->load->helper(array('form','url'));
+        $this->load->helper(array('form','url','download'));
         $this->load->model('Pegawai');
 	}
 
@@ -24,6 +24,14 @@ class DaftarPegawai extends CI_Controller {
 		$data['menu'] = 'daftarPegawai';
 		$data['data']	= $this->Pegawai->tampilDataPegawai()->result_object();		
 		$this->template->display('sdm/daftarPegawai/index',$data);
+	}
+
+	function file_download()
+    {
+        $nama_file = $_GET['file_name'];
+        $data = file_get_contents(base_url()."data/file/pegawai/".$nama_file);
+
+        force_download($nama_file, $data);
 	}
 }
 

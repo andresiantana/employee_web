@@ -3,8 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class LokasiPendidikanM extends CI_Model {
 
-	public function tampilData(){
-		return $this->db->get('lokasi_pendidikan');
+	public function tampilData($lokasi = null){
+		if($lokasi != ''){
+			$this->db->like('nama_lokasi', $lokasi);
+        	$query = $this->db->get("lokasi_pendidikan");
+		}else{
+			$query = $this->db->get("lokasi_pendidikan");
+		}
+		return $query;
 	}
 
     public function insert($data){

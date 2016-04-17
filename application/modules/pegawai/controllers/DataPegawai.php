@@ -12,7 +12,7 @@ class DataPegawai extends CI_Controller {
 		}		
 		$this->load->library('form_validation');
 		$this->load->helper('text');
-	 	$this->load->helper(array('url','html','form'));
+	 	$this->load->helper(array('url','html','form','download'));
 		$this->load->model('User');
 		$this->load->model('PGPegawai');
 
@@ -28,8 +28,9 @@ class DataPegawai extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Daftar Pegawai';
-		$data['menu'] = 'daftarPegawai';
-		$data['data']	= $this->PGPegawai->tampilDataPegawai()->result_object();		
+		$data['menu'] 	= 'daftarPegawai';
+		$data['data']	= $this->PGPegawai->tampilDataPegawai()->result_object();	
+		$data['aa']	= file_get_contents(base_url()."data/");
 		$this->template->display('pegawai/dataPegawai/index',$data);
 	}
 
@@ -80,6 +81,7 @@ class DataPegawai extends CI_Controller {
                 window.location.href='".base_url('pegawai/DataPegawai/index')."';
             </script>";
  		}else{
+ 			$foto = $this->upload->file_name;
  			$status_upload = true;
  		} 
 
@@ -92,6 +94,7 @@ class DataPegawai extends CI_Controller {
      	$this->load->library('upload', $config2);
      	$this->upload->initialize($config2);
  		if ($this->upload->do_upload("surat_studi_lanjut")){
+ 			$surat_studi_lanjut = $this->upload->file_name;
 			$status_upload = true;
  		}else{
  			echo "<script>alert('Surat Studi Lanjut gagal diupload!');
@@ -108,6 +111,7 @@ class DataPegawai extends CI_Controller {
      	$this->load->library('upload', $config3);
      	$this->upload->initialize($config3);
  		if ($this->upload->do_upload("surat_lulus_seleksi")){
+ 			$surat_lulus_seleksi = $this->upload->file_name;
 			$status_upload = true;
  		}else{
  			echo "<script>alert('Surat Lulus Seleksi gagal diupload!');
@@ -124,6 +128,7 @@ class DataPegawai extends CI_Controller {
      	$this->load->library('upload', $config4);	     	
      	$this->upload->initialize($config4);
  		if ($this->upload->do_upload("surat_terima_beasiswa")){
+ 			$surat_terima_beasiswa = $this->upload->file_name;
 			$status_upload = true;
  		}else{
  			echo "<script>alert('Surat Terima Beasiswa gagal diupload!');
@@ -138,16 +143,16 @@ class DataPegawai extends CI_Controller {
 				'tanggal_lahir' => $tanggal_lahir,
 				'email' => $email,
 				'no_telp' => $no_telp,
-				'foto' => $config['file_name'],
+				'foto' => $foto,
 				'fakultas' => $fakultas,
 				'prodi' => $prodi,
 				'nama_bank' => $nama_bank,
 				'nomor_rekening' => $nomor_rekening,
 				'atasnama_rekening' => $atasnama_rekening,
 				'sertifikasi' => $sertifikasi,
-				'surat_studi_lanjut' => $config2['file_name'],
-				'surat_lulus_seleksi' => $config3['file_name'],
-				'surat_terima_beasiswa' => $config4['file_name'],
+				'surat_studi_lanjut' => $surat_studi_lanjut,
+				'surat_lulus_seleksi' => $surat_lulus_seleksi,
+				'surat_terima_beasiswa' => $surat_terima_beasiswa,
 				'biaya_spp' => $biaya_spp,
 				'id_user' => $id_user,
 			);
@@ -167,6 +172,14 @@ class DataPegawai extends CI_Controller {
 				redirect('pegawai/DataPegawai');   
 			}
        
+	}
+
+	function file_download()
+    {
+        $nama_file = $_GET['file_name'];
+        $data = file_get_contents(base_url()."data/file/pegawai/".$nama_file);
+
+        force_download($nama_file, $data);
 	}
 
 }

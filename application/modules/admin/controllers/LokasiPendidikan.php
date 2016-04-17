@@ -22,7 +22,15 @@ class LokasiPendidikan extends CI_Controller {
 		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$data['judulHeader'] 	= 'Lokasi Pendidikan';
 		$data['menu'] 	= 'lokasiPendidikan';
-		$data['data']	= $this->LokasiPendidikanM->tampilData()->result_object();		
+		$lokasi = isset($_GET['lokasi']) ? $_GET['lokasi'] : null;
+		if($lokasi != ''){
+			$data['data'] = $this->LokasiPendidikanM->tampilData($lokasi)->result_object();
+			$tr['tr'] = $this->load->view('admin/lokasiPendidikan/pencarian',$data,true);
+			echo json_encode($tr['tr']); 
+			exit;
+		}else{
+			$data['data']	= $this->LokasiPendidikanM->tampilData()->result_object();		
+		}		
 		$this->template->display('admin/lokasiPendidikan/admin',$data);
 	}
 

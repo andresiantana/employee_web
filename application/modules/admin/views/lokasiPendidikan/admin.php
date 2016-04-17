@@ -5,7 +5,26 @@
                  Tabel Lokasi Pendidikan
             </div>
             <div class="panel-body">
+                
                 <div class="table-responsive">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <div id="dataTables-example_filter" class="dataTables_filter">
+                                <label>        
+                                    Lokasi Pendidikan :                                            
+                                    <select class="form-control input-sm" aria-controls="dataTables-example" onChange="setPencarian(this);">
+                                        <option value="">-Pilih Lokasi-</option>
+                                        <option value="Dalam Negeri">Dalam Negeri</option>
+                                        <option value="Luar Negeri">Luar Negeri</option>
+                                    </select>                                  
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="isi_table">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -34,8 +53,30 @@
                         </tbody>
                     </table>
                 </div>
+                    
+                </div>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/lokasiPendidikan/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Lokasi Pendidikan</a>                
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function setPencarian(obj){
+        if(obj.value == ''){
+            window.location.reload();
+        }
+        var data = {
+          lokasi    : obj.value
+        }
+
+      $.ajax({
+          url     : "<?php echo base_url('admin/LokasiPendidikan'); ?>",
+          type    : "GET",
+          data    : data,
+          dataType: 'json',
+          success : function (data) {
+              $('#dataTables-example > tbody').html(data);
+          }
+        });
+    }
+</script>
