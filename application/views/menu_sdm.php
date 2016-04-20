@@ -17,6 +17,9 @@
             <li>
                 <a <?php if($menu == 'DaftarPegawai'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/DaftarPegawai'); ?>">Daftar Pegawai</a>
             </li>
+            <li>
+                <a <?php if($menu == 'KartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPID'); ?>">Kartu PID</a>
+            </li>
         </ul>
     </li>
     <li>

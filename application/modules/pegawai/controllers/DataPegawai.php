@@ -47,11 +47,17 @@ class DataPegawai extends CI_Controller {
 	public function insert()
 	{
 		$status_upload = false;
-
+		$tgl = '';
+		$tanggal = '';
 		$nama_lengkap = $this->input->post('nama_lengkap');
 		$nip = $this->input->post('nip');
 		$nidn = $this->input->post('nidn');
+
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
+		$tgl = explode("/",$tanggal_lahir);		
+		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
+		$tanggal_lahir = $tanggal;
+
 		$email = $this->input->post('email');
 		$no_telp = $this->input->post('no_telp');
 		$fakultas = $this->input->post('fakultas');

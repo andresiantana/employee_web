@@ -13,9 +13,11 @@
     <link href="<?php echo base_url('assets/template/Bluebox/assets/js/morris/morris-0.4.3.min.css');?>" rel="stylesheet" />
     <!-- Custom Styles-->
     <link href="<?php echo base_url('assets/template/Bluebox/assets/css/custom-styles.css');?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/template/Bluebox/assets/datepicker/css/datepicker.css');?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.css');?>" rel="stylesheet" />
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/cssCharts.css');?>"> 
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/cssCharts.css');?>">     
 </head>
 
 <body>
@@ -160,19 +162,20 @@
 	<script src="<?php echo base_url('assets/template/Bluebox/assets/js/easypiechart-data.js');?>"></script>
 	
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/jquery.chart.js');?>"></script>
-	
 
     <!-- DATA TABLE SCRIPTS -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/dataTables/jquery.dataTables.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/dataTables/dataTables.bootstrap.js');?>"></script>
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').dataTable();
-            });
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.js');?>"> </script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
     </script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
     <script type="text/javascript">
         $('.numbers-only').keyup(function() {
             var d = $(this).attr('numeric');

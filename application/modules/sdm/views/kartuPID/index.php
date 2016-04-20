@@ -6,6 +6,32 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
+                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                 <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        NIDN                                            
+                                        <input type="text" onblur="setPencarian();" class="form-control" id="nidn" name="nidn">
+                                    </label>
+                                </div>
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        Nama                                            
+                                        <input type="text" onblur="setPencarian();" class="form-control" id="nama" name="nama">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        NIP                                            
+                                        <input type="text" onblur="setPencarian();" class="form-control" id="nip" name="nip">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -51,10 +77,12 @@
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_studi_lanjut; ?>')"><?php echo $v->surat_studi_lanjut; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
-                                    <td><?php echo number_format($v->biaya_spp); ?></td>
                                     <td style="text-align:right;"><?php echo $v->username; ?></td>
+                                    <td><?php echo $v->username; ?></td>
                                     <td class="td-actions">
-                                        <a href="<?php echo base_url('pegawai/DataPegawai/lengkapiData/'.$v->id_pegawai); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Data Pegawai"><i class="fa fa-edit"> </i></a>
+                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
+                                        &nbsp;
+                                        <a href="javascript:void(0)" class="btn btn-small btn-info" rel="tooltip" title="Klik untuk Kirim Notifikasi" onclick="sendNotifikasi(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-bell"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -65,11 +93,44 @@
         </div>
     </div>
 </div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script type="text/javascript">
 function prd_download(file)
 {   
     file_name = file;
-    window.location.href =  "<?php echo site_url('pegawai/DataPegawai/file_download') ?>?file_name="+ file_name;
+    window.location.href =  "<?php echo site_url('sdm/daftarPegawai/file_download') ?>?file_name="+ file_name;
+}
+function cetakKartuPID(id_pegawai){
+    alert(id_pegawai);
+}
+function setPencarian(){
+    var nip = $('#nip').val();
+    var nama = $('#nama').val();
+    var nidn = $('#nidn').val();
+
+    var data = {
+      nip     : nip,
+      nama    : nama,
+      nidn    : nidn
+    }
+
+  $.ajax({
+      url     : "<?php echo base_url('sdm/kartuPID'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+            // if(data == ''){
+            //     window.location.reload();
+            // }
+          $('#dataTables-example > tbody').html(data);
+      }
+    });
+}
+function print(caraPrint,id_pegawai)
+{
+    var id_pegawai = id_pegawai;
+    window.open('<?php echo base_url('sdm/kartuPID/printKartu/'); ?>/'+id_pegawai,'printwin','left=100,top=100,width=1000,height=640');
 }
 </script>

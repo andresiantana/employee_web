@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
-                    <input class="form-control" type="text" name="tanggal_lahir" value="<?php echo isset($datapegawai->tanggal_lahir) ? $datapegawai->tanggal_lahir : ""; ?>">
+                    <input class="form-control" id="tanggal_lahir" name="tanggal_lahir" type="text" class="span3" value="<?php echo isset($datapegawai->tanggal_lahir) ? date('d/m/Y',strtotime($datapegawai->tanggal_lahir)) : date('d/m/Y'); ?>" required>
                 </div>
                 <div class="form-group">
                     <label>E-mail</label>
@@ -108,8 +108,13 @@
     <div class="col-md-12"></div>      
 </div>  
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
+<script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
-    $(document).ready(function(){        
+    $(document).ready(function(){     
+        $('#tanggal_lahir').datepicker({
+            format:'dd/mm/yyyy',
+        });
+
         $('.numbers-only').keyup(function() {
             console.log("a");
             var d = $(this).attr('numeric');

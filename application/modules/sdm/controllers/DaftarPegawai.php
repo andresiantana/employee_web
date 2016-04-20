@@ -33,6 +33,28 @@ class DaftarPegawai extends CI_Controller {
 
         force_download($nama_file, $data);
 	}
+
+	function approveData()
+    {
+    	$status = '';
+
+        $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
+        $object = array(
+			'status_approve_sdm'=>'Approved'
+		);
+
+		$this->db->where('id_pegawai', $id_pegawai);
+		$this->db->update('pegawai', $object);
+		if($this->db->affected_rows()){
+			$status = true;
+		}else{
+			$status = false;
+		}
+
+		$data['status'] = $status;
+		echo json_encode($data); 
+		exit;
+	}
 }
 
 /* End of file DaftarPegawai.php */
