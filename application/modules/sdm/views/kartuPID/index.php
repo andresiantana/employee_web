@@ -6,8 +6,9 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
+                    <legend>Pencarian :</legend>
                     <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                        <div class="row">
+                        <div class="row">                            
                             <div class="col-sm-6">
                                  <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
@@ -81,8 +82,6 @@
                                     <td><?php echo $v->username; ?></td>
                                     <td class="td-actions">
                                         <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
-                                        &nbsp;
-                                        <a href="javascript:void(0)" class="btn btn-small btn-info" rel="tooltip" title="Klik untuk Kirim Notifikasi" onclick="sendNotifikasi(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-bell"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

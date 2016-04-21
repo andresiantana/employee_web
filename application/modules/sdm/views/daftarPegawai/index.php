@@ -23,27 +23,31 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Nama Lengkap</th>
-                                <th>NIP</th>
-                                <th>NIDN</th>
-                                <th>Tanggal Lahir</th>
-                                <th>E-mail</th>
-                                <th>No. Telp</th>
-                                <th>Foto</th>
-                                <th>Fakultas</th>
-                                <th>Prodi</th>
-                                <th>Nama Bank</th>
-                                <th>Nomor Rekening</th>
-                                <th>Atas Nama</th>
-                                <th>Sertifikasi</th>
-                                <th>Surat Studi Lanjut</th>
-                                <th>Surat Lulus Seleksi</th>
-                                <th>Surat Terima Beasiswa</th>
-                                <th>Biaya SPP</th>
-                                <th>Username</th>
-                                <th class="td-actions">Aksi</th>
+                            <tr style="text-align:center;">
+                                <th rowspan="2">No.</th>
+                                <th rowspan="2">Nama Lengkap</th>
+                                <th rowspan="2">NIP</th>
+                                <th rowspan="2">NIDN</th>
+                                <th rowspan="2">Tanggal Lahir</th>
+                                <th rowspan="2">E-mail</th>
+                                <th rowspan="2">No. Telp</th>
+                                <th rowspan="2">Foto</th>
+                                <th rowspan="2">Fakultas</th>
+                                <th rowspan="2">Prodi</th>
+                                <th rowspan="2">Nama Bank</th>
+                                <th rowspan="2">Nomor Rekening</th>
+                                <th rowspan="2">Atas Nama</th>
+                                <th rowspan="2">Sertifikasi</th>
+                                <th rowspan="2">Surat Studi Lanjut</th>
+                                <th rowspan="2">Surat Lulus Seleksi</th>
+                                <th rowspan="2">Surat Terima Beasiswa</th>
+                                <th rowspan="2">Biaya SPP</th>
+                                <th rowspan="2">Username</th>
+                                <th colspan="2" class="td-actions">Aksi</th>
+                            </tr>
+                            <tr style="text-align:center;">
+                                <th>Approve</th>
+                                <th>Kirim Notifikasi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,6 +80,10 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                                         <?php }else{ ?>
                                         <font style="color:green;"><?php echo $v->status_approve_sdm; ?></font>
                                         <?php } ?>
+                                        
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo base_url('sdm/daftarPegawai/notifikasi/'.$v->id_pegawai); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk kirim notifikasi"><i class="fa fa-bell"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -88,6 +96,8 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
 </div>
 </form>
 
+<!-- Dialog untuk Approve -->
+<input type="hidden" id="pegawai_id">
 <div   class="popup_window_css" id="sample">
 <table class="popup_window_css">
 <tr    class="popup_window_css">
@@ -96,12 +106,14 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
 <img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Approve Data Pegawai</div>
 <div   class="popup_window_css_body">
     <div style="border: 1px solid #808080; padding: 6px; background: #FFFFFF;">
-        <input type="hidden" id="pegawai_id">
         <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="approveData();"><i class="fa fa-check"></i> Approved</a>
-        <a href="javascript:void(0)" class="btn btn-small btn-danger" rel="tooltip" title="Klik batal Approve" onclick="batal();"><i class="fa fa-ban"></i> Batal</a>
+        <a href="javascript:void(0)" class="btn btn-small btn-danger" rel="tooltip" title="Klik batal Approve" onclick="batalApprove();"><i class="fa fa-ban"></i> Batal</a>
     </div>
 </div>
+
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
+<script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
 function prd_download(file)
 {   
@@ -130,10 +142,149 @@ function approveData(id_pegawai){
       }
     });
 }
-function setIdPegawai(id_pegawai) {
+
+function kirimNotifikasi(id_pegawai){
+    var id_pegawai = $('#pegawai_id').val();
+    var tanggal = $('#tanggal').val();
+    var pesan = $('#pesan').val();
+
+    var data = {
+      id_pegawai    : id_pegawai,
+      tanggal       : tanggal,
+      pesan         : pesan
+    }
+    $('#sample').attr('style','display:none');
+    $.ajax({
+      url     : "<?php echo base_url('sdm/daftarPegawai/kirimNOtifikasi'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          if(data.status == true){
+            alert('Notifikasi berhasil dikirim');
+            window.location.reload();
+          }else{
+            alert('Notifikasi gagal dikirim');
+              window.location.reload();
+          }
+      }
+    });
+}
+
+function setIdPegawai(id_pegawai){
     $('#pegawai_id').val(id_pegawai)
 }
-function batal(){
-    $('#sample').attr('style','display:none');
+
+function batalApprove(){
+    $('#sample').attr('style','display:none');   
 }
+
+function batalNotifikas(){
+    $('#notifikasi').attr('style','display:none');    
+}
+$(document).ready(function(){
+    $('#tanggal').datepicker({
+        format:'dd/mm/yyyy',
+    });
+});
+</script>
+
+<p>This <a href="#ex2" rel="modal:open">example</a> demonstrates how visually customizable the modal is.</p>
+
+<!-- Modal HTML embedded directly into document -->
+<form action="" class="login_form modal" id="ex2" style="display:none;">
+  <h3>Isikan Notifikasi Sebagai Berikut</h3>
+  <p><label>Tanggal:</label><input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo date('d/m/Y'); ?>" required></p>
+  <p><label>Isi Notifikasi:</label> <textarea class="form-control" id="pesan" name="pesan" cols="10" rows="5"></textarea></p>
+  <p><input type="button" value="Kirim Notifikasi" /></p>
+</form>
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+
+    function log_modal_event(event, modal) {
+      if(typeof console != 'undefined' && console.log) console.log("[event] " + event.type);
+    };
+
+    $(document).on($.modal.BEFORE_BLOCK, log_modal_event);
+    $(document).on($.modal.BLOCK, log_modal_event);
+    $(document).on($.modal.BEFORE_OPEN, log_modal_event);
+    $(document).on($.modal.OPEN, log_modal_event);
+    $(document).on($.modal.BEFORE_CLOSE, log_modal_event);
+    $(document).on($.modal.CLOSE, log_modal_event);
+    $(document).on($.modal.AJAX_SEND, log_modal_event);
+    $(document).on($.modal.AJAX_SUCCESS, log_modal_event);
+    $(document).on($.modal.AJAX_COMPLETE, log_modal_event);
+
+    $('#more').click(function() {
+      $(this).parent().after($(this).parent().next().clone());
+      return false;
+    });
+
+    $('#manual-ajax').click(function(event) {
+      event.preventDefault();
+      $.get(this.href, function(html) {
+        $(html).appendTo('body').modal();
+      });
+    });
+
+    $('a[href="#ex5"]').click(function(event) {
+      event.preventDefault();
+      $(this).modal({
+        escapeClose: false,
+        clickClose: false,
+        showClose: false
+      });
+    });
+
+    $('a[href="#ex6-2b"],a[href="#ex6-3b"]').click(function(event) {
+      event.preventDefault();
+      $(this).modal({
+        closeExisting: false
+      });
+    });
+
+    $('a[href="#ex7"]').click(function(event) {
+      event.preventDefault();
+      $(this).modal({
+        fadeDuration: 250
+      });
+    });
+
+    $('a[href="#ex8"]').click(function(event) {
+      event.preventDefault();
+      $(this).modal({
+        fadeDuration: 1000,
+        fadeDelay: 0.50
+      });
+    });
+
+    $('a[href="#ex9"]').click(function(event) {
+      event.preventDefault();
+      $(this).modal({
+        fadeDuration: 1000,
+        fadeDelay: 1.75
+      });
+    });
+
+    $('a[href="#ex10"]').click(function(event){
+      event.preventDefault();
+      $(this).modal({
+        closeClass: 'icon-remove',
+        closeText: '!'
+      });
+    });
+
+  });
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1701128-22', 'auto');
+  ga('send', 'pageview');
+
 </script>

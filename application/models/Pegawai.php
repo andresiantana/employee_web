@@ -38,6 +38,17 @@ class Pegawai extends CI_Model {
 		return $query;
 	}
 
+	public function tampilDataPegawaiBaru(){
+		$approve = 'Approved';
+		$this->db->select('*');
+		$this->db->from('pegawai');
+		$this->db->join('user', 'user.id_user = pegawai.id_user');
+		$this->db->where('status_approve_sdm is null');
+
+		$query = $this->db->get();
+		return $query;
+	}
+
 	public function tampilKartuPegawai($id_pegawai){
 		$approve = 'Approved';
 		$this->db->select('*');

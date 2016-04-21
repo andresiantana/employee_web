@@ -20,13 +20,7 @@
         <td style="text-align:right;"><?php echo $v->username; ?></td>
         <td><?php echo $v->username; ?></td>
         <td class="td-actions">
-            <?php 
-                if($v->status_approve_sdm != "Approved" || $v->status_approve_sdm == ''){
-            ?>
-                <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="approveData(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
-            <?php }else{ ?>
-            <font style="color:green;"><?php echo $v->status_approve_sdm; ?></font>
-            <?php } ?>
+            <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>            
         </td>
     </tr>
 <?php endforeach; ?>

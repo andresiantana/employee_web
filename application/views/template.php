@@ -18,6 +18,8 @@
     <!-- Google Fonts-->
     <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/cssCharts.css');?>">     
+    <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.css');?>">     
+    <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/modal/hightlight/github.css');?>">     
 </head>
 
 <body>
@@ -82,18 +84,12 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-bell fa-fw"></i>
+                        <?php echo isset($isi_notifikasi) ? count($isi_notifikasi) : ''; ?>-<?php echo isset($isi_notifikasi2) ? count($isi_notifikasi2) : ''; ?>
+                        <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                       <!--  <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 min</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li> -->
+                       <?php echo $_notifikasi; ?>
                     </ul>
                     <!-- /.dropdown-alerts -->
                 </li>
@@ -137,6 +133,22 @@
             </div>
             <div id="page-inner">
                 <?php echo $_content; ?>
+
+                <!-- Dialog untuk Approve -->
+                <input type="hidden" id="id_notifikasi">
+                <div   class="popup_window_css" id="sample">
+                <table class="popup_window_css">
+                <tr    class="popup_window_css">
+                <td    class="popup_window_css">
+                <div   class="popup_window_css_head">
+                <img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Notifikasi</div>
+                <div   class="popup_window_css_body">
+                    <div style="border: 1px solid #808080; padding: 6px; background: #FFFFFF;">
+                        <div id="isi_pesan">
+
+                        </div>
+                    </div>
+                </div>
 				<footer>
                     <!-- <p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p>	 -->
                 </footer>
@@ -176,6 +188,9 @@
     <!-- Custom Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.js');?>"></script>
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/highlight/highlight.pack.js');?>"></script>
     <script type="text/javascript">
         $('.numbers-only').keyup(function() {
             var d = $(this).attr('numeric');

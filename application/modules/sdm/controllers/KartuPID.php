@@ -20,7 +20,7 @@ class KartuPID extends CI_Controller {
 	{
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Daftar Pegawai';
+		$data['judulHeader'] = 'Kartu PID';
 		$data['menu'] = 'KartuPID';
 		$nidn = !empty($this->input->post('nidn')) ? $this->input->post('nidn') : null;
 		$nip = !empty($this->input->post('nip')) ? $this->input->post('nip') : null;

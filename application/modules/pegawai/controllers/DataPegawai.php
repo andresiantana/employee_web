@@ -15,6 +15,7 @@ class DataPegawai extends CI_Controller {
 	 	$this->load->helper(array('url','html','form','download'));
 		$this->load->model('User');
 		$this->load->model('PGPegawai');
+		$this->load->model('Notifikasi');
 
 		$this->gallery_path = realpath(APPPATH . '../data/images/pegawai/');
        	$this->gallery_path_url = base_url() . 'data/images/pegawai/';
@@ -167,6 +168,15 @@ class DataPegawai extends CI_Controller {
 				$this->db->where('id_pegawai', $id_pegawai);
 				$this->db->update('pegawai', $data);
 				$insert = $this->db->affected_rows();
+
+		        $object = array(
+					'id_pegawai'=>$id_pegawai,
+					'tanggal'=>date('Y-m-d H:i:s'),
+					'pesan'=>'Update data pegawai',
+					'id_user'=>$this->session->userdata('id_user')
+				);
+
+				$this->Notifikasi->insert($object);
 			}else{
 				$insert = $this->PGPegawai->insert($data);	
 			}			
