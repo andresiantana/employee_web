@@ -1,4 +1,28 @@
 <style>
+    p {
+        color:#000099;
+        font-family: verdana;
+    }
+    body{
+        background-color: #ffffff;
+    }
+    table{
+        margin:0 auto;
+        width: 50%;
+        border-collapse: collapse;
+        background-color: #ecf3eb;
+    }
+    th, td{
+        border:1px solid #999;
+    }
+    th{
+        padding: 8px 0;
+        background: #0fc;
+        font-size: 30px;
+    }
+    td{
+        padding: 4px; 4px;
+    }
     .content-depan{
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -34,44 +58,57 @@
         font-size: 9px;
     }
 </style>
-<div class="content-depan">
-    <div class="pegawai">
-        <!-- <div class="data"> -->
-            <table>
-              <tr>
-                <td><b>NIDN</b></td>
-                <td>:</td>
-                <td><?php echo $detail->nidn; ?></td>
-              </tr>
-              <tr>
-                <td><b>NIP</b></td>
-                <td>:</td>
-                <td><?php echo $detail->nip; ?></td>
-              </tr>
-              <tr>
-                <td><b>Nama</b></td>
-                <td>:</td>
-                <td><?php echo $detail->nama_lengkap; ?></td>
-              </tr>
-              <tr>
-                <td><b>Tempat/Tgl. Lahir</b></td>
-                <td>:</td>
-                <td><?php echo date('d-m-Y',strtotime($detail->tanggal_lahir)); ?></td>
-              </tr>
-              <tr>
-                <td><b>Fakultas</b></td>
-                <td>:</td>
-                <td><?php echo $detail->fakultas; ?></td>
-              </tr>
-              <tr>
-                <td><b>Prodi</b></td>
-                <td>:</td>
-                <td><?php echo $detail->prodi; ?></td>
-              </tr>              
-            </table>
-        <!-- </div> -->
-    </div>
-</div><br>
+<table align="center">
+    <tr>
+        <th height="50" colspan="2">KARTU PID</th>
+    </tr>
+    <tr>
+        <td>
+            <p><blockquote><pre>
+                <?php 
+                    print '<br>';
+                    print 'NIDN :';
+                    print $detail->nidn;
+                    print '<br>';
+
+                    print 'NIP :';
+                    print $detail->nip;
+                    print '<br>';
+
+                    print 'Nama :';
+                    print $detail->nama_lengkap;
+                    print '<br>';
+
+                    print 'Tempat, Tgl Lahir :';
+                    print ",". date('d-m-Y',strtotime($detail->tanggal_lahir));
+                    print '<br>';
+
+                    print 'E-mail :';
+                    print $detail->email;
+                    print '<br>';
+
+                    print 'No. Telp :';
+                    print $detail->no_telp;
+                    print '<br>';
+
+                    print 'Fakultas :';
+                    print $detail->fakultas;
+                    print '<br>';
+
+                    print 'Prodi :';
+                    print $detail->prodi;
+                    print '<br>';
+                ?>
+            </pre></blockquote></p>
+        </td>
+        <td>
+            <blockquote>
+                <img src="<?php echo base_url().'data/images/pegawai/'.$detail->foto; ?>" width="100px" height="100px">
+            </blockquote>
+        </td>
+    </tr>
+</table>
+
 <script type="text/javascript">
   window.print();
 </script>
