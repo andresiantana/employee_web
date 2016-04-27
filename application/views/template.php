@@ -85,10 +85,10 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-bell fa-fw"></i>
-                        <?php echo isset($isi_notifikasi) ? count($isi_notifikasi) : ''; ?>-<?php echo isset($isi_notifikasi2) ? count($isi_notifikasi2) : ''; ?>
+                        <?php echo isset($isi_notifikasi) ? ((count($isi_notifikasi) > 0) ? count($isi_notifikasi) : "") : ''; ?> <?php echo isset($isi_notifikasi2) ? ((count($isi_notifikasi2) > 0) ? "-".count($isi_notifikasi2) : "") : ''; ?>
                         <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
+                    <ul class="dropdown-menu dropdown-alerts" style="overflow: scroll; height: 500px;">
                        <?php echo $_notifikasi; ?>
                     </ul>
                     <!-- /.dropdown-alerts -->
@@ -141,7 +141,7 @@
                 <tr    class="popup_window_css">
                 <td    class="popup_window_css">
                 <div   class="popup_window_css_head">
-                <img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Notifikasi</div>
+                <img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" onclick="close();"/>Notifikasi</div>
                 <div   class="popup_window_css_body">
                     <div style="border: 1px solid #808080; padding: 6px; background: #FFFFFF;">
                         <div id="isi_pesan">
@@ -180,9 +180,14 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/dataTables/dataTables.bootstrap.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.js');?>"> </script>
     <script>
+        function close(){
+            alert("a");
+        }
         $(document).ready(function () {
             $('#dataTables-example').dataTable();
         });
+
+
     </script>
 
     <!-- Custom Js -->

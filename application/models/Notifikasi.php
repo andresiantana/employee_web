@@ -33,9 +33,10 @@ class Notifikasi extends CI_Model {
 		$nama_role = 'SDM';
 		$this->db->select('*');
 		$this->db->from('notifikasi');
-		$this->db->join('pegawai', 'pegawai.id_pegawai = notifikasi.id_pegawai');
-		// $this->db->join('user', 'user.id_user = notifikasi.id_user');
-		// $this->db->join('role', 'role.id_role = user.id_user');
+		$this->db->join('pegawai', 'pegawai.id_pegawai = notifikasi.id_pegawai','left');
+		$this->db->join('user', 'user.id_user = notifikasi.id_user','left');
+		$this->db->join('role', 'role.id_role = user.id_role','left');
+		$this->db->where('user.id_role in(3,6)');
 		$this->db->where('notifikasi.status_baca is false');
 		$this->db->where('DATE(notifikasi.tanggal) ="'.date('Y-m-d').'"');
 		// $this->db->like('role.nama_role', $nama_role);

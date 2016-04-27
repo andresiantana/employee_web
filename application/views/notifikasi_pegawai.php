@@ -47,7 +47,10 @@ function setNotifikasi(id_notifikasi){
       type    : "POST",
       data    : data,
       dataType: 'json',
-      success : function (data) {
+      success : function (data) {          
+          if(data.status == true){
+              // window.location.reload();
+          }
           $('#isi_pesan').html(data.isi_pesan);
       }
     });

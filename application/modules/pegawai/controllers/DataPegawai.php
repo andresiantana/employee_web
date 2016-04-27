@@ -61,6 +61,7 @@ class DataPegawai extends CI_Controller {
 
 		$email = $this->input->post('email');
 		$no_telp = $this->input->post('no_telp');
+		$profesi = $this->input->post('profesi');
 		$fakultas = $this->input->post('fakultas');
 		$prodi = $this->input->post('prodi');
 		$nama_bank = $this->input->post('nama_bank');
@@ -75,6 +76,13 @@ class DataPegawai extends CI_Controller {
 		$id_user = $this->session->userdata('id_user');
 		$id_pegawai = ($this->input->post('id_pegawai')) ? $this->input->post('id_pegawai') : null;
 
+		// daftar file yang sudah di upload
+		$file_foto = $this->input->post('file_foto');
+		$file_lulus_seleksi = $this->input->post('file_lulus_seleksi');
+		$file_studi_lanjut = $this->input->post('file_studi_lanjut');
+		$file_terima_beasiswa = $this->input->post('file_terima_beasiswa');
+
+
 		$config['upload_path']    = $this->gallery_path;
      	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
      	$config['max_size']       = '2000';
@@ -87,12 +95,18 @@ class DataPegawai extends CI_Controller {
 				echo "<script>alert('Foto gagal diupload!');
                 window.location.href='".base_url('pegawai/DataPegawai/index')."';
             </script>";
- 		}else{
- 			$foto = $this->upload->file_name;
- 			$status_upload = true;
+ 		}else{	 			
+ 			$foto = $this->upload->file_name;	 				 			
+			$status_upload = true;
  		} 
-
- 		$config2['upload_path']    = $this->file_path;
+ 		if($foto != ''){
+			$foto = $foto;
+		}else{
+			$foto = $file_foto;
+		}
+ 		
+		
+		$config2['upload_path']    = $this->file_path;
      	$config2['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
      	$config2['max_size']       = '2000';
      	$config2['max_width']      = '2000';
@@ -109,7 +123,14 @@ class DataPegawai extends CI_Controller {
             </script>"; 			
  		} 
 
- 		$config3['upload_path']    = $this->file_path;
+ 		if($surat_studi_lanjut != ''){
+			$surat_studi_lanjut = $surat_studi_lanjut;
+		}else{
+			$surat_studi_lanjut = $file_studi_lanjut;
+		}
+ 		
+
+		$config3['upload_path']    = $this->file_path;
      	$config3['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
      	$config3['max_size']       = '2000';
      	$config3['max_width']      = '2000';
@@ -126,6 +147,13 @@ class DataPegawai extends CI_Controller {
             </script>"; 			
  		} 
 
+ 		if($surat_lulus_seleksi != ''){
+			$surat_lulus_seleksi = $surat_lulus_seleksi;
+		}else{
+			$surat_lulus_seleksi = $file_lulus_seleksi;
+		}
+
+ 		
 		$config4['upload_path']    = $this->file_path;
      	$config4['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
      	$config4['max_size']       = '2000';
@@ -142,6 +170,12 @@ class DataPegawai extends CI_Controller {
                 window.location.href='".base_url('pegawai/DataPegawai/index')."';
             </script>";	 			
  		} 
+ 		if($surat_terima_beasiswa != ''){
+			$surat_terima_beasiswa = $surat_terima_beasiswa;
+		}else{
+			$surat_terima_beasiswa = $file_terima_beasiswa;
+		}
+		
 
 			$data = array(
 				'nama_lengkap' => $nama_lengkap,
@@ -151,6 +185,7 @@ class DataPegawai extends CI_Controller {
 				'email' => $email,
 				'no_telp' => $no_telp,
 				'foto' => $foto,
+				'profesi'=>$profesi,
 				'fakultas' => $fakultas,
 				'prodi' => $prodi,
 				'nama_bank' => $nama_bank,

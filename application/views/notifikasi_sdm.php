@@ -1,10 +1,12 @@
+<?php if(count($isi_notifikasi2) > 0){ ?>
+<li>
+    <a style="color:green;">Notifikasi Pengajuan Pegawai</a>
+</li>
+<?php } ?>
 <?php
 	if(count($isi_notifikasi2) > 0){
 		foreach($isi_notifikasi2 as $i=>$data){
 ?>
-<li>
-	<a style="color:green;">Notifikasi Pengajuan Pegawai</a>
-</li>
  <li>
     <a href="#">
         <div>
@@ -16,16 +18,18 @@
 <li class="divider"></li>
 
 <?php } 
+}else{
 }
 ?>
-
+<?php if(count($isi_notifikasi) > 0){ ?>
+<li>
+    <a style="color:red;">Notifikasi Update Data Pegawai</a>
+</li>
+<?php } ?>
 <?php
 	if(count($isi_notifikasi) > 0){
 		foreach($isi_notifikasi as $i=>$data){
 ?>
-<li>
-	<a style="color:red;">Notifikasi Update Data Pegawai</a>
-</li>
  <li>
     <a href="#">
         <div>

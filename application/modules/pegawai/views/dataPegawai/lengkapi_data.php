@@ -42,20 +42,44 @@
                 </div>
                 <div class="form-group">
                     <label>Foto</label> 
-                    <input class="form-control" type="file" name="foto">
+                    <div class="controls">
+                        <?php if($datapegawai->foto != '') { ?>                    
+                            <img src="<?php echo base_url().'data/images/pegawai/'.$datapegawai->foto; ?>" width="50px" height="50px">
+                        <?php } ?><br><br>
+                        <input class="form-control" type="file" name="foto">
+                        <input class="form-control" type="hidden" name="file_foto" value="<?php echo $datapegawai->foto; ?>">
+                    </div>                    
                 </div>
                 <div class="form-group ">
                     <label>Profesi</label>
-                    <input class="form-control" type="text" name="profesi" value="<?php echo isset($datapegawai->profesi) ? $datapegawai->profesi : ""; ?>">
+                    <select class="form-control" name="profesi" id="profesi" onchange="setProfesi();">
+                        <option value="">-Pilih Profesi-</option>
+                        <option value="DOSEN">Dosen</option>
+                        <option value="TPA">TPA</option>
+                    </select>
                 </div>
-                <div class="form-group ">
-                    <label>Fakultas</label>
-                    <input class="form-control" type="text" name="fakultas" value="<?php echo isset($datapegawai->fakultas) ? $datapegawai->fakultas : ""; ?>">
+                <div id="dosen" style="display:none;">
+                    <div class="form-group">
+                        <label>Fakultas</label>  
+                        <select class="form-control" name="fakultas" id="fakultas">
+                            <option value="">-Pilih Fakultas-</option>
+                            <option value="FEB">FEB</option>
+                            <option value="FIF">FIF</option>
+                            <option value="FIK">FIK</option>
+                            <option value="FIT">FIT</option>
+                            <option value="FKB">FKB</option>
+                            <option value="FRI">FRI</option>
+                            <option value="FTE">FTE</option>
+                            <option value="Rekayasa Industri">Rekayasa Industri</option>
+                            <option value="Teknik Elektro">Teknik Elektro</option>
+                            <option value="Teknik Mesin dan Manufaktur">Teknik Mesin dan Manufaktur</option>
+                        </select>                  
+                    </div>
+                    <div class="form-group ">
+                        <label>Prodi</label>
+                        <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi) ? $datapegawai->prodi : ""; ?>">
+                    </div> 
                 </div>
-                <div class="form-group ">
-                    <label>Prodi</label>
-                    <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi) ? $datapegawai->prodi : ""; ?>">
-                </div> 
                 <div class="form-group ">
                     <label>Sertifikasi</label>
                     <input class="form-control" type="text" name="sertifikasi" value="<?php echo isset($datapegawai->sertifikasi) ? $datapegawai->sertifikasi : ""; ?>">
@@ -80,15 +104,28 @@
                 <legend>Data Pengajuan</legend>
                 <div class="form-group ">
                     <label>Surat Pengajuan Studi Lanjut</label>
-                    <input class="form-control" type="file" name="surat_studi_lanjut">
+                    <div class="controls">
+                        File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapegawai->surat_studi_lanjut; ?>')"><?php echo $datapegawai->surat_studi_lanjut; ?></a><br>
+                        <input class="form-control" type="file" name="surat_studi_lanjut">
+                        <input class="form-control" type="hidden" name="file_studi_lanjut" value="<?php echo $datapegawai->surat_terima_beasiswa; ?>">
+                    </div>                    
                 </div>
                 <div class="form-group ">
                     <label>Surat Tanda Lulus Seleksi</label>
-                    <input class="form-control" type="file" name="surat_lulus_seleksi">
+                    <div class="controls">
+                        File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapegawai->surat_lulus_seleksi; ?>')"><?php echo $datapegawai->surat_lulus_seleksi; ?></a><br>
+                        <input class="form-control" type="file" name="surat_lulus_seleksi">
+                        <input class="form-control" type="hidden" name="file_lulus_seleksi" value="<?php echo $datapegawai->surat_lulus_seleksi; ?>">
+                    </div>                    
                 </div>
                 <div class="form-group ">
                     <label>Surat Tanda Penerimaan Beasiswa</label>
-                    <input class="form-control" type="file" name="surat_terima_beasiswa">
+                    <div class="controls">
+                        File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapegawai->surat_terima_beasiswa; ?>')"><?php echo $datapegawai->surat_terima_beasiswa; ?></a><br>
+                        <input class="form-control" type="file" name="surat_terima_beasiswa">
+                        <input class="form-control" type="hidden" name="file_terima_beasiswa" value="<?php echo $datapegawai->surat_terima_beasiswa; ?>">
+                    </div>
+                    
                 </div>
                 <div class="form-group ">
                     <label>Biaya SPP</label>
@@ -110,7 +147,33 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
-    $(document).ready(function(){     
+    function prd_download(file)
+    {   
+        file_name = file;
+        window.location.href =  "<?php echo site_url('sdm/daftarPegawai/file_download') ?>?file_name="+ file_name;
+    }
+
+    function setProfesi(){
+        var pilihprofesi = $('#profesi option:selected').val();
+        if(pilihprofesi == 'DOSEN'){
+            $('#dosen').removeAttr('style','display:none;');
+        }else{
+            $('#dosen').attr('style','display:none;');
+        }
+    }
+
+    $(document).ready(function(){             
+        var profesi = "<?php echo $datapegawai->profesi; ?>";
+        if(profesi != ""){           
+            $('#profesi').val(profesi);
+            if(profesi == 'DOSEN'){
+                setProfesi();
+            }
+        }
+        var fakultas = '<?php echo $datapegawai->fakultas; ?>';
+        if(fakultas != ''){
+            $('#fakultas').val(fakultas);
+        }
         $('#tanggal_lahir').datepicker({
             format:'dd/mm/yyyy',
         });

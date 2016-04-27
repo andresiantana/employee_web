@@ -72,7 +72,7 @@ class DaftarPegawai extends CI_Controller {
 	{		
 		$id  = isset($_POST['id_notifikasi']) ? $_POST['id_notifikasi'] : null;
 		$data['isi_pesan'] = '';
-
+		$data['status'] = '';
 		$data['judulHeader'] = 'Notifikasi';
 		$data['menu'] = 'dashboard';
 		$data['username'] = $this->session->userdata('username');
@@ -81,6 +81,15 @@ class DaftarPegawai extends CI_Controller {
 		$user = $this->db->get_where('user',array('id_user'=>$notifikasi->id_user))->row();
 		$data['isi_pesan'] = 'Nama User : '.$user->nama_lengkap.' <br> Tanggal : '.date('d M Y H:i:s',strtotime($notifikasi->tanggal)).' <br> Isi Pesan : '.$notifikasi->pesan;
 
+		$object = array(
+			'status_baca'=>true
+		);
+
+		$this->db->where('id_notifikasi', $id);
+		$this->db->update('notifikasi', $object);
+		if ($this->db->affected_rows()) {
+			$data['status'] = true;
+		}
 		echo json_encode($data);
 		exit;
 	}
