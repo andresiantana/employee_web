@@ -12,13 +12,14 @@
                             <div class="col-sm-6">
                                  <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
-                                        Semester                                            
-                                        <select class="form-control" name="semester" id="semester">
-                                            <option value="">-Pilih Semester-</option>
-                                            <?php for ($i = 0; $i < 8; $i++) { ?>
-                                                <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
-                                            <?php } ?>
-                                        </select>
+                                        Nama Pegawai                                            
+                                        <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai">
+                                    </label>
+                                </div>
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        Kode Pengajuan                                           
+                                        <input type="text" class="form-control" id="kode_pengajuan" name="kode_pengajuan">
                                     </label>
                                 </div>
                                 <div id="dataTables-example_filter" class="dataTables_filter">
@@ -37,13 +38,23 @@
                                 <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Tanggal Awal                                            
-                                        <input class="form-control" id="tanggal_awal" name="tanggal_awal" type="text" class="span3" required>
+                                        <input type="text" onblur="setPencarian();" class="form-control" id="tanggal_awal" name="tanggal_awal">
                                     </label>
                                 </div>
                                 <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Tanggal Akhir                                            
-                                        <input class="form-control" id="tanggal_akhir" name="tanggal_akhir" type="text" class="span3" required>
+                                        <input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
+                                    </label>
+                                </div>
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        Status                                          
+                                        <select class="form-control" name="status_pengajuan" id="status_pengajuan">
+                                            <option value="">-Pilih Status-</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Reject">Reject</option>
+                                        </select>
                                     </label>
                                 </div>
                             </div>
@@ -51,7 +62,7 @@
                     </div>
                     <br>
                     <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
-                    <a href='<?php echo base_url('pegawai/PengajuanBiaya/informasi'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <a href='<?php echo base_url('sdm/PengajuanBiaya/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
                     <br><br>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
@@ -63,9 +74,7 @@
                                 <th>Kategori Biaya Pengajuan</th>
                                 <th>Semester</th>
                                 <th>Jumlah Pengajuan</th>
-                                <th>Status Pengajuan</th>
-                                <th>Status Pencairan</th>
-                                <th class="td-actions">Aksi</th>
+                                <th class="td-actions">Cairkan Pengajuan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,51 +86,23 @@
                                     <td><?php echo $v->nama_lengkap; ?></td>
                                     <td><?php echo $v->nama_kategori; ?></td>
                                     <td><?php echo $v->semester; ?></td>
-                                    <td><?php echo $v->jumlah_nominal; ?></td>
-                                    <td>
-                                        <?php if(isset($v->status_pengajuan)) { 
-                                            if($v->status_pengajuan == 'Approved'){
-                                                $data = 'Approved';
-                                                $warna = 'green';
-                                                $huruf = '<a href="#"><font style="color:'.$warna.';">'.$data.'</font></a>';
-                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).'" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
-                                            }else if($v->status_pengajuan == 'Reject'){
-                                                $data = 'Reject';
-                                                $warna = 'red';
-                                                $huruf = '<a href="#" rel="tooltip" title="Lihat Alasan" onclick="setDialog(\''.$v->alasan_status.'\');"><font style="color:'.$warna.';">'.$data.'</font></a>';
-                                                $button = '-';
-                                            }else{
-                                                $data = '';
-                                                $warna = '';
-                                                $huruf = '';
-                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).'" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
-                                            }
-                                        ?>
-                                            <?php echo isset($huruf) ? $huruf : ""; ?>
-                                        <?php }else{ 
-                                                $data = '';
-                                                $warna = '';
-                                                $huruf = '';
-                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).'" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
-                                            }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php if(!empty($v->id_pencairan_biaya)) {
-                                            $button = "-";
-                                        ?>
-                                        Sudah Dicairkan
-                                        <?php } ?>
-                                    </td>
+                                    <td><?php echo $v->jumlah_nominal; ?></td>                                    
                                     <td class="td-actions">
-                                        <?php echo isset($button) ? $button : ""; ?>
+                                        <?php 
+                                            if(empty($v->id_pencairan_biaya)){
+                                        ?>
+                                            <a href="<?php echo base_url('keuangan/PengajuanBiaya/pencairanBiaya?id_pengajuan_biaya='.$v->id_pengajuan_biaya); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Melakukan Pencairan Biaya"><i class="fa fa-check"> </i></a>
+                                        <?php }else{ ?>
+                                        <font>Sudah Dicairkan</font>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>
-            </div>
+                </div><br><br>
+                <a href='javascript:void(0);' onclick="print();" class="btn btn-small btn-info"><i class="fa fa-print"> </i> Print</a>
+            </div>            
         </div>
     </div>
 </div>
@@ -133,15 +114,23 @@
 <tr    class="popup_window_css">
 <td    class="popup_window_css">
 <div   class="popup_window_css_head">
-<img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Alasan Reject</div>
+<img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Approve Pengajuan Biaya Pegawai</div>
 <div   class="popup_window_css_body">
     <div style="border: 1px solid #808080; padding: 6px; background: #FFFFFF;">
         <div class="form-group">
-            <label>Alasan Reject : </label>
-            <span id="status"></span>
+            <label>Status Pengajuan</label>
+            <select class="form-control" name="status_pengajuan" id="status_pengajuan" onChange='setStatus(this);'>
+                <option value="">-Pilih Status-</option>
+                <option value="Approved">Approved</option>
+                <option value="Reject">Reject</option>
+            </select>
         </div>
-
-        <a href="<?php echo base_url('pegawai/PengajuanBiaya/index'); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i>Buat Pengajuan Baru</a>
+        <div class="form-group" id="reject" style="display:none;">
+            <label>Alasan Pengajuan</label>
+            <textarea class="form-control" name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
+        </div>
+        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="approveData();"><i class="fa fa-check"></i> Approved</a>
+        <a href="javascript:void(0)" class="btn btn-small btn-danger" rel="tooltip" title="Klik batal Approve" onclick="batalApprove();"><i class="fa fa-ban"></i> Batal</a>
     </div>
 </div>
 
@@ -149,25 +138,70 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
-function setDialog(status) {
-    $('#status').html(status);
-    popup_window_show("#sample", { pos : "window-center",width : "800px" });
+function setStatus(obj) {
+    var status_pengajuan = $('#status_pengajuan').val();
+    alert(status_pengajuan);
+    if(status_pengajuan == 'Reject') {
+        $('#reject').removeAttr('style','display:none;');
+    }else{
+        $('#reject').attr('style','display:none;');
+    }
 }
+
+function approveData(){
+    var id_pengajuan_biaya = $('#id_pengajuan_biaya').val();
+    var status_pengajuan = $('#status_pengajuan').val();
+    var alasan_pengajuan = $('#alasan_pengajuan').val();
+    var data = {
+      id_pengajuan_biaya: id_pengajuan_biaya,
+      status_pengajuan:status_pengajuan,
+      alasan_pengajuan:alasan_pengajuan
+    }
+    $('#sample').attr('style','display:none');
+    $.ajax({
+      url     : "<?php echo base_url('sdm/pengajuanBiaya/approveData'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          if(data.status == true){
+            alert(data.pesan);
+            window.location.reload();
+          }else{
+            alert(data.pesan);
+            window.location.reload();
+          }
+      }
+    });
+}
+
+function setIdPengajuanBiaya(id_pengajuan_biaya){
+    $('#id_pengajuan_biaya').val(id_pengajuan_biaya)
+}
+
+function batalApprove(){
+    $('#sample').attr('style','display:none');   
+}
+
 function setPencarian(){
-    var semester = $('#semester').val();
+    var nama_pegawai = $('#nama_pegawai').val();
     var id_kategori_biaya = $('#id_kategori_biaya').val();
     var tanggal_awal = $('#tanggal_awal').val();
     var tanggal_akhir = $('#tanggal_akhir').val();
+    var kode_pengajuan = $('#kode_pengajuan').val();
+    var status_pengajuan = $('#status_pengajuan').val();
 
     var data = {
-      semester: semester,
+      nama_pegawai: nama_pegawai,
       id_kategori_biaya: id_kategori_biaya,
       tanggal_awal: tanggal_awal,
-      tanggal_akhir: tanggal_akhir
+      tanggal_akhir: tanggal_akhir,
+      kode_pengajuan:kode_pengajuan,
+      status_pengajuan:status_pengajuan
     }
 
   $.ajax({
-      url     : "<?php echo base_url('pegawai/PengajuanBiaya/informasi'); ?>",
+      url     : "<?php echo base_url('sdm/PengajuanBiaya/index'); ?>",
       type    : "POST",
       data    : data,
       dataType: 'json',
