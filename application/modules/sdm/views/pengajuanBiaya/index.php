@@ -13,13 +13,24 @@
                                  <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Nama Pegawai                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="nama_pegawai" name="nama_pegawai">
+                                        <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai">
+                                    </label>
+                                </div>
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        Kode Pengajuan                                           
+                                        <input type="text" class="form-control" id="kode_pengajuan" name="kode_pengajuan">
                                     </label>
                                 </div>
                                 <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Kategori Biaya                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="nama" name="nama">
+                                        <select class="form-control" name="id_kategori_biaya" id="id_kategori_biaya">
+                                            <option value="">-Pilih Kategori Biaya-</option>
+                                            <?php foreach ($kategori as $i => $val) { ?>
+                                                <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </label>
                                 </div>
                             </div>
@@ -36,9 +47,23 @@
                                         <input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
                                     </label>
                                 </div>
+                                <div id="dataTables-example_filter" class="dataTables_filter">
+                                    <label>        
+                                        Status                                          
+                                        <select class="form-control" name="status_pengajuan" id="status_pengajuan">
+                                            <option value="">-Pilih Status-</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Reject">Reject</option>
+                                        </select>
+                                    </label>
+                                </div>
                             </div>
                         </div>  
                     </div>
+                    <br>
+                    <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
+                    <a href='<?php echo base_url('sdm/PengajuanBiaya/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <br><br>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -87,8 +112,9 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>
-            </div>
+                </div><br><br>
+                <a href='javascript:void(0);' onclick="print();" class="btn btn-small btn-info"><i class="fa fa-print"> </i> Print</a>
+            </div>            
         </div>
     </div>
 </div>
@@ -174,16 +200,20 @@ function setPencarian(){
     var id_kategori_biaya = $('#id_kategori_biaya').val();
     var tanggal_awal = $('#tanggal_awal').val();
     var tanggal_akhir = $('#tanggal_akhir').val();
+    var kode_pengajuan = $('#kode_pengajuan').val();
+    var status_pengajuan = $('#status_pengajuan').val();
 
     var data = {
       nama_pegawai: nama_pegawai,
       id_kategori_biaya: id_kategori_biaya,
       tanggal_awal: tanggal_awal,
-      tanggal_akhir: tanggal_akhir
+      tanggal_akhir: tanggal_akhir,
+      kode_pengajuan:kode_pengajuan,
+      status_pengajuan:status_pengajuan
     }
 
   $.ajax({
-      url     : "<?php echo base_url('pengajuan/PengajuanBiaya/informasi'); ?>",
+      url     : "<?php echo base_url('sdm/PengajuanBiaya/index'); ?>",
       type    : "POST",
       data    : data,
       dataType: 'json',
@@ -192,4 +222,13 @@ function setPencarian(){
       }
     });
 }
+
+$(document).ready(function(){
+    $('#tanggal_awal').datepicker({
+        format:'dd/mm/yyyy',
+    });
+    $('#tanggal_akhir').datepicker({
+        format:'dd/mm/yyyy',
+    });
+});
 </script>
