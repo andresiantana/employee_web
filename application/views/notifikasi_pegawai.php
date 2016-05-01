@@ -23,8 +23,33 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
  <li>
     <a href="javascript:void(0);" onclick="popup_window_show('#sample', { pos : 'window-center',width : '800px' });setNotifikasi(<?php echo $data->id_notifikasi; ?>);">
         <div>
-            <i class="fa fa-comment fa-fw"></i> Nama SDM : <?php echo $data->nama_lengkap; ?>
+            <i class="fa fa-comment fa-fw"></i> 
+            Nama SDM : <?php echo $data->nama_lengkap; ?> <br>
+            Pesan : <?php echo $data->pesan; ?>
             <span class="pull-right text-muted small"><?php echo date('d M Y H:i:s',strtotime($data->tanggal)); ?></span>
+        </div>
+    </a>
+</li>
+<li class="divider"></li>
+
+<?php } 
+}
+?>
+
+<?php
+  if(count($isi_notifikasi2) > 0){
+    foreach($isi_notifikasi2 as $i=>$data2){
+?>
+<li>
+  <a style="color:red;">Notifikasi dari Keuangan</a>
+</li>
+ <li>
+    <a href="javascript:void(0);" onclick="setNotifikasi(<?php echo $data2->id_notifikasi; ?>)">
+        <div>
+            <i class="fa fa-comment fa-fw"></i> 
+            Nama Keuangan : <?php echo $data2->nama_lengkap; ?> <br>
+            Pesan : <?php echo $data2->pesan; ?>
+            <span class="pull-right text-muted small"><?php echo date('d M Y H:i:s',strtotime($data2->tanggal)); ?></span>
         </div>
     </a>
 </li>
@@ -48,10 +73,10 @@ function setNotifikasi(id_notifikasi){
       data    : data,
       dataType: 'json',
       success : function (data) {          
-          if(data.status == true){
-              // window.location.reload();
-          }
-          $('#isi_pesan').html(data.isi_pesan);
+        if(data.status == true){
+            // window.location.reload();
+        }
+        $('#isi_pesan').html(data.isi_pesan);
       }
     });
 }

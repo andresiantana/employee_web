@@ -50,7 +50,7 @@
                                 <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Status                                          
-                                        <select class="form-control" name="status_pengajuan" id="status_pengajuan">
+                                        <select class="form-control" name="status" id="status">
                                             <option value="">-Pilih Status-</option>
                                             <option value="Approved">Approved</option>
                                             <option value="Reject">Reject</option>
@@ -152,7 +152,6 @@
 <script type="text/javascript">
 function setStatus(obj) {
     var status_pengajuan = $('#status_pengajuan').val();
-    alert(status_pengajuan);
     if(status_pengajuan == 'Reject') {
         $('#reject').removeAttr('style','display:none;');
     }else{
@@ -201,7 +200,7 @@ function setPencarian(){
     var tanggal_awal = $('#tanggal_awal').val();
     var tanggal_akhir = $('#tanggal_akhir').val();
     var kode_pengajuan = $('#kode_pengajuan').val();
-    var status_pengajuan = $('#status_pengajuan').val();
+    var status_pengajuan = $('#status').val();
 
     var data = {
       nama_pegawai: nama_pegawai,

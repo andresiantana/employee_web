@@ -23,6 +23,7 @@ class Template{
             $data['_menu'] = $this->_ci->load->view('menu_sdm',$data,true); 
             $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasiSDM()->result_object();
             $data['isi_notifikasi2'] = $this->_ci->Pegawai->tampilDataPegawaiBaru()->result_object();
+            $data['isi_notifikasi3'] = $this->_ci->Notifikasi->tampilNotifikasiDariKeuangan()->result_object();
             $data['_notifikasi'] = $this->_ci->load->view('notifikasi_sdm',$data,true);             
         }else if ($data['nama_role'] == 'Keuangan'){
             $data['_menu'] = $this->_ci->load->view('menu_keuangan',$data,true); 
@@ -31,6 +32,7 @@ class Template{
         } else if ($data['nama_role'] == 'Pegawai') {
             $data['_menu'] = $this->_ci->load->view('menu_pegawai',$data,true); 
             $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasiDariSDM()->result_object();
+            $data['isi_notifikasi2'] = $this->_ci->Notifikasi->tampilNotifikasiDariKeuangan()->result_object();
             $data['_notifikasi'] = $this->_ci->load->view('notifikasi_pegawai',$data,true);             
         }else{
             $data['_menu'] = $this->_ci->load->view('menu_admin',$data,true); 

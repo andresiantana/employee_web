@@ -58,7 +58,7 @@
                         <option value="TPA">TPA</option>
                     </select>
                 </div>
-                <div id="dosen" style="display:none;">
+                <div id="dosen" style="display:none;">                    
                     <div class="form-group">
                         <label>Fakultas</label>  
                         <select class="form-control" name="fakultas" id="fakultas">
@@ -79,6 +79,22 @@
                         <label>Prodi</label>
                         <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi) ? $datapegawai->prodi : ""; ?>">
                     </div> 
+                </div>
+                <div class="form-group">
+                    <label>Lokasi Pendidikan</label>
+                    <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan(this);">
+                        <option value="">-Pilih Lokasi-</option>
+                        <option value="Dalam Negeri">Dalam Negeri</option>
+                        <option value="Luar Negeri">Luar Negeri</option>
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label>Nama Universitas</label>
+                    <div class="controls" id="tampil_universitas">
+                       <select class="form-control" name="id_lokasi" id="id_lokasi">
+                            <option value="">-Pilih Universitas-</option>
+                        </select>                            
+                    </div>
                 </div>
                 <div class="form-group ">
                     <label>Sertifikasi</label>
@@ -153,6 +169,18 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
+    function setLokasiPendidikan(obj){
+        var nama_lokasi = obj.value;
+        
+        $.ajax({
+           type: 'POST',
+           data: "nama_lokasi="+nama_lokasi,
+           url: '<?php echo base_url('pegawai/DataPegawai/dropDownUniversitas'); ?>',
+           success: function(result) {
+            $('#tampil_universitas').html(result);       }
+        });
+
+    }
     function prd_download(file)
     {   
         file_name = file;

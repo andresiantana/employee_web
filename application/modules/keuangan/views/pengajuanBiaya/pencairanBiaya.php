@@ -95,7 +95,7 @@
 <script type="text/javascript">  
     function print(caraPrint)
     {
-        var id_pencairan_biaya = '<?php echo $datapencairan->id_pencairan_biaya; ?>';
+        var id_pencairan_biaya = '<?php echo isset($datapencairan->id_pencairan_biaya) ? $datapencairan->id_pencairan_biaya : null; ?>';
         window.open('<?php echo base_url('keuangan/PengajuanBiaya/printPencairanBiaya/'); ?>/'+id_pencairan_biaya,'printwin','left=100,top=100,width=1000,height=640');
     }
 

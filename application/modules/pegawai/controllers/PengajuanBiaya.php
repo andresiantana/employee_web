@@ -78,8 +78,18 @@ class PengajuanBiaya extends CI_Controller {
 				'jumlah_nominal' => $jumlah_nominal,
 				'id_pegawai' => $id_pegawai
 			);
-		}else{
-			$insert = $this->PengajuanBiayaT->insert($data);	
+		}else{			
+			$insert = $this->PengajuanBiayaT->insert($data);
+			$datapengajuan = $this->db->get_where('pengajuan_biaya',array(),array('limit'=>1,'order'=>'id_pengajuan_biaya DESC'))->row();
+			$notif = array(
+				'id_notifikasi'=>'',
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>date('Y-m-d H:i:s'),
+				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' <br> Pengajuan Dana Baru',
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$this->Notifikasi->insert($notif);
 		}	
 
 		if ($insert) {

@@ -85,7 +85,13 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-bell fa-fw"></i>
-                        <?php echo isset($isi_notifikasi) ? ((count($isi_notifikasi) > 0) ? count($isi_notifikasi) : "") : ''; ?> <?php echo isset($isi_notifikasi2) ? ((count($isi_notifikasi2) > 0) ? "-".count($isi_notifikasi2) : "") : ''; ?>
+                        <?php
+                            $tanda = '';
+                            if(count($isi_notifikasi) > 0 && count($isi_notifikasi2) > 0){
+                                $tanda = '-';
+                            }
+                        ?>
+                        <?php echo isset($isi_notifikasi) ? ((count($isi_notifikasi) > 0) ? count($isi_notifikasi) : "") : ''; ?> <?php echo isset($isi_notifikasi2) ? ((count($isi_notifikasi2) > 0) ? $tanda.count($isi_notifikasi2) : "") : ''; ?>
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts" style="overflow: scroll; height: 500px;">

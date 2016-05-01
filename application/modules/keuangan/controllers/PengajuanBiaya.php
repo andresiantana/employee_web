@@ -137,6 +137,17 @@ class PengajuanBiaya extends CI_Controller {
 
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
 			$this->db->update('pengajuan_biaya', $pengajuan);
+
+			// send notifikasi
+			$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya))->row();
+			$object = array(
+				'id_pegawai'=>$datapengajuan->id_pengajuan_biaya,
+				'tanggal'=>date('Y-m-d H:i:s'),
+				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' Sudah dicairkan oleh Bagian Keuangan',
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$this->Notifikasi->insert($object);
 		}	
 
 		if ($insert) {

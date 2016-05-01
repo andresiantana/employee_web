@@ -61,6 +61,7 @@ class DataPegawai extends CI_Controller {
 		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
 		$tanggal_lahir = $tanggal;
 
+		$id_lokasi = $this->input->post('id_lokasi');
 		$email = $this->input->post('email');
 		$no_telp = $this->input->post('no_telp');
 		$profesi = $this->input->post('profesi');
@@ -178,6 +179,7 @@ class DataPegawai extends CI_Controller {
 			$surat_terima_beasiswa = $file_terima_beasiswa;
 		}
 			$data = array(
+				'id_lokasi' => $id_lokasi,
 				'nama_lengkap' => $nama_lengkap,
 				'nip' => $nip,
 				'nidn' => $nidn,
@@ -231,6 +233,22 @@ class DataPegawai extends CI_Controller {
         $data = file_get_contents(base_url()."data/file/pegawai/".$nama_file);
 
         force_download($nama_file, $data);
+	}
+
+	function dropDownUniversitas()
+    {
+        $nama_lokasi = isset($_POST['nama_lokasi']) ? $_POST['nama_lokasi'] : null;
+        $this->db->select('*');
+		$this->db->like('nama_lokasi', $nama_lokasi);
+		$dataLokasi = $this->db->get('lokasi_pendidikan')->result_object();
+
+		if(count($dataLokasi) > 0){
+			echo "<select class='form-control' name='id_lokasi' id='id_lokasi'><option value=''>--Pilih Universitas--</option>";
+			foreach($dataLokasi as $lokasi){
+			   echo"<option value='".$lokasi->id_lokasi."'>".$lokasi->nama_universitas."</option>";
+		  	}     
+		  	echo"</select></p><script>initComboBox();</script>";
+		}
 	}
 
 }

@@ -70,6 +70,7 @@ class PengajuanBiaya extends CI_Controller {
         $status_pengajuan = isset($_POST['status_pengajuan']) ? $_POST['status_pengajuan'] : "";
         $alasan_pengajuan = isset($_POST['alasan_pengajuan']) ? $_POST['alasan_pengajuan'] : "";
 
+        $datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya))->row();
 
         $object = array(
 			'status_pengajuan'=>$status_pengajuan,
@@ -80,6 +81,14 @@ class PengajuanBiaya extends CI_Controller {
 		$this->db->update('pengajuan_biaya', $object);
 		if($this->db->affected_rows()){
 			$status = true;
+		 	$object = array(
+				'id_pegawai'=>$datapengajuan->id_pengajuan_biaya,
+				'tanggal'=>date('Y-m-d H:i:s'),
+				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' di - '.$status_pengajuan.' oleh SDM ',
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$this->Notifikasi->insert($object);
 			$pesan = 'Data Pengajuan Biaya berhasil di'.$status_pengajuan;
 		}else{
 			$status = false;
