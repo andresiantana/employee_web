@@ -65,6 +65,7 @@
         </div>
     </div>
 </div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script type="text/javascript">
 function prd_download(file)

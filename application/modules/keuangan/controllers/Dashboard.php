@@ -20,6 +20,7 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['menu'] = 'beranda';
 		$data['judulHeader'] = 'Dashboard';
@@ -31,6 +32,7 @@ class Dashboard extends CI_Controller {
 		$data['judulHeader'] = 'Daftar User';
 		$data['menu'] = 'dashboard';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('user',array('username'=>$id))->row();
 		$data['role'] = $this->KURoleM->dd_role_user();
@@ -74,6 +76,7 @@ class Dashboard extends CI_Controller {
 
 	public function logout() {
 		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('id_user');
 		$this->session->unset_userdata('nama_role');
 		session_destroy();
 		redirect('keuangan/Login');

@@ -43,11 +43,11 @@
                 <div class="form-group">
                     <label>Foto</label> 
                     <div class="controls">
-                        <?php if($datapegawai->foto != '') { ?>                    
+                        <?php if((count($datapegawai) > 0) && $datapegawai->foto != '') { ?>                    
                             <img src="<?php echo base_url().'data/images/pegawai/'.$datapegawai->foto; ?>" width="50px" height="50px">
                         <?php } ?><br><br>
                         <input class="form-control" type="file" name="foto">
-                        <input class="form-control" type="hidden" name="file_foto" value="<?php echo $datapegawai->foto; ?>">
+                        <input class="form-control" type="hidden" name="file_foto" value="<?php echo isset($datapegawai->foto) ? $datapegawai->foto : ""; ?>">
                     </div>                    
                 </div>
                 <div class="form-group ">
@@ -105,25 +105,31 @@
                 <div class="form-group ">
                     <label>Surat Pengajuan Studi Lanjut</label>
                     <div class="controls">
+                        <?php if((count($datapegawai) > 0) && $datapegawai->surat_studi_lanjut != '') { ?>
                         File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapegawai->surat_studi_lanjut; ?>')"><?php echo $datapegawai->surat_studi_lanjut; ?></a><br>
+                        <?php } ?>
                         <input class="form-control" type="file" name="surat_studi_lanjut">
-                        <input class="form-control" type="hidden" name="file_studi_lanjut" value="<?php echo $datapegawai->surat_terima_beasiswa; ?>">
+                        <input class="form-control" type="hidden" name="file_studi_lanjut" value="<?php echo isset($datapegawai->surat_studi_lanjut) ? $datapegawai->surat_studi_lanjut : ""; ?>">
                     </div>                    
                 </div>
                 <div class="form-group ">
                     <label>Surat Tanda Lulus Seleksi</label>
                     <div class="controls">
+                        <?php if((count($datapegawai) > 0) && $datapegawai->surat_lulus_seleksi != '') { ?>
                         File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapegawai->surat_lulus_seleksi; ?>')"><?php echo $datapegawai->surat_lulus_seleksi; ?></a><br>
+                        <?php } ?>
                         <input class="form-control" type="file" name="surat_lulus_seleksi">
-                        <input class="form-control" type="hidden" name="file_lulus_seleksi" value="<?php echo $datapegawai->surat_lulus_seleksi; ?>">
+                        <input class="form-control" type="hidden" name="file_lulus_seleksi" value="<?php echo isset($datapegawai->surat_lulus_seleksi) ? $datapegawai->surat_lulus_seleksi : ""; ?>">
                     </div>                    
                 </div>
                 <div class="form-group ">
                     <label>Surat Tanda Penerimaan Beasiswa</label>
                     <div class="controls">
+                        <?php if((count($datapegawai) > 0) && $datapegawai->surat_terima_beasiswa != '') { ?>
                         File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapegawai->surat_terima_beasiswa; ?>')"><?php echo $datapegawai->surat_terima_beasiswa; ?></a><br>
+                        <?php } ?>
                         <input class="form-control" type="file" name="surat_terima_beasiswa">
-                        <input class="form-control" type="hidden" name="file_terima_beasiswa" value="<?php echo $datapegawai->surat_terima_beasiswa; ?>">
+                        <input class="form-control" type="hidden" name="file_terima_beasiswa" value="<?php echo isset($datapegawai->surat_terima_beasiswa) ? $datapegawai->surat_terima_beasiswa : ""; ?>">
                     </div>
                     
                 </div>
@@ -163,14 +169,14 @@
     }
 
     $(document).ready(function(){             
-        var profesi = "<?php echo $datapegawai->profesi; ?>";
+        var profesi = '<?php echo isset($datapegawai->profesi) ? $datapegawai->profesi : ""; ?>';
         if(profesi != ""){           
             $('#profesi').val(profesi);
             if(profesi == 'DOSEN'){
                 setProfesi();
             }
         }
-        var fakultas = '<?php echo $datapegawai->fakultas; ?>';
+        var fakultas = '<?php echo isset($datapegawai->fakultas) ? $datapegawai->fakultas : ""; ?>';
         if(fakultas != ''){
             $('#fakultas').val(fakultas);
         }

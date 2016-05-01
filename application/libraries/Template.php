@@ -13,6 +13,8 @@ class Template{
         $data['_content'] = $this->_ci->load->view($template,$data,true);   
         $data['isi_notifikasi']      = array();
         $data['isi_notifikasi2']      = array();
+        $data['userPegawai'] =  $this->_ci->Pegawai->tampilUserPegawai($data['id_user'])->row();
+
         if($data['nama_role'] == 'Admin'){
             $data['_menu'] = $this->_ci->load->view('menu_admin',$data,true); 
             $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasi()->result_object();
@@ -39,7 +41,7 @@ class Template{
         $this->_ci->load->view('/template.php',$data);
     }
 
-     function displayLogin($template,$data=null){
+    function displayLogin($template,$data=null){
         $data['_content'] = $this->_ci->load->view($template,$data,true);
         $data['_error'] = $this->_ci->load->view('error_404',$data,true);      
         $this->_ci->load->view('/template_login.php',$data);

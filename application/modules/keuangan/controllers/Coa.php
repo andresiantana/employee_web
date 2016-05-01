@@ -20,6 +20,7 @@ class Coa extends CI_Controller {
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Coa';
 		$data['menu'] = 'coa';
@@ -30,6 +31,7 @@ class Coa extends CI_Controller {
 	public function tambah()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Coa';
 		$data['menu'] = 'coa';		
@@ -71,6 +73,7 @@ class Coa extends CI_Controller {
 		$data['judulHeader'] = 'Coa';
 		$data['menu'] = 'coa';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('coa',array('no_akun'=>$id))->row();		
 		$this->template->display('keuangan/coa/edit',$data);

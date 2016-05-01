@@ -19,6 +19,7 @@ class KartuPID extends CI_Controller {
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Kartu PID';
 		$data['menu'] = 'KartuPID';
@@ -46,6 +47,7 @@ class KartuPID extends CI_Controller {
 
 	public function printKartu($id_pegawai = null){
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['id_pegawai'] = $id_pegawai;
 		$data['detail'] = $this->Pegawai->tampilKartuPegawai($id_pegawai)->row();
@@ -54,5 +56,5 @@ class KartuPID extends CI_Controller {
 
 }
 
-/* End of file DaftarPegawai.php */
-/* Location: ./application/modules/admin/controllers/DaftarPegawai.php */
+/* End of file KartuPID.php */
+/* Location: ./application/modules/admin/controllers/KartuPID.php */

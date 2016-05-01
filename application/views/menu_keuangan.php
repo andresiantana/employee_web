@@ -9,6 +9,9 @@
             <li>
                 <a <?php if($menu == 'coa'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Coa'); ?>">Coa</a>
             </li>
+            <li>
+                <a <?php if($menu == 'kategoriBiaya'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/KategoriBiaya'); ?>">Kategori Biaya Pengajuan</a>
+            </li>
         </ul>
     </li>
     <li>
@@ -23,7 +26,7 @@
         <a href="#"><i class="fa fa-table"></i> Informasi<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="#">Informasi 1</a>
+                <a <?php if($menu == 'PengajuanBiaya'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/PengajuanBiaya'); ?>">Pengajuan Biaya</a>
             </li>
         </ul>
     </li>

@@ -21,6 +21,7 @@ class DaftarPegawai extends CI_Controller {
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Daftar Pegawai';
 		$data['menu'] = 'daftarPegawai';
@@ -63,6 +64,7 @@ class DaftarPegawai extends CI_Controller {
 		$data['judulHeader'] = 'Notifikasi';
 		$data['menu'] = 'dashboard';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_pegawai'=>$id))->row();
 		$this->template->display('sdm/daftarPegawai/notifikasi',$data);

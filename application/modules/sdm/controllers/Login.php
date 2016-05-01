@@ -171,7 +171,6 @@ class Login extends CI_Controller {
         echo json_encode($data); 
         exit;
     }
-
 }
 
 /* End of file Login.php */

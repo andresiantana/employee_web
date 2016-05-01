@@ -62,6 +62,20 @@ class Pegawai extends CI_Model {
 		return $query;
 	}
 
+	public function tampilUserPegawai($id_user){
+		$approve = 'Approved';
+		$this->db->select('*');
+		$this->db->from('pegawai');
+		$this->db->join('user', 'user.id_user = pegawai.id_user','left');
+		$this->db->like('status_approve_sdm', $approve);
+		if($id_user != ''){
+			$this->db->where('pegawai.id_user', $id_user);
+		}
+		$this->db->limit = 1;
+		$query = $this->db->get();
+		return $query;
+	}
+
 	public function insert($data){
 		return $this->db->insert('pegawai', $data);
 	}

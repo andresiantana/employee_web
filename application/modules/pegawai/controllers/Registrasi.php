@@ -65,7 +65,6 @@ class Registrasi extends CI_Controller {
             }         
         }   
     }
-
 }
 
 /* End of file Registrasi.php */

@@ -20,6 +20,9 @@
             <li>
                 <a <?php if($menu == 'KartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPID'); ?>">Kartu PID</a>
             </li>
+            <li>
+                <a <?php if($menu == 'PengajuanBiaya'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/PengajuanBiaya'); ?>">Pengajuan Biaya</a>
+            </li>
         </ul>
     </li>
     <li>

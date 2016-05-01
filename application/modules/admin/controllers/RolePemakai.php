@@ -20,6 +20,7 @@ class RolePemakai extends CI_Controller {
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Daftar User';
 		$data['menu'] = 'rolePemakai';
@@ -30,6 +31,7 @@ class RolePemakai extends CI_Controller {
 	public function tambah()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Daftar User';
 		$data['menu'] = 'rolePemakai';		
@@ -104,6 +106,7 @@ class RolePemakai extends CI_Controller {
 		$data['judulHeader'] = 'Daftar User';
 		$data['menu'] = 'rolePemakai';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('user',array('id_user'=>$id))->row();
 		$data['role'] = $this->ADRoleM->dd_role_user();

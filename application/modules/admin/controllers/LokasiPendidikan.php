@@ -19,6 +19,7 @@ class LokasiPendidikan extends CI_Controller {
 	public function index()
 	{
 		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
 		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$data['judulHeader'] 	= 'Lokasi Pendidikan';
 		$data['menu'] 	= 'lokasiPendidikan';
@@ -36,8 +37,9 @@ class LokasiPendidikan extends CI_Controller {
 
 	public function tambah()
 	{
-		$data['username'] = $this->session->userdata('username');
-		$data['nama_role'] = $this->session->userdata('nama_role');
+		$data['username'] 	= $this->session->userdata('username');
+		$data['id_user'] 	= $this->session->userdata('id_user');
+		$data['nama_role'] 	= $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Lokasi Pendidikan';
 		$data['menu'] = 'lokasiPendidikan';		
 		$this->template->display('admin/lokasiPendidikan/tambah',$data);
@@ -95,6 +97,7 @@ class LokasiPendidikan extends CI_Controller {
 		$data['judulHeader'] = 'Lokasi Pendidikan';
 		$data['menu'] = 'lokasiPendikan';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('lokasi_pendidikan',array('id_lokasi'=>$id))->row();
 		$this->template->display('admin/lokasiPendidikan/edit',$data);

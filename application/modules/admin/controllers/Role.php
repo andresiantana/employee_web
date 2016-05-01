@@ -19,19 +19,21 @@ class Role extends CI_Controller {
 
 	public function index()
 	{
-		$data['judul'] = 'Employee Web';
+		$data['judulHeader'] = 'Role';
 		$data['menu'] = 'master';
 		$data['data']	= $this->ADRoleM->tampilData()->result_object();
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$this->template->display('admin/role/admin',$data);
 	}
 
 	public function tambah()
 	{
-		$data['judul'] = 'Employee Web';
+		$data['judulHeader'] = 'Role';
 		$data['menu'] = 'master';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$this->template->display('admin/role/tambah',$data);
 		
@@ -42,9 +44,10 @@ class Role extends CI_Controller {
 		$this->form_validation->set_rules('nama_role', 'Nama Role', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$data['judul'] = 'Employee Web';
+			$data['judulHeader'] = 'Role';
 			$data['menu'] = 'master';
 			$data['username'] = $this->session->userdata('username');
+			$data['id_user'] = $this->session->userdata('id_user');
 			$data['nama_role'] = $this->session->userdata('nama_role');
 			$this->template->display('admin/role/tambah',$data);
 		} else {			
@@ -85,9 +88,10 @@ class Role extends CI_Controller {
 
 	public function edit($id = null)
 	{		
-		$data['judul'] = 'Employee Web';
+		$data['judulHeader'] = 'Role';
 		$data['menu'] = 'master';
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['editdata'] = $this->db->get_where('role',array('id_role'=>$id))->row();
 		$this->template->display('admin/role/edit',$data);

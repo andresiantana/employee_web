@@ -6,7 +6,7 @@ class DataPegawai extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('template');
+		$this->load->library('template');		
 		if ($this->session->userdata('username')=="") {
 			redirect('login');
 		}		
@@ -27,6 +27,7 @@ class DataPegawai extends CI_Controller {
 	public function index()
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Daftar Pegawai';
 		$data['menu'] 	= 'daftarPegawai';
@@ -38,6 +39,7 @@ class DataPegawai extends CI_Controller {
 	public function lengkapiData($id = null)
 	{
 		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['menu'] = 'dataPegawai';
 		$data['judulHeader'] = 'Data Pegawai';
@@ -175,8 +177,6 @@ class DataPegawai extends CI_Controller {
 		}else{
 			$surat_terima_beasiswa = $file_terima_beasiswa;
 		}
-		
-
 			$data = array(
 				'nama_lengkap' => $nama_lengkap,
 				'nip' => $nip,
