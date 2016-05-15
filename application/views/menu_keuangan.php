@@ -12,6 +12,9 @@
             <li>
                 <a <?php if($menu == 'kategoriBiaya'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/KategoriBiaya'); ?>">Kategori Biaya Pengajuan</a>
             </li>
+            <li>
+                <a <?php if($menu == 'cabangBank'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/CabangBank'); ?>">Cabang Bank</a>
+            </li>
         </ul>
     </li>
     <li>

@@ -38,6 +38,7 @@
                         </tbody>
                     </table>
                 </div>
+                <br>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/rolePemakai/tambah'); ?>"><i class="fa fa-plus"></i> Tambah User</a>                
             </div>
         </div>

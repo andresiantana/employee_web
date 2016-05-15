@@ -13,7 +13,7 @@ class KartuPID extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('form','url','download'));
-        $this->load->model('Pegawai');
+        $this->load->model('SDPegawai');
 	}
 
 	public function index()
@@ -27,12 +27,12 @@ class KartuPID extends CI_Controller {
 		$nip = !empty($this->input->post('nip')) ? $this->input->post('nip') : null;
 		$nama = !empty($this->input->post('nama')) ? $this->input->post('nama') : null;
 		if($nidn != '' || $nip != '' || $nama != ''){
-			$data['data'] =  $this->Pegawai->tampilDataPegawaiApprove($nidn,$nip,$nama)->result_object();		
+			$data['data'] =  $this->SDPegawai->tampilDataPegawaiApprove($nidn,$nip,$nama)->result_object();		
 			$tr['tr'] = $this->load->view('sdm/kartuPID/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$data['data']	= $this->Pegawai->tampilDataPegawaiApprove()->result_object();		
+			$data['data']	= $this->SDPegawai->tampilDataPegawaiApprove()->result_object();		
 		}	
 		$this->template->display('sdm/kartuPID/index',$data);
 	}
@@ -50,7 +50,7 @@ class KartuPID extends CI_Controller {
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['id_pegawai'] = $id_pegawai;
-		$data['detail'] = $this->Pegawai->tampilKartuPegawai($id_pegawai)->row();
+		$data['detail'] = $this->SDPegawai->tampilKartuPegawai($id_pegawai)->row();
 		$this->load->view('sdm/kartuPID/cetak_kartu', $data);
 	}
 

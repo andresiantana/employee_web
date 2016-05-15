@@ -20,7 +20,7 @@ class KategoriBiaya extends CI_Controller {
 	public function index()
 	{
 		$data['judulHeader'] = 'Kategori Biaya';
-		$data['menu'] = 'master';
+		$data['menu'] = 'kategoriBiaya';
 		$data['data']	= $this->KategoriBiayaM->tampilData()->result_object();
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
@@ -31,7 +31,7 @@ class KategoriBiaya extends CI_Controller {
 	public function tambah()
 	{
 		$data['judulHeader'] = 'Kategori Biaya';
-		$data['menu'] = 'master';
+		$data['menu'] = 'kategoriBiaya';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
@@ -45,7 +45,7 @@ class KategoriBiaya extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['judulHeader'] = 'Kategori Biaya';
-			$data['menu'] = 'master';
+			$data['menu'] = 'kategoriBiaya';
 			$data['username'] = $this->session->userdata('username');
 			$data['id_user'] = $this->session->userdata('id_user');
 			$data['nama_role'] = $this->session->userdata('nama_role');
@@ -89,7 +89,7 @@ class KategoriBiaya extends CI_Controller {
 	public function edit($id = null)
 	{		
 		$data['judulHeader'] = 'Kategori Biaya';
-		$data['menu'] = 'master';
+		$data['menu'] = 'kategoriBiaya';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');

@@ -13,7 +13,7 @@ class DaftarPegawai extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->helper(array('form','url','download'));
-        $this->load->model('Pegawai');
+        $this->load->model('SDPegawai');
         $this->load->model('Notifikasi');
 
 	}
@@ -25,7 +25,7 @@ class DaftarPegawai extends CI_Controller {
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Daftar Pegawai';
 		$data['menu'] = 'daftarPegawai';
-		$data['data']	= $this->Pegawai->tampilDataPegawai()->result_object();		
+		$data['data']	= $this->SDPegawai->tampilDataPegawai()->result_object();		
 		$this->template->display('sdm/daftarPegawai/index',$data);
 	}
 

@@ -27,7 +27,8 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>                
+                </div>  
+                <br>              
                 <a class="btn btn-primary" href="<?php echo base_url('admin/role/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Role</a>
             </div>
         </div>

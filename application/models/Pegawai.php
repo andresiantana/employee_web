@@ -24,6 +24,8 @@ class Pegawai extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pegawai');
 		$this->db->join('user', 'user.id_user = pegawai.id_user');
+		$this->db->join('fakultas', 'fakultas.id_fakultas = pegawai.id_fakultas','left');
+		$this->db->join('prodi', 'prodi.id_prodi = pegawai.id_prodi','left');
 		$this->db->like('status_approve_sdm', $approve);
 		if($nidn != ''){
 			$this->db->like('nidn', $nidn);
@@ -43,6 +45,8 @@ class Pegawai extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pegawai');
 		$this->db->join('user', 'user.id_user = pegawai.id_user');
+		$this->db->join('fakultas', 'fakultas.id_fakultas = pegawai.id_fakultas','left');
+		$this->db->join('prodi', 'prodi.id_prodi = pegawai.id_prodi','left');
 		$this->db->where('status_approve_sdm is null');
 
 		$query = $this->db->get();
@@ -54,6 +58,8 @@ class Pegawai extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('pegawai');
 		$this->db->join('user', 'user.id_user = pegawai.id_user');
+		$this->db->join('fakultas', 'fakultas.id_fakultas = pegawai.id_fakultas','left');
+		$this->db->join('prodi', 'prodi.id_prodi = pegawai.id_prodi','left');
 		$this->db->like('status_approve_sdm', $approve);
 		if($id_pegawai != ''){
 			$this->db->where('id_pegawai', $id_pegawai);

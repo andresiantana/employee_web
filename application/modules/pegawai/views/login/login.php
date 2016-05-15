@@ -9,7 +9,7 @@
             <?php echo form_open("pegawai/login/cek_login"); ?>
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                    <input class="form-control" name="username" placeholder="Username">
+                    <input class="form-control" name="username" placeholder="NIP">
                 </div>
 
                 <div class="form-group input-group">

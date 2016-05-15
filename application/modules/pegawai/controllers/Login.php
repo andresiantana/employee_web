@@ -44,11 +44,11 @@ class Login extends CI_Controller {
             if($user_aktif == true){
                 redirect('pegawai/Dashboard');     
             }else{
-                echo "<script>alert('Username telah di Suspend/tidak aktif, Silahkan hubungi Admin');history.go(-1);</script>";
+                echo "<script>alert('Akun telah di Suspend/tidak aktif, Silahkan hubungi Admin');history.go(-1);</script>";
             } 
         }
         else {
-            echo "<script>alert('Gagal login: Cek username, password!');history.go(-1);</script>";
+            echo "<script>alert('Gagal login: Cek NIP dan Password!');history.go(-1);</script>";
         }
     }
 
@@ -73,7 +73,7 @@ class Login extends CI_Controller {
             $status = true;
         }else{
             $status = false;
-            $pesan = 'Username tidak terdaftar dalam database!';
+            $pesan = 'NIP tidak terdaftar dalam database!';
         }
 
         $data['status'] = $status;
