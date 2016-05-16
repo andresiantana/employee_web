@@ -23,7 +23,7 @@ class PengajuanBiayaT extends CI_Model {
 	public function noPengajuanBiaya() {
         $default="0001";
         $prefix = 'PB'.date('ymd');
-        $sql = "SELECT CAST(MAX(SUBSTR(kode_pengajuan,".(strlen($prefix)+1).",".(strlen($default)).")) AS integer) nomaksimal 
+        $sql = "SELECT COUNT(kode_pengajuan) nomaksimal 
                 FROM pengajuan_biaya 
                 WHERE kode_pengajuan LIKE ('".$prefix."%')";
         $noPengajuan = $this->db->query($sql);
