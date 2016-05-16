@@ -13,7 +13,6 @@ class Registrasi extends CI_Controller {
         $this->load->model('User');
         $this->load->model('RoleM');
         $this->load->model('PGPegawai');
-		//Do your magic here
 	}
 
 	public function index()

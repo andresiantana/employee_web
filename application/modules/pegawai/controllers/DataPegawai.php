@@ -111,16 +111,14 @@ class DataPegawai extends CI_Controller {
      	$this->load->library('upload', $config);
  	 	$this->upload->initialize($config);
 
- 	 	if(!empty($foto)){
- 	 		if ($this->upload->do_upload("foto")){
-	 			$foto = $this->upload->file_name;
-				$status_upload = true;
-	 		}else{
-	 			echo "<script>alert('Foto gagal diupload!');
-	                window.location.href='".base_url('pegawai/DataPegawai/index')."';
-	            </script>"; 			
-	 		} 
- 	 	}
+ 		if ($this->upload->do_upload("foto")){
+ 			$foto = $this->upload->file_name;
+			$status_upload = true;
+ 		}else{
+ 			echo "<script>alert('Foto gagal diupload!');
+                window.location.href='".base_url('pegawai/DataPegawai/index')."';
+            </script>"; 			
+ 		} 
  	 	
 
  		if($foto != ''){
@@ -251,9 +249,6 @@ class DataPegawai extends CI_Controller {
 
 		$datapegawai = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
 			if(count($this->input->post('sertifikasi')) > 0) {
-				// echo "<pre>";
-				// print_r($this->input->post('sertifikasi'));
-				// exit;
 				foreach ($this->input->post('sertifikasi') as $i => $data) {	
 					$id_pegawai = $datapegawai->id_pegawai;
 					$id_jenis_sertifikasi = $data['id_jenis_sertifikasi'];
@@ -270,7 +265,7 @@ class DataPegawai extends CI_Controller {
 			     	$config5['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
 			     	$this->load->library('upload', $config5);	     	
 			     	$this->upload->initialize($config5);
-			     	if(!empty($upload)){
+			     	// if(!empty($upload)){
 			 			if ($this->upload->do_upload($data['upload'])){
 				 			$upload = $this->upload->file_name;
 							$status_upload = true;
@@ -279,7 +274,7 @@ class DataPegawai extends CI_Controller {
 				                window.location.href='".base_url('pegawai/DataPegawai/index')."';
 				            </script>";	 			
 				 		}
-			     	}
+			     	// }
 			 		 
 			 		if($upload != ''){
 						$upload = $upload;
@@ -361,9 +356,9 @@ class DataPegawai extends CI_Controller {
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
 		$data['tr'] .= '<td>'.form_dropdown('sertifikasi[0][id_jenis_sertifikasi]', $jenis_sertifikasi, $jenis_sertifikasi_selected, $jenis_sertifikasi_attributes).'</td>';
-		$data['tr'] .= '<td><input id="sertifikasi_0_nama_penyelenggara" name="sertifikasi[0][penyelenggara]" type="text" class="form-control"></td>';
-		$data['tr'] .= '<td><input id="sertifikasi_0_nama_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>';
-		$data['tr'] .= '<td><input id="sertifikasi_0_nama_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>';
+		$data['tr'] .= '<td><input id="sertifikasi_0_penyelenggara" name="sertifikasi[0][penyelenggara]" type="text" class="form-control"></td>';
+		$data['tr'] .= '<td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>';
+		$data['tr'] .= '<td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusSertifikasi(this);" ><i class="fa fa-minus"> </i></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 
