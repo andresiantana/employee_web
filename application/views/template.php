@@ -93,10 +93,18 @@
                         ?>
                         <?php echo isset($isi_notifikasi) ? ((count($isi_notifikasi) > 0) ? count($isi_notifikasi) : "") : ''; ?> <?php echo isset($isi_notifikasi2) ? ((count($isi_notifikasi2) > 0) ? $tanda.count($isi_notifikasi2) : "") : ''; ?>
                         <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts" style="overflow: scroll; height: 500px;">
-                       <?php echo $_notifikasi; ?>
-                    </ul>
+                    </a>                    
+                   <?php
+                       if (count($isi_notifikasi) > 0 && count($isi_notifikasi2) > 0) {
+                            echo '<ul class="dropdown-menu dropdown-alerts" style="overflow: scroll; height: 300px;">';
+                            echo $_notifikasi; 
+                            echo '</ul>';
+                       } else {
+                            echo '<ul class="dropdown-menu dropdown-alerts" height: 100px;">';
+                            echo "<center><i><font color='red'>Tidak ada pemberitahuan</font></i></center>";
+                            echo '</ul>';
+                       }
+                   ?>
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
