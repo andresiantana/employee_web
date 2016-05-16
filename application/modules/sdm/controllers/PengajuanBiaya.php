@@ -32,18 +32,18 @@ class PengajuanBiaya extends CI_Controller {
 						->get()->result_object();
 
 
-		$nama_pegawai = !empty($this->input->post('nama_pegawai')) ? $this->input->post('nama_pegawai') : null;
-		$kode_pengajuan = !empty($this->input->post('kode_pengajuan')) ? $this->input->post('kode_pengajuan') : null;
-		$status_pengajuan = !empty($this->input->post('status_pengajuan')) ? $this->input->post('status_pengajuan') : null;
-		$id_kategori_biaya = !empty($this->input->post('id_kategori_biaya')) ? $this->input->post('id_kategori_biaya') : null;
-		$tanggal_awal = !empty($this->input->post('tanggal_awal')) ? $this->input->post('tanggal_awal') : null;
+		$nama_pegawai = $this->input->post('nama_pegawai');
+		$kode_pengajuan = $this->input->post('kode_pengajuan');
+		$status_pengajuan = $this->input->post('status_pengajuan');
+		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
+		$tanggal_awal = $this->input->post('tanggal_awal');
 		if(!empty($tanggal_awal)){
 			$tgl_awal = explode("/",$tanggal_awal);		
 			$tgl_awal = $tgl_awal[2]."-".$tgl_awal[1]."-".$tgl_awal[0];
 			$tanggal_awal = $tgl_awal;
 		}
 
-		$tanggal_akhir = !empty($this->input->post('tanggal_akhir')) ? $this->input->post('tanggal_akhir') : null;
+		$tanggal_akhir = $this->input->post('tanggal_akhir');
 		if(!empty($tgl_akhir)){
 			$tgl_akhir = explode("/",$tanggal_akhir);		
 			$tgl_akhir = $tgl_akhir[2]."-".$tgl_akhir[1]."-".$tgl_akhir[0];
