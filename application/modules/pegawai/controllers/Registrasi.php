@@ -12,6 +12,7 @@ class Registrasi extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('User');
         $this->load->model('RoleM');
+        $this->load->model('PGPegawai');
 		//Do your magic here
 	}
 
@@ -53,6 +54,12 @@ class Registrasi extends CI_Controller {
             $cek_data = $this->User->cek_data($username);
             if(empty($cek_data)){
                 $insert = $this->User->insert($object);
+                $datauser = $this->db->get_where('user',array('username'=>$username),array('limit'=>1))->row();
+                $data   = array(
+                    'nip' => $username,
+                    'id_user' => $datauser->id_user,
+                );
+                $insert_pegawai = $this->PGPegawai->insert($data);
                 if($insert){
                     echo "<script>alert('Data Registrasi User Pegawai berhasil disimpan!');
                         window.location.href='".base_url('pegawai/login')."';

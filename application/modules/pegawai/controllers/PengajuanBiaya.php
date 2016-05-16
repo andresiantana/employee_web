@@ -49,6 +49,10 @@ class PengajuanBiaya extends CI_Controller {
 		$jumlah_nominal = $this->input->post('jumlah_nominal');
 		$id_pegawai = $this->Pegawai->tampilUserPegawai($this->session->userdata('id_user'))->row();
 		$id_pegawai = $id_pegawai->id_pegawai;
+		$nama_lokasi = $this->input->post('nama_lokasi');
+		$jurusan_fakultas = $this->input->post('jurusan_fakultas');
+		$prodi = $this->input->post('prodi');
+		$jenjang = $this->input->post('jenjang');
 
 		$tanggal = $this->input->post('tanggal');
 		$tgl = explode("/",$tanggal);		
@@ -62,7 +66,11 @@ class PengajuanBiaya extends CI_Controller {
 			'id_kategori_biaya' => $id_kategori_biaya,
 			'semester' => $semester,
 			'jumlah_nominal' => $jumlah_nominal,
-			'id_pegawai' => $id_pegawai
+			'id_pegawai' => $id_pegawai,
+			'nama_lokasi' => $nama_lokasi,
+			'jurusan_fakultas' => $jurusan_fakultas,
+			'prodi' => $prodi,
+			'jenjang' => $jenjang
 		);
 
 		if(!empty($id_pengajuan_biaya)){
@@ -76,7 +84,11 @@ class PengajuanBiaya extends CI_Controller {
 				'id_kategori_biaya' => $id_kategori_biaya,
 				'semester' => $semester,
 				'jumlah_nominal' => $jumlah_nominal,
-				'id_pegawai' => $id_pegawai
+				'id_pegawai' => $id_pegawai,
+				'nama_lokasi' => $nama_lokasi,
+				'jurusan_fakultas' => $jurusan_fakultas,
+				'prodi' => $prodi,
+				'jenjang' => $jenjang
 			);
 		}else{			
 			$insert = $this->PengajuanBiayaT->insert($data);

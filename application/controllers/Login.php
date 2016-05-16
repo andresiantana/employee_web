@@ -17,7 +17,7 @@ class Login extends CI_Controller {
     {
         $data = null;
         
-        $this->template->displayLogin('login/login',$data);
+        redirect('pegawai',array());
     }
 }
 
