@@ -243,6 +243,13 @@ class DataPegawai extends CI_Controller {
 			);
 
 			$this->Notifikasi->insert($object);
+
+			$data_user = array(
+				'nama_lengkap'=>$nama_lengkap
+			);
+			$this->db->where('id_user',$id_user);
+			$this->db->update('user',$data_user);
+			$this->db->affected_rows();
 		}else{
 			$insert = $this->PGPegawai->insert($data);	
 		}
