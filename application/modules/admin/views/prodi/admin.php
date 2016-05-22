@@ -13,10 +13,10 @@
                             <div id="dataTables-example_filter" class="dataTables_filter">
                                 <label>        
                                     Fakultas:                                          
-                                    <select class="form-control" name="id_fakultas">
+                                    <select class="form-control" name="kode_fakultas">
                                         <option value="">-Pilih Fakultas-</option>
                                         <?php foreach ($fakultas as $i => $val) { ?>
-                                            <option value="<?php echo $val->id_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                            <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
                                         <?php } ?>
                                     </select>                                
                                 </label>
@@ -56,6 +56,7 @@
                 </div>
                 <br>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/Prodi/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Prodi</a>                
+                <a class="btn btn-success" href="<?php echo base_url('admin/Prodi/importProdi'); ?>"><i class="fa fa-plus"></i> Import Data Prodi</a>                
             </div>
         </div>
     </div>
@@ -66,7 +67,7 @@
             window.location.reload();
         }
         var data = {
-          id_fakultas    : obj.value
+          kode_fakultas    : obj.value
         }
 
       $.ajax({

@@ -65,10 +65,10 @@
                 <div id="dosen" style="display:none;">                    
                     <div class="form-group">
                         <label>Fakultas</label>
-                        <select class="form-control" name="id_fakultas" id="id_fakultas" onChange="setProdi();">
+                        <select class="form-control" name="kode_fakultas" id="kode_fakultas" onChange="setProdi();">
                             <option value="">-Pilih Fakultas-</option>
                             <?php foreach ($fakultas as $i => $val) { ?>
-                                <option value="<?php echo $val->id_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -219,11 +219,11 @@
     }
 
     function setProdi(){
-        var id_fakultas = $('#id_fakultas').val();
+        var kode_fakultas = $('#kode_fakultas').val();
         
         $.ajax({
            type: 'POST',
-           data: "id_fakultas="+id_fakultas,
+           data: "kode_fakultas="+kode_fakultas,
            url: '<?php echo base_url('pegawai/DataPegawai/dropDownProdi'); ?>',
            success: function(result) {
             $('#tampil_prodi').html(result);       }
@@ -323,9 +323,9 @@
                 setStatusPegawai();
             }
         }
-        var fakultas = '<?php echo isset($datapegawai->id_fakultas) ? $datapegawai->id_fakultas : ""; ?>';
+        var fakultas = '<?php echo isset($datapegawai->kode_fakultas) ? $datapegawai->kode_fakultas : ""; ?>';
         if(fakultas != ''){
-            $('#id_fakultas').val(fakultas);
+            $('#kode_fakultas').val(fakultas);
             setProdi()
         }
         var id_prodi = '<?php echo isset($datapegawai->id_prodi) ? $datapegawai->id_prodi : ""; ?>';

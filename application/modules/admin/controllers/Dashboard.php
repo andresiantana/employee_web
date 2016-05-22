@@ -12,7 +12,7 @@ class Dashboard extends CI_Controller {
 		}
 		$this->load->library('form_validation');
 		$this->load->helper('text');
-		$this->load->helper('form');		
+	 	$this->load->helper(array('url','html','form','download'));		
 		$this->load->model('ADUserM');
 		$this->load->model('ADRoleM');
 	}
@@ -80,6 +80,14 @@ class Dashboard extends CI_Controller {
                     window.location.href='".base_url('admin/dashboard')."';
                 </script>";
 		}
+	}
+
+	function file_download()
+    {
+        $nama_file = $_GET['file_name'];
+        $data = file_get_contents(base_url()."data/file/".$nama_file);
+
+        force_download($nama_file, $data);
 	}
 }
 

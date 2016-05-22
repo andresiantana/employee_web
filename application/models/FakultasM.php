@@ -12,7 +12,7 @@ class FakultasM extends CI_Model {
 	}
 	
 	public function delete($id){
-		return $this->db->delete('fakultas', array('id_fakultas'=>$id));	
+		return $this->db->delete('fakultas', array('kode_fakultas'=>$id));	
 	}
 
     public function cekNama($nama) {
@@ -30,11 +30,33 @@ class FakultasM extends CI_Model {
 		$dd[''] = '--Pilih Fakultas--';
 		if($result->num_rows() > 0){
 			foreach($result->result() as $row){
-				$dd[$row->id_fakultas] = $row->nama_fakultas;
+				$dd[$row->kode_fakultas] = $row->nama_fakultas;
 			}
 		}
 		return $dd;
 	}
+
+ 	public function upload_data($filename){
+        ini_set('memory_limit', '-1');
+        $inputFileName = './data/uploads/'.$filename;
+        try {
+        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+        } catch(Exception $e) {
+        die('Error loading file :' . $e->getMessage());
+        }
+ 
+        $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $numRows = count($worksheet);
+ 
+        for ($i=2; $i < ($numRows+1) ; $i++) { 
+            $ins = array(
+                    "kode_fakultas"	=> $worksheet[$i]["A"],
+                    "nama_fakultas"	=> $worksheet[$i]["B"],
+                    "status_aktif"	=>true
+                   ); 
+            $this->db->insert('fakultas', $ins);
+        }
+    }
 }
 
 /* End of file FakultasM.php */

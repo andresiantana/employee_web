@@ -22,8 +22,8 @@
                                     <td><?php echo $v->kode_fakultas; ?></td>
                                     <td><?php echo $v->nama_fakultas; ?></td>
                                     <td class="td-actions">
-                                        <a href="<?php echo base_url('admin/Fakultas/edit/'.$v->id_fakultas); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Fakultas"><i class="fa fa-edit"> </i></a>
-                                        <a href="<?php echo base_url('admin/Fakultas/hapus/'.$v->id_fakultas); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk hapus Fakultas" onclick="return confirm('Apakah anda yakin akan menghapus fakultas ini ?')"><i class="fa fa-times"> </i></a>
+                                        <a href="<?php echo base_url('admin/Fakultas/edit/'.$v->kode_fakultas); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Fakultas"><i class="fa fa-edit"> </i></a>
+                                        <a href="<?php echo base_url('admin/Fakultas/hapus/'.$v->kode_fakultas); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk hapus Fakultas" onclick="return confirm('Apakah anda yakin akan menghapus fakultas ini ?')"><i class="fa fa-times"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -32,6 +32,7 @@
                 </div>
                 <br>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/Fakultas/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Fakultas</a>                
+                <a class="btn btn-success" href="<?php echo base_url('admin/Fakultas/importFakultas'); ?>"><i class="fa fa-plus"></i> Import Data Fakultas</a>                
             </div>
         </div>
     </div>

@@ -1,8 +1,17 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default">
+        <?php if(isset($message) && $message == 'sukses'){ ?>
+            <div class="alert alert-success">
+                <center><strong>Berhasil!</strong> Data berhasil disimpan </center>
+            </div>  
+        <?php }else if(isset($message) && $message == 'gagal'){ ?>
+            <div class="alert alert-error">
+                <center><strong>Gagal!</strong> Data gagal disimpan </center>
+            </div>
+        <?php } ?>
+        <div class="panel panel-default">            
             <div class="panel-heading">
-                 Tabel User
+                Tabel User
             </div>
             <div class="panel-body">
                 <div class="table-responsive">

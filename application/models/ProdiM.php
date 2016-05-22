@@ -6,7 +6,7 @@ class ProdiM extends CI_Model {
 	public function tampilData(){
 		$this->db->select('*');
 		$this->db->from('prodi');
-		$this->db->join('fakultas', 'fakultas.id_fakultas = prodi.id_fakultas','Left');
+		$this->db->join('fakultas', 'fakultas.kode_fakultas = prodi.kode_fakultas','Left');
 		$query = $this->db->get();
         return $query;
 	}
@@ -39,6 +39,29 @@ class ProdiM extends CI_Model {
 		}
 		return $dd;
 	}
+	public function upload_data($filename){
+        ini_set('memory_limit', '-1');
+        $inputFileName = './data/uploads/'.$filename;
+        try {
+        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+        } catch(Exception $e) {
+        die('Error loading file :' . $e->getMessage());
+        }
+ 
+        $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $numRows = count($worksheet);
+ 
+        for ($i=2; $i < ($numRows+1) ; $i++) { 
+            $ins = array(
+            		"id_prodi"=>'',
+                    "kode_fakultas"	=> $worksheet[$i]["A"],
+                    "kode_prodi"	=> $worksheet[$i]["B"],
+                    "nama_prodi"	=> $worksheet[$i]["C"],
+                    "status_aktif"	=>true
+               	); 
+            $this->db->insert('prodi', $ins);
+        }
+    }
 }
 
 /* End of file ProdiM.php */

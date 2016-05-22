@@ -9,7 +9,8 @@ class Prodi extends CI_Controller {
 		if ($this->session->userdata('username')=="") {
 			redirect('login');
 		}
-		$this->load->library('template');	
+		$this->load->library('template');
+		$this->load->library("PHPExcel");	
 		$this->load->helper(array('form','url'));			
 		$this->load->library('form_validation');
 		$this->load->library('session');      
@@ -48,13 +49,13 @@ class Prodi extends CI_Controller {
 		$status = '';
 
 		foreach ($this->input->post('prodi') as $i => $data) {	
-			$id_fakultas = $this->input->post('id_fakultas');
+			$kode_fakultas = $this->input->post('kode_fakultas');
 			$kode_prodi = $data['kode_prodi'];
 			$nama_prodi = $data['nama_prodi'];
 			$status_prodi 	= true;
 
 			$object = array(
-				'id_fakultas'=>$id_fakultas,
+				'kode_fakultas'=>$kode_fakultas,
 				'kode_prodi'=>$kode_prodi,
 				'nama_prodi'=>$nama_prodi,
 				'status_prodi'=>$status_prodi
@@ -77,6 +78,35 @@ class Prodi extends CI_Controller {
                 </script>";
 		}
 	}
+
+	public function importProdi($sukses = "")
+	{
+		$data['username'] 	= $this->session->userdata('username');
+		$data['id_user'] 	= $this->session->userdata('id_user');
+		$data['nama_role'] 	= $this->session->userdata('nama_role');
+		$data['judulHeader'] = 'Prodi';
+		$data['menu'] = 'prodi';		
+		$this->template->display('admin/prodi/import',$data);
+	}
+
+	public function do_upload(){
+        $config['upload_path'] = './data/uploads/';
+        $config['allowed_types'] = 'xlsx|xls';
+        
+        $this->load->library('upload', $config);
+        
+        if (!$this->upload->do_upload("file")){
+            $error = array('error' => $this->upload->display_errors());
+        }
+        else{
+            $data = array('upload_data' => $this->upload->data());
+            $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
+            $filename = $upload_data['file_name'];//Nama File
+            $this->ProdiM->upload_data($filename);
+            unlink('./data/uploads/'.$filename);
+            redirect('admin/Prodi/importProdi/sukses','refresh');
+        }
+    }
 
 	public function hapus($id)
 	{
@@ -107,12 +137,12 @@ class Prodi extends CI_Controller {
 	public function update()
 	{
 		$id_prodi = $this->input->post('id_prodi');
-		$id_fakultas = $this->input->post('id_fakultas');
+		$kode_fakultas = $this->input->post('kode_fakultas');
 		$kode_prodi = $this->input->post('kode_prodi');
 		$nama_prodi = $this->input->post('nama_prodi');
 
 		$object = array(
-			'id_fakultas'=>$id_fakultas,
+			'kode_fakultas'=>$kode_fakultas,
 			'kode_prodi'=>$kode_prodi,
 			'nama_prodi'=>$nama_prodi
 		);

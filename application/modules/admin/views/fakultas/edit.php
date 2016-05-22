@@ -15,8 +15,7 @@
                             <?php } ?>  
                             <div class="form-group">
                                 <label>Kode Fakultas</label>
-                                <input type="hidden" class="form-control" name="id_fakultas" type="text" value="<?php echo $editdata->id_fakultas; ?>">
-                                <input class="form-control" name="kode_fakultas" type="text" placeholder="Isikan Kode Fakultas" value="<?php echo $editdata->kode_fakultas; ?>">
+                                <input class="form-control" name="kode_fakultas" type="text" placeholder="Isikan Kode Fakultas" value="<?php echo $editdata->kode_fakultas; ?>" readonly=true>
                             </div>
                             <div class="form-group">
                                 <label>Nama Fakultas</label>

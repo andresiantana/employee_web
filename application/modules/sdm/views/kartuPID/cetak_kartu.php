@@ -92,11 +92,11 @@
                     print '<br>';
 
                     print 'Fakultas :';
-                    print $detail->fakultas;
+                    print $detail->nama_fakultas;
                     print '<br>';
 
                     print 'Prodi :';
-                    print $detail->prodi;
+                    print $detail->nama_prodi;
                     print '<br>';
                 ?>
             </pre></blockquote></p>
@@ -105,6 +105,25 @@
             <blockquote>
                 <img src="<?php echo base_url().'data/images/pegawai/'.$detail->foto; ?>" width="100px" height="100px">
             </blockquote>
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">Rincian Pengajuan Biaya</th>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table align="center">
+                <tr>
+                    <td>No.</td>
+                    <td>Nama Uraian</td>
+                    <td>Nominal</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align:right;">Total</td>
+                    <td></td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>

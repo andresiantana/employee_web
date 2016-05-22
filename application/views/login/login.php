@@ -11,7 +11,6 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                     <input class="form-control" name="username" placeholder="Username">
                 </div>
-
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
                     <input class="form-control" name="password" placeholder="Password">

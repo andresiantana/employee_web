@@ -10,8 +10,8 @@ class RolePemakai extends CI_Controller {
 			redirect('login');
 		}
 		$this->load->library('template');				
-		$this->load->library('session');
-        $this->load->library('form_validation');
+		$this->load->library('form_validation');
+		$this->load->library('session');        
         $this->load->helper(array('form','url'));
         $this->load->model('ADRoleM');
         $this->load->model('ADUserM');
@@ -38,6 +38,7 @@ class RolePemakai extends CI_Controller {
 		$data['role'] = $this->db->select('*')
 						->from('role')
 						->where('id_role !=',1)
+						->where('id_role !=',2)
 						->get()->result_object();
 		$this->template->display('admin/rolePemakai/tambah',$data);
 	}
@@ -54,11 +55,11 @@ class RolePemakai extends CI_Controller {
 				);
 		$insert = $this->ADUserM->insert($data);
 		if ($insert) {
-			$this->session->set_flashdata('success','Data berhasil disimpan!');
-			redirect('admin/RolePemakai');
+			$datas['message'] = 'sukses';
+			redirect('admin/RolePemakai',$datas);
 		} else {
-			$this->session->set_flashdata('error','Data gagal disimpan!');
-			redirect('admin/RolePemakai/tambah');   
+			$datas['message'] = 'gagal';
+			redirect('admin/RolePemakai/tambah',$datas);   
 		}
 	}
 

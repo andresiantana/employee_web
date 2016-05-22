@@ -15,10 +15,10 @@
                             <?php } ?>  
                             <div class="form-group">
                                 <label>Fakultas</label>
-                                <select class="form-control" name="id_fakultas" id="id_fakultas">
+                                <select class="form-control" name="kode_fakultas" id="kode_fakultas">
                                     <option value="">-Pilih Fakultas-</option>
                                     <?php foreach ($fakultas as $i => $val) { ?>
-                                        <option value="<?php echo $val->id_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                        <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -44,9 +44,9 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script type="text/javascript">
     $(document).ready(function(){        
-        var id_fakultas = '<?php echo $editdata->id_fakultas; ?>';
-        if(id_fakultas != ''){
-            $('#id_fakultas').val(id_fakultas);
+        var kode_fakultas = '<?php echo $editdata->kode_fakultas; ?>';
+        if(kode_fakultas != ''){
+            $('#kode_fakultas').val(kode_fakultas);
         }
     });
 </script>

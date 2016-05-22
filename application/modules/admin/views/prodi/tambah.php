@@ -15,10 +15,10 @@
                             <?php } ?>  
                             <div class="form-group">
                                 <label>Fakultas</label>
-                                <select class="form-control" name="id_fakultas">
+                                <select class="form-control" name="kode_fakultas">
                                     <option value="">-Pilih Fakultas-</option>
                                     <?php foreach ($fakultas as $i => $val) { ?>
-                                        <option value="<?php echo $val->id_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                        <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
                                     <?php } ?>
                                 </select>  
                             </div>                            

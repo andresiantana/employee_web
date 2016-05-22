@@ -51,6 +51,7 @@ class KartuPID extends CI_Controller {
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['id_pegawai'] = $id_pegawai;
 		$data['detail'] = $this->SDPegawai->tampilKartuPegawai($id_pegawai)->row();
+		$data['detail_rincian'] = $this->SDUraianT->tampilUraian($id_pegawai)->row();
 		$this->load->view('sdm/kartuPID/cetak_kartu', $data);
 	}
 

@@ -9,7 +9,8 @@ class Fakultas extends CI_Controller {
 		if ($this->session->userdata('username')=="") {
 			redirect('login');
 		}
-		$this->load->library('template');	
+		$this->load->library('template');
+		$this->load->library("PHPExcel");	
 		$this->load->helper(array('form','url'));			
 		$this->load->library('form_validation');
 		$this->load->library('session');      
@@ -44,12 +45,12 @@ class Fakultas extends CI_Controller {
 		foreach ($this->input->post('fakultas') as $i => $data) {	
 			$kode_fakultas = $data['kode_fakultas'];
 			$nama_fakultas = $data['nama_fakultas'];
-			$status_fakultas 	= true;
+			$status_aktif 	= true;
 
 			$object = array(
 				'kode_fakultas'=>$kode_fakultas,
 				'nama_fakultas'=>$nama_fakultas,
-				'status_fakultas'=>$status_fakultas
+				'status_aktif'=>$status_aktif
 			);
 
 			$insert = $this->FakultasM->insert($object);
@@ -70,6 +71,35 @@ class Fakultas extends CI_Controller {
 		}
 	}
 
+	public function importFakultas($sukses = "")
+	{
+		$data['username'] 	= $this->session->userdata('username');
+		$data['id_user'] 	= $this->session->userdata('id_user');
+		$data['nama_role'] 	= $this->session->userdata('nama_role');
+		$data['judulHeader'] = 'Fakultas';
+		$data['menu'] = 'fakultas';		
+		$this->template->display('admin/fakultas/import',$data);
+	}
+
+	public function do_upload(){
+        $config['upload_path'] = './data/uploads/';
+        $config['allowed_types'] = 'xlsx|xls';
+        
+        $this->load->library('upload', $config);
+        
+        if (!$this->upload->do_upload("file")){
+            $error = array('error' => $this->upload->display_errors());
+        }
+        else{
+            $data = array('upload_data' => $this->upload->data());
+            $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
+            $filename = $upload_data['file_name'];//Nama File
+            $this->FakultasM->upload_data($filename);
+            unlink('./data/uploads/'.$filename);
+            redirect('admin/Fakultas/importFakultas/sukses','refresh');
+        }
+    }
+
 	public function hapus($id)
 	{
 		$hapus = $this->FakultasM->delete($id);
@@ -89,22 +119,20 @@ class Fakultas extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['editdata'] = $this->db->get_where('fakultas',array('id_fakultas'=>$id))->row();
+		$data['editdata'] = $this->db->get_where('fakultas',array('kode_fakultas'=>$id))->row();
 		$this->template->display('admin/fakultas/edit',$data);
 	}
 
 	public function update()
 	{
-		$id_fakultas = $this->input->post('id_fakultas');
-		$nama_fakultas = $this->input->post('nama_fakultas');
 		$kode_fakultas = $this->input->post('kode_fakultas');
+		$nama_fakultas = $this->input->post('nama_fakultas');
 
 		$object = array(
-			'nama_fakultas'=>$nama_fakultas,
-			'kode_fakultas'=>$kode_fakultas
+			'nama_fakultas'=>$nama_fakultas
 		);
 
-		$this->db->where('id_fakultas', $id_fakultas);
+		$this->db->where('kode_fakultas', $kode_fakultas);
 		$this->db->update('fakultas', $object);
 		if ($this->db->affected_rows()) {
 			$this->session->set_flashdata('info', 'Data berhasil diubah.');

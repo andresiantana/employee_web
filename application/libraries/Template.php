@@ -11,8 +11,8 @@ class Template{
     function display($template,$data=null){
         $data['judul'] = 'Employee Web';
         $data['_content'] = $this->_ci->load->view($template,$data,true);   
-        $data['isi_notifikasi']      = array();
-        $data['isi_notifikasi2']      = array();
+        $data['isi_notifikasi'] = array();
+        $data['isi_notifikasi2'] = array();
         $data['userPegawai'] =  $this->_ci->Pegawai->tampilUserPegawai($data['id_user'])->row();
 
         if($data['nama_role'] == 'Admin'){

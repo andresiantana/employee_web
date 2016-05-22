@@ -2,11 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RoleM extends CI_Model {
-
-	public function index(){
-
-	}
-
 	public function tampilData(){
 		return $this->db->get('role');
 	}
@@ -40,6 +35,5 @@ class RoleM extends CI_Model {
 		return $dd;
 	}
 }
-
 /* End of file Role.php */
 /* Location: ./application/models/Role.php */
