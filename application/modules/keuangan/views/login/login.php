@@ -16,7 +16,7 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
-                <button class="button btn btn-primary btn-large">Log In</button>
+                <button class="button btn btn-primary btn-large">Masuk</button>
                 &nbsp;<span><a href="<?php echo base_url('keuangan/Login/resetPassword'); ?>">Lupa Password?</a></span>
             <?php echo form_close(); ?>
         </div>

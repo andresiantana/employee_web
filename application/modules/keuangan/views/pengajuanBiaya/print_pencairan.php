@@ -4,7 +4,7 @@
       <table width="100%">
           <tr>
               <td width="25%" align="center">
-                  <img src="" style="max-width: 80px; width:80px;"/>
+                  <img src="<?php echo base_url().'data/images/logo.png'; ?>" width="50px" height="50px">
               </td>
               <td align="center">
                   <div>
@@ -29,7 +29,6 @@
             <tr>
               <td>
                 <p>
-                  Assalamu'alaikum, Wr. Wb <br/><br/>
                   Dengan surat ini, kami menyampaikan bahwa pengajuan biaya yang diajukan oleh : </br>
                   
                   <table>
@@ -54,16 +53,19 @@
                       <td><?php echo $datapencairan->nama_kategori; ?></td>
                     </tr>
                     <tr>
+                      <td>Jumlah Biaya</td>
+                      <td>:</td>
+                      <td><i><b>Rp. <?php echo number_format($datapencairan->jumlah_nominal,0,'',','); ?></b></i></td>
+                    </tr>
+                    <tr>
                       <td>Semester</td>
                       <td>:</td>
                       <td><?php echo $datapencairan->semester; ?></td>
                     </tr>
                   </table>
                   <br/>
-                  Bahwa pengajuan biaya yang telah dilampirkan sudah di setujui oleh Bagian Keuangan. Dengan Jumlah Nominal <i><b>Rp. <?php echo number_format($datapencairan->jumlah_nominal); ?>,- . </b></i>
+                  Bahwa pengajuan biaya yang telah dilampirkan sudah di setujui oleh Bagian Keuangan. Dengan Jumlah Nominal <i><b>Rp. <?php echo number_format($datapencairan->berhasil_transfer); ?>,- . </b></i>
                   <br>Untuk keterangan lebih lanjut dapat menghubungi Bagian Keuangan. <br/><br/>
-                  
-                  Wassalamu'alaikum, Wr. Wb.
                 </p>
               <td>
             </tr>

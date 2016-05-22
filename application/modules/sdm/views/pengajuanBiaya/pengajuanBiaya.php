@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php echo form_open_multipart('pegawai/PengajuanBiaya/insert',array('accept-charset'=>"utf-8"));  ?>
+                        <?php echo form_open('sdm/PengajuanBiaya/insert');  ?>
                         <?php if(validation_errors()){ ?>
                         <div class="alert alert-warning">
                             <strong><?php echo validation_errors(); ?></strong>
@@ -17,6 +17,7 @@
                             <label for="kode_pengajuan">Kode Pengajuan</label>
                             <input class="form-control" type="text" name="kode_pengajuan" placeholder="Isikan Kode Pengajuan" value="<?php echo isset($kode_pengajuan) ? $kode_pengajuan : ""; ?>" readonly=true required>
                             <input class="form-control" type="hidden" name="id_pengajuan_biaya" value="<?php echo isset($datapengajuan->id_pengajuan_biaya) ? $datapengajuan->id_pengajuan_biaya : ""; ?>" readonly=true required>
+                            <input class="form-control" type="hidden" name="id_pegawai" value="<?php echo isset($datapengajuan->id_pegawai) ? $datapengajuan->id_pegawai : ""; ?>" readonly=true required>
                         </div>
                          <div class="form-group">
                             <label>Tanggal</label>
@@ -64,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jumlah_nominal">Biaya Per Semester</label>
-                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
+                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
                         </div>                         
                     </div>
                     <div class="col-md-12">
@@ -78,6 +79,36 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    if(count($uraian_biaya) > 0){
+                                        foreach($uraian_biaya as $i=>$uraian){
+                                ?>
+                                <tr>
+                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]">
+                                            <option value="">-Pilih Kategori Biaya-</option>
+                                            <?php foreach ($kategori as $i => $val) {
+                                                if($uraian->id_kategori_biaya == $va->id_kategori_biaya){
+                                                    $selected = 'selected';
+                                                }else{
+                                                    $selected = "";
+                                                }
+                                            ?>
+                                            <option value="<?php echo $val->id_kategori_biaya; ?>" selected="<?php echo $selected; ?>"><?php echo $val->nama_kategori; ?></option>
+                                            <?php } ?>
+                                        </select></td>
+                                    <td>
+                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>">
+                                        <input id="biaya_0_id_uraian" type="hidden" name="biaya[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
+                                    </td>
+                                    <td class="td-actions">
+                                        <a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a>
+                                    </td>
+                                </tr>
+                                <?php 
+                                        }
+                                    }else{
+                                ?>
+
                                 <tr>
                                     <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]">
                                             <option value="">-Pilih Kategori Biaya-</option>
@@ -85,11 +116,15 @@
                                             <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
                                             <?php } ?>
                                         </select></td>
-                                    <td><input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);"></td>
+                                    <td>
+                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="biaya_0_id_uraian" type="hidden" name="biaya[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                    </td>
                                     <td class="td-actions">
                                         <a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a>
                                     </td>
                                 </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -106,14 +141,22 @@
 </div>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
-<script type="text/javascript">    
+<script type="text/javascript"> 
+    function proporsiUraian(obj){
+        var jumlah_nominal = parseFloat(obj.value);
+        var jml_row = $('#tabel-biaya tbody').length;
+        var jml_proporsi = jumlah_nominal / jml_row;
+        $('#tabel-biaya tbody tr').each(function(){
+            $(this).find    ('input[name$="[nominal]"]').val(jml_proporsi);
+        });
+    }
     function tambahBiaya(){
         var data = {
           tambah_biaya    : 'ya'
         }
 
         $.ajax({
-            url     : "<?php echo base_url('pegawai/PengajuanBiaya/setFormBiaya'); ?>",
+            url     : "<?php echo base_url('sdm/PengajuanBiaya/setFormBiaya'); ?>",
             type    : "POST",
             data    : data,
             dataType: 'json',
@@ -131,6 +174,15 @@
     }
 
     function hitungTotalBiaya(obj){
+        total_nominal = 0;
+        $('#tabel-biaya tbody tr').each(function(){
+            var nominal = parseFloat($(this).find('input[name$="[nominal]"]').val());
+            total_nominal += nominal;
+        });
+        $('#jumlah_nominal').val(total_nominal);
+    }
+
+    function hitungTotalSemua(){
         total_nominal = 0;
         $('#tabel-biaya tbody tr').each(function(){
             var nominal = parseFloat($(this).find('input[name$="[nominal]"]').val());
@@ -176,6 +228,7 @@
     }
 
     $(document).ready(function(){  
+        hitungTotalSemua();
         var id_kategori_biaya = '<?php echo isset($datapengajuan->id_kategori_biaya) ? $datapengajuan->id_kategori_biaya : ""; ?>';
         if(id_kategori_biaya != ""){           
             $('#id_kategori_biaya').val(id_kategori_biaya);

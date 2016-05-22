@@ -109,11 +109,11 @@ class PengajuanBiaya extends CI_Controller {
 		$datapegawai = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
 		$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pegawai'=>$datapegawai->id_pegawai),array('limit'=>1))->row();
 			if(count($this->input->post('biaya')) > 0) {
-				foreach ($this->input->post('biaya') as $i => $data) {	
+				foreach ($this->input->post('biaya') as $i => $detail) {	
 					$id_pegawai = $datapegawai->id_pegawai;
 					$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
-					$id_kategori_biaya = $data['id_kategori_biaya'];
-					$nominal 	= $data['nominal'];
+					$id_kategori_biaya = $detail['id_kategori_biaya'];
+					$nominal 	= $detail['nominal'];
 
 					$object = array(
 						'id_pengajuan_biaya'=>$id_pengajuan_biaya,
@@ -184,11 +184,10 @@ class PengajuanBiaya extends CI_Controller {
 	public function setFormBiaya(){
 		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" name="biaya[0][id_kategori_biaya]" class="form-control kategori_biaya"';
 		$kategori_biaya = $this->KategoriBiayaM->dd_kategori();
-		$kategori_biaya_selected = $this->input->post('id_kategori_biaya') ? $this->input->post('id_kategori_biaya') : '';
 
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
-		$data['tr'] .= '<td>'.form_dropdown('biaya[0][id_kategori_biaya]', $kategori_biaya, $kategori_biaya_selected, $kategori_biaya_attribute).'</td>';
+		$data['tr'] .= '<td>'.form_dropdown('biaya[0][id_kategori_biaya]', $kategori_biaya, '', $kategori_biaya_attribute).'</td>';
 		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusBiaya(this);" ><i class="fa fa-minus"> </i></a></td>';
 		$data['tr'] .= '</tr>';

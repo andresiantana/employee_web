@@ -65,16 +65,18 @@
                             
                             <div class="form-group">
                                 <label>Jumlah Biaya</label>
-                                <input class="form-control" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
+                                <input class="form-control" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>
                             </div>
 
+
                             <div class="form-group">
-                                <label>Status Transfer</label>
-                                <select class="form-control" name="status_transfer" id="status_transfer">
-                                    <option value="">-Pilih Status Transfer-</option>
-                                    <option value="Sukses">Sukses</option>
-                                    <option value="Gagal">Gagal</option>
-                                </select>
+                                <label>Jumlah Berhasil Transfer</label>
+                                <input class="form-control" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->berhasil_transfer) ? $datapengajuan->berhasil_transfer : ""; ?>" onblur="setJmlBerhasil(this);" required>                                        
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Jumlah Gagal Transfer</label>
+                                <input class="form-control" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  required>
                             </div>
 
                             <div class="form-group">
@@ -102,6 +104,37 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">  
+    function setJmlBerhasil(obj){
+        var jml_biaya = parseFloat($('#jumlah_biaya').val());
+        var jml_berhasil = parseFloat($('#berhasil_transfer').val());
+        var jml_gagal = parseFloat($('#gagal_transfer').val());
+
+        if(jml_berhasil > jml_biaya){
+            alert("Jumlah berhasil transfer tidak boleh lebih dari Jumlah Biaya");
+            return false;
+        }else{
+            jml_berhasil = jml_berhasil;
+            jml_gagal = jml_biaya - jml_berhasil;
+        }
+        $('#berhasil_transfer').val(jml_berhasil);
+        $('#gagal_transfer').val(jml_gagal);
+    }
+
+    function setJmlGagal(obj){
+        var jml_biaya = parseFloat($('#jumlah_biaya').val());
+        var jml_berhasil = parseFloat($('#berhasil_transfer').val());
+        var jml_gagal = parseFloat($('#gagal_transfer').val());
+
+        if(jml_gagal > jml_biaya){
+            alert("Jumlah berhasil transfer tidak boleh lebih dari Jumlah Biaya");
+            return false;
+        }else{
+            jml_berhasil = jml_biaya - jml_gagal;
+            jml_gagal = jml_gagal;
+        }
+        $('#berhasil_transfer').val(jml_berhasil);
+        $('#gagal_transfer').val(jml_gagal);
+    }
     function print(caraPrint)
     {
         var id_pencairan_biaya = '<?php echo isset($datapencairan->id_pencairan_biaya) ? $datapencairan->id_pencairan_biaya : null; ?>';

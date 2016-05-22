@@ -97,7 +97,8 @@ class PengajuanBiaya extends CI_Controller {
 		$kode_pencairan = $this->input->post('kode_pencairan');
 		$semester = $this->input->post('semester');
 		$jumlah_biaya = $this->input->post('jumlah_biaya');
-		$status_transfer = $this->input->post('status_transfer');
+		$berhasil_transfer = $this->input->post('berhasil_transfer');
+		$gagal_transfer = $this->input->post('gagal_transfer');
 		$keterangan = $this->input->post('keterangan');
 
 		$tanggal = $this->input->post('tanggal_pencairan');
@@ -112,7 +113,8 @@ class PengajuanBiaya extends CI_Controller {
 			'tanggal_pencairan'=>$tanggal,
 			'kode_pencairan' => $kode_pencairan,
 			'jumlah_biaya' => $jumlah_biaya,
-			'status_transfer'=>$status_transfer,
+			'berhasil_transfer' => $berhasil_transfer,
+			'gagal_transfer' => $gagal_transfer,
 			'keterangan' => $keterangan
 		);
 
@@ -127,7 +129,8 @@ class PengajuanBiaya extends CI_Controller {
 				'tanggal_pencairan'=>$tanggal,
 				'kode_pencairan' => $kode_pencairan,
 				'jumlah_biaya' => $jumlah_biaya,
-				'status_transfer'=>$status_transfer,
+				'berhasil_transfer' => $berhasil_transfer,
+				'gagal_transfer' => $gagal_transfer,
 				'keterangan' => $keterangan
 			);
 		}else{

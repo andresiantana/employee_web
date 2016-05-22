@@ -27,7 +27,7 @@ class KategoriBiayaM extends CI_Model {
 		$result = $this->db->get('kategori_biaya');
 
 		// membuat array
-		$dd[''] = '--Pilih Kategori--';
+		$dd[''] = '-Pilih Kategori Biaya-';
 		if($result->num_rows() > 0){
 			foreach($result->result() as $row){
 				$dd[$row->id_kategori_biaya] = $row->nama_kategori;
