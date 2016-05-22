@@ -18,6 +18,7 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->model('Notifikasi');
 		$this->load->model('KategoriBiayaM');
 		$this->load->model('PGPengajuanBiayaT');
+		$this->load->model('UraianPengajuanBiayaT');
 	}
 
 	public function index($id = null)
@@ -40,6 +41,8 @@ class PengajuanBiaya extends CI_Controller {
 
 	public function insert()
 	{
+		$status = true;
+
 		$tgl = '';
 		$tanggal = '';
 		$id_pengajuan_biaya = $this->input->post('id_pengajuan_biaya');
@@ -103,8 +106,30 @@ class PengajuanBiaya extends CI_Controller {
 
 			$this->Notifikasi->insert($notif);
 		}	
+		$datapegawai = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
+		$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pegawai'=>$datapegawai->id_pegawai),array('limit'=>1))->row();
+			if(count($this->input->post('biaya')) > 0) {
+				foreach ($this->input->post('biaya') as $i => $data) {	
+					$id_pegawai = $datapegawai->id_pegawai;
+					$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
+					$id_kategori_biaya = $data['id_kategori_biaya'];
+					$nominal 	= $data['nominal'];
 
-		if ($insert) {
+					$object = array(
+						'id_pengajuan_biaya'=>$id_pengajuan_biaya,
+						'id_kategori_biaya'=>$id_kategori_biaya,
+						'nominal'=>$nominal
+					);
+
+					$insert = $this->UraianPengajuanBiayaT->insert($object);
+					
+					if($insert){
+						$status = true;
+					}
+				}
+			}
+
+		if ($insert && $status) {
 			echo "<script>alert('Pengajuan Biaya berhasil disimpan!');
                     window.location.href='".base_url('pegawai/PengajuanBiaya')."';
                 </script>";
@@ -154,6 +179,21 @@ class PengajuanBiaya extends CI_Controller {
 			$data['data']	= $this->PGPengajuanBiayaT->tampilDataPengajuan()->result_object();			
 		}			
 		$this->template->display('pegawai/pengajuanBiaya/informasi',$data);
+	}
+
+	public function setFormBiaya(){
+		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" name="biaya[0][id_kategori_biaya]" class="form-control kategori_biaya"';
+		$kategori_biaya = $this->KategoriBiayaM->dd_kategori();
+		$kategori_biaya_selected = $this->input->post('id_kategori_biaya') ? $this->input->post('id_kategori_biaya') : '';
+
+		$data['tr'] = '';
+		$data['tr'] .= '<tr>';
+		$data['tr'] .= '<td>'.form_dropdown('biaya[0][id_kategori_biaya]', $kategori_biaya, $kategori_biaya_selected, $kategori_biaya_attribute).'</td>';
+		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);"></td>';
+		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusBiaya(this);" ><i class="fa fa-minus"> </i></a></td>';
+		$data['tr'] .= '</tr>';
+		echo json_encode($data); 
+		exit;
 	}
 
 }

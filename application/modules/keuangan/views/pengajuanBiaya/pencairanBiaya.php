@@ -69,6 +69,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Status Transfer</label>
+                                <select class="form-control" name="status_transfer" id="status_transfer">
+                                    <option value="">-Pilih Status Transfer-</option>
+                                    <option value="Sukses">Sukses</option>
+                                    <option value="Gagal">Gagal</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Keterangan</label>
                                 <textarea class="form-control" id="keterangan" name="keterangan"><?php echo isset($datapencairan->keterangan) ? $datapencairan->keterangan : ""; ?> </textarea>
                             </div>

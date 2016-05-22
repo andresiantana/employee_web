@@ -49,6 +49,9 @@ class DataPegawai extends CI_Controller {
 		$data['menu'] = 'dataPegawai';
 		$data['judulHeader'] = 'Data Pegawai';
 		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')))->row();
+		if(isset($data['datapegawai']->id_pegawai)){
+			$data['datasertifikasi'] = $this->db->get_where('sertifikasi',array('id_pegawai'=>$data['datapegawai']->id_pegawai))->result_object();	
+		}		
 		$data['cabang_bank'] = $this->db->select('*')
 						->from('cabang_bank')
 						->get()->result_object();
@@ -274,13 +277,7 @@ class DataPegawai extends CI_Controller {
 			                window.location.href='".base_url('pegawai/DataPegawai/index')."';
 			            </script>";	 			
 			 		}
-			 		 
-			 		if($upload != ''){
-						$upload = $upload;
-					}else{
-						$upload = '';
-					}
-
+			 		
 					$object = array(
 						'id_pegawai'=>$id_pegawai,
 						'id_jenis_sertifikasi'=>$id_jenis_sertifikasi,

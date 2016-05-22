@@ -14,6 +14,7 @@ class KartuPID extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper(array('form','url','download'));
         $this->load->model('SDPegawai');
+        $this->load->model('SDUraianPengajuanBiayaT');
 	}
 
 	public function index()
@@ -51,7 +52,7 @@ class KartuPID extends CI_Controller {
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['id_pegawai'] = $id_pegawai;
 		$data['detail'] = $this->SDPegawai->tampilKartuPegawai($id_pegawai)->row();
-		$data['detail_rincian'] = $this->SDUraianT->tampilUraian($id_pegawai)->row();
+		$data['detail_rincian'] = $this->SDUraianPengajuanBiayaT->tampilUraian($id_pegawai)->result_object();
 		$this->load->view('sdm/kartuPID/cetak_kartu', $data);
 	}
 

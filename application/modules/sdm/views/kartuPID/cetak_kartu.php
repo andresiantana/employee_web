@@ -118,10 +118,20 @@
                     <td>Nama Uraian</td>
                     <td>Nominal</td>
                 </tr>
-
+                <?php 
+                    $total = 0;
+                    foreach($detail_rincian as $key => $v){ 
+                    $total += $v->nominal;
+                ?>
+                    <tr>
+                        <td><?php echo $key+1; ?></td>
+                        <td><?php echo $v->nama_kategori; ?></td>
+                        <td style='text-align:right;'><?php echo number_format($v->nominal,0,'',','); ?></td>
+                    </tr>
+                <?php } ?>
                 <tr>
                     <td colspan="2" style="text-align:right;">Total</td>
-                    <td></td>
+                    <td style='text-align:right;'><?php echo number_format($total,0,'',','); ?></td>
                 </tr>
             </table>
         </td>

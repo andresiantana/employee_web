@@ -173,7 +173,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                       <tr>
+                        <?php
+                            if(count($datasertifikasi) > 0){
+                                foreach($datasertifikasi as $i=>$datas){
+                        ?>
+                        <tr>
+                            <td><select class="form-control jenis_sertifikasi" name="sertifikasi[0][id_jenis_sertifikasi]">
+                                    <option value="">-Pilih Jenis Sertifikasi-</option>
+                                    <?php foreach ($jenis_sertifikasi as $i => $val) { ?>
+                                    <option value="<?php echo $val->id_jenis_sertifikasi; ?>"><?php echo $val->nama_jenis_sertifikasi; ?></option>
+                                    <?php } ?>
+                                </select></td>
+                            <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" value="<?php echo $datas->penyelenggara; ?>"></td>
+                            <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control" value="<?php echo $datas->skor; ?>"></td>
+                            <td><a href="javascript:prd_download('<?php echo $datas->upload; ?>')"><?php echo $datas->upload; ?></a><br><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>
+                            <td class="td-actions">
+                                <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
+                            </td>
+                        </tr>
+                        <?php 
+                                }
+                            }else{
+                        ?>
+                        <tr>
                             <td><select class="form-control jenis_sertifikasi" name="sertifikasi[0][id_jenis_sertifikasi]">
                                     <option value="">-Pilih Jenis Sertifikasi-</option>
                                     <?php foreach ($jenis_sertifikasi as $i => $val) { ?>
@@ -187,6 +209,7 @@
                                 <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
                             </td>
                         </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
