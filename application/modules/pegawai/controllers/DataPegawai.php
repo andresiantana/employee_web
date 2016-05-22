@@ -118,9 +118,10 @@ class DataPegawai extends CI_Controller {
  			$foto = $this->upload->file_name;
 			$status_upload = true;
  		}else{
- 			echo "<script>alert('Foto gagal diupload!');
-                window.location.href='".base_url('pegawai/DataPegawai/index')."';
-            </script>"; 			
+ 			// echo "<script>alert('Foto gagal diupload!');
+    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
+    //         </script>"; 			
+ 			$status_upload = true;
  		} 
  	 	
 
@@ -143,9 +144,10 @@ class DataPegawai extends CI_Controller {
  			$surat_studi_lanjut = $this->upload->file_name;
 			$status_upload = true;
  		}else{
- 			echo "<script>alert('Surat Studi Lanjut gagal diupload!');
-                window.location.href='".base_url('pegawai/DataPegawai/index')."';
-            </script>"; 			
+ 			// echo "<script>alert('Surat Studi Lanjut gagal diupload!');
+    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
+    //         </script>"; 		
+    		$status_upload = true;	
  		}
  		 
  		if($surat_studi_lanjut != ''){
@@ -167,9 +169,10 @@ class DataPegawai extends CI_Controller {
  			$surat_lulus_seleksi = $this->upload->file_name;
 			$status_upload = true;
  		}else{
- 			echo "<script>alert('Surat Lulus Seleksi gagal diupload!');
-                window.location.href='".base_url('pegawai/DataPegawai/index')."';
-            </script>"; 			
+ 			// echo "<script>alert('Surat Lulus Seleksi gagal diupload!');
+    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
+    //         </script>"; 	
+    		$status_upload = true;		
  		}
  		
  		if($surat_lulus_seleksi != ''){
@@ -191,9 +194,10 @@ class DataPegawai extends CI_Controller {
  			$surat_terima_beasiswa = $this->upload->file_name;
 			$status_upload = true;
  		}else{
- 			echo "<script>alert('Surat Terima Beasiswa gagal diupload!');
-                window.location.href='".base_url('pegawai/DataPegawai/index')."';
-            </script>";	 			
+ 			// echo "<script>alert('Surat Terima Beasiswa gagal diupload!');
+    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
+    //         </script>";	
+    		$status_upload = true; 			
  		}
  		 
  		if($surat_terima_beasiswa != ''){
@@ -258,24 +262,22 @@ class DataPegawai extends CI_Controller {
 					$id_jenis_sertifikasi = $data['id_jenis_sertifikasi'];
 					$penyelenggara 	= $data['penyelenggara'];
 					$skor 	= $data['skor'];
-					$upload 	= isset($data['upload']) ? $data['upload'] : null;
+					$upload 	= isset($_FILES['sertifikasi']['name'][$i]['upload']) ? $_FILES['sertifikasi']['name'][0]['upload'] : null;
 
-					// upload sertifikasiisset($data['upload']) ? $data['upload'] : null
 					$config5['upload_path']    = $this->file_path;
-			     	$config5['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+			     	$config5['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|xls';
 			     	$config5['max_size']       = '2000';
 			     	$config5['max_width']      = '2000';
 			     	$config5['max_height']     = '2000';
 			     	$config5['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
 			     	$this->load->library('upload', $config5);	     	
 			     	$this->upload->initialize($config5);
-		 			if ($this->upload->do_upload("upload")){
+		 			if ($this->upload->do_upload($_FILES['sertifikasi']['name'][$i]['upload'])){
 			 			$upload = $this->upload->file_name;
 						$status_upload = true;
+						echo $upload;exit;
 			 		}else{
-			 			echo "<script>alert('Upload Sertifikasi gagal diupload!');
-			                window.location.href='".base_url('pegawai/DataPegawai/index')."';
-			            </script>";	 			
+			 			$status_upload = true;			
 			 		}
 			 		
 					$object = array(
@@ -354,7 +356,7 @@ class DataPegawai extends CI_Controller {
 		$data['tr'] .= '<td>'.form_dropdown('sertifikasi[0][id_jenis_sertifikasi]', $jenis_sertifikasi, $jenis_sertifikasi_selected, $jenis_sertifikasi_attributes).'</td>';
 		$data['tr'] .= '<td><input id="sertifikasi_0_penyelenggara" name="sertifikasi[0][penyelenggara]" type="text" class="form-control"></td>';
 		$data['tr'] .= '<td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>';
-		$data['tr'] .= '<td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>';
+		$data['tr'] .= '<td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusSertifikasi(this);" ><i class="fa fa-minus"> </i></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 

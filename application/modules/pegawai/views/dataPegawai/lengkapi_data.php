@@ -11,7 +11,7 @@
             </div>              
             <?php } ?>
     
-            <?php echo form_open_multipart("pegawai/DataPegawai/insert"); ?>
+            <?php echo form_open_multipart("pegawai/DataPegawai/insert",array('accept-charset'=>"utf-8")); ?>
             <div class="col-md-6">
                 <legend>Data Pegawai</legend>
 
@@ -204,7 +204,7 @@
                                 </select></td>
                             <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" ></td>
                             <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>
-                            <td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>
+                            <td><input id="sertifikasi_0_upload"  name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>
                             <td class="td-actions">
                                 <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
                             </td>
