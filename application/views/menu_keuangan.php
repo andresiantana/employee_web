@@ -33,6 +33,12 @@
             <li>
                 <a <?php if($menu == 'bukuBesar'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/BukuBesar'); ?>">Buku Besar</a>
             </li>
+            <li>
+                <a <?php if($menu == 'KartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/KartuPID'); ?>">Kartu PID</a>
+            </li>
+            <li>
+                <a <?php if($menu == 'pengeluaran'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Pengeluaran'); ?>">Pengeluaran</a>
+            </li>
         </ul>
     </li>
 </ul>
