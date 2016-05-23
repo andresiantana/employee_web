@@ -23,7 +23,7 @@ class PencairanBiayaT extends CI_Model {
 	public function noPencairanBiaya() {
         $default="0001";
         $prefix = 'PCB'.date('ymd');
-        $sql = "SELECT CAST(MAX(SUBSTR(kode_pencairan,".(strlen($prefix)+1).",".(strlen($default)).")) AS integer) nomaksimal 
+        $sql = "SELECT COUNT(kode_pencairan) nomaksimal 
                 FROM pencairan_biaya 
                 WHERE kode_pencairan LIKE ('".$prefix."%')";
         $noPencairan = $this->db->query($sql);

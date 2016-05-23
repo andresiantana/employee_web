@@ -31,7 +31,6 @@ class PengajuanBiaya extends CI_Controller {
 						->from('kategori_biaya')
 						->get()->result_object();
 
-
 		$nama_pegawai = $this->input->post('nama_pegawai');
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
 		$status_pengajuan = $this->input->post('status_pengajuan');

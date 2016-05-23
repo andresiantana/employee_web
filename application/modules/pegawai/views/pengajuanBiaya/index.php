@@ -41,11 +41,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nama_lokasi">Nama Lokasi</label>
+                            <label for="nama_lokasi">Nama Universitas</label>
                             <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapengajuan->nama_lokasi) ? $datapengajuan->nama_lokasi : ""; ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="jurusan_fakultas">Jurusan/Fakultas</label>
+                            <label for="jurusan_fakultas">Fakultas</label>
                             <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapengajuan->jurusan_fakultas) ? $datapengajuan->jurusan_fakultas : ""; ?>" required>
                         </div>
                         <div class="form-group">
@@ -56,9 +56,9 @@
                             <label>Jenjang</label>
                             <select class="form-control" name="jenjang" id="jenjang">
                                 <option value="">-Pilih Jenjang-</option>
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
                                 <option value="S3">S3</option>
+                                <option value="S2">S2</option>
+                                <option value="S1">S1</option>
                                 <option value="D3">D3</option>
                             </select>
                         </div>
