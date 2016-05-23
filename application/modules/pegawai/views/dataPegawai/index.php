@@ -26,7 +26,6 @@
                                 <th>Surat Lulus Seleksi</th>
                                 <th>Surat Terima Beasiswa</th>
                                 <th>Biaya SPP</th>
-                                <th>Username</th>
                                 <th class="td-actions">Aksi</th>
                             </tr>
                         </thead>
@@ -50,7 +49,6 @@
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
                                     <td><?php echo number_format($v->biaya_spp); ?></td>
-                                    <td style="text-align:right;"><?php echo $v->username; ?></td>
                                     <td class="td-actions">
                                         <a href="<?php echo base_url('pegawai/DataPegawai/lengkapiData/'.$v->id_pegawai); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Data Pegawai"><i class="fa fa-edit"> </i></a>
                                     </td>

@@ -6,33 +6,6 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <legend>Pencarian :</legend>
-                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                        <div class="row">                            
-                            <div class="col-sm-6">
-                                 <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        NIDN                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="nidn" name="nidn">
-                                    </label>
-                                </div>
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Nama                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="nama" name="nama">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        NIP                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="nip" name="nip">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>

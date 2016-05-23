@@ -4,13 +4,12 @@ $obj->load->model('PengajuanBiayaT');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SDPengajuanBiayaT extends PengajuanBiayaT {
-	public function tampilData($nama_pegawai = null , $kode_pengajuan = null, $id_kategori_biaya = null , $status_pengajuan = null, $tanggal_awal = null ,$tanggal_akhir = null){
+	public function tampilData($nip = null , $kode_pengajuan = null, $id_kategori_biaya = null , $status_pengajuan = null, $tanggal_awal = null ,$tanggal_akhir = null){
 		$this->db->select('*');
 		$this->db->from('pengajuan_biaya');
 		$this->db->join('pegawai', 'pegawai.id_pegawai = pengajuan_biaya.id_pegawai');
-		$this->db->join('kategori_biaya', 'kategori_biaya.id_kategori_biaya = pengajuan_biaya.id_kategori_biaya','left');
-		if($nama_pegawai != ''){
-			$this->db->like('pegawai.nama_lengkap', $nama_pegawai);
+		if($nip != ''){
+			$this->db->like('pegawai.nip', $nip);
 		}
 		if($kode_pengajuan != ''){
 			$this->db->like('pengajuan_biaya.kode_pengajuan', $kode_pengajuan);

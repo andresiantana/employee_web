@@ -31,7 +31,7 @@ class PengajuanBiaya extends CI_Controller {
 						->from('kategori_biaya')
 						->get()->result_object();
 
-		$nama_pegawai = $this->input->post('nama_pegawai');
+		$nip = $this->input->post('nip');
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
 		$status_pengajuan = $this->input->post('status_pengajuan');
 		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
@@ -49,8 +49,8 @@ class PengajuanBiaya extends CI_Controller {
 			$tanggal_akhir = $tgl_akhir;
 		}
 	
-		if($nama_pegawai != '' || $kode_pengajuan != '' || $id_kategori_biaya != '' || $status_pengajuan != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
-			$data['data'] =  $this->SDPengajuanBiayaT->tampilData($nama_pegawai,$kode_pengajuan,$id_kategori_biaya,$status_pengajuan,$tanggal_awal,$tanggal_akhir)->result_object();		
+		if($nip != '' || $kode_pengajuan != '' || $id_kategori_biaya != '' || $status_pengajuan != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
+			$data['data'] =  $this->SDPengajuanBiayaT->tampilData($nip,$kode_pengajuan,$id_kategori_biaya,$status_pengajuan,$tanggal_awal,$tanggal_akhir)->result_object();		
 			$tr['tr'] = $this->load->view('sdm/pengajuanBiaya/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
@@ -68,13 +68,22 @@ class PengajuanBiaya extends CI_Controller {
         $id_pengajuan_biaya = isset($_POST['id_pengajuan_biaya']) ? $_POST['id_pengajuan_biaya'] : null;
         $status_pengajuan = isset($_POST['status_pengajuan']) ? $_POST['status_pengajuan'] : "";
         $alasan_pengajuan = isset($_POST['alasan_pengajuan']) ? $_POST['alasan_pengajuan'] : "";
+        $jumlah_nominal = isset($_POST['jumlah_nominal']) ? $_POST['jumlah_nominal'] : "";
 
         $datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya))->row();
 
-        $object = array(
+        if($status_pengajuan == 'Approved'){
+        	$object = array(
+				'status_pengajuan'=>$status_pengajuan,
+				'alasan_status'=>$alasan_pengajuan,
+				'jumlah_nominal'=>$jumlah_nominal
+			);
+        }else{
+        	$object = array(
 			'status_pengajuan'=>$status_pengajuan,
-			'alasan_status'=>$alasan_pengajuan
-		);
+			'alasan_status'=>$alasan_pengajuan,
+			);
+        }        
 
 		$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
 		$this->db->update('pengajuan_biaya', $object);

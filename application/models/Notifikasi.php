@@ -18,12 +18,15 @@ class Notifikasi extends CI_Model {
 		return $query;
 	}
 
-	public function tampilNotifikasiSDM(){
+	public function tampilNotifikasiSDM($id_user = null){
 		$this->db->select('*');
 		$this->db->from('notifikasi');
 		$this->db->join('pegawai', 'pegawai.id_pegawai = notifikasi.id_pegawai');
 		$this->db->where('notifikasi.status_baca is false');
 		$this->db->where('DATE(notifikasi.tanggal) ="'.date('Y-m-d').'"');
+		if($id_user != ''){
+			$this->db->where('notifikasi.id_user != '.$id_user);
+		}
 		$this->db->order_by('notifikasi.tanggal','DESC');
 		$query = $this->db->get();
 		return $query;

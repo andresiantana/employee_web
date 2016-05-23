@@ -46,7 +46,6 @@ class PengajuanBiaya extends CI_Controller {
 		$tgl = '';
 		$tanggal = '';
 		$id_pengajuan_biaya = $this->input->post('id_pengajuan_biaya');
-		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
 		$semester = $this->input->post('semester');
 		$jumlah_nominal = $this->input->post('jumlah_nominal');
@@ -66,7 +65,6 @@ class PengajuanBiaya extends CI_Controller {
 			'id_pengajuan_biaya' =>'',
 			'tanggal' => $tanggal,
 			'kode_pengajuan'=>$kode_pengajuan,
-			'id_kategori_biaya' => $id_kategori_biaya,
 			'semester' => $semester,
 			'jumlah_nominal' => $jumlah_nominal,
 			'id_pegawai' => $id_pegawai,
@@ -84,7 +82,6 @@ class PengajuanBiaya extends CI_Controller {
 	        $object = array(
 				'tanggal' => $tanggal,
 				'kode_pengajuan'=>$kode_pengajuan,
-				'id_kategori_biaya' => $id_kategori_biaya,
 				'semester' => $semester,
 				'jumlah_nominal' => $jumlah_nominal,
 				'id_pegawai' => $id_pegawai,
@@ -147,7 +144,7 @@ class PengajuanBiaya extends CI_Controller {
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Informasi Pengajuan Biaya';
-		$data['menu'] 	= 'daftarPegawai';
+		$data['menu'] 	= 'informasiPengajuanBiaya';
 		$data['kategori'] = $this->db->select('*')
 						->from('kategori_biaya')
 						->get()->result_object();

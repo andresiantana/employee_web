@@ -7,59 +7,30 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <legend>Pencarian :</legend>
-                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                        <div class="row">                            
-                            <div class="col-sm-6">
-                                 <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Nama Pegawai                                            
-                                        <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai">
-                                    </label>
-                                </div>
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Kode Pengajuan                                           
-                                        <input type="text" class="form-control" id="kode_pengajuan" name="kode_pengajuan">
-                                    </label>
-                                </div>
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Kategori Biaya                                            
-                                        <select class="form-control" name="id_kategori_biaya" id="id_kategori_biaya">
-                                            <option value="">-Pilih Kategori Biaya-</option>
-                                            <?php foreach ($kategori as $i => $val) { ?>
-                                                <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Tanggal Awal                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="tanggal_awal" name="tanggal_awal">
-                                    </label>
-                                </div>
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Tanggal Akhir                                            
-                                        <input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
-                                    </label>
-                                </div>
-                                <div id="dataTables-example_filter" class="dataTables_filter">
-                                    <label>        
-                                        Status                                          
-                                        <select class="form-control" name="status_pengajuan" id="status_pengajuan">
-                                            <option value="">-Pilih Status-</option>
-                                            <option value="Approved">Approved</option>
-                                            <option value="Reject">Reject</option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:10%"><label>NIP</label></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:30%"> <input type="text" class="form-control" id="nip" name="nip"></td>
+
+                            <td style="width:9%"></td>
+
+                            <td><label>Tanggal Awal</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text" onblur="setPencarian();" class="form-control" id="tanggal_awal" name="tanggal_awal"></td>
+                        </tr>
+                        <tr>
+                            <td><label>Kode Pengajuan</label></td>
+                            <td style="width:1%;"></td>
+                            <td> <input type="text" class="form-control" id="kode_pengajuan" name="kode_pengajuan"></td>
+
+                            <td style="width:9%"></td>
+
+                            <td><label>Tangal Akhir</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir"></td>
+                        </tr>
+                    </table>
                     <br>
                     <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
                     <a href='<?php echo base_url('sdm/PengajuanBiaya/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
@@ -71,7 +42,6 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th>Kode Pengajuan</th>
                                 <th>Nama Pegawai Pengaju</th>
-                                <th>Kategori Biaya Pengajuan</th>
                                 <th>Semester</th>
                                 <th>Jumlah Pengajuan</th>
                                 <th class="td-actions">Cairkan Pengajuan</th>
@@ -84,7 +54,6 @@
                                     <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
                                     <td><?php echo $v->kode_pengajuan; ?></td>
                                     <td><?php echo $v->nama_lengkap; ?></td>
-                                    <td><?php echo $v->nama_kategori; ?></td>
                                     <td><?php echo $v->semester; ?></td>
                                     <td><?php echo $v->jumlah_nominal; ?></td>                                    
                                     <td class="td-actions">
@@ -184,24 +153,20 @@ function batalApprove(){
 }
 
 function setPencarian(){
-    var nama_pegawai = $('#nama_pegawai').val();
-    var id_kategori_biaya = $('#id_kategori_biaya').val();
+    var nip = $('#nip').val();
     var tanggal_awal = $('#tanggal_awal').val();
     var tanggal_akhir = $('#tanggal_akhir').val();
     var kode_pengajuan = $('#kode_pengajuan').val();
-    var status_pengajuan = $('#status_pengajuan').val();
 
     var data = {
-      nama_pegawai: nama_pegawai,
-      id_kategori_biaya: id_kategori_biaya,
+      nip: nip,
       tanggal_awal: tanggal_awal,
       tanggal_akhir: tanggal_akhir,
       kode_pengajuan:kode_pengajuan,
-      status_pengajuan:status_pengajuan
     }
 
   $.ajax({
-      url     : "<?php echo base_url('sdm/PengajuanBiaya/index'); ?>",
+      url     : "<?php echo base_url('keuangan/PengajuanBiaya/index'); ?>",
       type    : "POST",
       data    : data,
       dataType: 'json',

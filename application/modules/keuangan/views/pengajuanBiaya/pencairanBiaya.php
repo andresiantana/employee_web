@@ -76,7 +76,7 @@
                             
                             <div class="form-group">
                                 <label>Jumlah Gagal Transfer</label>
-                                <input class="form-control" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  required>
+                                <input class="form-control" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  value="0" required>
                             </div>
 
                             <div class="form-group">
@@ -116,6 +116,8 @@
             jml_berhasil = jml_berhasil;
             jml_gagal = jml_biaya - jml_berhasil;
         }
+
+
         $('#berhasil_transfer').val(jml_berhasil);
         $('#gagal_transfer').val(jml_gagal);
     }
@@ -150,6 +152,15 @@
         var semester = '<?php echo isset($datapengajuan->semester) ? $datapengajuan->semester : ""; ?>';
         if(semester != ""){           
             $('#semester').val(semester);
+        }
+
+        var jumlah_biaya = '<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>';
+        if(jumlah_biaya != ""){           
+            $('#berhasil_transfer').val(jumlah_biaya);
+            $('#gagal_transfer').val(0);
+        }else{
+            $('#berhasil_transfer').val(0);
+            $('#gagal_transfer').val(0);
         }
 
         $('#tanggal').datepicker({

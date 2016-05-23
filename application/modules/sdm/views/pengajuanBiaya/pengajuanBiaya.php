@@ -131,7 +131,7 @@
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <button type="reset" class="btn btn-success">Reset</button>
-                        <a class="btn btn-danger" href="<?php echo base_url('pegawai/PengajuanBiaya'); ?>">Batal</a>
+                        <a class="btn btn-danger" href="<?php echo base_url('sdm/PengajuanBiaya'); ?>">Batal</a>
                     </div>
                         <?php echo form_close(); ?>
                 </div>

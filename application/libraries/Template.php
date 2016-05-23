@@ -8,7 +8,7 @@ class Template{
         $this->_ci->load->model('Pegawai');
     }
     
-    function display($template,$data=null){
+    function display($template,$data=null){ 
         $data['judul'] = 'Employee Web';
         $data['_content'] = $this->_ci->load->view($template,$data,true);   
         $data['isi_notifikasi'] = array();
@@ -21,7 +21,7 @@ class Template{
             $data['_notifikasi'] = $this->_ci->load->view('notifikasi_admin',$data,true);             
         }else if($data['nama_role'] == 'SDM'){
             $data['_menu'] = $this->_ci->load->view('menu_sdm',$data,true); 
-            $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasiSDM()->result_object();
+            $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasiSDM($data['id_user'])->result_object();
             $data['isi_notifikasi2'] = $this->_ci->Pegawai->tampilDataPegawaiBaru()->result_object();
             $data['isi_notifikasi3'] = $this->_ci->Notifikasi->tampilNotifikasiDariKeuangan()->result_object();
             $data['_notifikasi'] = $this->_ci->load->view('notifikasi_sdm',$data,true);             

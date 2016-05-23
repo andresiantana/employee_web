@@ -19,6 +19,7 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->model('KategoriBiayaM');
 		$this->load->model('KUPengajuanBiayaT');
 		$this->load->model('KUPencairanBiayaT');
+		$this->load->model('JurnalT');
 	}
 
 	public function index()
@@ -32,9 +33,8 @@ class PengajuanBiaya extends CI_Controller {
 						->from('kategori_biaya')
 						->get()->result_object();
 
-		$nama_pegawai = $this->input->post('nama_pegawai');		
+		$nip = $this->input->post('nip');		
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
-		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
 		$tanggal_awal = $this->input->post('tanggal_awal');
 		if(!empty($tanggal_awal)){
 			$tgl_awal = explode("/",$tanggal_awal);		
@@ -49,8 +49,8 @@ class PengajuanBiaya extends CI_Controller {
 			$tanggal_akhir = $tgl_akhir;
 		}
 	
-		if($nama_pegawai != '' || $kode_pengajuan != '' || $id_kategori_biaya != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
-			$data['data'] =  $this->SDPengajuanBiayaT->tampilData($nama_pegawai,$kode_pengajuan,$id_kategori_biaya,$tanggal_awal,$tanggal_akhir)->result_object();		
+		if($nip != '' || $kode_pengajuan != '' ||  $tanggal_awal != '' || $tanggal_akhir != ''){
+			$data['data'] =  $this->KUPengajuanBiayaT->tampilData($nip,$kode_pengajuan,$tanggal_awal,$tanggal_akhir)->result_object();		
 			$tr['tr'] = $this->load->view('keuangan/pengajuanBiaya/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
@@ -151,8 +151,57 @@ class PengajuanBiaya extends CI_Controller {
 				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' Sudah dicairkan oleh Bagian Keuangan',
 				'id_user'=>$this->session->userdata('id_user')
 			);
-
 			$this->Notifikasi->insert($object);
+
+			// input jurnal Debit dan Kredit
+			if($gagal_transfer > 0){
+				// Jurnal Gagal Transfer			
+				$object_jurnal_kredit = array(
+					'id_jurnal'=>'',
+					'id_pencairan_biaya'=>$datapencairan->id_pencairan_biaya,
+					'id_pegawai'=>$id_pegawai,
+					'tanggal_jurnal'=>date('Y-m-d'),
+					'no_akun'=>111,
+					'keterangan'=>'Pencairan Dana Berhasil Transfer',
+					'status'=>'K',
+					'biaya'=>$berhasil_transfer
+				);	
+				$object_jurnal_debit = array(
+					'id_jurnal'=>'',
+					'id_pencairan_biaya'=>$datapencairan->id_pencairan_biaya,
+					'id_pegawai'=>$id_pegawai,
+					'tanggal_jurnal'=>date('Y-m-d'),
+					'no_akun'=>112,
+					'keterangan'=>'Pencairan Dana Berhasil Transfer',
+					'status'=>'D',
+					'biaya'=>$berhasil_transfer
+				);	
+			}else{
+				// Jurnal Berhasil Transfer			
+				$object_jurnal_kredit = array(
+					'id_jurnal'=>'',
+					'id_pencairan_biaya'=>$datapencairan->id_pencairan_biaya,
+					'id_pegawai'=>$id_pegawai,
+					'tanggal_jurnal'=>date('Y-m-d'),
+					'no_akun'=>111,
+					'deskripsi'=>'Pencairan Dana Berhasil Transfer',
+					'status'=>'K',
+					'biaya'=>$berhasil_transfer
+				);	
+				$object_jurnal_debit = array(
+					'id_jurnal'=>'',
+					'id_pencairan_biaya'=>$datapencairan->id_pencairan_biaya,
+					'id_pegawai'=>$id_pegawai,
+					'tanggal_jurnal'=>date('Y-m-d'),
+					'no_akun'=>113,
+					'deskripsi'=>'Pencairan Dana Berhasil Transfer',
+					'status'=>'D',
+					'biaya'=>$berhasil_transfer
+				);	
+			}
+				 	
+		 	$this->JurnalT->insert($object_jurnal_debit);
+		 	$this->JurnalT->insert($object_jurnal_kredit);
 		}	
 
 		if ($insert) {

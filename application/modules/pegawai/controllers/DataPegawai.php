@@ -80,9 +80,9 @@ class DataPegawai extends CI_Controller {
 		$tanggal_lahir = $tanggal;
 
 		$id_lokasi = $this->input->post('id_lokasi');
+		$tempat_lahir = $this->input->post('tempat_lahir');
 		$email = $this->input->post('email');
-		$no_telp = $this->input->post('no_telp');
-		$no_hp = $this->input->post('no_hp');
+		$no_telp_hp = $this->input->post('no_telp_hp');
 		$status_pegawai = $this->input->post('status_pegawai');
 		$kode_fakultas = $this->input->post('kode_fakultas');
 		$id_prodi = $this->input->post('id_prodi');
@@ -200,10 +200,10 @@ class DataPegawai extends CI_Controller {
 			'nama_lengkap' => $nama_lengkap,
 			'nip' => $nip,
 			'nidn' => $nidn,
+			'tempat_lahir'=>$tempat_lahir,
 			'tanggal_lahir' => $tanggal_lahir,
 			'email' => $email,
-			'no_telp' => $no_telp,
-			'no_hp' => $no_hp,
+			'no_telp_hp' => $no_telp_hp,
 			'foto' => $foto,
 			'status_pegawai'=>$status_pegawai,
 			'kode_fakultas' => $kode_fakultas,
@@ -314,7 +314,10 @@ class DataPegawai extends CI_Controller {
 			foreach($dataLokasi as $lokasi){
 			   echo"<option value='".$lokasi->id_lokasi."'>".$lokasi->nama_universitas."</option>";
 		  	}     
-		  	echo"</select></p><script>initComboBox();</script>";
+		  	echo"</select>";
+		}else{
+			echo "<select class='form-control' name='id_lokasi' id='id_lokasi'><option value=''>-Pilih Universitas-</option>";
+		  	echo"</select>";
 		}
 	}
 
@@ -330,7 +333,10 @@ class DataPegawai extends CI_Controller {
 			foreach($dataProdi as $prodi){
 			   echo"<option value='".$prodi->id_prodi."'>".$prodi->nama_prodi."</option>";
 		  	}     
-		  	echo"</select></p><script>initComboBox();</script>";
+		  	echo"</select>";
+		}else{
+			echo "<select class='form-control' name='id_prodi' id='id_prodi'><option value=''>-Pilih Prodi-</option>";
+		  	echo"</select>";
 		}
 	}
 
@@ -347,6 +353,21 @@ class DataPegawai extends CI_Controller {
 		$data['tr'] .= '<td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusSertifikasi(this);" ><i class="fa fa-minus"> </i></a></td>';
 		$data['tr'] .= '</tr>';
+		echo json_encode($data); 
+		exit;
+	}
+
+	public function setLokasi(){
+		$id_lokasi = isset($_POST['id_lokasi']) ? $_POST['id_lokasi'] : null;
+        $this->db->select('*');
+		$this->db->where('id_lokasi', $id_lokasi);
+		$dataLokasi = $this->db->get('lokasi_pendidikan')->row();
+
+		$data = null;
+		if(count($dataLokasi) > 0){
+			$data['nama_lokasi'] = $dataLokasi->nama_lokasi;
+			$data['id_lokasi'] = $id_lokasi;
+		}
 		echo json_encode($data); 
 		exit;
 	}

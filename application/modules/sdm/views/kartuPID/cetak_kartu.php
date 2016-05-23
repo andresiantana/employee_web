@@ -80,15 +80,15 @@
                     print '<br>';
 
                     print 'Tempat, Tgl Lahir :';
-                    print ",". date('d-m-Y',strtotime($detail->tanggal_lahir));
+                    print ucwords($detail->tempat_lahir).",". date('d-m-Y',strtotime($detail->tanggal_lahir));
                     print '<br>';
 
                     print 'E-mail :';
                     print $detail->email;
                     print '<br>';
 
-                    print 'No. Telp :';
-                    print $detail->no_telp;
+                    print 'Nama Universitas :';
+                    print $detail->nama_universitas;
                     print '<br>';
 
                     print 'Fakultas :';
@@ -96,7 +96,7 @@
                     print '<br>';
 
                     print 'Prodi :';
-                    print $detail->nama_prodi;
+                    print str_replace('Prodi','', $detail->nama_prodi);
                     print '<br>';
                 ?>
             </pre></blockquote></p>

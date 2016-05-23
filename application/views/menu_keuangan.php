@@ -28,7 +28,10 @@
         <a href="#"><i class="fa fa-bar-chart-o"></i> Laporan<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
-                <a href="#"></a>
+                <a <?php if($menu == 'jurnal'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Jurnal'); ?>">Jurnal</a>
+            </li>
+            <li>
+                <a <?php if($menu == 'bukuBesar'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/BukuBesar'); ?>">Buku Besar</a>
             </li>
         </ul>
     </li>

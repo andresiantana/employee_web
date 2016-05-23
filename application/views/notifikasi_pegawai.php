@@ -18,7 +18,7 @@
 		foreach($isi_notifikasi as $i=>$data){
 ?>
             <li>
-            	<a style="color:red;">Notifikasi dari SDM</a>
+            	<a style="color:green;">Notifikasi dari SDM</a>
             </li>
             <li>
                 <a href="javascript:void(0);" onclick="popup_window_show('#sample', { pos : 'window-center',width : '800px' });setNotifikasi(<?php echo $data->id_notifikasi; ?>);">
@@ -41,7 +41,7 @@
         foreach($isi_notifikasi2 as $i=>$data2){
 ?>
             <li>
-                <a style="color:red;">Notifikasi dari Keuangan</a>
+                <a style="color:green;">Notifikasi dari Keuangan</a>
             </li>
             <li>
                 <a href="javascript:void(0);" onclick="setNotifikasi(<?php echo $data2->id_notifikasi; ?>)">

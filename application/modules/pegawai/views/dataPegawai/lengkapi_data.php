@@ -29,6 +29,10 @@
                     <input class="form-control" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>">
                 </div>
                 <div class="form-group">
+                    <label>Tempat Lahir</label>
+                    <input class="form-control" type="text" name="tempat_lahir" value="<?php echo isset($datapegawai->tempat_lahir) ? $datapegawai->tempat_lahir : ""; ?>">
+                </div>
+                <div class="form-group">
                     <label>Tanggal Lahir</label>
                     <input class="form-control" id="tanggal_lahir" name="tanggal_lahir" type="text" class="span3" value="<?php echo isset($datapegawai->tanggal_lahir) ? date('d/m/Y',strtotime($datapegawai->tanggal_lahir)) : date('d/m/Y'); ?>" required>
                 </div>
@@ -37,12 +41,8 @@
                     <input class="form-control" type="text" onblur='validasiEmail();' name="email" id="email" value="<?php echo isset($datapegawai->email) ? $datapegawai->email : ""; ?>" >
                 </div>
                 <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class="form-control" type="text" name="no_telp" value="<?php echo isset($datapegawai->no_telp) ? $datapegawai->no_telp : ""; ?>">
-                </div>
-                <div class="form-group">
-                    <label>No. Handphone</label>
-                    <input class="form-control" type="text" name="no_hp" value="<?php echo isset($datapegawai->no_hp) ? $datapegawai->no_hp : ""; ?>">
+                    <label>No. Telp / Ponsel</label>
+                    <input class="form-control" type="text" name="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
                 </div>
                 <div class="form-group">
                     <label>Foto</label> 
@@ -83,7 +83,7 @@
                 </div>
                 <div class="form-group">
                     <label>Lokasi Pendidikan</label>
-                    <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan(this);">
+                    <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();">
                         <option value="">-Pilih Lokasi-</option>
                         <option value="Dalam Negeri">Dalam Negeri</option>
                         <option value="Luar Negeri">Luar Negeri</option>
@@ -228,15 +228,16 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
-    function setLokasiPendidikan(obj){
-        var nama_lokasi = obj.value;
+    function setLokasiPendidikan(){
+        var nama_lokasi = $('#nama_lokasi').val();
         
         $.ajax({
-           type: 'POST',
-           data: "nama_lokasi="+nama_lokasi,
-           url: '<?php echo base_url('pegawai/DataPegawai/dropDownUniversitas'); ?>',
-           success: function(result) {
-            $('#tampil_universitas').html(result);       }
+            type: 'POST',
+            data: "nama_lokasi="+nama_lokasi,
+            url: '<?php echo base_url('pegawai/DataPegawai/dropDownUniversitas'); ?>',
+            success: function(result) {
+                $('#tampil_universitas').html(result);       
+            }
         });
 
     }
@@ -285,7 +286,7 @@
           tambah_sertifikasi    : 'ya'
         }
 
-      $.ajax({
+        $.ajax({
           url     : "<?php echo base_url('pegawai/DataPegawai/setFormSertifikasi'); ?>",
           type    : "POST",
           data    : data,
@@ -294,8 +295,7 @@
               $('#tabel-sertifikasi tbody').append(data.tr);
               renameInput($('#table-sertifikasi'));  
           }
-        });
-                          
+        });                          
     }
 
     function hapusSertifikasi(obj){
@@ -346,11 +346,35 @@
                 setStatusPegawai();
             }
         }
+
         var fakultas = '<?php echo isset($datapegawai->kode_fakultas) ? $datapegawai->kode_fakultas : ""; ?>';
         if(fakultas != ''){
             $('#kode_fakultas').val(fakultas);
             setProdi()
         }
+
+        var id_lokasi = '<?php echo isset($datapegawai->id_lokasi) ? $datapegawai->id_lokasi : ""; ?>';
+        if(id_lokasi != ''){
+            var data = {
+              setlokasi     : 'ya',
+              id_lokasi     : id_lokasi
+            }
+
+            $.ajax({
+              url     : "<?php echo base_url('pegawai/DataPegawai/setLokasi'); ?>",
+              type    : "POST",
+              data    : data,
+              dataType: 'json',
+              success : function (data) {                    
+                    $('#nama_lokasi').val(data.nama_lokasi);
+                    setLokasiPendidikan();
+                    if(id_lokasi != ''){
+                        $('#id_lokasi').val(id_lokasi);
+                    }
+              }
+            });
+        }
+
         var id_prodi = '<?php echo isset($datapegawai->id_prodi) ? $datapegawai->id_prodi : ""; ?>';
         if(id_prodi != ''){
             $('#id_prodi').val(id_prodi);

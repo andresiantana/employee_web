@@ -23,15 +23,6 @@
                             <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : ""; ?>" required>
                         </div>
                         <div class="form-group">
-                            <label>Kategori Biaya</label>
-                            <select class="form-control" name="id_kategori_biaya" id="id_kategori_biaya">
-                                <option value="">-Pilih Kategori Biaya-</option>
-                                <?php foreach ($kategori as $i => $val) { ?>
-                                    <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label>Pilih Semester</label>
                             <select class="form-control" name="semester" id="semester">
                                 <option value="">-Pilih Semester-</option>
@@ -62,10 +53,7 @@
                                 <option value="D3">D3</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="jumlah_nominal">Biaya Per Semester</label>
-                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
-                        </div>                         
+                        <input class="form-control numbers-only" type="hidden" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
                     </div>
                     <div class="col-md-12">
                         <legend>Data Rincian Biaya</legend>

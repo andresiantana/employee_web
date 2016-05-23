@@ -4,7 +4,6 @@
         <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
         <td><?php echo $v->kode_pengajuan; ?></td>
         <td><?php echo $v->nama_lengkap; ?></td>
-        <td><?php echo $v->nama_kategori; ?></td>
         <td><?php echo $v->semester; ?></td>
         <td><?php echo $v->jumlah_nominal; ?></td>                                    
         <td>
