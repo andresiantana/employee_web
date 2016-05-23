@@ -23,7 +23,7 @@ class Dashboard extends CI_Controller {
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['menu'] = 'beranda';
-		$data['judulHeader'] = 'Dashboard';
+		$data['judulHeader'] = 'Beranda';
 		$this->template->display('admin/dashboard', $data);
 	}
 
@@ -84,9 +84,8 @@ class Dashboard extends CI_Controller {
 
 	function file_download()
     {
-        $nama_file = $_GET['file_name'];
-        $data = file_get_contents(base_url()."data/file/".$nama_file);
-
+        $nama_file 	= $_GET['file_name'];
+        $data 		= file_get_contents(base_url()."data/file/".$nama_file);
         force_download($nama_file, $data);
 	}
 }

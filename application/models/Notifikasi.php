@@ -39,7 +39,6 @@ class Notifikasi extends CI_Model {
 		$this->db->where('user.id_role = 3');
 		$this->db->where('notifikasi.status_baca is false');
 		$this->db->where('DATE(notifikasi.tanggal) ="'.date('Y-m-d').'"');
-		// $this->db->like('role.nama_role', $nama_role);
 		$this->db->order_by('notifikasi.tanggal','DESC');
 		$query = $this->db->get();
 		return $query;

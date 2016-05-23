@@ -30,6 +30,7 @@
                         </tbody>
                     </table>
                 </div>
+                <br>
                 <a class="btn btn-primary" href="<?php echo base_url('keuangan/Coa/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Coa</a>                
             </div>
         </div>

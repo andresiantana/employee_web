@@ -1,6 +1,6 @@
 <ul class="nav" id="main-menu">
     <li>
-        <a <?php if($menu == 'beranda'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a>
+        <a <?php if($menu == 'beranda'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/dashboard'); ?>"><i class="fa fa-dashboard"></i> Beranda</a>
     </li>
     <li>
         <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>
@@ -13,14 +13,6 @@
             </li>
             <li>
                 <a <?php if($menu == 'cabangBank'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/CabangBank'); ?>">Cabang Bank</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#"><i class="fa fa-list"></i> Transaksi<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-            <li>
-                <a href="#"></a>
             </li>
         </ul>
     </li>

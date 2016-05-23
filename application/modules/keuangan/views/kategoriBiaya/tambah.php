@@ -18,7 +18,7 @@
                                 <input class="form-control" type="text" name="nama_kategori" placeholder="Isikan Nama Kategori" required>
                             </div>                           
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-success">Reset</button>
+                            <button type="reset" class="btn btn-success">Ulang</button>
                             <a class="btn btn-danger" href="<?php echo base_url('keuangan/KategoriBiaya'); ?>">Batal</a>
                         <?php echo form_close(); ?>
                     </div>

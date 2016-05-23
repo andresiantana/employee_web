@@ -248,7 +248,6 @@ class PengajuanBiaya extends CI_Controller {
 		echo json_encode($data); 
 		exit;
 	}
-
 }
 
 /* End of file PengajuanBiaya.php */

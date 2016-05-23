@@ -68,10 +68,10 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="<?php echo site_url().strtolower($nama_role)."/Dashboard/editProfile/".$username; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="<?php echo site_url().strtolower($nama_role)."/Dashboard/editProfile/".$username; ?>"><i class="fa fa-user fa-fw"></i> Profil User</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo site_url().strtolower($nama_role)."/Dashboard/logout"; ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="<?php echo site_url().strtolower($nama_role)."/Dashboard/logout"; ?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a>
                         </li>
                     </ul>
                 </li>
@@ -90,12 +90,7 @@
             <div class="header"> 
                 <h1 class="page-header">
                     <?php echo isset($judulHeader) ? $judulHeader : ""; ?> <small></small>
-                </h1>
-                <ol class="breadcrumb">
-                    <!-- <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li> -->
-                </ol> 									
+                </h1>									
             </div>
             <div id="page-inner">
                 <?php echo $_content; ?>
@@ -138,7 +133,7 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.js');?>"> </script>
     <script type="text/javascript">
         function close(){
-            alert("a");
+            
         }
 
         $(document).ready(function () {
@@ -160,8 +155,8 @@
             var msg = "Only Integer Values allowed.";
 
             if (d == 'decimal') {
-            value = value.replace(/\./, "");
-            msg = "Only Numeric Values allowed.";
+                value = value.replace(/\./, "");
+                msg = "Only Numeric Values allowed.";
             }
 
             if (value != '') {

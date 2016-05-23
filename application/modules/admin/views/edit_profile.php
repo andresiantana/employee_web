@@ -40,12 +40,12 @@
 
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                    <input class="form-control" type="password" name="password" placeholder="Password">
+                    <input class="form-control" type="password" name="password" placeholder="Kata Kunci">
                 </div>
 
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                    <input class="form-control" type="password" id="password_ulang" name="password_ulang" placeholder="Ulangi Password" onblur="cekPassword(this);">
+                    <input class="form-control" type="password" id="password_ulang" name="password_ulang" placeholder="Ulangi Kata Kunci" onblur="cekPassword(this);">
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <button type="reset" class="btn btn-success">Reset</button>

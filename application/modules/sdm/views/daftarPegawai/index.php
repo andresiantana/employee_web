@@ -46,7 +46,7 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                             </tr>
                             <tr style="text-align:center;">
                                 <th>Approve</th>
-                                <th>Kirim Notifikasi</th>
+                                <th>Kirim Pemberitahuan</th>
                             </tr>
                         </thead>
                         <tbody>

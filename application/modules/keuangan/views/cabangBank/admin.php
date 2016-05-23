@@ -27,7 +27,8 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div><br>
+                </div>
+                <br>
                 <a class="btn btn-primary" href="<?php echo base_url('keuangan/CabangBank/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Cabang Bank</a>                
             </div>
         </div>

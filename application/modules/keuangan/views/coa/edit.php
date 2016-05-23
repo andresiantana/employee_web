@@ -22,7 +22,7 @@
                                 <input class="form-control" type="text" name="nama_akun" placeholder="Isikan Nama Akun" value="<?php echo $editdata->nama_akun; ?>" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-success">Reset</button>
+                            <button type="reset" class="btn btn-success">Ulang</button>
                             <a class="btn btn-danger" href="<?php echo base_url('keuangan/Coa'); ?>">Batal</a>
                         <?php echo form_close(); ?>
                     </div>

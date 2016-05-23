@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">                            
             <div class="panel-heading" style="text-align:center;">
-            Kirim Notifikasi
+            Kirim Pemberitahuan
         </div>
         <div class="panel-body">
             <?php if(validation_errors()){ ?>
@@ -24,7 +24,8 @@
                 </div>                
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <button type="reset" class="btn btn-success">Reset</button>
+                <button type="reset" class="btn btn-success">Ulang</button>
+                <a class="btn btn-danger" href="<?php echo base_url('sdm/DaftarPegawai'); ?>">Batal</a>
             </div>
             <?php echo form_close(); ?>
         </div>

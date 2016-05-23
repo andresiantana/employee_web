@@ -32,11 +32,6 @@ class PengajuanBiaya extends CI_Controller {
 						->from('kategori_biaya')
 						->get()->result_object();
 
-
-		// $nama_pegawai = !empty($this->input->post('nama_pegawai')) ? $this->input->post('nama_pegawai') : null;
-		// $kode_pengajuan = !empty($this->input->post('kode_pengajuan')) ? $this->input->post('kode_pengajuan') : null;
-		// $id_kategori_biaya = !empty($this->input->post('id_kategori_biaya')) ? $this->input->post('id_kategori_biaya') : null;
-		// $tanggal_awal = !empty($this->input->post('tanggal_awal')) ? $this->input->post('tanggal_awal') : null;
 		$nama_pegawai = $this->input->post('nama_pegawai');		
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
 		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
@@ -47,7 +42,6 @@ class PengajuanBiaya extends CI_Controller {
 			$tanggal_awal = $tgl_awal;
 		}
 
-		// $tanggal_akhir = !empty($this->input->post('tanggal_akhir')) ? $this->input->post('tanggal_akhir') : null;
 		$tanggal_akhir = $this->input->post('tanggal_akhir');
 		if(!empty($tgl_akhir)){
 			$tgl_akhir = explode("/",$tanggal_akhir);		

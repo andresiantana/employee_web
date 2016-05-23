@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <div class="panel panel-default">                            
             <div class="panel-heading" style="text-align:center;">
-            Reset Password
+            Ulang Kata Kunci
         </div>
         <div class="panel-body">
             <?php if(validation_errors()){ ?>
@@ -18,12 +18,12 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                     <input class="form-control" id="username" name="username" placeholder="Masukan Username" required>
                 </div>                
-                <button class="button btn btn-primary btn-large" type="button" onclick="resetPassword();">Reset Password</button>
+                <button class="button btn btn-primary btn-large" type="button" onclick="resetPassword();">Ulang Kata Kunci</button>
                 </div>
                 <div id="showPassword">
-                    <span>Password baru Anda : <b id="password_baru"> </b></span>
+                    <span>Kata Kunci baru Anda : <b id="password_baru"> </b></span>
                     <br>
-                    kembali ke </i>&nbsp;<span><a href="<?php echo base_url('sdm/login'); ?>">Login</a></span>
+                    <span><a href="<?php echo base_url('sdm/login'); ?>">Masuk</a></span>
                 </div>
             </form>
         </div>

@@ -24,11 +24,8 @@ class KartuPID extends CI_Controller {
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Kartu PID';
 		$data['menu'] = 'KartuPID';
-		// $nidn = !empty($this->input->post('nidn')) ? $this->input->post('nidn') : null;
 		$nidn = $this->input->post('nidn');
-		// $nip = !empty($this->input->post('nip')) ? $this->input->post('nip') : null;
 		$nip = $this->input->post('nip');
-		// $nama = !empty($this->input->post('nama')) ? $this->input->post('nama') : null;
 		$nama = $this->input->post('nama');
 		if($nidn != '' || $nip != '' || $nama != ''){
 			$data['data'] =  $this->SDPegawai->tampilDataPegawaiApprove($nidn,$nip,$nama)->result_object();		

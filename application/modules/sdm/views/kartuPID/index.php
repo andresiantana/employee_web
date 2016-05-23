@@ -118,9 +118,6 @@ function setPencarian(){
       data    : data,
       dataType: 'json',
       success : function (data) {
-            // if(data == ''){
-            //     window.location.reload();
-            // }
           $('#dataTables-example > tbody').html(data);
       }
     });

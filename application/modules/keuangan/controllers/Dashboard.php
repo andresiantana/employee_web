@@ -23,7 +23,7 @@ class Dashboard extends CI_Controller {
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['menu'] = 'beranda';
-		$data['judulHeader'] = 'Dashboard';
+		$data['judulHeader'] = 'Beranda';
 		$this->template->display('keuangan/dashboard', $data);
 	}
 

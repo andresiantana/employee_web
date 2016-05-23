@@ -61,7 +61,7 @@ class DaftarPegawai extends CI_Controller {
 
 	public function notifikasi($id = null)
 	{		
-		$data['judulHeader'] = 'Notifikasi';
+		$data['judulHeader'] = 'Pemberitahuan';
 		$data['menu'] = 'dashboard';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
@@ -75,7 +75,7 @@ class DaftarPegawai extends CI_Controller {
 		$id  = isset($_POST['id_notifikasi']) ? $_POST['id_notifikasi'] : null;
 		$data['isi_pesan'] = '';
 		$data['status'] = '';
-		$data['judulHeader'] = 'Notifikasi';
+		$data['judulHeader'] = 'Pemberitahuan';
 		$data['menu'] = 'dashboard';
 		$data['username'] = $this->session->userdata('username');
 		$data['nama_role'] = $this->session->userdata('nama_role');

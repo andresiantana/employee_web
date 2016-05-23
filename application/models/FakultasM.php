@@ -40,9 +40,9 @@ class FakultasM extends CI_Model {
         ini_set('memory_limit', '-1');
         $inputFileName = './data/uploads/'.$filename;
         try {
-        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+        	$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
         } catch(Exception $e) {
-        die('Error loading file :' . $e->getMessage());
+        	die('Error loading file :' . $e->getMessage());
         }
  
         $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
@@ -50,10 +50,10 @@ class FakultasM extends CI_Model {
  
         for ($i=2; $i < ($numRows+1) ; $i++) { 
             $ins = array(
-                    "kode_fakultas"	=> $worksheet[$i]["A"],
-                    "nama_fakultas"	=> $worksheet[$i]["B"],
-                    "status_aktif"	=>true
-                   ); 
+                "kode_fakultas"	=> $worksheet[$i]["A"],
+                "nama_fakultas"	=> $worksheet[$i]["B"],
+                "status_aktif"	=>true
+           	); 
             $this->db->insert('fakultas', $ins);
         }
     }

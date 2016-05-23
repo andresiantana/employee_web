@@ -26,10 +26,10 @@ class Login extends CI_Controller {
     public function cek_login() {
         $user_aktif = false;
         $data = array(
-                    'username' => $this->input->post('username', TRUE),
-                    'password' => $this->input->post('password', TRUE),
-                    'nama_role'=>'Admin'
-                );
+            'username' => $this->input->post('username', TRUE),
+            'password' => $this->input->post('password', TRUE),
+            'nama_role'=>'Admin'
+        );
         $this->load->model('user'); // load model_user
         $hasil = $this->user->cek_user_role($data);
         if ($hasil->num_rows() == 1) {
@@ -125,7 +125,7 @@ class Login extends CI_Controller {
             $status = true;
         }else{
             $status = false;
-            $pesan = 'Username tidak terdaftar dalam database!';
+            $pesan  = 'Username tidak terdaftar dalam database!';
         }
 
         $data['status'] = $status;

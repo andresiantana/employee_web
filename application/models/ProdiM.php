@@ -43,9 +43,9 @@ class ProdiM extends CI_Model {
         ini_set('memory_limit', '-1');
         $inputFileName = './data/uploads/'.$filename;
         try {
-        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+       		$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
         } catch(Exception $e) {
-        die('Error loading file :' . $e->getMessage());
+        	die('Error loading file :' . $e->getMessage());
         }
  
         $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
@@ -53,12 +53,12 @@ class ProdiM extends CI_Model {
  
         for ($i=2; $i < ($numRows+1) ; $i++) { 
             $ins = array(
-            		"id_prodi"=>'',
-                    "kode_fakultas"	=> $worksheet[$i]["A"],
-                    "kode_prodi"	=> $worksheet[$i]["B"],
-                    "nama_prodi"	=> $worksheet[$i]["C"],
-                    "status_aktif"	=>true
-               	); 
+        		"id_prodi"=>'',
+                "kode_fakultas"	=> $worksheet[$i]["A"],
+                "kode_prodi"	=> $worksheet[$i]["B"],
+                "nama_prodi"	=> $worksheet[$i]["C"],
+                "status_aktif"	=>true
+           	); 
             $this->db->insert('prodi', $ins);
         }
     }

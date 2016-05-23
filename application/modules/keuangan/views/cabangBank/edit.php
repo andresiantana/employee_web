@@ -19,7 +19,7 @@
                                 <input class="form-control" type="hidden" name="id_cabang_bank" readonly=true value="<?php echo $editdata->id_cabang_bank; ?>" required >
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-success">Reset</button>
+                            <button type="reset" class="btn btn-success">Ulang</button>
                             <a class="btn btn-danger" href="<?php echo base_url('keuangan/CabangBank'); ?>">Batal</a>
                         <?php echo form_close(); ?>
                     </div>

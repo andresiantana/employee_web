@@ -117,10 +117,7 @@ class DataPegawai extends CI_Controller {
  		if ($this->upload->do_upload("foto")){
  			$foto = $this->upload->file_name;
 			$status_upload = true;
- 		}else{
- 			// echo "<script>alert('Foto gagal diupload!');
-    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
-    //         </script>"; 			
+ 		}else{			
  			$status_upload = true;
  		} 
  	 	
@@ -143,10 +140,7 @@ class DataPegawai extends CI_Controller {
 		if ($this->upload->do_upload("surat_studi_lanjut")){
  			$surat_studi_lanjut = $this->upload->file_name;
 			$status_upload = true;
- 		}else{
- 			// echo "<script>alert('Surat Studi Lanjut gagal diupload!');
-    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
-    //         </script>"; 		
+ 		}else{ 		
     		$status_upload = true;	
  		}
  		 
@@ -168,10 +162,7 @@ class DataPegawai extends CI_Controller {
  		if ($this->upload->do_upload("surat_lulus_seleksi")){
  			$surat_lulus_seleksi = $this->upload->file_name;
 			$status_upload = true;
- 		}else{
- 			// echo "<script>alert('Surat Lulus Seleksi gagal diupload!');
-    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
-    //         </script>"; 	
+ 		}else{	
     		$status_upload = true;		
  		}
  		
@@ -194,9 +185,6 @@ class DataPegawai extends CI_Controller {
  			$surat_terima_beasiswa = $this->upload->file_name;
 			$status_upload = true;
  		}else{
- 			// echo "<script>alert('Surat Terima Beasiswa gagal diupload!');
-    //             window.location.href='".base_url('pegawai/DataPegawai/index')."';
-    //         </script>";	
     		$status_upload = true; 			
  		}
  		 
