@@ -113,6 +113,14 @@
                         </select>                            
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Tanggal Mulai Studi</label>
+                    <input class="form-control" type="text" id="tanggal_mulai_studi" name="tanggal_mulai_studi" value="<?php echo isset($datapegawai->tanggal_lahir) ? date('d/m/Y',strtotime($datapegawai->tanggal_lahir)) : date('d/m/Y'); ?>">
+                </div>
+                <div class="form-group">
+                    <label>Lama Studi (Tahun)</label>
+                    <input class="form-control notelp" type="text" name="lama_tahun_studi" value="<?php echo isset($datapegawai->lama_tahun_studi) ? $datapegawai->lama_tahun_studi : ""; ?>">
+                </div>
             </div>
             <div class="col-md-6">
                 <legend>Data Rekening</legend>
@@ -400,7 +408,7 @@
               data    : data,
               dataType: 'json',
               success : function (data) {                    
-                    $('#nama_lokasi').val(data.nama_lokasi);
+                    //$('#nama_lokasi').val(data.nama_lokasi);
                     setLokasiPendidikan();
                     if(id_lokasi != ''){
                         $('#id_lokasi').val(id_lokasi);
@@ -416,7 +424,9 @@
         $('#tanggal_lahir').datepicker({
             format:'dd/mm/yyyy',
         });
-
+        $('#tanggal_mulai_studi').datepicker({
+            format:'dd/mm/yyyy',
+        });
         $('.numbers-only').keyup(function() {
             console.log("a");
             var d = $(this).attr('numeric');

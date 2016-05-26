@@ -82,6 +82,12 @@ class DataPegawai extends CI_Controller {
 		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
 		$tanggal_lahir = $tanggal;
 
+
+		$tanggal_studi = $this->input->post('tanggal_mulai_studi');
+		$tgl_studi = explode("/",$tanggal_studi);		
+		$tanggal_studi = $tgl_studi[2]."-".$tgl_studi[1]."-".$tgl_studi[0];
+		$tanggal_mulai_studi = $tanggal_studi;
+
 		$id_lokasi = $this->input->post('id_lokasi');
 		$tempat_lahir = $this->input->post('tempat_lahir');
 		$email = $this->input->post('email');
@@ -101,6 +107,7 @@ class DataPegawai extends CI_Controller {
 		$biaya_spp = $this->input->post('biaya_spp');
 		$id_user = $this->session->userdata('id_user');
 		$id_pegawai = ($this->input->post('id_pegawai')) ? $this->input->post('id_pegawai') : null;
+		$lama_tahun_studi = $this->session->userdata('lama_tahun_studi');
 
 		// daftar file yang sudah di upload
 		$file_foto = $this->input->post('file_foto');
@@ -138,7 +145,7 @@ class DataPegawai extends CI_Controller {
      	$config2['max_size']       = '2000';
      	$config2['max_width']      = '2000';
      	$config2['max_height']     = '2000';
-     	$config2['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
+     	//$config2['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
      	$this->load->library('upload', $config2);
      	$this->upload->initialize($config2);
 		if ($this->upload->do_upload("surat_studi_lanjut")){
@@ -160,7 +167,7 @@ class DataPegawai extends CI_Controller {
      	$config3['max_size']       = '2000';
      	$config3['max_width']      = '2000';
      	$config3['max_height']     = '2000';
-     	$config3['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
+     	// $config3['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
      	$this->load->library('upload', $config3);
      	$this->upload->initialize($config3);
  		if ($this->upload->do_upload("surat_lulus_seleksi")){
@@ -182,7 +189,7 @@ class DataPegawai extends CI_Controller {
      	$config4['max_size']       = '2000';
      	$config4['max_width']      = '2000';
      	$config4['max_height']     = '2000';
-     	$config4['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
+     	// $config4['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
      	$this->load->library('upload', $config4);	     	
      	$this->upload->initialize($config4);
 		if ($this->upload->do_upload("surat_terima_beasiswa")){
@@ -222,6 +229,8 @@ class DataPegawai extends CI_Controller {
 			'surat_terima_beasiswa' => $surat_terima_beasiswa,
 			'biaya_spp' => $biaya_spp,
 			'id_user' => $id_user,
+			'tanggal_mulai_studi' => $tanggal_mulai_studi,
+			'lama_tahun_studi' => $lama_tahun_studi,
 		);
 
 		if(!empty($id_pegawai)){

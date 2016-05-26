@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee Web</title>
+    <title>Pengembangan SDM</title>
     <!-- Bootstrap Styles-->
     <link href="<?php echo base_url('assets/template/Bluebox/assets/css/bootstrap.css');?>" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -15,6 +15,10 @@
     <link href="<?php echo base_url('assets/template/Bluebox/assets/datepicker/css/datepicker.css');?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.css');?>" rel="stylesheet" />
     <!-- Google Fonts-->
+    <!-- Bootstrap DataTables dan Dialog -->
+    <!-- <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet"> -->
+    <!-- <link href="<?php echo base_url('assets/datatables/css/dataTables.bootstrap.css')?>" rel="stylesheet"> -->
+    <!-- <link href="<?php echo base_url('assets/datepicker/css/bootstrap-datepicker3.min.css')?>" rel="stylesheet">     -->
     <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/cssCharts.css');?>">     
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.css');?>">     
@@ -146,6 +150,14 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.min.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/highlight/highlight.pack.js');?>"></script>
+
+<!--
+    <script src="<?php echo base_url('assets/jquery/jquery-2.1.4.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/datatables/js/jquery.dataTables.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/datatables/js/dataTables.bootstrap.js')?>"></script>
+    <script src="<?php echo base_url('assets/datepicker/js/bootstrap-datepicker.min.js')?>"></script>
+-->
     <script type="text/javascript">
         $('.numbers-only').keyup(function() {
             var d = $(this).attr('numeric');
