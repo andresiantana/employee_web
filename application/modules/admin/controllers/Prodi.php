@@ -99,6 +99,9 @@ class Prodi extends CI_Controller {
             $error = array('error' => $this->upload->display_errors());
         }
         else{
+        	if(isset($_POST['drop']) && $_POST['drop'] == 1){
+        		$this->db->empty_table('prodi');
+        	}
             $data = array('upload_data' => $this->upload->data());
             $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
             $filename = $upload_data['file_name'];//Nama File

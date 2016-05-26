@@ -41,7 +41,6 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                                 <th rowspan="2">Surat Lulus Seleksi</th>
                                 <th rowspan="2">Surat Terima Beasiswa</th>
                                 <th rowspan="2">Biaya SPP</th>
-                                <th rowspan="2">Username</th>
                                 <th colspan="2" class="td-actions">Aksi</th>
                             </tr>
                             <tr style="text-align:center;">
@@ -68,8 +67,7 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_studi_lanjut; ?>')"><?php echo $v->surat_studi_lanjut; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
-                                    <td style="text-align:right;"><?php echo $v->username; ?></td>
-                                    <td><?php echo $v->username; ?></td>
+                                    <td style="text-align:right;"><?php echo $v->biaya_spp; ?></td>
                                     <td class="td-actions">
                                         <?php 
                                             if($v->status_approve_sdm != "Approved" || $v->status_approve_sdm == ''){

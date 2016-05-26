@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong>Employee Web</strong></a>
+                <a class="navbar-brand" href="index.html"><strong>Pengembangan SDM</strong></a>
             </div>
         </nav>
         <div id="page-wrapper" style="margin-left: 0px;">

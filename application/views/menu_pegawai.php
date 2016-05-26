@@ -11,5 +11,6 @@
         <?php 
     		}
 		?>
+        <a <?php if($menu == 'daftarPegawai'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('pegawai/KartuPID'); ?>">Kartu PID</a>
     </li>
 </ul>

@@ -56,6 +56,7 @@
                 </div>
                 <br>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/lokasiPendidikan/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Lokasi Pendidikan</a>                
+                <a class="btn btn-success" href="<?php echo base_url('admin/lokasiPendidikan/importLokasiPendidikan'); ?>"><i class="fa fa-plus"></i> Import Data Lokasi Pendidikan</a>                
             </div>
         </div>
     </div>

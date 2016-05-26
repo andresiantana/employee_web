@@ -12,7 +12,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Unduh Format Prodi</label>
-                            <td><a href="javascript:prd_download('Prodi.xls')"><?php echo "prodi.xls"; ?></a></td>
+                            <td><a href="javascript:prd_download('prodi.xls')"><?php echo "prodi.xls"; ?></a></td>
                         </div>
                         <div class="form-group">
                             <label>File Prodi</label>

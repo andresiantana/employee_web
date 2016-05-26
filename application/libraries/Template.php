@@ -9,7 +9,7 @@ class Template{
     }
     
     function display($template,$data=null){ 
-        $data['judul'] = 'Employee Web';
+        $data['judul'] = 'Pengembangan SDM';
         $data['_content'] = $this->_ci->load->view($template,$data,true);   
         $data['isi_notifikasi'] = array();
         $data['isi_notifikasi2'] = array();

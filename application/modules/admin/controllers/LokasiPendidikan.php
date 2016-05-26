@@ -9,7 +9,8 @@ class LokasiPendidikan extends CI_Controller {
 		if ($this->session->userdata('username')=="") {
 			redirect('login');
 		}
-		$this->load->library('template');	
+		$this->load->library('template');
+		$this->load->library("PHPExcel");	
 		$this->load->helper(array('form','url'));			
 		$this->load->library('form_validation');
 		$this->load->library('session');      
@@ -140,6 +141,38 @@ class LokasiPendidikan extends CI_Controller {
 		echo json_encode($data); 
 		exit;
 	}
+
+	public function importLokasiPendidikan($sukses = "")
+	{
+		$data['username'] 	= $this->session->userdata('username');
+		$data['id_user'] 	= $this->session->userdata('id_user');
+		$data['nama_role'] 	= $this->session->userdata('nama_role');
+		$data['judulHeader'] = 'Lokasi Pendidikan';
+		$data['menu'] = 'lokasiPendidikan';		
+		$this->template->display('admin/lokasiPendidikan/import',$data);
+	}
+
+	public function do_upload(){
+        $config['upload_path'] = './data/uploads/';
+        $config['allowed_types'] = 'xlsx|xls';
+        
+        $this->load->library('upload', $config);
+        
+        if (!$this->upload->do_upload("file")){
+            $error = array('error' => $this->upload->display_errors());
+        }
+        else{
+        	if(isset($_POST['drop']) && $_POST['drop'] == 1){
+        		$this->db->empty_table('lokasi_pendidikan');
+        	}
+            $data = array('upload_data' => $this->upload->data());
+            $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
+            $filename = $upload_data['file_name'];//Nama File
+            $this->LokasiPendidikanM->upload_data($filename);
+            unlink('./data/uploads/'.$filename);
+            redirect('admin/LokasiPendidikan/importLokasiPendidikan/sukses','refresh');
+        }
+    }
 
 }
 
