@@ -39,7 +39,7 @@
                                     <td><?php echo $v->nidn; ?></td>
                                     <td><?php echo date('d M Y',strtotime($v->tanggal_lahir)); ?></td>
                                     <td><?php echo $v->email; ?></td>
-                                    <td><?php echo $v->no_telp; ?></td>
+                                    <td><?php echo $v->no_telp_hp; ?></td>
                                     <td><img src="<?php echo base_url().'data/images/pegawai/'.$v->foto; ?>" width="50px" height="50px"></td>
                                     <td><?php echo $v->nama_fakultas; ?></td>
                                     <td><?php echo $v->nama_prodi; ?></td>

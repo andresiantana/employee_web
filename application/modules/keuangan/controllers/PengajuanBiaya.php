@@ -184,7 +184,7 @@ class PengajuanBiaya extends CI_Controller {
 					'id_pegawai'=>$id_pegawai,
 					'tanggal_jurnal'=>date('Y-m-d'),
 					'no_akun'=>111,
-					'deskripsi'=>'Pencairan Dana Berhasil Transfer',
+					'keterangan'=>'Pencairan Dana Berhasil Transfer',
 					'status'=>'K',
 					'biaya'=>$berhasil_transfer
 				);	
@@ -194,7 +194,7 @@ class PengajuanBiaya extends CI_Controller {
 					'id_pegawai'=>$id_pegawai,
 					'tanggal_jurnal'=>date('Y-m-d'),
 					'no_akun'=>113,
-					'deskripsi'=>'Pencairan Dana Berhasil Transfer',
+					'keterangan'=>'Pencairan Dana Berhasil Transfer',
 					'status'=>'D',
 					'biaya'=>$berhasil_transfer
 				);	

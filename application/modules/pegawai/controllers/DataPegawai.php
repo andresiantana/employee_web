@@ -58,6 +58,9 @@ class DataPegawai extends CI_Controller {
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
 						->get()->result_object();
+		$data['prodi'] = $this->db->select('*')
+						->from('prodi')
+						->get()->result_object();
 		$data['jenis_sertifikasi'] = $this->db->select('*')
 						->from('jenis_sertifikasi')
 						->get()->result_object();
@@ -88,6 +91,7 @@ class DataPegawai extends CI_Controller {
 		$id_prodi = $this->input->post('id_prodi');
 		$nama_bank = $this->input->post('nama_bank');
 		$id_cabang_bank = $this->input->post('id_cabang_bank');
+		$cabang_bank = $this->input->post('cabang_bank');
 		$nomor_rekening = $this->input->post('nomor_rekening');
 		$atasnama_rekening = $this->input->post('atasnama_rekening');
 		$foto = $this->input->post('foto');
@@ -209,7 +213,8 @@ class DataPegawai extends CI_Controller {
 			'kode_fakultas' => $kode_fakultas,
 			'id_prodi' => $id_prodi,
 			'nama_bank' => $nama_bank,
-			'id_cabang_bank' => $id_cabang_bank,
+			//'id_cabang_bank' => $id_cabang_bank,
+			'cabang_bank'=>$cabang_bank,
 			'nomor_rekening' => $nomor_rekening,
 			'atasnama_rekening' => $atasnama_rekening,
 			'surat_studi_lanjut' => $surat_studi_lanjut,

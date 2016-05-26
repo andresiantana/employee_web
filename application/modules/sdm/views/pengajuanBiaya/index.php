@@ -84,7 +84,7 @@
                                             if($v->status_pengajuan == ''){
                                         ?>
                                             <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve/Reject Pengajuan" onclick="popup_window_show('#sample', { pos : 'window-center',width : '800px' });setIdPengajuanBiaya(<?php echo $v->id_pengajuan_biaya; ?>,<?php echo $v->jumlah_nominal; ?>);"><i class="fa fa-check"> </i></a>
-                                            <!-- <a href="<?php echo base_url('sdm/PengajuanBiaya/edit/'.$v->id_pengajuan_biaya); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a> -->
+                                            <a href="<?php echo base_url('sdm/PengajuanBiaya/edit/'.$v->id_pengajuan_biaya); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>
                                         <?php }else{ 
                                             if($v->status_pengajuan == 'Approved'){
                                                 $warna = 'color:green;';

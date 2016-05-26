@@ -17,16 +17,16 @@
 
                 <div class="form-group">
                     <label>Nama Lengkap</label>
-                    <input class="form-control" type="text" name="nama_lengkap" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>">
+                    <input class="form-control nama" type="text" name="nama_lengkap" id="nama_lengkap" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>" maxlength="50">
                     <input class="form-control" type="hidden" name="id_pegawai" value="<?php echo isset($datapegawai->id_pegawai) ? $datapegawai->id_pegawai : ""; ?>">
                 </div>
                 <div class="form-group">
                     <label>NIP</label>
-                    <input class="form-control" type="text" name="nip" value="<?php echo isset($datapegawai->nip) ? $datapegawai->nip : ""; ?>">
+                    <input class="form-control nip" type="text" name="nip" value="<?php echo isset($datapegawai->nip) ? $datapegawai->nip : ""; ?>" maxlength=10 readonly=true>
                 </div>
                 <div class="form-group">
                     <label>NIDN</label>
-                    <input class="form-control" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>">
+                    <input class="form-control nidn" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>" maxlength=7>
                 </div>
                 <div class="form-group">
                     <label>Tempat Lahir</label>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label>No. Telp / Ponsel</label>
-                    <input class="form-control" type="text" name="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
+                    <input class="form-control notelp" type="text" name="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
                 </div>
                 <div class="form-group">
                     <label>Foto</label> 
@@ -81,6 +81,22 @@
                         </div>
                     </div> 
                 </div>
+                <div id="tpa" style="display:none;">                    
+                    <div class="form-group">
+                        <label>Fakultas - Unit Kerja</label>
+                        <select class="form-control" name="kode_fakultas" id="kode_fakultas">
+                            <option value="">-Pilih-</option>
+                            <?php foreach ($fakultas as $i => $val) { 
+                                    if($datapegawai->kode_fakultas == $val->kode_fakultas){
+                            ?>
+                                <option value="<?php echo $val->kode_fakultas; ?>" selected><?php echo $val->nama_fakultas; ?></option>
+                            <?php }else{ ?>
+                                <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                            <?php } ?>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>Lokasi Pendidikan</label>
                     <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();">
@@ -104,7 +120,11 @@
                     <label>Nama Bank</label>
                     <input class="form-control" type="text" name="nama_bank" value="<?php echo isset($datapegawai->nama_bank) ? $datapegawai->nama_bank : ""; ?>">
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
+                    <label>Cabang Bank</label>
+                    <input class="form-control" type="text" name="cabang_bank" value="<?php echo isset($datapegawai->cabang_bank) ? $datapegawai->cabang_bank : ""; ?>">
+                </div>
+                <!-- <div class="form-group">
                     <label>Cabang Bank</label>
                     <select class="form-control" name="id_cabang_bank">
                         <option value="">-Pilih Cabang-</option>
@@ -112,7 +132,7 @@
                             <option value="<?php echo $val->id_cabang_bank; ?>"><?php echo $val->nama_cabang; ?></option>
                         <?php } ?>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group ">
                     <label>Nomor Rekening</label>
                     <input class="form-control" type="text" name="nomor_rekening" value="<?php echo isset($datapegawai->nomor_rekening) ? $datapegawai->nomor_rekening : ""; ?>">
@@ -161,57 +181,65 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <legend>Data Sertifikasi</legend>
-                <table class="table table-striped table-bordered table-hover" id="tabel-sertifikasi">
-                    <thead>
-                        <tr>
-                            <th>Jenis Sertifikasi</th>
-                            <th>Penyelenggara</th>
-                            <th>Skor</th>
-                            <th>Upload</th>
-                            <th class="td-actions">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            if(count($datasertifikasi) > 0){
-                                foreach($datasertifikasi as $i=>$datas){
-                        ?>
-                        <tr>
-                            <td><select class="form-control jenis_sertifikasi" name="sertifikasi[0][id_jenis_sertifikasi]">
-                                    <option value="">-Pilih Jenis Sertifikasi-</option>
-                                    <?php foreach ($jenis_sertifikasi as $i => $val) { ?>
-                                    <option value="<?php echo $val->id_jenis_sertifikasi; ?>"><?php echo $val->nama_jenis_sertifikasi; ?></option>
-                                    <?php } ?>
-                                </select></td>
-                            <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" value="<?php echo $datas->penyelenggara; ?>"></td>
-                            <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control" value="<?php echo $datas->skor; ?>"></td>
-                            <td><a href="javascript:prd_download('<?php echo $datas->upload; ?>')"><?php echo $datas->upload; ?></a><br><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>
-                            <td class="td-actions">
-                                <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
-                            </td>
-                        </tr>
-                        <?php 
-                                }
-                            }else{
-                        ?>
-                        <tr>
-                            <td><select class="form-control jenis_sertifikasi" name="sertifikasi[0][id_jenis_sertifikasi]">
-                                    <option value="">-Pilih Jenis Sertifikasi-</option>
-                                    <?php foreach ($jenis_sertifikasi as $i => $val) { ?>
-                                    <option value="<?php echo $val->id_jenis_sertifikasi; ?>"><?php echo $val->nama_jenis_sertifikasi; ?></option>
-                                    <?php } ?>
-                                </select></td>
-                            <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" ></td>
-                            <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>
-                            <td><input id="sertifikasi_0_upload"  name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>
-                            <td class="td-actions">
-                                <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
-                            </td>
-                        </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                <div id="sertifikat_dosen" style="display:none;">
+                    <legend>Data Sertifikasi</legend>
+                        <table class="table table-striped table-bordered table-hover" id="tabel-sertifikasi">
+                            <thead>
+                                <tr>
+                                    <th>Jenis Sertifikasi</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Skor</th>
+                                    <th>Upload</th>
+                                    <th class="td-actions">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    if(count($datasertifikasi) > 0){
+                                        foreach($datasertifikasi as $i=>$datas){
+                                ?>
+                                <tr>
+                                    <td><select class="form-control jenis_sertifikasi" name="sertifikasi[0][id_jenis_sertifikasi]">
+                                            <option value="">-Pilih Jenis Sertifikasi-</option>
+                                            <?php foreach ($jenis_sertifikasi as $i => $val) { 
+                                                if($val->id_jenis_sertifikasi == $datas->id_jenis_sertifikasi){
+                                            ?>
+                                            <option value="<?php echo $val->id_jenis_sertifikasi; ?>" selected><?php echo $val->nama_jenis_sertifikasi; ?></option>
+                                            <?php }else{ ?>
+                                            <option value="<?php echo $val->id_jenis_sertifikasi; ?>"><?php echo $val->nama_jenis_sertifikasi; ?></option>
+                                            <?php } ?>
+                                            <?php } ?>
+                                        </select></td>
+                                    <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" value="<?php echo $datas->penyelenggara; ?>"></td>
+                                    <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control" value="<?php echo $datas->skor; ?>"></td>
+                                    <td><a href="javascript:prd_download('<?php echo $datas->upload; ?>')"><?php echo $datas->upload; ?></a><br><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>
+                                    <td class="td-actions">
+                                        <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
+                                    </td>
+                                </tr>
+                                <?php 
+                                        }
+                                    }else{
+                                ?>
+                                <tr>
+                                    <td><select class="form-control jenis_sertifikasi" name="sertifikasi[0][id_jenis_sertifikasi]">
+                                            <option value="">-Pilih Jenis Sertifikasi-</option>
+                                            <?php foreach ($jenis_sertifikasi as $i => $val) {                                                    
+                                             ?>
+                                            <option value="<?php echo $val->id_jenis_sertifikasi; ?>"><?php echo $val->nama_jenis_sertifikasi; ?></option>
+                                            <?php } ?>
+                                        </select></td>
+                                    <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" ></td>
+                                    <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>
+                                    <td><input id="sertifikasi_0_upload"  name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>
+                                    <td class="td-actions">
+                                        <a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                </div>
             </div>
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -276,8 +304,12 @@
         var pilihstatus_pegawai = $('#status_pegawai option:selected').val();
         if(pilihstatus_pegawai == 'DOSEN'){
             $('#dosen').removeAttr('style','display:none;');
+            $('#tpa').attr('style','display:none;');
+            $('#sertifikat_dosen').removeAttr('style','display:none;');
         }else{
             $('#dosen').attr('style','display:none;');
+            $('#tpa').removeAttr('style','display:none;');
+            $('#sertifikat_dosen').attr('style','display:none;');
         }
     }
 
@@ -344,6 +376,8 @@
             $('#status_pegawai').val(status_pegawai);
             if(status_pegawai == 'DOSEN'){
                 setStatusPegawai();
+            }else{
+                setStatusPegawai();
             }
         }
 
@@ -399,6 +433,54 @@
             if (value != '') {
               orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
               $(this).val(orignalValue);
+            }
+        });
+
+        $('.nip').keyup(function() {
+            var d = $(this).attr('numeric');
+            var value = $(this).val();
+            var orignalValue = value;
+            value = value.replace(/[0-9]-*/g, "");
+            var msg = "Only Integer Values allowed.";
+
+            if (d == 'decimal') {
+                value = value.replace(/\./, "");
+                msg = "Only Numeric Values allowed.";
+            }
+
+            if (value != '') {
+              orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+              $(this).val(orignalValue);
+            }
+        });
+
+        $('.notelp').keyup(function() {
+            var d = $(this).attr('numeric');
+            var value = $(this).val();
+            var orignalValue = value;
+            value = value.replace(/[0-9() ]-*/g, "");
+            var msg = "Only Integer Values allowed.";
+
+            if (d == 'decimal') {
+                value = value.replace(/\./, "");
+                msg = "Only Numeric Values allowed.";
+            }
+
+            if (value != '') {
+              orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+              $(this).val(orignalValue);
+            }
+        });
+
+        $('.nama').keyup(function() {
+            var nama = document.getElementById('nama_lengkap');
+            var filter = /^([a-zA-Z _\`\,\.\-])+$/;
+
+            if (!filter.test(nama.value)) {
+                alert('Nama hanya boleh diisi dengan huruf dan karakter!');
+                nama('');
+                nama.focus;
+            return false;
             }
         });
     });
