@@ -17,6 +17,7 @@
                             <label for="kode_pengajuan">Kode Pengajuan</label>
                             <input class="form-control" type="text" name="kode_pengajuan" placeholder="Isikan Kode Pengajuan" value="<?php echo isset($kode_pengajuan) ? $kode_pengajuan : ""; ?>" readonly=true required>
                             <input class="form-control" type="hidden" name="id_pengajuan_biaya" value="<?php echo isset($datapengajuan->id_pengajuan_biaya) ? $datapengajuan->id_pengajuan_biaya : ""; ?>" readonly=true required>
+                            <input class="form-control" type="hidden" name="id_lokasi_lama" id="id_lokasi_lama" value="<?php echo isset($datapegawai->id_lokasi) ? $datapegawai->id_lokasi : ""; ?>" readonly=true required>
                         </div>
                          <div class="form-group">
                             <label>Tanggal</label>
@@ -30,14 +31,29 @@
                             <label>Pilih Semester</label>
                             <select class="form-control" name="semester" id="semester">
                                 <option value="">-Pilih Semester-</option>
-                                <?php for ($i = 0; $i < 8; $i++) { ?>
+                                <?php for ($i = 0; $i < 8; $i++) {
+                                    if($pengajuan->semester < ($i+1)){
+                                 ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
+                                <?php } ?>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nama_lokasi">Nama Universitas</label>
-                            <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapengajuan->nama_lokasi) ? $datapengajuan->nama_lokasi : ""; ?>" required>
+                            <label>Lokasi Pendidikan</label>
+                            <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();">
+                                <option value="">-Pilih Lokasi-</option>
+                                <option value="Dalam Negeri">Dalam Negeri</option>
+                                <option value="Luar Negeri">Luar Negeri</option>
+                            </select>
+                        </div> 
+                        <div class="form-group">
+                            <label>Nama Universitas</label>
+                            <div class="controls" id="tampil_universitas">
+                               <select class="form-control" name="id_lokasi" id="id_lokasi">
+                                    <option value="">-Pilih Universitas-</option>
+                                </select>                            
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="jurusan_fakultas">Fakultas</label>
@@ -101,7 +117,21 @@
 </div>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
-<script type="text/javascript">    
+<script type="text/javascript">  
+    function setLokasiPendidikan(){
+        var nama_lokasi = $('#nama_lokasi').val();
+        var id_lokasi = $('#id_lokasi_lama').val();
+        $.ajax({
+            type: 'POST',
+            data: "nama_lokasi="+nama_lokasi+"&id_lokasi="+id_lokasi,
+            url: '<?php echo base_url('pegawai/DataPegawai/dropDownUniversitas'); ?>',
+            success: function(result) {
+                $('#tampil_universitas').html(result);       
+            }
+        });
+
+    }
+
     function tambahBiaya(){
         var data = {
           tambah_biaya    : 'ya'
@@ -170,7 +200,34 @@
       }
     }
 
+    var id_lokasi = '<?php echo isset($datapegawai->id_lokasi) ? $datapegawai->id_lokasi : ""; ?>';
+        if(id_lokasi != ''){
+            var data = {
+              setlokasi     : 'ya',
+              id_lokasi     : id_lokasi
+            }
+
+            $.ajax({
+              url     : "<?php echo base_url('pegawai/DataPegawai/setLokasi'); ?>",
+              type    : "POST",
+              data    : data,
+              dataType: 'json',
+              success : function (data) {                                        
+                    if(id_lokasi != ''){
+                        $('#id_lokasi_lama').val(data.id_lokasi);
+                        $('#nama_lokasi').val(data.nama_lokasi);
+                    }
+                    setLokasiPendidikan();
+              }
+            });
+        }
+
     $(document).ready(function(){  
+        var biaya_spp = '<?php echo isset($datapegawai->biaya_spp) ? $datapegawai->biaya_spp : ""; ?>';
+        if(biaya_spp != ''){
+            $('#jumlah_nominal').val(biaya_spp);
+        }
+
         var id_kategori_biaya = '<?php echo isset($datapengajuan->id_kategori_biaya) ? $datapengajuan->id_kategori_biaya : ""; ?>';
         if(id_kategori_biaya != ""){           
             $('#id_kategori_biaya').val(id_kategori_biaya);

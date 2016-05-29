@@ -212,5 +212,10 @@ $(document).ready(function(){
     $('#tanggal').datepicker({
         format:'dd/mm/yyyy',
     });
+
+    $('#informasi_header').addClass('active');
+    $('#informasi').addClass('in');
+    $('#informasi').attr('aria-expanded',true);
+    $('#informasi').attr('style','');
 });
 </script>

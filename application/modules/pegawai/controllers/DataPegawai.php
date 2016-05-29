@@ -319,6 +319,8 @@ class DataPegawai extends CI_Controller {
 	function dropDownUniversitas()
     {
         $nama_lokasi = isset($_POST['nama_lokasi']) ? $_POST['nama_lokasi'] : null;
+        $id_lokasi = isset($_POST['id_lokasi']) ? $_POST['id_lokasi'] : null;
+
         $this->db->select('*');
 		$this->db->like('nama_lokasi', $nama_lokasi);
 		$dataLokasi = $this->db->get('lokasi_pendidikan')->result_object();
@@ -326,7 +328,12 @@ class DataPegawai extends CI_Controller {
 		if(count($dataLokasi) > 0){
 			echo "<select class='form-control' name='id_lokasi' id='id_lokasi'><option value=''>-Pilih Universitas-</option>";
 			foreach($dataLokasi as $lokasi){
-			   echo"<option value='".$lokasi->id_lokasi."'>".$lokasi->nama_universitas."</option>";
+				if($lokasi->id_lokasi == $id_lokasi){
+					echo"<option value='".$lokasi->id_lokasi."' selected>".$lokasi->nama_universitas."</option>";	
+				}else{
+					echo"<option value='".$lokasi->id_lokasi."'>".$lokasi->nama_universitas."</option>";
+				}
+			   
 		  	}     
 		  	echo"</select>";
 		}else{

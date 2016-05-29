@@ -2,7 +2,7 @@
     <li>
         <a <?php if($menu == 'beranda'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/dashboard'); ?>"><i class="fa fa-dashboard"></i> Beranda</a>
     </li>
-    <li>
+    <li id="master">
         <a href="#"><i class="fa fa-book"></i> Master<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
@@ -16,7 +16,7 @@
             </li>
         </ul>
     </li>
-    <li>
+    <li id="informasi">
         <a href="#"><i class="fa fa-table"></i> Informasi<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
@@ -24,7 +24,7 @@
             </li>
         </ul>
     </li>
-    <li>
+    <li id="laporan">
         <a href="#"><i class="fa fa-bar-chart-o"></i> Laporan<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>

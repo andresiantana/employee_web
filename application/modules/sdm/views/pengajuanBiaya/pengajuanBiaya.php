@@ -21,20 +21,14 @@
                         </div>
                          <div class="form-group">
                             <label>Tanggal</label>
-                            <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : ""; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Kategori Biaya</label>
-                            <select class="form-control" name="id_kategori_biaya" id="id_kategori_biaya">
-                                <option value="">-Pilih Kategori Biaya-</option>
-                                <?php foreach ($kategori as $i => $val) { ?>
-                                    <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
-                                <?php } ?>
-                            </select>
+                            <br>
+                            <div class="myOwnClass">
+                                <input type="text" class="form-control" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('Y-m-d',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Pilih Semester</label>
-                            <select class="form-control" name="semester" id="semester">
+                            <select class="form-control" name="semester" id="semester" disabled>
                                 <option value="">-Pilih Semester-</option>
                                 <?php for ($i = 0; $i < 8; $i++) { ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
@@ -228,7 +222,7 @@
     }
 
     $(document).ready(function(){  
-        hitungTotalSemua();
+        // hitungTotalSemua();
         var id_kategori_biaya = '<?php echo isset($datapengajuan->id_kategori_biaya) ? $datapengajuan->id_kategori_biaya : ""; ?>';
         if(id_kategori_biaya != ""){           
             $('#id_kategori_biaya').val(id_kategori_biaya);
@@ -243,11 +237,7 @@
         if(jenjang != ""){           
             $('#jenjang').val(jenjang);
         }
-
-        $('#tanggal').datepicker({
-            format:'dd/mm/yyyy',
-        });
-
+        
         $('.numbers-only').keyup(function() {
             var d = $(this).attr('numeric');
             var value = $(this).val();

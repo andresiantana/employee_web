@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PengajuanBiaya extends CI_Controller {
+class PengajuanBiaya_old extends CI_Controller {
 
 	public function __construct()
 	{
@@ -33,19 +33,11 @@ class PengajuanBiaya extends CI_Controller {
 									->get()->result_object();
 		$data['kode_pengajuan'] = $this->PGPengajuanBiayaT->noPengajuanBiaya();
 		if(!empty($id)){
-			$data['datapengajuan']	= $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id))->row();
-			$data['kode_pengajuan']	= $data['datapengajuan']->kode_pengajuan;
+			$data['datapengajuan'] = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id))->row();
+			$data['kode_pengajuan'] = $data['datapengajuan']->kode_pengajuan;
 		}
-
-		// untuk load data pengajuan biaya		
-		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
-	 	$data['pengajuan'] =  $this->db->select('*')
-							->where('id_pegawai',$data['datapegawai']->id_pegawai)
-							->order_by("id_pengajuan_biaya","desc")
-							->limit('1')
-							->from('pengajuan_biaya')
-						    ->get()->row();
-
+		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')))->row();
+		
 		$this->template->display('pegawai/pengajuanBiaya/index',$data);
 	}
 
@@ -67,9 +59,9 @@ class PengajuanBiaya extends CI_Controller {
 		$jenjang = $this->input->post('jenjang');
 
 		$tanggal = $this->input->post('tanggal');
-		// $tgl = explode("/",$tanggal);		
-		// $tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
-		// $tanggal = $tanggal;
+		$tgl = explode("/",$tanggal);		
+		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
+		$tanggal = $tanggal;
 
 		$data = array(
 			'id_pengajuan_biaya' =>'',
@@ -115,23 +107,26 @@ class PengajuanBiaya extends CI_Controller {
 		}	
 		$datapegawai = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
 		$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pegawai'=>$datapegawai->id_pegawai),array('limit'=>1))->row();
-		$kategori_biaya = $this->db->get_where('kategori_biaya',array('nama_kategori'=>'SPP'),array('limit'=>1))->row();
-		
-		// input detail pengajuan biaya untuk SPP
-		$id_pegawai = $datapegawai->id_pegawai;
-		$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
+			if(count($this->input->post('biaya')) > 0) {
+				foreach ($this->input->post('biaya') as $i => $detail) {	
+					$id_pegawai = $datapegawai->id_pegawai;
+					$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
+					$id_kategori_biaya = $detail['id_kategori_biaya'];
+					$nominal 	= $detail['nominal'];
 
-		$object = array(
-			'id_pengajuan_biaya'=>$id_pengajuan_biaya,
-			'id_kategori_biaya'=>$kategori_biaya->id_kategori_biaya,
-			'nominal'=>$jumlah_nominal
-		);
+					$object = array(
+						'id_pengajuan_biaya'=>$id_pengajuan_biaya,
+						'id_kategori_biaya'=>$id_kategori_biaya,
+						'nominal'=>$nominal
+					);
 
-		$insert = $this->UraianPengajuanBiayaT->insert($object);
-		
-		if($insert){
-			$status = true;
-		}
+					$insert = $this->UraianPengajuanBiayaT->insert($object);
+					
+					if($insert){
+						$status = true;
+					}
+				}
+			}
 
 		if ($insert && $status) {
 			echo "<script>alert('Pengajuan Biaya berhasil disimpan!');
