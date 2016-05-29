@@ -26,25 +26,26 @@ class Amortisasi extends CI_Controller {
 		$nip = $this->input->post('nip');
 		$nama = $this->input->post('nama');
 		if($nip != '' || $nama != ''){
-			$data['data'] =  $this->KUPegawai->tampilDataPegawaiLulus($nip,$nama)->result_object();		
+			$data['data'] =  $this->KUPegawai->tampilDataPegawaiAmortisasi($nip,$nama)->result_object();		
 			$tr['tr'] = $this->load->view('keuangan/amortisasi/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$data['data']	= $this->KUPegawai->tampilDataPegawaiLulus()->result_object();		
+			$data['data']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->result_object();
+			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->row();
+			$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+1));
 		}	
 		$this->template->display('keuangan/amortisasi/index',$data);
 	}
 
 
-	// public function printKartu($id_pegawai = null){
-	// 	$data['username'] = $this->session->userdata('username');
-	// 	$data['id_user'] = $this->session->userdata('id_user');
-	// 	$data['nama_role'] = $this->session->userdata('nama_role');
-	// 	$data['id_pegawai'] = $id_pegawai;
-	// 	$data['detail'] = $this->KUPegawai->tampilKartuPegawai($id_pegawai)->row();
-	// 	$data['detail_rincian'] = $this->KUUraianPengajuanBiayaT->tampilUraian($id_pegawai)->result_object();
-	// 	$this->load->view('sdm/kartuPID/cetak_kartu', $data);
-	// }
+	public function printAmortisasi($id_pegawai = null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');
+		$data['id_pegawai'] = $id_pegawai;
+		$data['detail'] = $this->KUPegawai->printAmortisasiPerPegawai($id_pegawai)->row();
+		$this->load->view('keuangan/amortisasi/print', $data);
+	}
 
 }
