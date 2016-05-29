@@ -14,7 +14,7 @@ class BukuBesar extends CI_Controller {
 	}
 
 	public function index(){
-		$data['judulHeader'] = 'Laporan Buku Besar';
+		$data['judulHeader'] = 'Buku Besar';
 		$data['menu'] = 'bukuBesar';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
@@ -25,7 +25,7 @@ class BukuBesar extends CI_Controller {
 	}
 
 	public function LaporanBukuBesar(){
-		$data['judulHeader'] = 'Laporan Buku Besar';
+		$data['judulHeader'] = 'Buku Besar';
 		$data['menu'] = 'bukuBesar';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');

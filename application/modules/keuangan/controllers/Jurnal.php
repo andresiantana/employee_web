@@ -19,7 +19,7 @@ class Jurnal extends CI_Controller {
     }
 
 	public function index(){
-		$data['judulHeader'] = 'Laporan Jurnal';
+		$data['judulHeader'] = 'Jurnal';
 		$data['menu'] = 'jurnal';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
@@ -28,7 +28,7 @@ class Jurnal extends CI_Controller {
 	}
 
 	public function laporanJurnal(){
-		$data['judulHeader'] = 'Laporan Jurnal';
+		$data['judulHeader'] = 'Jurnal';
 		$data['menu'] = 'jurnal';
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');

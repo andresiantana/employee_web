@@ -29,14 +29,14 @@
 ?>
 <div class="row">
     <div style='text-align:center;'>
-      <h3>Laporan Jurnal Umum</h3><br/>
-      <h3>Periode 01 <?php echo $bl; ?> <?php echo $tahun; ?> s.d <?php echo $jumlah_hari; ?> <?php echo $bl; ?> <?php echo $tahun; ?></h3>
+      <h3>Jurnal Umum</h3><br/>
+      <h3>Periode <?php echo $bl; ?> <?php echo $tahun; ?></h3>
     </div>
     <br/>
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                 Tabel Laporan Jurnal
+                 Tabel Jurnal
             </div>
             <br/>
             <div class="panel-body">

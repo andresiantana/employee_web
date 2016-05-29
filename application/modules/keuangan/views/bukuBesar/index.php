@@ -32,6 +32,9 @@
 		                            <td></td>
 		                        </tr>
 		                        <tr>
+		                        	<td colspan="3">&nbsp;</td>
+		                        </tr>
+		                        <tr>
 		                            <td style="width:10%"><label>Bulan</label></td>
 		                            <td style="width:1%;"></td>
 		                            <td style="width:30%">
@@ -80,6 +83,9 @@
 		                            <td><label></label></td>
 		                            <td style="width:1%;"></td>
 		                            <td></td>
+		                        </tr>
+		                        <tr>
+		                        	<td colspan="3">&nbsp;</td>
 		                        </tr>
 		                        <tr>
 		                            <td><label>Tahun</label></td>

@@ -20,10 +20,8 @@
                             </td>
 
                             <td style="width:9%"></td>
-
-                            <td><label>Nama Prodi</label></td>
-                            <td style="width:1%;"></td>
-                            <td><input type="text"  class="form-control" id="nama_prodi" name="nama_prodi"></td>
+                            <td><label>Prodi</label></td>
+                            <td><input type="text" class="form-control" id="nama_prodi" name="nama_prodi"></td>
                         </tr>
                     </table>
                     <br>

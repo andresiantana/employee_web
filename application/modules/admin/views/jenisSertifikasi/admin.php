@@ -8,8 +8,7 @@
                 <div class="table-responsive">
                     <table style="width:100%;">
                         <tr>
-                            <td style="width:10%"><label>Nama Jenis Sertifikasi</label></td>
-                            <td style="width:1%;"></td>
+                            <td style="width:20%"><label>Jenis Sertifikasi</label></td>
                             <td style="width:30%"><input type="text"  class="form-control" id="nama_sertifikasi" name="nama_sertifikasi"></td>
 
                             <td style="width:9%"></td>
