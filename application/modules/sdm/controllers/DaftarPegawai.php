@@ -104,9 +104,9 @@ class DaftarPegawai extends CI_Controller {
         $tanggal = $this->input->post('tanggal');
         $pesan = $this->input->post('isi_pesan');
 
-        $tgl = explode("/",$tanggal);		
-		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
-		$tanggal = $tanggal." ".date('H:i:s');
+  //       $tgl = explode("/",$tanggal);		
+		// $tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
+		// $tanggal = $tanggal." ".date('H:i:s');
 
         $object = array(
 			'id_pegawai'=>$id_pegawai,
@@ -131,6 +131,29 @@ class DaftarPegawai extends CI_Controller {
                     window.location.href='".base_url('sdm/daftarPegawai')."';
                 </script>";
 		}
+	}
+
+	function updateStatusLulus()
+    {
+    	$status = '';
+
+        $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
+        $status_lulus = isset($_GET['status_lulus']) ? $_GET['status_lulus'] : null;
+        $object = array(
+			'status_kelulusan'=>$status_lulus
+		);
+
+		$this->db->where('id_pegawai', $id_pegawai);
+		$this->db->update('pegawai', $object);
+		if($this->db->affected_rows()){
+			$status = true;
+		}else{
+			$status = false;
+		}
+
+		$data['status'] = $status;
+		echo json_encode($data); 
+		exit;
 	}
 }
 

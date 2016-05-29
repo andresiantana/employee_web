@@ -11,7 +11,7 @@
                             <tr>
                                 <th>ID Role</th>
                                 <th>Nama Role</th>
-                                <th class="td-actions">Proses</th>
+                                <th class="td-actions" style="width:150px;">Proses</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,6 +27,7 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    Halaman :  <div class="halaman"><?php echo $halaman;?></div>
                 </div>  
                 <br>              
                 <a class="btn btn-primary" href="<?php echo base_url('admin/role/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Role</a>

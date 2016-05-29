@@ -11,6 +11,21 @@ class User extends CI_Model {
         return $query;
 	}
 
+	public function tampilDataUser($num, $offset, $id_role, $username)
+	{
+		$this->db->order_by('user.username', 'ASC');
+		if($id_role != ''){
+			$this->db->where('user.id_role', $id_role);
+		}
+		if($username != ''){
+			$this->db->like('username', $username);
+		}
+		$this->db->join('role', 'role.id_role = user.id_role','Left');
+		$data = $this->db->get('user', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function cek_user_role($data) {
 		$this->db->select('*');
 		$this->db->from('user');

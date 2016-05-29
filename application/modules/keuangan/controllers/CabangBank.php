@@ -17,14 +17,62 @@ class CabangBank extends CI_Controller {
         $this->load->model('CabangBankM');
 	}
 
-	public function index()
+	public function index($id=NULL)
 	{
 		$data['judulHeader'] = 'Cabang Bank';
 		$data['menu'] = 'cabangBank';
-		$data['data']	= $this->CabangBankM->tampilData()->result_object();
+		// $data['data']	= $this->CabangBankM->tampilData()->result_object();
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
+
+		$jml = $this->db->get('cabang_bank');
+
+		//pengaturan pagination
+		 $config['base_url'] = base_url().'keuangan/cabangBank/index';
+		 $config['total_rows'] = $jml->num_rows();
+		 $config['per_page'] = '10';
+		 $config['first_page'] = 'Awal';
+		 $config['last_page'] = 'Akhir';
+		 $config['next_page'] = '&laquo;';
+		 $config['prev_page'] = '&raquo;';
+
+		//inisialisasi config
+		 $this->pagination->initialize($config);
+
+		//buat pagination
+		 $data['halaman'] = $this->pagination->create_links();
+
+		//tamplikan data
+	 	$nama_cabang = $this->input->post('nama_cabang');
+		if($nama_cabang != ''){
+			$jml = $this->db->select('*')
+						->from('cabang_bank')
+						->like('nama_cabang',$nama_cabang)
+						->get();
+			//pengaturan pagination
+			 $config['base_url'] = base_url().'keuangan/cabangBank/index';
+			 $config['total_rows'] = $jml->num_rows();
+			 $config['per_page'] = '10';
+			 $config['first_page'] = 'Awal';
+			 $config['last_page'] = 'Akhir';
+			 $config['next_page'] = '&laquo;';
+			 $config['prev_page'] = '&raquo;';
+
+			//inisialisasi config
+		 	$this->pagination->initialize($config);
+
+			//buat pagination
+		 	$data['halaman'] = $this->pagination->create_links();
+			$data['data'] =  $this->CabangBankM->tampilDataCabang($config['per_page'], $id, $nama_cabang);
+			$tr['tr'] = $this->load->view('keuangan/cabangBank/pencarian',$data,true);
+			echo json_encode($tr['tr']); 
+			exit;
+		}else{
+			$nama_cabang = '';
+			$data['data'] = $this->CabangBankM->tampilDataCabang($config['per_page'], $id, $nama_cabang);
+		}
+
 		$this->template->display('keuangan/cabangBank/admin',$data);
 	}
 

@@ -4,28 +4,33 @@
             <div class="panel-heading">
                  Tabel Lokasi Pendidikan
             </div>
-            <div class="panel-body">
-                
+            <div class="panel-body">                
                 <div class="table-responsive">
-                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                    <div class="row">
-                        <div class="col-sm-6"></div>
-                        <div class="col-sm-6">
-                            <div id="dataTables-example_filter" class="dataTables_filter">
-                                <label>        
-                                    Lokasi Pendidikan :                                            
-                                    <select class="form-control input-sm" aria-controls="dataTables-example" onChange="setPencarian(this);">
-                                        <option value="">-Pilih Lokasi-</option>
-                                        <option value="Dalam Negeri">Dalam Negeri</option>
-                                        <option value="Luar Negeri">Luar Negeri</option>
-                                    </select>                                  
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:10%"><label>Lokasi Pendidikan</label></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:30%">
+                                <select class="form-control input-sm" id="nama_lokasi" name="nama_lokasi" aria-controls="dataTables-example">
+                                    <option value="">-Pilih Lokasi-</option>
+                                    <option value="Dalam Negeri">Dalam Negeri</option>
+                                    <option value="Luar Negeri">Luar Negeri</option>
+                                </select>  
+                            </td>
+
+                            <td style="width:9%"></td>
+
+                            <td><label>Nama Universitas</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text"  class="form-control" id="nama_universitas" name="nama_universitas"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
+                    <a href='<?php echo base_url('admin/lokasiPendidikan/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <br><br>
                 <div id="isi_table">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" id="data-pendidikan">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -33,7 +38,7 @@
                                 <th>Nama Universitas</th>
                                 <th>Alamat</th>
                                 <th>No. Telp</th>
-                                <th class="td-actions">Aksi</th>
+                                <th class="td-actions" style="width:150px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +57,7 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    Halaman :  <div class="halaman"><?php echo $halaman;?></div>
                 </div>                    
                 </div>
                 <br>
@@ -62,22 +68,23 @@
     </div>
 </div>
 <script type="text/javascript">
-    function setPencarian(obj){
-        if(obj.value == ''){
-            window.location.reload();
-        }
+    function setPencarian(){
+        var nama_lokasi = $('#nama_lokasi').val();
+        var nama_universitas = $('#nama_universitas').val();
+
         var data = {
-          lokasi    : obj.value
+          nama_lokasi: nama_lokasi,
+          nama_universitas: nama_universitas
         }
 
-      $.ajax({
-          url     : "<?php echo base_url('admin/LokasiPendidikan'); ?>",
-          type    : "GET",
-          data    : data,
-          dataType: 'json',
-          success : function (data) {
-              $('#dataTables-example > tbody').html(data);
-          }
+        $.ajax({
+            url     : "<?php echo base_url('admin/lokasiPendidikan/index'); ?>",
+            type    : "POST",
+            data    : data,
+            dataType: 'json',
+            success : function (data) {
+              $('#data-pendidikan > tbody').html(data);
+            }
         });
     }
 </script>

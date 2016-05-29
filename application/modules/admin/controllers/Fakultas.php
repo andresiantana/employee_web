@@ -17,14 +17,66 @@ class Fakultas extends CI_Controller {
         $this->load->model('FakultasM');
 	}
 
-	public function index()
+	public function index($id=NULL)
 	{
 		$data['username'] 		= $this->session->userdata('username');
 		$data['id_user'] 		= $this->session->userdata('id_user');
 		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$data['judulHeader'] 	= 'Fakultas';
-		$data['menu'] 	= 'fakultas';
-		$data['data']	= $this->FakultasM->tampilData()->result_object();				
+		$data['menu'] 			= 'fakultas';
+	 	
+	 	$jml = $this->db->get('fakultas');
+
+		//pengaturan pagination
+		 $config['base_url'] = base_url().'admin/fakultas/index';
+		 $config['total_rows'] = $jml->num_rows();
+		 $config['per_page'] = '10';
+		 $config['first_page'] = 'Awal';
+		 $config['last_page'] = 'Akhir';
+		 $config['next_page'] = '&laquo;';
+		 $config['prev_page'] = '&raquo;';
+
+		//inisialisasi config
+		 $this->pagination->initialize($config);
+
+		//buat pagination
+		 $data['halaman'] = $this->pagination->create_links();
+
+		//tamplikan data
+	 	$kode_fakultas = $this->input->post('kode_fakultas');
+		$nama_fakultas = $this->input->post('nama_fakultas');
+		if($kode_fakultas != '' || $nama_fakultas != ''){
+			$jml = $this->db->select('*')
+						->from('fakultas')
+						->where('kode_fakultas',$kode_fakultas)
+						->like('nama_fakultas',$nama_fakultas)
+						->get();
+
+			//pengaturan pagination
+			 $config['base_url'] = base_url().'admin/fakultas/index';
+			 $config['total_rows'] = $jml->num_rows();
+			 $config['per_page'] = '10';
+			 $config['first_page'] = 'Awal';
+			 $config['last_page'] = 'Akhir';
+			 $config['next_page'] = '&laquo;';
+			 $config['prev_page'] = '&raquo;';
+
+			//inisialisasi config
+		 	$this->pagination->initialize($config);
+
+			//buat pagination
+		 	$data['halaman'] = $this->pagination->create_links();
+			$data['data'] =  $this->FakultasM->tampilDataFakultas($config['per_page'], $id, $kode_fakultas, $nama_fakultas);
+			$tr['tr'] = $this->load->view('admin/fakultas/pencarian',$data,true);
+			echo json_encode($tr['tr']); 
+			exit;
+		}else{
+			$nama_fakultas = null;
+			$kode_fakultas = null;
+			$data['data'] = $this->FakultasM->tampilDataFakultas($config['per_page'], $id, $kode_fakultas, $nama_fakultas);
+		}
+
+		// $data['data']	= $this->FakultasM->tampilData()->result_object();				
 		$this->template->display('admin/fakultas/admin',$data);
 	}
 

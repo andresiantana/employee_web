@@ -11,6 +11,21 @@ class ProdiM extends CI_Model {
         return $query;
 	}
 
+	public function tampilDataProdi($num, $offset, $kode, $nama)
+	{
+		$this->db->order_by('nama_prodi', 'ASC');
+		if($kode != ''){
+			$this->db->where('prodi.kode_fakultas', $kode);
+		}
+		if($nama != ''){
+			$this->db->like('prodi.nama_prodi', $nama);
+		}
+		$this->db->join('fakultas', 'fakultas.kode_fakultas = prodi.kode_fakultas','Left');
+		$data = $this->db->get('prodi', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function insert($data){
 		return $this->db->insert('prodi', $data);
 	}

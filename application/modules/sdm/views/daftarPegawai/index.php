@@ -1,18 +1,3 @@
-<style type="text/css">
-dl   { margin:  0px 0px  0px  0px; }
-dt   { margin:  0px 0px  0px  0px; }
-dd   { margin:  0px 0px  0px 25px; }
-form { margin:  0px 0px  0px  0px; }
-h1   { margin:  0px 0px 20px  0px; }
-h2   { margin: 20px 0px 10px  0px; }
-p    { margin:  0px 0px  5px  0px; }
-
-body  { font: 100  13px   Arial, Sans-Serif; }
-b     { font: 900 1.0em   Arial, Sans-Serif; }
-h1    { font: 900 1.4em   Arial, Sans-Serif; }
-h2    { font: 900 1.4em   Arial, Sans-Serif; }
-small { font: 100 0.8em Verdana, Sans-Serif; }
-</style>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -41,11 +26,12 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                                 <th rowspan="2">Surat Lulus Seleksi</th>
                                 <th rowspan="2">Surat Terima Beasiswa</th>
                                 <th rowspan="2">Biaya SPP</th>
-                                <th colspan="2" class="td-actions">Aksi</th>
+                                <th colspan="3" class="td-actions">Aksi</th>
                             </tr>
                             <tr style="text-align:center;">
                                 <th>Approve</th>
                                 <th>Kirim Pemberitahuan</th>
+                                <th>Update Status Lulus</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,7 +58,7 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                                         <?php 
                                             if($v->status_approve_sdm != "Approved" || $v->status_approve_sdm == ''){
                                         ?>
-                                            <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="popup_window_show('#sample', { pos : 'window-center',width : '800px' });setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
+                                            <a href="#approved" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
                                         <?php }else{ ?>
                                         <font style="color:green;"><?php echo $v->status_approve_sdm; ?></font>
                                         <?php } ?>
@@ -80,6 +66,9 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
                                     </td>
                                     <td>
                                         <a href="<?php echo base_url('sdm/daftarPegawai/notifikasi/'.$v->id_pegawai); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk kirim notifikasi"><i class="fa fa-bell"> </i></a>
+                                    </td>
+                                    <td>
+                                        <a href="#update_lulus" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Update Lulus" onclick="setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-pencil"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -93,20 +82,36 @@ small { font: 100 0.8em Verdana, Sans-Serif; }
 </form>
 
 <!-- Dialog untuk Approve -->
-<input type="hidden" id="pegawai_id">
-<div   class="popup_window_css" id="sample">
-<table class="popup_window_css">
-<tr    class="popup_window_css">
-<td    class="popup_window_css">
-<div   class="popup_window_css_head">
-<img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Approve Data Pegawai</div>
-<div   class="popup_window_css_body">
-    <div style="border: 1px solid #808080; padding: 6px; background: #FFFFFF;">
-        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="approveData();"><i class="fa fa-check"></i> Approved</a>
-        <a href="javascript:void(0)" class="btn btn-small btn-danger" rel="tooltip" title="Klik batal Approve" onclick="batalApprove();"><i class="fa fa-ban"></i> Batal</a>
-    </div>
+<input type="hidden" id="pegawai_id">     
+<div class="remodal" data-remodal-id="approved" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Approved Pegawai</h2>
+    <p id="modal1Desc"></p>
+  </div>
+  <button data-remodal-action="confirm" class="remodal-confirm" onclick="approveData();">Approved</button>
+  <button data-remodal-action="cancel" class="remodal-cancel">Batal</button>  
 </div>
 
+<!-- Dialog untuk Update Staus Lulus -->
+<div class="remodal" data-remodal-id="update_lulus" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Ubah Status Kelulusan</h2>
+    <p id="modal1Desc">
+        <div class="form-group">
+            <label>Status Kelulusan</label>
+            <select class="form-control" name="status_lulus" id="status_lulus" onChange='setStatus(this);'>
+                <option value="">-Pilih Status-</option>
+                <option value="Lulus">Lulus</option>
+                <option value="Belum Lulus">Belum Lulus</option>
+            </select>
+        </div>     
+    </p>
+  </div>
+  <button data-remodal-action="confirm" class="remodal-confirm" onclick="updateStatusLulus();">Ubah</button>
+  <button data-remodal-action="cancel" class="remodal-cancel">Batal</button>  
+</div>
 
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
@@ -178,6 +183,31 @@ function batalApprove(){
 function batalNotifikas(){
     $('#notifikasi').attr('style','display:none');    
 }
+
+function updateStatusLulus(id_pegawai){
+    var id_pegawai = $('#pegawai_id').val();
+    var status_lulus = $('#status_lulus').val();
+    var data = {
+      id_pegawai    : id_pegawai,
+      status_lulus : status_lulus
+    }
+    $.ajax({
+      url     : "<?php echo base_url('sdm/daftarPegawai/updateStatusLulus'); ?>",
+      type    : "GET",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          if(data.status == true){
+            alert('Data Status Pegawai berhasil di ubah');
+            window.location.reload();
+          }else{
+            alert('Data Status Pegawai gagal di ubah');
+              window.location.reload();
+          }
+      }
+    });
+}
+
 $(document).ready(function(){
     $('#tanggal').datepicker({
         format:'dd/mm/yyyy',

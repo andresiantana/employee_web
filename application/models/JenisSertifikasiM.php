@@ -7,6 +7,17 @@ class JenisSertifikasiM extends CI_Model {
 		return $this->db->get('jenis_sertifikasi');
 	}
 
+	public function tampilDataSertifikasi($num, $offset, $nama_sertifikasi)
+	{
+		$this->db->order_by('nama_jenis_sertifikasi', 'ASC');
+		if($nama_sertifikasi != ''){
+			$this->db->like('nama_jenis_sertifikasi', $nama_sertifikasi);
+		}
+		$data = $this->db->get('jenis_sertifikasi', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function insert($data){
 		return $this->db->insert('jenis_sertifikasi', $data);
 	}

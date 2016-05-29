@@ -16,14 +16,61 @@ class JenisSertifikasi extends CI_Controller {
         $this->load->model('JenisSertifikasiM');
 	}
 
-	public function index()
+	public function index($id=NULL)
 	{
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Jenis Sertifikasi';
 		$data['menu'] = 'jenisSertifikasi';
-		$data['data']	= $this->JenisSertifikasiM->tampilData()->result_object();		
+
+		$jml = $this->db->get('jenis_sertifikasi');
+		//pengaturan pagination
+		 $config['base_url'] = base_url().'admin/jenisSertifikasi/index';
+		 $config['total_rows'] = $jml->num_rows();
+		 $config['per_page'] = '10';
+		 $config['first_page'] = 'Awal';
+		 $config['last_page'] = 'Akhir';
+		 $config['next_page'] = '&laquo;';
+		 $config['prev_page'] = '&raquo;';
+
+		//inisialisasi config
+		 $this->pagination->initialize($config);
+
+		//buat pagination
+		 $data['halaman'] = $this->pagination->create_links();
+
+		//tamplikan data
+	 	$nama_sertifikasi = $this->input->post('nama_sertifikasi');
+		if($nama_sertifikasi != ''){
+			$jml = $this->db->select('*')
+						->from('jenis_sertifikasi')
+						->like('nama_jenis_sertifikasi',$nama_sertifikasi)
+						->get();
+			//pengaturan pagination
+			 $config['base_url'] = base_url().'admin/jenisSertifikasi/index';
+			 $config['total_rows'] = $jml->num_rows();
+			 $config['per_page'] = '10';
+			 $config['first_page'] = 'Awal';
+			 $config['last_page'] = 'Akhir';
+			 $config['next_page'] = '&laquo;';
+			 $config['prev_page'] = '&raquo;';
+
+			//inisialisasi config
+		 	$this->pagination->initialize($config);
+
+			//buat pagination
+		 	$data['halaman'] = $this->pagination->create_links();
+			$data['data'] =  $this->JenisSertifikasiM->tampilDataSertifikasi($config['per_page'], $id, $nama_sertifikasi);
+			$tr['tr'] = $this->load->view('admin/jenisSertifikasi/pencarian',$data,true);
+			echo json_encode($tr['tr']); 
+			exit;
+		}else{
+			$nama_prodi = null;
+			$kode_fakultas = null;
+			$data['data'] = $this->JenisSertifikasiM->tampilDataSertifikasi($config['per_page'], $id, $nama_sertifikasi);
+		}	
+		// $data['data']	= $this->JenisSertifikasiM->tampilData()->result_object();		
 		$this->template->display('admin/jenisSertifikasi/admin',$data);
 	}
 

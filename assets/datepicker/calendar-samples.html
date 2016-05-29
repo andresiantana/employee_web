@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./css/ws-calendar.default.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="./js/ws-calendar-min.js"></script>
+        <script type="text/javascript">
+            $( function() {
+                $( ".myOwnClass" ).wsCalendar();
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Range Selection -->
+        <div class="myOwnClass">
+            <input name="dateFrom" type="text" value="2015-12-09">
+             ~ <input name="dateTo" type="text" value="2015-12-31">
+        </div><br><br>
+        
+        <!-- Auto Dimming -->
+        <div class="myOwnClass">
+            <input name="dateBegin" type="text" value="2015-12-09" readonly>
+             ~ <input name="dateEnd" type="text" value="2015-12-31">
+        </div><br><br>
+        
+        <!-- Single Pick -->
+        <div class="myOwnClass">
+            <input name="myBirthDay" type="text" value="2010-10-22">
+        </div>
+    </body>
+</html>

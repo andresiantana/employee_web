@@ -46,7 +46,7 @@ class DataPegawai extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['menu'] = 'dataPegawai';
+		$data['menu'] = 'lengkapiData';
 		$data['judulHeader'] = 'Data Pegawai';
 		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')))->row();
 		if(isset($data['datapegawai']->id_pegawai)){
@@ -78,15 +78,15 @@ class DataPegawai extends CI_Controller {
 		$nidn = $this->input->post('nidn');
 
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
-		$tgl = explode("/",$tanggal_lahir);		
-		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
-		$tanggal_lahir = $tanggal;
+		// $tgl = explode("/",$tanggal_lahir);		
+		// $tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
+		// $tanggal_lahir = $tanggal;
 
 
 		$tanggal_studi = $this->input->post('tanggal_mulai_studi');
-		$tgl_studi = explode("/",$tanggal_studi);		
-		$tanggal_studi = $tgl_studi[2]."-".$tgl_studi[1]."-".$tgl_studi[0];
-		$tanggal_mulai_studi = $tanggal_studi;
+		// $tgl_studi = explode("/",$tanggal_studi);		
+		// $tanggal_studi = $tgl_studi[2]."-".$tgl_studi[1]."-".$tgl_studi[0];
+		// $tanggal_mulai_studi = $tanggal_studi;
 
 		$id_lokasi = $this->input->post('id_lokasi');
 		$tempat_lahir = $this->input->post('tempat_lahir');

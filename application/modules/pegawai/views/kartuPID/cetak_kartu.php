@@ -15,7 +15,7 @@
     th, td{
         border:1px solid #999;
     }
-    th{
+    .judul{
         padding: 8px 0;
         background: #0fc;
         font-size: 30px;
@@ -58,86 +58,52 @@
         font-size: 9px;
     }
 </style>
-<table align="center">
+<table align="center" border="0">
     <tr>
-        <th height="50" colspan="2">KARTU PID</th>
+        <th height="50" colspan="9" class="judul">KARTU PID</th>
     </tr>
     <tr>
-        <td>
-            <p><blockquote><pre>
-                <?php 
-                    print '<br>';
-                    print 'NIDN :';
-                    print $detail->nidn;
-                    print '<br>';
+        <td>Pegawai</td>
+        <td>:</td>
+        <td><?php echo $detail->nama_lengkap; ?></td>
 
-                    print 'NIP :';
-                    print $detail->nip;
-                    print '<br>';
+        <td>Status Pegawai</td>
+        <td>:</td>
+        <td><?php echo $detail->nip; ?></td>
 
-                    print 'Nama :';
-                    print $detail->nama_lengkap;
-                    print '<br>';
-
-                    print 'Tempat, Tgl Lahir :';
-                    print ucwords($detail->tempat_lahir).",". date('d-m-Y',strtotime($detail->tanggal_lahir));
-                    print '<br>';
-
-                    print 'E-mail :';
-                    print $detail->email;
-                    print '<br>';
-
-                    print 'Nama Universitas :';
-                    print $detail->nama_universitas;
-                    print '<br>';
-
-                    print 'Fakultas :';
-                    print $detail->nama_fakultas;
-                    print '<br>';
-
-                    print 'Prodi :';
-                    print str_replace('Prodi','', $detail->nama_prodi);
-                    print '<br>';
-                ?>
-            </pre></blockquote></p>
-        </td>
-        <td>
-            <blockquote>
-                <img src="<?php echo base_url().'data/images/pegawai/'.$detail->foto; ?>" width="100px" height="100px">
-            </blockquote>
-        </td>
+        <td>Tempat Studi</td>
+        <td>:</td>
+        <td><?php echo $detail->nama_universitas; ?></td>
     </tr>
     <tr>
-        <th colspan="2">Rincian Pengajuan Biaya</th>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <table align="center">
-                <tr>
-                    <td>No.</td>
-                    <td>Nama Uraian</td>
-                    <td>Nominal</td>
-                </tr>
-                <?php 
-                    $total = 0;
-                    foreach($detail_rincian as $key => $v){ 
-                    $total += $v->nominal;
-                ?>
-                    <tr>
-                        <td><?php echo $key+1; ?></td>
-                        <td><?php echo $v->nama_kategori; ?></td>
-                        <td style='text-align:right;'><?php echo number_format($v->nominal,0,'',','); ?></td>
-                    </tr>
-                <?php } ?>
-                <tr>
-                    <td colspan="2" style="text-align:right;">Total</td>
-                    <td style='text-align:right;'><?php echo number_format($total,0,'',','); ?></td>
-                </tr>
-            </table>
-        </td>
+        <td>NIP</td>
+        <td>:</td>
+        <td><?php echo $detail->nip; ?></td>
+
+        <td>Fakultas/Prodi</td>
+        <td>:</td>
+        <td><?php echo $detail->nama_fakultas; ?> / <?php echo $detail->nama_prodi; ?></td>
+
+        <td>Jenjang</td>
+        <td>:</td>
+        <td><?php echo $detail->jenjang; ?></td>
     </tr>
 </table>
-
+<table align="center">
+    <tr>
+        <th height="50" colspan="9" class="judul">Rincian Biaya</th>
+    </tr>
+    <tr>
+        <th>Semester</th>
+        <th colspan="3">Rincian Biaya</th>        
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 <script type="text/javascript">
   window.print();
 </script>

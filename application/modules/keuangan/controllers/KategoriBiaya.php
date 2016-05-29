@@ -17,14 +17,62 @@ class KategoriBiaya extends CI_Controller {
         $this->load->model('KategoriBiayaM');
 	}
 
-	public function index()
+	public function index($id = NULL)
 	{
 		$data['judulHeader'] = 'Kategori Biaya';
 		$data['menu'] = 'kategoriBiaya';
-		$data['data']	= $this->KategoriBiayaM->tampilData()->result_object();
+		// $data['data']	= $this->KategoriBiayaM->tampilData()->result_object();
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
+
+		$jml = $this->db->get('kategori_biaya');
+
+		//pengaturan pagination
+		 $config['base_url'] = base_url().'keuangan/kategoriBiaya/index';
+		 $config['total_rows'] = $jml->num_rows();
+		 $config['per_page'] = '10';
+		 $config['first_page'] = 'Awal';
+		 $config['last_page'] = 'Akhir';
+		 $config['next_page'] = '&laquo;';
+		 $config['prev_page'] = '&raquo;';
+
+		//inisialisasi config
+		 $this->pagination->initialize($config);
+
+		//buat pagination
+		 $data['halaman'] = $this->pagination->create_links();
+
+		//tamplikan data
+	 	$nama_kategori = $this->input->post('nama_kategori');
+		if($nama_kategori != ''){
+			$jml = $this->db->select('*')
+						->from('kategori_biaya')
+						->like('nama_kategori',$nama_kategori)
+						->get();
+			//pengaturan pagination
+			 $config['base_url'] = base_url().'keuangan/kategoriBiaya/index';
+			 $config['total_rows'] = $jml->num_rows();
+			 $config['per_page'] = '10';
+			 $config['first_page'] = 'Awal';
+			 $config['last_page'] = 'Akhir';
+			 $config['next_page'] = '&laquo;';
+			 $config['prev_page'] = '&raquo;';
+
+			//inisialisasi config
+		 	$this->pagination->initialize($config);
+
+			//buat pagination
+		 	$data['halaman'] = $this->pagination->create_links();
+			$data['data'] =  $this->KategoriBiayaM->tampilDataKategori($config['per_page'], $id, $nama_kategori);
+			$tr['tr'] = $this->load->view('keuangan/kategoriBiaya/pencarian',$data,true);
+			echo json_encode($tr['tr']); 
+			exit;
+		}else{
+			$nama_akun = '';
+			$data['data'] = $this->KategoriBiayaM->tampilDataKategori($config['per_page'], $id, $nama_kategori);
+		}
+
 		$this->template->display('keuangan/kategoriBiaya/admin',$data);
 	}
 

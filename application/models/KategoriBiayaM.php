@@ -7,6 +7,17 @@ class KategoriBiayaM extends CI_Model {
 		return $this->db->get('kategori_biaya');
 	}
 
+	public function tampilDataKategori($num, $offset, $nama)
+	{
+		$this->db->order_by('nama_kategori', 'ASC');
+		if($nama != ''){
+			$this->db->like('nama_kategori', $nama);
+		}
+		$data = $this->db->get('kategori_biaya', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function insert($data){
 		return $this->db->insert('kategori_biaya', $data);
 	}

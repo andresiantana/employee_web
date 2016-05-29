@@ -13,6 +13,20 @@ class LokasiPendidikanM extends CI_Model {
 		return $query;
 	}
 
+    public function tampilDataLokasi($num, $offset, $nama_lokasi, $nama_universitas)
+    {
+        $this->db->order_by('nama_universitas', 'ASC');
+        if($nama_lokasi != ''){
+            $this->db->where('nama_lokasi', $nama_lokasi);
+        }
+        if($nama_universitas != ''){
+            $this->db->like('nama_universitas', $nama_universitas);
+        }
+        $data = $this->db->get('lokasi_pendidikan', $num, $offset);
+
+        return $data->result();
+    }
+
     public function insert($data){
 		return $this->db->insert('lokasi_pendidikan', $data);	
 	}

@@ -7,6 +7,17 @@ class CabangBankM extends CI_Model {
 		return $this->db->get('cabang_bank');
 	}
 
+	public function tampilDataCabang($num, $offset, $nama)
+	{
+		$this->db->order_by('nama_cabang', 'ASC');
+		if($nama != ''){
+			$this->db->like('nama_cabang', $nama);
+		}
+		$data = $this->db->get('cabang_bank', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function insert($data){
 		return $this->db->insert('cabang_bank', $data);
 	}

@@ -14,15 +14,34 @@
     <link href="<?php echo base_url('assets/template/Bluebox/assets/css/custom-styles.css');?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/template/Bluebox/assets/datepicker/css/datepicker.css');?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.css');?>" rel="stylesheet" />
+    <!-- Pagination Styles-->
+    <link href="<?php echo base_url('assets/css/pagination.css');?>" rel="stylesheet" />
     <!-- Google Fonts-->
-    <!-- Bootstrap DataTables dan Dialog -->
-    <!-- <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet"> -->
-    <!-- <link href="<?php echo base_url('assets/datatables/css/dataTables.bootstrap.css')?>" rel="stylesheet"> -->
-    <!-- <link href="<?php echo base_url('assets/datepicker/css/bootstrap-datepicker3.min.css')?>" rel="stylesheet">     -->
     <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/cssCharts.css');?>">     
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.css');?>">     
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/modal/hightlight/github.css');?>">     
+
+    <!-- untuk dialog box -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/jquery/Remodal-master/dist/remodal.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/jquery/Remodal-master/dist/remodal-default-theme.css');?>">
+    <style>
+        .remodal-bg.with-red-theme.remodal-is-opening,
+        .remodal-bg.with-red-theme.remodal-is-opened {
+          filter: none;
+        }
+
+        .remodal-overlay.with-red-theme {
+          background-color: #f44336;
+        }
+
+        .remodal.with-red-theme {
+          background: #fff;
+        }
+    </style>
+
+    <!-- untuk datepicker -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/datepicker/css/ws-calendar.default.min.css');?>"/>    
 </head>
 <body>
     <div id="wrapper">
@@ -151,13 +170,62 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.min.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/highlight/highlight.pack.js');?>"></script>
 
-<!--
-    <script src="<?php echo base_url('assets/jquery/jquery-2.1.4.min.js')?>"></script>
-    <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
-    <script src="<?php echo base_url('assets/datatables/js/jquery.dataTables.min.js')?>"></script>
-    <script src="<?php echo base_url('assets/datatables/js/dataTables.bootstrap.js')?>"></script>
-    <script src="<?php echo base_url('assets/datepicker/js/bootstrap-datepicker.min.js')?>"></script>
--->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="<?php echo base_url("assets/jquery/Remodal-master/libs/jquery/dist/jquery.min.js"); ?>"><\/script>')</script>
+    <script src="<?php echo base_url('assets/jquery/Remodal-master/dist/remodal.js');?>"></script>
+    
+    <script src="<?php echo base_url('assets/datepicker/js/jquery-1.11.3.min.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/datepicker/js/ws-calendar-min.js');?>"></script>
+    <script type="text/javascript">
+        $( function() {
+            $( ".myOwnClass" ).wsCalendar();            
+        });
+    </script>
+
+    <!-- Events -->
+    <script>
+      $(document).on('opening', '.remodal', function () {
+        console.log('opening');
+      });
+
+      $(document).on('opened', '.remodal', function () {
+        console.log('opened');
+      });
+
+      $(document).on('closing', '.remodal', function (e) {
+        console.log('closing' + (e.reason ? ', reason: ' + e.reason : ''));
+      });
+
+      $(document).on('closed', '.remodal', function (e) {
+        console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
+      });
+
+      $(document).on('confirmation', '.remodal', function () {
+        console.log('confirmation');
+      });
+
+      $(document).on('cancellation', '.remodal', function () {
+        console.log('cancellation');
+      });
+
+    //  Usage:
+    //  $(function() {
+    //
+    //    // In this case the initialization function returns the already created instance
+    //    var inst = $('[data-remodal-id=modal]').remodal();
+    //
+    //    inst.open();
+    //    inst.close();
+    //    inst.getState();
+    //    inst.destroy();
+    //  });
+
+      //  The second way to initialize:
+      // $('[data-remodal-id=modal2]').remodal({
+      //   modifier: 'with-red-theme'
+      // });
+    </script>
+
     <script type="text/javascript">
         $('.numbers-only').keyup(function() {
             var d = $(this).attr('numeric');

@@ -7,6 +7,17 @@ class CoaM extends CI_Model {
 		return $this->db->get('coa');
 	}
 
+	public function tampilDataAkun($num, $offset, $nama_akun)
+	{
+		$this->db->order_by('nama_akun', 'ASC');
+		if($nama_akun != ''){
+			$this->db->like('nama_akun', $nama_akun);
+		}
+		$data = $this->db->get('coa', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function insert($data){
 		return $this->db->insert('coa', $data);
 	}

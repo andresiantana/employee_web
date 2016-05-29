@@ -1,0 +1,48 @@
+.halaman
+ {
+	 margin:10px;
+	 margin-top:-25px;
+	 margin-left:70px;
+	 font-size:11px;
+ }
+
+.halaman > strong
+ {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #337ab7;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+.halaman > a
+ {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #337ab7;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+.halaman > a:hover a:active {
+	background-color: #337ab7;
+    border-color: #337ab7;
+    color: #fff;
+    cursor: default;
+    z-index: 2;
+    cursor:pointer;
+}
+.halaman > li {
+    display: inline;
+}
+* {
+    box-sizing: border-box;
+}

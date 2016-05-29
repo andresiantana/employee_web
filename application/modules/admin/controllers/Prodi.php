@@ -17,17 +17,68 @@ class Prodi extends CI_Controller {
         $this->load->model('ProdiM');
 	}
 
-	public function index()
+	public function index($id=NULL)
 	{
 		$data['username'] 		= $this->session->userdata('username');
 		$data['id_user'] 		= $this->session->userdata('id_user');
 		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$data['judulHeader'] 	= 'Prodi';
 		$data['menu'] 	= 'prodi';
-		$data['data']	= $this->ProdiM->tampilData()->result_object();		
+		// $data['data']	= $this->ProdiM->tampilData()->result_object();		
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
 						->get()->result_object();
+
+		$jml = $this->db->get('prodi');
+		//pengaturan pagination
+		 $config['base_url'] = base_url().'admin/prodi/index';
+		 $config['total_rows'] = $jml->num_rows();
+		 $config['per_page'] = '10';
+		 $config['first_page'] = 'Awal';
+		 $config['last_page'] = 'Akhir';
+		 $config['next_page'] = '&laquo;';
+		 $config['prev_page'] = '&raquo;';
+
+		//inisialisasi config
+		 $this->pagination->initialize($config);
+
+		//buat pagination
+		 $data['halaman'] = $this->pagination->create_links();
+
+		//tamplikan data
+	 	$kode_fakultas = $this->input->post('kode_fakultas');
+		$nama_prodi = $this->input->post('nama_prodi');
+		if($kode_fakultas != '' || $nama_prodi != ''){
+			$jml = $this->db->select('*')
+						->from('prodi')
+						->where('prodi.kode_fakultas',$kode_fakultas)
+						->like('prodi.nama_prodi',$nama_prodi)
+						->join('fakultas', 'fakultas.kode_fakultas = prodi.kode_fakultas','Left')
+						->get();
+			//pengaturan pagination
+			 $config['base_url'] = base_url().'admin/prodi/index';
+			 $config['total_rows'] = $jml->num_rows();
+			 $config['per_page'] = '10';
+			 $config['first_page'] = 'Awal';
+			 $config['last_page'] = 'Akhir';
+			 $config['next_page'] = '&laquo;';
+			 $config['prev_page'] = '&raquo;';
+
+			//inisialisasi config
+		 	$this->pagination->initialize($config);
+
+			//buat pagination
+		 	$data['halaman'] = $this->pagination->create_links();
+			$data['data'] =  $this->ProdiM->tampilDataProdi($config['per_page'], $id, $kode_fakultas, $nama_prodi);
+			$tr['tr'] = $this->load->view('admin/prodi/pencarian',$data,true);
+			echo json_encode($tr['tr']); 
+			exit;
+		}else{
+			$nama_prodi = null;
+			$kode_fakultas = null;
+			$data['data'] = $this->ProdiM->tampilDataProdi($config['per_page'], $id, $kode_fakultas, $nama_prodi);
+		}		 
+		
 		$this->template->display('admin/prodi/admin',$data);
 	}
 

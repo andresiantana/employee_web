@@ -20,7 +20,11 @@
                         </div>
                          <div class="form-group">
                             <label>Tanggal</label>
-                            <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : ""; ?>" required>
+                            <br>
+                            <div class="myOwnClass">
+                                <input type="text" class="form-control" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>">
+                            </div>
+                            <!-- <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : ""; ?>" required> -->
                         </div>
                         <div class="form-group">
                             <label>Pilih Semester</label>
@@ -53,11 +57,14 @@
                                 <option value="D3">D3</option>
                             </select>
                         </div>
-                        <input class="form-control numbers-only" type="hidden" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
+                        <div class="form-group">
+                            <label for="prodi">Jumlah Nominal</label>
+                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
+                        </div>                        
                     </div>
                     <div class="col-md-12">
-                        <legend>Data Rincian Biaya</legend>
-                        <table class="table table-striped table-bordered table-hover" id="tabel-biaya">
+                        <!-- <legend>Data Rincian Biaya</legend> -->
+                        <!-- <table class="table table-striped table-bordered table-hover" id="tabel-biaya">
                             <thead>
                                 <tr>
                                     <th>Kategori Biaya</th>
@@ -79,7 +86,7 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> -->
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -178,10 +185,6 @@
         if(jenjang != ""){           
             $('#jenjang').val(jenjang);
         }
-
-        $('#tanggal').datepicker({
-            format:'dd/mm/yyyy',
-        });
 
         $('.numbers-only').keyup(function() {
             var d = $(this).attr('numeric');

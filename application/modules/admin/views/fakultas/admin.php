@@ -6,13 +6,31 @@
             </div>
             <div class="panel-body">                
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table style="width:100%;">
+                        <tr>
+                            <td><label>Kode Fakultas</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text"  class="form-control" id="kode_fakultas" name="kode_fakultas"></td>
+
+                            <td style="width:9%"></td>
+
+                            <td><label>Nama Fakultas</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text"  class="form-control" id="nama_fakultas" name="nama_fakultas"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
+                    <a href='<?php echo base_url('admin/fakultas/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <br><br>
+
+                    <table class="table table-striped table-bordered table-hover" id="data-fakultas">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Kode Fakultas</th>
                                 <th>Nama Fakultas</th>
-                                <th class="td-actions">Aksi</th>
+                                <th class="td-actions" style="width:150px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,6 +47,7 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    Halaman :  <div class="halaman"><?php echo $halaman;?></div>
                 </div>
                 <br>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/Fakultas/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Fakultas</a>                
@@ -37,3 +56,24 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function setPencarian(){
+        var kode_fakultas = $('#kode_fakultas').val();
+        var nama_fakultas = $('#nama_fakultas').val();
+
+        var data = {
+          kode_fakultas: kode_fakultas,
+          nama_fakultas: nama_fakultas
+        }
+
+        $.ajax({
+            url     : "<?php echo base_url('admin/fakultas/index'); ?>",
+            type    : "POST",
+            data    : data,
+            dataType: 'json',
+            success : function (data) {
+              $('#data-fakultas > tbody').html(data);
+            }
+        });
+    }
+</script>

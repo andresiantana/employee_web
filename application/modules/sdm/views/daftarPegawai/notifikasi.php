@@ -16,7 +16,9 @@
                 <div class="form-group">
                     <label>Tanggal</label>
                     <input class="form-control" type="hidden" name="id_pegawai" value="<?php echo isset($datapegawai->id_pegawai) ? $datapegawai->id_pegawai : ""; ?>">
-                    <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo date('d/m/Y'); ?>" required>
+                    <div class="myOwnClass">
+                        <input type="text" class="form-control" id="tanggal" name="tanggal" value="<?php echo isset($datapegawai->tanggal) ? date('Y-m-d',strtotime($datapegawai->tanggal)) : date('Y-m-d'); ?>" required> (Tahun-Bulan-Tanggal)
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Isi Pesan</label>

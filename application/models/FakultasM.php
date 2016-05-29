@@ -7,6 +7,20 @@ class FakultasM extends CI_Model {
 		return $this->db->get('fakultas');
 	}
 
+	public function tampilDataFakultas($num, $offset, $kode, $nama)
+	{
+		$this->db->order_by('nama_fakultas', 'ASC');
+		if($kode != ''){
+			$this->db->where('kode_fakultas', $kode);
+		}
+		if($nama != ''){
+			$this->db->like('nama_fakultas', $nama);
+		}
+		$data = $this->db->get('fakultas', $num, $offset);
+
+		return $data->result();
+	}
+
 	public function insert($data){
 		return $this->db->insert('fakultas', $data);
 	}

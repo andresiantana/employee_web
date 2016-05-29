@@ -6,13 +6,33 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:10%"><label>Nama Kategori</label></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:30%">
+                                <input type="text"  class="form-control" id="nama_kategori" name="nama_kategori">
+                            </td>
+
+                            <td style="width:9%"></td>
+
+                            <td style="width:10%"><label></label></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:30%"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
+                    <a href='<?php echo base_url('keuangan/kategoriBiaya/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <br><br>
+
+                    <table class="table table-striped table-bordered table-hover" id="data-kategori">
                         <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Nama Kategori</th>
                                 <th>Status</th>
-                                <th class="td-actions">Aksi</th>
+                                <th class="td-actions" style="width:150px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,8 +54,9 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                        </tbody>
+                        </tbody>                        
                     </table>
+                    Halaman :  <div class="halaman"><?php echo $halaman;?></div>
                 </div>
                 <br>
                 <a class="btn btn-primary" href="<?php echo base_url('keuangan/kategoriBiaya/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Kategori Biaya</a>                
@@ -43,3 +64,22 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function setPencarian(){
+        var nama_kategori = $('#nama_kategori').val();
+
+        var data = {
+          nama_kategori: nama_kategori
+        }
+
+        $.ajax({
+            url     : "<?php echo base_url('keuangan/kategoriBiaya/index'); ?>",
+            type    : "POST",
+            data    : data,
+            dataType: 'json',
+            success : function (data) {
+              $('#data-kategori > tbody').html(data);
+            }
+        });
+    }
+</script>

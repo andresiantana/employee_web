@@ -6,26 +6,32 @@
             </div>
             <div class="panel-body">                
                 <div class="table-responsive">
-                    <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
-                    <div class="row">
-                        <div class="col-sm-6"></div>
-                        <div class="col-sm-6">
-                            <div id="dataTables-example_filter" class="dataTables_filter">
-                                <label>        
-                                    Fakultas:                                          
-                                    <select class="form-control" name="kode_fakultas">
-                                        <option value="">-Pilih Fakultas-</option>
-                                        <?php foreach ($fakultas as $i => $val) { ?>
-                                            <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
-                                        <?php } ?>
-                                    </select>                                
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:10%"><label>Fakultas</label></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:30%">
+                                <select class="form-control" name="kode_fakultas" id="kode_fakultas">
+                                    <option value="">-Pilih Fakultas-</option>
+                                    <?php foreach ($fakultas as $i => $val) { ?>
+                                        <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                    <?php } ?>
+                                </select>  
+                            </td>
+
+                            <td style="width:9%"></td>
+
+                            <td><label>Nama Prodi</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text"  class="form-control" id="nama_prodi" name="nama_prodi"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
+                    <a href='<?php echo base_url('admin/prodi/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <br><br>
                 <div id="isi_table">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover" id="data-prodi">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -33,7 +39,7 @@
                                 <th>Nama Fakultas</th>
                                 <th>Kode Prodi</th>
                                 <th>Nama Prodi</th>
-                                <th class="td-actions">Aksi</th>
+                                <th class="td-actions" style="width:150px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +58,8 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                </div>                    
+                </div>
+                Halaman :  <div class="halaman"><?php echo $halaman;?></div>                    
                 </div>
                 <br>
                 <a class="btn btn-primary" href="<?php echo base_url('admin/Prodi/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Prodi</a>                
@@ -62,21 +69,22 @@
     </div>
 </div>
 <script type="text/javascript">
-    function setPencarian(obj){
-        if(obj.value == ''){
-            window.location.reload();
-        }
+    function setPencarian(){
+        var kode_fakultas = $('#kode_fakultas').val();
+        var nama_prodi = $('#nama_prodi').val();
+
         var data = {
-          kode_fakultas    : obj.value
+          kode_fakultas: kode_fakultas,
+          nama_prodi: nama_prodi
         }
 
       $.ajax({
-          url     : "<?php echo base_url('admin/Prodi'); ?>",
-          type    : "GET",
+          url     : "<?php echo base_url('admin/prodi/index'); ?>",
+          type    : "POST",
           data    : data,
           dataType: 'json',
           success : function (data) {
-              $('#dataTables-example > tbody').html(data);
+              $('#data-prodi > tbody').html(data);
           }
         });
     }
