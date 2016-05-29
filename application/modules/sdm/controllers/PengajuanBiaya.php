@@ -35,12 +35,11 @@ class PengajuanBiaya extends CI_Controller {
 		$nip = $this->input->post('nip');
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
 		$status_pengajuan = $this->input->post('status_pengajuan');
-		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
 		$tanggal_awal = $this->input->post('tanggal_awal');
 	
 		$tanggal_akhir = $this->input->post('tanggal_akhir');
 	
-		if($nip != '' || $kode_pengajuan != '' || $id_kategori_biaya != '' || $status_pengajuan != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
+		if($nip != '' || $kode_pengajuan != '' || $status_pengajuan != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
 			$data['data'] =  $this->SDPengajuanBiayaT->tampilData($nip,$kode_pengajuan,$id_kategori_biaya,$status_pengajuan,$tanggal_awal,$tanggal_akhir)->result_object();		
 			$tr['tr'] = $this->load->view('sdm/pengajuanBiaya/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
@@ -169,14 +168,13 @@ class PengajuanBiaya extends CI_Controller {
 			foreach ($this->input->post('biaya') as $i => $data) {	
 				$id_pegawai = $datapegawai->id_pegawai;
 				$id_pengajuan_biaya = $id_pengajuan_biaya;
-				$id_kategori_biaya = $data['id_kategori_biaya'];
+				$id_kategori_biaya = isset($data['id_kategori_biaya']) ? $data['id_kategori_biaya'] : null;
 				$id_uraian = $data['id_uraian'];
 				$nominal 	= $data['nominal'];
 				$nominal_disetujui 	= $data['nominal_disetujui'];
 
 				$uraian = array(
 					'id_pengajuan_biaya'=>$id_pengajuan_biaya,
-					'id_kategori_biaya'=>$id_kategori_biaya,
 					'nominal'=>$nominal,
 					'nominal_disetujui'=>$nominal_disetujui
 				);

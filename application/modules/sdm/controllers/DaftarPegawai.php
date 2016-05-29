@@ -15,7 +15,7 @@ class DaftarPegawai extends CI_Controller {
         $this->load->helper(array('form','url','download'));
         $this->load->model('SDPegawai');
         $this->load->model('Notifikasi');
-
+        $this->load->model('SDJurnalT');
 	}
 
 	public function index()
@@ -138,14 +138,54 @@ class DaftarPegawai extends CI_Controller {
     	$status = '';
 
         $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
-        $status_lulus = isset($_GET['status_lulus']) ? $_GET['status_lulus'] : null;
+        $status_kelulusan = isset($_GET['status_kelulusan']) ? $_GET['status_kelulusan'] : null;
         $object = array(
-			'status_kelulusan'=>$status_lulus
+			'status_kelulusan'=>$status_kelulusan
 		);
 
 		$this->db->where('id_pegawai', $id_pegawai);
-		$this->db->update('pegawai', $object);
-		if($this->db->affected_rows()){
+		$query = $this->db->update('pegawai', $object);
+		if($query){
+			if($status_kelulusan == 'Lulus'){
+				$dataJurnal = $this->SDJurnalT->tampilJurnalPegawai($id_pegawai)->row();
+				// Jurnal Pegawai Studi Lanjut		
+				$object_jurnal_kredit = array(
+					'id_jurnal'=>'',
+					'id_pencairan_biaya'=>NULL,
+					'id_pegawai'=>$id_pegawai,
+					'tanggal_jurnal'=>date('Y-m-d'),
+					'no_akun'=>111,
+					'keterangan'=>'Pegawai Studi Lanjut',
+					'status'=>'K',
+					'biaya'=>$dataJurnal->biaya,
+					'status_aktif'=>true
+				);	
+				$object_jurnal_debit = array(
+					'id_jurnal'=>'',
+					'id_pencairan_biaya'=>NULL,
+					'id_pegawai'=>$id_pegawai,
+					'tanggal_jurnal'=>date('Y-m-d'),
+					'no_akun'=>114,
+					'keterangan'=>'Pegawai Studi Lanjut',
+					'status'=>'D',
+					'biaya'=>$dataJurnal->biaya,
+					'status_aktif'=>true
+				);	
+
+				$this->JurnalT->insert($object_jurnal_debit);
+		 		$this->JurnalT->insert($object_jurnal_kredit);
+			}
+
+			// update jurnal aktif = false
+			$object = array(
+				'status_aktif'=>false
+			);
+			$this->db->where('id_pegawai', $id_pegawai);
+			$this->db->where('id_pencairan_biaya is not null');
+			$query_jurnal = $this->db->update('jurnal', $object);
+			if($query_jurnal){
+				$status = true;
+			}
 			$status = true;
 		}else{
 			$status = false;

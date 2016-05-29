@@ -27,18 +27,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Kategori Biaya</label>
-                                <select class="form-control" name="id_kategori_biaya" id="id_kategori_biaya" disabled=true>
-                                    <option value="">-Pilih Kategori Biaya-</option>
-                                    <?php foreach ($kategori as $i => $val) { ?>
-                                        <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Pilih Semester</label>
-                                <select class="form-control" name="semester" id="semester">
+                                <select class="form-control" name="semester" id="semester" disabled>
                                     <option value="">-Pilih Semester-</option>
                                     <?php for ($i = 0; $i < 8; $i++) { ?>
                                         <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
@@ -60,7 +50,9 @@
 
                             <div class="form-group">
                                 <label>Tanggal Pencairan</label>
-                                <input class="form-control" id="tanggal_pencairan" name="tanggal_pencairan" type="text" class="span3" value="<?php echo isset($datapencairan->tanggal_pencairan) ? date('d/m/Y',strtotime($datapencairan->tanggal_pencairan)) : ""; ?>" required>
+                                <div class="myOwnClass">
+                                    <input type="text" class="form-control"  id="tanggal_pencairan" name="tanggal_pencairan" value="<?php echo isset($datapencairan->tanggal_pencairan) ? date('Y-m-d',strtotime($datapencairan->tanggal_pencairan)) : date('Y-m-d'); ?>">
+                                </div>
                             </div>
                             
                             <div class="form-group">

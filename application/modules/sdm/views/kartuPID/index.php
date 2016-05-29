@@ -50,7 +50,13 @@
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
                                     <td style="text-align:right;"><?php echo $v->username; ?></td>
                                     <td class="td-actions">
+                                        <?php
+                                            if($v->status_kelulusan == 'Lulus'){
+                                        ?>
                                         <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
+                                        <?php }else { ?>
+                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);" disabled=true><i class="fa fa-print"> </i></a>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

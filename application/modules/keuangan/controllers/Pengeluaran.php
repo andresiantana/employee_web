@@ -28,19 +28,7 @@ class Pengeluaran extends CI_Controller {
 
 		$this->template->display('keuangan/pengeluaran/index',$data);
 	}
-
-	
-	public function printKartu($id_pegawai = null){
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['id_pegawai'] = $id_pegawai;
-		$data['detail'] = $this->KUPegawai->tampilKartuPegawai($id_pegawai)->row();
-		$data['detail_rincian'] = $this->KUUraianPengajuanBiayaT->tampilUraian($id_pegawai)->result_object();
-		$this->load->view('sdm/kartuPID/cetak_kartu', $data);
-	}
-
 }
 
-/* End of file KartuPID.php */
-/* Location: ./application/modules/admin/controllers/KartuPID.php */
+/* End of file Pengeluaran.php */
+/* Location: ./application/modules/keuangan/controllers/Pengeluaran.php */

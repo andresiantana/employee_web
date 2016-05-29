@@ -101,9 +101,9 @@ class PengajuanBiaya extends CI_Controller {
 		$keterangan = $this->input->post('keterangan');
 
 		$tanggal = $this->input->post('tanggal_pencairan');
-		$tgl = explode("/",$tanggal);		
-		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
-		$tanggal = $tanggal;
+		// $tgl = explode("/",$tanggal);		
+		// $tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
+		// $tanggal = $tanggal;
 
 		$data = array(
 			'id_pencairan_biaya' =>'',
@@ -162,7 +162,7 @@ class PengajuanBiaya extends CI_Controller {
 					'id_pegawai'=>$id_pegawai,
 					'tanggal_jurnal'=>date('Y-m-d'),
 					'no_akun'=>111,
-					'keterangan'=>'Pencairan Dana Berhasil Transfer',
+					'keterangan'=>'Pencairan Dana Gagal Transfer',
 					'status'=>'K',
 					'biaya'=>$berhasil_transfer
 				);	
@@ -172,7 +172,7 @@ class PengajuanBiaya extends CI_Controller {
 					'id_pegawai'=>$id_pegawai,
 					'tanggal_jurnal'=>date('Y-m-d'),
 					'no_akun'=>112,
-					'keterangan'=>'Pencairan Dana Berhasil Transfer',
+					'keterangan'=>'Pencairan Dana Gagal Transfer',
 					'status'=>'D',
 					'biaya'=>$berhasil_transfer
 				);	

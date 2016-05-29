@@ -189,7 +189,7 @@ function updateStatusLulus(id_pegawai){
     var status_lulus = $('#status_lulus').val();
     var data = {
       id_pegawai    : id_pegawai,
-      status_lulus : status_lulus
+      status_kelulusan : status_lulus
     }
     $.ajax({
       url     : "<?php echo base_url('sdm/daftarPegawai/updateStatusLulus'); ?>",
@@ -209,10 +209,6 @@ function updateStatusLulus(id_pegawai){
 }
 
 $(document).ready(function(){
-    $('#tanggal').datepicker({
-        format:'dd/mm/yyyy',
-    });
-
     $('#informasi_header').addClass('active');
     $('#informasi').addClass('in');
     $('#informasi').attr('aria-expanded',true);
