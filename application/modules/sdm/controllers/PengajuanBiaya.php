@@ -18,6 +18,7 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->model('Notifikasi');
 		$this->load->model('KategoriBiayaM');
 		$this->load->model('SDPengajuanBiayaT');
+		$this->load->model('SDUraianPengajuanBiayaT');
 	}
 
 	public function index()
@@ -75,13 +76,14 @@ class PengajuanBiaya extends CI_Controller {
         if($status_pengajuan == 'Approved'){
         	$object = array(
 				'status_pengajuan'=>$status_pengajuan,
-				'alasan_status'=>$alasan_pengajuan,
-				'jumlah_nominal'=>$jumlah_nominal
+				'jumlah_nominal'=>$jumlah_nominal,
+				'jumlah_disetujui'=>$jumlah_disetujui
 			);
         }else{
         	$object = array(
 			'status_pengajuan'=>$status_pengajuan,
 			'alasan_status'=>$alasan_pengajuan,
+			'jumlah_disetujui'=>0
 			);
         }        
 
@@ -134,50 +136,20 @@ class PengajuanBiaya extends CI_Controller {
 	{
 		$status = true;
 
+		echo "<pre>";
+		print_r($_POST['biaya']);exit;
 		$tgl = '';
 		$tanggal = '';
+
 		$id_pengajuan_biaya = $this->input->post('id_pengajuan_biaya');
-		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
-		$kode_pengajuan = $this->input->post('kode_pengajuan');
-		$semester = $this->input->post('semester');
-		$jumlah_nominal = $this->input->post('jumlah_nominal');
 		$id_pegawai = $this->input->post('id_pegawai');
-		$nama_lokasi = $this->input->post('nama_lokasi');
-		$jurusan_fakultas = $this->input->post('jurusan_fakultas');
-		$prodi = $this->input->post('prodi');
-		$jenjang = $this->input->post('jenjang');
-
-		$tanggal = $this->input->post('tanggal');
-		$tgl = explode("/",$tanggal);		
-		$tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
-		$tanggal = $tanggal;
-
-		$data = array(
-			'id_pengajuan_biaya' =>'',
-			'tanggal' => $tanggal,
-			'kode_pengajuan'=>$kode_pengajuan,
-			'id_kategori_biaya' => $id_kategori_biaya,
-			'semester' => $semester,
-			'jumlah_nominal' => $jumlah_nominal,
-			'id_pegawai' => $id_pegawai,
-			'nama_lokasi' => $nama_lokasi,
-			'jurusan_fakultas' => $jurusan_fakultas,
-			'prodi' => $prodi,
-			'jenjang' => $jenjang
-		);
+		$jumlah_nominal = $this->input->post('jumlah_nominal');		
+		$status_pengajuan = $this->input->post('status_pengajuan');
 
 		if(!empty($id_pengajuan_biaya)){
 			$object = array(
-				'tanggal' => $tanggal,
-				'kode_pengajuan'=>$kode_pengajuan,
-				'id_kategori_biaya' => $id_kategori_biaya,
-				'semester' => $semester,
 				'jumlah_nominal' => $jumlah_nominal,
-				'id_pegawai' => $id_pegawai,
-				'nama_lokasi' => $nama_lokasi,
-				'jurusan_fakultas' => $jurusan_fakultas,
-				'prodi' => $prodi,
-				'jenjang' => $jenjang
+				'status_pengajuan' => $status_pengajuan
 			);
 
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
@@ -196,6 +168,7 @@ class PengajuanBiaya extends CI_Controller {
 
 			$this->Notifikasi->insert($notif);
 		}	
+
 		$datapegawai = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai),array('limit'=>1))->row();
 		$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya),array('limit'=>1))->row();
 		if(!empty($id_pengajuan_biaya)){
@@ -203,33 +176,49 @@ class PengajuanBiaya extends CI_Controller {
 		}else{
 			$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
 		}
-			if(count($this->input->post('biaya')) > 0) {
-				foreach ($this->input->post('biaya') as $i => $data) {	
-					$id_pegawai = $datapegawai->id_pegawai;
-					$id_pengajuan_biaya = $id_pengajuan_biaya;
-					$id_kategori_biaya = $data['id_kategori_biaya'];
-					$id_uraian = $data['id_uraian'];
-					$nominal 	= $data['nominal'];
 
-					$object = array(
-						'id_pengajuan_biaya'=>$id_pengajuan_biaya,
-						'id_kategori_biaya'=>$id_kategori_biaya,
-						'nominal'=>$nominal
-					);
+		// echo "<pre>";
+		// print_r($_POST['biaya']);exit;
+		// echo count($this->input->post('biaya')); exit;
 
-					if(!empty($id_uraian)){
-						$this->db->where('id_uraian', $id_uraian);
-						$this->db->update('uraian_pengajuan_biaya', $data);
-						$insert = $this->db->affected_rows();
-					}else{
-						$insert = $this->PGPegawai->insert($data);	
-					}
-					if($insert){
-						$status = true;
-					}
+		// input uraian
+		if(count($this->input->post('biaya')) > 0) {
+			foreach ($this->input->post('biaya') as $i => $data) {	
+				$id_pegawai = $datapegawai->id_pegawai;
+				$id_pengajuan_biaya = $id_pengajuan_biaya;
+				$id_kategori_biaya = $data['id_kategori_biaya'];
+				$id_uraian = $data['id_uraian'];
+				$nominal 	= $data['nominal'];
+				$nominal_disetujui 	= $data['nominal_disetujui'];
+
+				$uraian = array(
+					'id_pengajuan_biaya'=>$id_pengajuan_biaya,
+					'id_kategori_biaya'=>$id_kategori_biaya,
+					'nominal'=>$nominal,
+					'nominal_disetujui'=>$nominal_disetujui
+				);
+
+				$uraian_baru = array(
+					'id_uraian'=>'',
+					'id_pengajuan_biaya'=>$id_pengajuan_biaya,
+					'id_kategori_biaya'=>$id_kategori_biaya,
+					'nominal'=>$nominal_disetujui,
+					'nominal_disetujui'=>$nominal_disetujui
+				);
+
+				if(!empty($id_uraian)){
+					$this->db->where('id_uraian', $id_uraian);
+					$this->db->update('uraian_pengajuan_biaya', $uraian);
+					$insert = $this->db->affected_rows();
+				}else{
+					$insert = $this->SDUraianPengajuanBiayaT->insert($uraian_baru);	
 				}
-			}
 
+				if($insert){
+					$status = true;
+				}					
+			}	
+		}
 		if ($insert && $status) {
 			echo "<script>alert('Ubah Pengajuan Biaya berhasil disimpan!');
                     window.location.href='".base_url('sdm/PengajuanBiaya')."';
@@ -243,15 +232,16 @@ class PengajuanBiaya extends CI_Controller {
 	}
 
 	public function setFormBiaya(){
-		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" name="biaya[0][id_kategori_biaya]" class="form-control kategori_biaya"';
+		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" class="form-control kategori_biaya"';
 		$kategori_biaya = $this->KategoriBiayaM->dd_kategori();
 
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
 		$data['tr'] .= '<td>'.form_dropdown('biaya[0][id_kategori_biaya]', $kategori_biaya, '', $kategori_biaya_attribute).'</td>';
-		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
 		<input id="biaya_0_id_uraian" name="biaya[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
 		</td>';
+		$data['tr'] .= '<td><input id="biaya_0_nominal_disetujui" name="biaya[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusBiaya(this);" ><i class="fa fa-minus"> </i></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 

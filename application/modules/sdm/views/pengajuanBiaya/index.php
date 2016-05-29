@@ -83,7 +83,6 @@
                                         <?php 
                                             if($v->status_pengajuan == ''){
                                         ?>
-                                            <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve/Reject Pengajuan" onclick="popup_window_show('#sample', { pos : 'window-center',width : '800px' });setIdPengajuanBiaya(<?php echo $v->id_pengajuan_biaya; ?>,<?php echo $v->jumlah_nominal; ?>);"><i class="fa fa-check"> </i></a>
                                             <a href="<?php echo base_url('sdm/PengajuanBiaya/edit/'.$v->id_pengajuan_biaya); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>
                                         <?php }else{ 
                                             if($v->status_pengajuan == 'Approved'){
@@ -108,49 +107,22 @@
 
 <!-- Dialog untuk Approve -->
 <input type="hidden" id="id_pengajuan_biaya">
-<div   class="popup_window_css" id="sample">
-<table class="popup_window_css">
-<tr    class="popup_window_css">
-<td    class="popup_window_css">
-<div   class="popup_window_css_head">
-<img src="<?php echo base_url('assets/template/Bluebox/assets/popup/images/close.gif');?>" alt="" width="9" height="9" />Approve Pengajuan Biaya Pegawai</div>
-<div   class="popup_window_css_body">
-    <div style="border: 1px solid #808080; padding: 6px; background: #FFFFFF;">
-        <div class="form-group">
-            <label>Status Pengajuan</label>
-            <select class="form-control" name="status_pengajuan" id="status_pengajuan" onChange='setStatus(this);'>
-                <option value="">-Pilih Status-</option>
-                <option value="Approved">Approved</option>
-                <option value="Reject">Reject</option>
-            </select>
-        </div>
-        <div class="form-group" id="approved" style="display:none;">
-            <label>Nominal yang di approve </label>
-            <input type="text" class="form-control" name="jumlah_nominal" id="jumlah_nominal">
-        </div>
-        <div class="form-group" id="reject" style="display:none;">
-            <label>Alasan</label>
-            <textarea class="form-control" name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
-        </div>
-        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="approveData();"><i class="fa fa-check"></i> Simpan</a>
-        <a href="javascript:void(0)" class="btn btn-small btn-danger" rel="tooltip" title="Klik batal Approve" onclick="batalApprove();"><i class="fa fa-ban"></i> Batal</a>
-    </div>
+<div class="remodal" data-remodal-id="update_lulus" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Ubah Status Kelulusan</h2>
+    <p id="modal1Desc">
+       
+    </p>
+  </div>
+  <button data-remodal-action="confirm" class="remodal-confirm" onclick="approveData();">Approved</button>
+  <button data-remodal-action="cancel" class="remodal-cancel">Batal</button>  
 </div>
-
 
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
-function setStatus(obj) {
-    var status_pengajuan = $('#status_pengajuan').val();
-    if(status_pengajuan == 'Reject') {
-        $('#reject').removeAttr('style','display:none;');
-        $('#approved').attr('style','display:none;');
-    }else{
-        $('#reject').attr('style','display:none;');
-        $('#approved').removeAttr('style','display:none;');
-    }
-}
+
 
 function approveData(){
     var id_pengajuan_biaya = $('#id_pengajuan_biaya').val();
@@ -219,11 +191,11 @@ function setPencarian(){
 }
 
 $(document).ready(function(){
-    $('#tanggal_awal').datepicker({
-        format:'dd/mm/yyyy',
-    });
-    $('#tanggal_akhir').datepicker({
-        format:'dd/mm/yyyy',
-    });
+    // $('#tanggal_awal').datepicker({
+    //     format:'dd/mm/yyyy',
+    // });
+    // $('#tanggal_akhir').datepicker({
+    //     format:'dd/mm/yyyy',
+    // });
 });
 </script>

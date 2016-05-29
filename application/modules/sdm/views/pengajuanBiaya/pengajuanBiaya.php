@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php echo form_open('sdm/PengajuanBiaya/insert');  ?>
+                        <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('accept-charset'=>"utf-8")); ?>
                         <?php if(validation_errors()){ ?>
                         <div class="alert alert-warning">
                             <strong><?php echo validation_errors(); ?></strong>
@@ -21,14 +21,14 @@
                         </div>
                          <div class="form-group">
                             <label>Tanggal</label>
-                            <br>
-                            <div class="myOwnClass">
-                                <input type="text" class="form-control" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('Y-m-d',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>">
-                            </div>
+                            <!-- <br> -->
+                            <!-- <div class="myOwnClass"> -->
+                            <input type="text" class="form-control"  id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('Y-m-d',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>" readonly=true>
+                            <!-- </div> -->
                         </div>
                         <div class="form-group">
                             <label>Pilih Semester</label>
-                            <select class="form-control" name="semester" id="semester" disabled>
+                            <select class="form-control" name="semester" id="semester" readonly>
                                 <option value="">-Pilih Semester-</option>
                                 <?php for ($i = 0; $i < 8; $i++) { ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
@@ -37,19 +37,19 @@
                         </div>
                         <div class="form-group">
                             <label for="nama_lokasi">Nama Lokasi</label>
-                            <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapengajuan->nama_lokasi) ? $datapengajuan->nama_lokasi : ""; ?>" required>
+                            <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapengajuan->nama_lokasi) ? $datapengajuan->nama_lokasi : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label for="jurusan_fakultas">Jurusan/Fakultas</label>
-                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapengajuan->jurusan_fakultas) ? $datapengajuan->jurusan_fakultas : ""; ?>" required>
+                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapengajuan->jurusan_fakultas) ? $datapengajuan->jurusan_fakultas : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label for="prodi">Prodi</label>
-                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapengajuan->prodi) ? $datapengajuan->prodi : ""; ?>" required>
+                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapengajuan->prodi) ? $datapengajuan->prodi : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label>Jenjang</label>
-                            <select class="form-control" name="jenjang" id="jenjang">
+                            <select class="form-control" name="jenjang" id="jenjang" disabled>
                                 <option value="">-Pilih Jenjang-</option>
                                 <option value="S1">S1</option>
                                 <option value="S2">S2</option>
@@ -58,17 +58,37 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="jumlah_nominal">Biaya Per Semester</label>
-                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
-                        </div>                         
+                            <label for="jumlah_nominal">Biaya Yang Diajukan</label>
+                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>
+                        </div>  
+
+                        <div class="form-group">
+                            <label for="jumlah_nominal">Biaya Yang Disetujui</label>
+                            <input class="form-control numbers-only" type="text" name="jumlah_disetujui" id="jumlah_disetujui" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_disetujui) ? $datapengajuan->jumlah_disetujui : ""; ?>" readonly=true required>
+                        </div>                        
                     </div>
                     <div class="col-md-12">
+                         <div class="form-group">
+                            <label>Status Pengajuan</label>
+                            <select class="form-control" name="status_pengajuan" id="status_pengajuan" onChange='setStatus(this);'>
+                                <option value="">-Pilih Status-</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Reject">Reject</option>
+                            </select>
+                        </div>  
+                        <div class="form-group" id="reject" style="display:none;">
+                            <label>Alasan</label>
+                            <textarea class="form-control" name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="approved_biaya">
                         <legend>Data Rincian Biaya</legend>
                         <table class="table table-striped table-bordered table-hover" id="tabel-biaya">
                             <thead>
                                 <tr>
                                     <th>Kategori Biaya</th>
-                                    <th>Nominal</th>
+                                    <th>Nominal Pengajuan</th>
+                                    <th>Nominal Disetujui</th>
                                     <th class="td-actions">Aksi</th>
                                 </tr>
                             </thead>
@@ -78,21 +98,24 @@
                                         foreach($uraian_biaya as $i=>$uraian){
                                 ?>
                                 <tr>
-                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]">
+                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]" disabled>
                                             <option value="">-Pilih Kategori Biaya-</option>
                                             <?php foreach ($kategori as $i => $val) {
-                                                if($uraian->id_kategori_biaya == $va->id_kategori_biaya){
-                                                    $selected = 'selected';
-                                                }else{
-                                                    $selected = "";
-                                                }
+                                                if($uraian->id_kategori_biaya == $val->id_kategori_biaya){
                                             ?>
-                                            <option value="<?php echo $val->id_kategori_biaya; ?>" selected="<?php echo $selected; ?>"><?php echo $val->nama_kategori; ?></option>
+                                            <option value="<?php echo $val->id_kategori_biaya; ?>" selected><?php echo $val->nama_kategori; ?></option>
+
+                                            <?php }else{ ?>
+                                                <option value="<?php echo $val->id_kategori_biaya; ?>" ><?php echo $val->nama_kategori; ?></option>                                            
+                                            <?php } ?>
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>">
+                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true>
                                         <input id="biaya_0_id_uraian" type="hidden" name="biaya[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
+                                    </td>
+                                    <td>
+                                        <input id="biaya_0_nominal_disetujui" type="text" name="biaya[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
                                     </td>
                                     <td class="td-actions">
                                         <a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a>
@@ -104,15 +127,18 @@
                                 ?>
 
                                 <tr>
-                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]">
+                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]" id="biaya_0_id_kategori_biaya">
                                             <option value="">-Pilih Kategori Biaya-</option>
                                             <?php foreach ($kategori as $i => $val) { ?>
                                             <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
                                         <input id="biaya_0_id_uraian" type="hidden" name="biaya[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                    </td>
+                                    <td>
+                                        <input id="biaya_0_nominal_disetujui" type="text" name="biaya[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td class="td-actions">
                                         <a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a>
@@ -134,14 +160,32 @@
     </div>
 </div>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
-<script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
+    function setStatus(obj) {
+        var status_pengajuan = $('#status_pengajuan').val();
+        if(status_pengajuan == 'Reject') {
+            $('#reject').removeAttr('style','display:none;');
+            $('#approved').attr('style','display:none;');
+            $('#approved_biaya').attr('style','display:none;');
+            $('#tabel-biaya > tbody > tr').each(function(){
+                $(this).find('input[name$="[nominal_disetujui]"]').attr('readonly',true);
+            });
+        }else{
+            $('#reject').attr('style','display:none;');
+            $('#approved').removeAttr('style','display:none;');
+            $('#approved_biaya').removeAttr('style','display:none;');
+            $('#tabel-biaya > tbody > tr').each(function(){
+                $(this).find('input[name$="[nominal_disetujui]"]').removeAttr('readonly',true);
+            });
+        }
+    }
+
     function proporsiUraian(obj){
         var jumlah_nominal = parseFloat(obj.value);
         var jml_row = $('#tabel-biaya tbody').length;
         var jml_proporsi = jumlah_nominal / jml_row;
         $('#tabel-biaya tbody tr').each(function(){
-            $(this).find    ('input[name$="[nominal]"]').val(jml_proporsi);
+            $(this).find('input[name$="[nominal]"]').val(jml_proporsi);
         });
     }
     function tambahBiaya(){
