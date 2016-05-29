@@ -118,7 +118,7 @@
                                         <input id="biaya_0_nominal_disetujui" type="text" name="biaya[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
                                     </td>
                                     <td class="td-actions">
-                                        <a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a>
+                                        <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
                                     </td>
                                 </tr>
                                 <?php 
@@ -141,7 +141,7 @@
                                         <input id="biaya_0_nominal_disetujui" type="text" name="biaya[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td class="td-actions">
-                                        <a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a>
+                                        <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -163,20 +163,30 @@
 <script type="text/javascript">
     function setStatus(obj) {
         var status_pengajuan = $('#status_pengajuan').val();
-        if(status_pengajuan == 'Reject') {
+        if (status_pengajuan == 'Reject') {
             $('#reject').removeAttr('style','display:none;');
             $('#approved').attr('style','display:none;');
             $('#approved_biaya').attr('style','display:none;');
             $('#tabel-biaya > tbody > tr').each(function(){
                 $(this).find('input[name$="[nominal_disetujui]"]').attr('readonly',true);
             });
-        }else{
+            $('#tambahBiaya').hide();
+        } else if(status_pengajuan == 'Approved'){
             $('#reject').attr('style','display:none;');
             $('#approved').removeAttr('style','display:none;');
             $('#approved_biaya').removeAttr('style','display:none;');
             $('#tabel-biaya > tbody > tr').each(function(){
                 $(this).find('input[name$="[nominal_disetujui]"]').removeAttr('readonly',true);
             });
+            $('#tambahBiaya').show();
+        } else {
+            $('#reject').attr('style','display:none;');
+            $('#approved').removeAttr('style','display:none;');
+            $('#approved_biaya').removeAttr('style','display:none;');
+            $('#tabel-biaya > tbody > tr').each(function(){
+                $(this).find('input[name$="[nominal_disetujui]"]').attr('readonly',true);
+            });
+            $('#tambahBiaya').hide();
         }
     }
 
@@ -265,8 +275,9 @@
       }
     }
 
-    $(document).ready(function(){  
+    $(document).ready(function() {  
         // hitungTotalSemua();
+        $('#tambahBiaya').hide();
         var id_kategori_biaya = '<?php echo isset($datapengajuan->id_kategori_biaya) ? $datapengajuan->id_kategori_biaya : ""; ?>';
         if(id_kategori_biaya != ""){           
             $('#id_kategori_biaya').val(id_kategori_biaya);

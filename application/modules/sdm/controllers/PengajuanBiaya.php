@@ -125,7 +125,6 @@ class PengajuanBiaya extends CI_Controller {
 	public function insert()
 	{
 		$status = true;
-
 		$tgl = '';
 		$tanggal = '';
 
@@ -163,11 +162,7 @@ class PengajuanBiaya extends CI_Controller {
 			$id_pengajuan_biaya = $id_pengajuan_biaya;
 		}else{
 			$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
-		}
-
-		// echo "<pre>";
-		// print_r($_POST['biaya']);exit;
-		// echo count($this->input->post('biaya')); exit;
+		}	
 
 		// input uraian
 		if(count($this->input->post('biaya')) > 0) {
@@ -221,7 +216,7 @@ class PengajuanBiaya extends CI_Controller {
 	}
 
 	public function setFormBiaya(){
-		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" class="form-control kategori_biaya"';
+		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" class="form-control kategori_biaya" required';
 		$kategori_biaya = $this->KategoriBiayaM->dd_kategori();
 
 		$data['tr'] = '';
@@ -230,8 +225,8 @@ class PengajuanBiaya extends CI_Controller {
 		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
 		<input id="biaya_0_id_uraian" name="biaya[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
 		</td>';
-		$data['tr'] .= '<td><input id="biaya_0_nominal_disetujui" name="biaya[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);"></td>';
-		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahBiaya();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusBiaya(this);" ><i class="fa fa-minus"> </i></a></td>';
+		$data['tr'] .= '<td><input id="biaya_0_nominal_disetujui" name="biaya[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" required></td>';
+		$data['tr'] .= '<td><a href="javascript:tambahBiaya(this);"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a> <a style="margin-left:10px;" href="javascript:hapusBiaya(this);"><button type="button" class="btn btn-small btn-danger" onClick="hapusBiaya(this);"><i class="fa fa-minus"></i></button></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 
 		exit;
