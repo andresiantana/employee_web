@@ -8,9 +8,9 @@ class SDUraianPencairanBiayaT extends UraianPencairanBiayaT {
 		$this->db->select('*');
 		$this->db->from('uraian_pencairan_biaya');
 		$this->db->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = uraian_pencairan_biaya.id_pencairan_biaya');
-		$this->db->join('kategori_biaya', 'kategori_biaya.id_kategori_biaya = uraian_pencairan_biaya.id_kategori_biaya','left');
+		$this->db->join('kategori_biaya', 'kategori_biaya.id_kategori_biaya = uraian_pencairan_biaya.id_kategori_biaya');
 		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pengajuan_biaya = pencairan_biaya.id_pengajuan_biaya');
-		$query = $this->db->get();
+x		$query = $this->db->get();
 		return $query;
 	}
 }

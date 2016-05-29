@@ -27,6 +27,15 @@ class SDPengajuanBiayaT extends PengajuanBiayaT {
 		$query = $this->db->get();
 		return $query;
 	}
+
+	public function tampilDetailPengajuan($id_pegawai){
+		$this->db->select('*');
+		$this->db->from('pengajuan_biaya');
+		$this->db->join('pegawai', 'pegawai.id_pegawai = pengajuan_biaya.id_pegawai');
+		$this->db->where('pengajuan_biaya.id_pegawai',$id_pegawai);
+		$query = $this->db->get();
+		return $query;
+	}
 }
 
 /* End of file SDPengajuanBiayaT.php */

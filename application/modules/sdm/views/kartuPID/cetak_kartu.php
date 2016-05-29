@@ -103,7 +103,50 @@
         <td></td>
         <td></td>
     </tr>
+    <tbody>
+        <?php 
+            $total_seluruh = 0;
+            foreach($detail_pengajuan as $key => $v){ 
+        ?>
+            <tr>
+                <td style="text-align:center;"><?php echo $v->semester; ?></td>
+                <td style='text-align:left;'>
+                    <ol>
+                        <?php foreach($detail_rincian as $i => $rincian){
+                            if($v->id_pengajuan_biaya == $rincian->id_pengajuan_biaya){
+                         ?>
+                            <li><?php echo ($rincian->nama_kategori); ?></li>
+                        <?php } ?>
+                        <?php } ?>
+                    </ol>
+                </td>
+                <td style='text-align:left;'>
+                    <ol style="list-style:none;">
+                        <?php 
+                            $total = 0;
+                            foreach($detail_rincian as $i => $rincian){
+                            if($v->id_pengajuan_biaya == $rincian->id_pengajuan_biaya){
+                                $total += $rincian->nominal_disetujui;
+                         ?>
+                            <li style='text-align:right;'><?php echo ($rincian->nominal_disetujui); ?></li>
+                        <?php } ?>
+                        <?php } ?>
+                    </ol>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align:right;"><b><i>Total</i></a></td>
+                <td><?php echo $total; ?></td>
+            </tr>
+        <?php             
+        } ?>
+        <tr>
+            <td colspan="3" style="text-align:right;"><b><i>Total Seluruh Pengajuan</i></a></td>
+            <td><?php echo $total; ?></td>
+        </tr>
+    </tbody>
 </table>
 <script type="text/javascript">
-  window.print();
+    window.print();
 </script>

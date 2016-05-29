@@ -125,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <label>Lama Studi (Tahun)</label>
-                    <input class="form-control notelp" type="text" name="lama_tahun_studi" value="<?php echo isset($datapegawai->lama_tahun_studi) ? $datapegawai->lama_tahun_studi : ""; ?>">
+                    <input class="form-control notelp" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>">
                 </div>
             </div>
             <div class="col-md-6">

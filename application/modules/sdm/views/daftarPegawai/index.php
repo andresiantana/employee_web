@@ -106,7 +106,13 @@
                 <option value="Lulus">Lulus</option>
                 <option value="Belum Lulus">Belum Lulus</option>
             </select>
-        </div>     
+        </div>   
+        <div class="form-group">
+          <label>Tanggal Selesai Studi</label>
+          <div class="myOwnClass">
+            <input type="text" class="form-control" id="tanggal_selesai_studi" name="tanggal_selesai_studi">
+          </div>
+        </div>
     </p>
   </div>
   <button data-remodal-action="confirm" class="remodal-confirm" onclick="updateStatusLulus();">Ubah</button>
@@ -187,9 +193,20 @@ function batalNotifikas(){
 function updateStatusLulus(id_pegawai){
     var id_pegawai = $('#pegawai_id').val();
     var status_lulus = $('#status_lulus').val();
+    var tanggal_selesai_studi = $('#tanggal_selesai_studi').val();
     var data = {
       id_pegawai    : id_pegawai,
-      status_kelulusan : status_lulus
+      status_kelulusan : status_lulus,
+      tanggal_selesai_studi:tanggal_selesai_studi
+    }
+
+    if(status_lulus == ''){
+      alert("Status Lulus wajib diisi");
+      return false;
+    }
+    if(tanggal_selesai_studi == ''){
+      alert("Tanggal Selesai Studi wajib diisi");
+      return false;
     }
     $.ajax({
       url     : "<?php echo base_url('sdm/daftarPegawai/updateStatusLulus'); ?>",

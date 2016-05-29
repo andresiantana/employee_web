@@ -139,8 +139,17 @@ class DaftarPegawai extends CI_Controller {
 
         $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
         $status_kelulusan = isset($_GET['status_kelulusan']) ? $_GET['status_kelulusan'] : null;
+        $tanggal_selesai_studi = isset($_GET['tanggal_selesai_studi']) ? $_GET['tanggal_selesai_studi'] : null;
+
+        // load data pegawai
+        $pegawai = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
+        $tanggal_mulai_studi = $pegawai->tanggal_mulai_studi;
+        $bulan =  $this->diffInMonths($tanggal_mulai_studi, $tanggal_selesai_studi);
+
         $object = array(
-			'status_kelulusan'=>$status_kelulusan
+			'status_kelulusan'=>$status_kelulusan,
+			'tanggal_selesai_studi'=>$tanggal_selesai_studi,
+			'lama_bulan_studi'=>$bulan
 		);
 
 		$this->db->where('id_pegawai', $id_pegawai);
@@ -195,6 +204,16 @@ class DaftarPegawai extends CI_Controller {
 		echo json_encode($data); 
 		exit;
 	}
+
+    public  function diffInMonths(\DateTime $date1, \DateTime $date2)
+    {
+	    $diff =  $date1->diff($date2);
+
+	    $months = $diff->y * 12 + $diff->m + $diff->d / 30;
+
+	    return (int) round($months);
+    }
+
 }
 
 /* End of file DaftarPegawai.php */
