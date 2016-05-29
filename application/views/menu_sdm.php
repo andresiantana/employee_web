@@ -22,6 +22,9 @@
             <li>
                 <a <?php if($menu == 'pengeluaran'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/Pengeluaran'); ?>">Pengeluaran</a>
             </li>
+            <li>
+                <a <?php if($menu == 'amortisasi'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Amortisasi'); ?>">Amortisasi</a>
+            </li>
         </ul>
     </li>
 </ul>
