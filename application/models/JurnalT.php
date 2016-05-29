@@ -12,7 +12,8 @@ class JurnalT extends CI_Model {
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan);
 		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("id_pencairan_biaya != ''");
-		$this->db->order_by("id_jurnal","asc");
+		$this->db->where("jurnal.status_aktif is true");
+		$this->db->order_by("jurnal.id_jurnal","asc");
 		$query = $this->db->get();
         return $query;
     }
@@ -25,6 +26,7 @@ class JurnalT extends CI_Model {
 		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
 		$this->db->where("jurnal.id_pencairan_biaya != ''");	
+		$this->db->where("jurnal.status_aktif is true");
 		$this->db->order_by("jurnal.id_jurnal","asc");
 		$this->db->order_by("jurnal.status","asc");
 		$query = $this->db->get();
@@ -51,6 +53,7 @@ class JurnalT extends CI_Model {
 		
 		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
+		$this->db->where("jurnal.status_aktif is true");
 		$query = $this->db->get();
         return $query;
     }
@@ -87,6 +90,7 @@ class JurnalT extends CI_Model {
 		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
 		$this->db->where("jurnal.status", 'K');
+		$this->db->where("jurnal.status_aktif is true");
 		$query = $this->db->get();
         return $query;
     }
