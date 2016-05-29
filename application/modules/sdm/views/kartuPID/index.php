@@ -48,7 +48,7 @@
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_studi_lanjut; ?>')"><?php echo $v->surat_studi_lanjut; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
-                                    <td style="text-align:right;"><?php echo $v->username; ?></td>
+                                    <td style="text-align:right;"><?php echo $v->biaya_spp; ?></td>
                                     <td class="td-actions">
                                         <?php
                                             if($v->status_kelulusan == 'Lulus'){

@@ -32,6 +32,24 @@ class KUPencairanBiayaT extends PencairanBiayaT {
 		$query = $this->db->get();
 		return $query;
 	}
+
+	public function tampilLaporanPengeluaran($nama_pegawai = null , $kode_pencairan = null, $tanggal_awal = null ,$tanggal_akhir = null){
+		$this->db->select('*');
+		$this->db->from('pencairan_biaya');
+		$this->db->join('pegawai', 'pegawai.id_pegawai = pencairan_biaya.id_pegawai');
+		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pengajuan_biaya = pencairan_biaya.id_pengajuan_biaya');
+		if($nama_pegawai != ''){
+			$this->db->like('pegawai.nama_lengkap', $nama_pegawai);
+		}
+		if($kode_pencairan != ''){
+			$this->db->like('pencairan_biaya.kode_pencairan', $kode_pencairan);
+		}
+		if($tanggal_awal != ''){
+			$this->db->where('pencairan_biaya.tanggal', $tanggal_awal);
+		}
+		$query = $this->db->get();
+		return $query;
+	}
 }
 
 /* End of file KUPencairanBiayaT.php */
