@@ -18,7 +18,7 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
                     <input class="form-control" id="username" name="username" placeholder="Masukan Username" required>
                 </div>                
-                <button class="button btn btn-primary btn-large" type="button" onclick="resetPassword();">Ulang Kata Kunci</button>
+                <button class="button btn btn-danger btn-large" type="button" onclick="resetPassword();">Ulang Kata Kunci</button>
                 </div>
                 <div id="showPassword">
                     <span>Kata Kunci baru Anda : <b id="password_baru"> </b></span>

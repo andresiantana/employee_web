@@ -37,7 +37,7 @@
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
                     <input class="form-control" type="password" name="password" placeholder="Password">
                 </div>
-                <button class="button btn btn-primary btn-large">Registrasi</button> 
+                <button class="button btn btn-danger btn-large">Registrasi</button> 
                 kembali ke </i>&nbsp;<span><a href="<?php echo base_url('admin/login'); ?>">Login</a></span>
             <?php echo form_close(); ?>
         </div>

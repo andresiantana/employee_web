@@ -53,7 +53,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url('admin/login'); ?>"><strong><?php echo $judul; ?></strong></a>
+                <div class="navbar-brand">
+                    <table>
+                        <tr>
+                            <td><img src="<?php echo base_url().'data/images/logo2.png'; ?>" width="50" height="40"></td>
+                            <td>&nbsp;&nbsp;&nbsp;<strong><font size="4"><?php echo $judul; ?></font></strong></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
