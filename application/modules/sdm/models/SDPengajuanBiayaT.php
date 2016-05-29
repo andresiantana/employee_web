@@ -21,7 +21,8 @@ class SDPengajuanBiayaT extends PengajuanBiayaT {
 			$this->db->where('pengajuan_biaya.id_kategori_biaya', $id_kategori_biaya);
 		}
 		if($tanggal_awal != ''){
-			$this->db->where('pengajuan_biaya.tanggal', $tanggal_awal);
+			$this->db->where("pengajuan_biaya.tanggal BETWEEN '".$tanggal_awal."' AND '".$tanggal_akhir."'");
+			// $this->db->where('pengajuan_biaya.tanggal', $tanggal_awal);
 		}
 		$query = $this->db->get();
 		return $query;

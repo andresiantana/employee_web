@@ -37,18 +37,8 @@ class PengajuanBiaya extends CI_Controller {
 		$status_pengajuan = $this->input->post('status_pengajuan');
 		$id_kategori_biaya = $this->input->post('id_kategori_biaya');
 		$tanggal_awal = $this->input->post('tanggal_awal');
-		if(!empty($tanggal_awal)){
-			$tgl_awal = explode("/",$tanggal_awal);		
-			$tgl_awal = $tgl_awal[2]."-".$tgl_awal[1]."-".$tgl_awal[0];
-			$tanggal_awal = $tgl_awal;
-		}
-
+	
 		$tanggal_akhir = $this->input->post('tanggal_akhir');
-		if(!empty($tgl_akhir)){
-			$tgl_akhir = explode("/",$tanggal_akhir);		
-			$tgl_akhir = $tgl_akhir[2]."-".$tgl_akhir[1]."-".$tgl_akhir[0];
-			$tanggal_akhir = $tgl_akhir;
-		}
 	
 		if($nip != '' || $kode_pengajuan != '' || $id_kategori_biaya != '' || $status_pengajuan != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
 			$data['data'] =  $this->SDPengajuanBiayaT->tampilData($nip,$kode_pengajuan,$id_kategori_biaya,$status_pengajuan,$tanggal_awal,$tanggal_akhir)->result_object();		
@@ -136,8 +126,6 @@ class PengajuanBiaya extends CI_Controller {
 	{
 		$status = true;
 
-		echo "<pre>";
-		print_r($_POST['biaya']);exit;
 		$tgl = '';
 		$tanggal = '';
 
@@ -219,6 +207,7 @@ class PengajuanBiaya extends CI_Controller {
 				}					
 			}	
 		}
+
 		if ($insert && $status) {
 			echo "<script>alert('Ubah Pengajuan Biaya berhasil disimpan!');
                     window.location.href='".base_url('sdm/PengajuanBiaya')."';

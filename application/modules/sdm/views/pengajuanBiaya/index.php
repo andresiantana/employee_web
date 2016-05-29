@@ -17,7 +17,11 @@
 
                             <td><label>Tanggal Awal</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text" onblur="setPencarian();" class="form-control" id="tanggal_awal" name="tanggal_awal"></td>
+                            <td>
+                              <div class="myOwnClass">
+                                  <input type="text" class="form-control" id="tanggal_awal" name="tanggal_awal" required>
+                              </div>
+                            </td>
                         </tr>
                         <tr>
                             <td><label>Kode Pengajuan</label></td>
@@ -28,7 +32,11 @@
 
                             <td><label>Tangal Akhir</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir"></td>
+                            <td>
+                              <div class="myOwnClass">
+                                <input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir">
+                              </div>
+                            </td>
                         </tr>
                         <tr>
                             <td><label>Status</label></td>
