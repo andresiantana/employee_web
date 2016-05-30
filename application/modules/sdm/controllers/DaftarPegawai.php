@@ -205,7 +205,7 @@ class DaftarPegawai extends CI_Controller {
 		exit;
 	}
 
-    public  function diffInMonths(\DateTime $date1, \DateTime $date2)
+    public  function diffInMonths($date1, $date2)
     {
 	    $diff =  $date1->diff($date2);
 

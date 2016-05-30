@@ -101,7 +101,7 @@
     <p id="modal1Desc">
         <div class="form-group">
             <label>Status Kelulusan</label>
-            <select class="form-control" name="status_lulus" id="status_lulus" onChange='setStatus(this);'>
+            <select class="form-control" name="status_lulus" id="status_lulus'>
                 <option value="">-Pilih Status-</option>
                 <option value="Lulus">Lulus</option>
                 <option value="Belum Lulus">Belum Lulus</option>

@@ -220,10 +220,10 @@ class PengajuanBiaya extends CI_Controller {
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
 		$data['tr'] .= '<td>'.form_dropdown('biaya[0][id_kategori_biaya]', $kategori_biaya, '', $kategori_biaya_attribute).'</td>';
-		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
+		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only nominal" onblur="hitungTotalBiaya(this);" readonly=true>
 		<input id="biaya_0_id_uraian" name="biaya[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
 		</td>';
-		$data['tr'] .= '<td><input id="biaya_0_nominal_disetujui" name="biaya[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" required></td>';
+		$data['tr'] .= '<td><input id="biaya_0_nominal_disetujui" name="biaya[0][nominal_disetujui]" type="text" class="form-control numbers-only nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required></td>';
 		$data['tr'] .= '<td><a href="javascript:tambahBiaya(this);"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a> <a style="margin-left:10px;" href="javascript:hapusBiaya(this);"><button type="button" class="btn btn-small btn-danger" onClick="hapusBiaya(this);"><i class="fa fa-minus"></i></button></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 

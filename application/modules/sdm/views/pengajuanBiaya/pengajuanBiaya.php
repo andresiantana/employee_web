@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('accept-charset'=>"utf-8")); ?>
+                        <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('accept-charset'=>"utf-8",'id'=>'form-inputan','onsubmit'=>'return cekInputan();return false;')); ?>
                         <?php if(validation_errors()){ ?>
                         <div class="alert alert-warning">
                             <strong><?php echo validation_errors(); ?></strong>
@@ -256,23 +256,35 @@
     }
 
     function cekInputan(){
-    // Menghitung jumlah data yang akan disimpan
-      var jml_biaya = 0;
-      $(".kategori_biaya").each(function(){
-        var kategori_biaya = $(this).parents('tr').find('input[name$="[id_kategori_biaya]"]').val();
+        // Menghitung jumlah data yang akan disimpan
+        var jml_biaya = 0;
+        var jml_disetujui = 0;
+        $("#tabel-biaya tbody tr").each(function(){
+            var kategori_biaya = $(this).find('input[name$="[id_kategori_biaya]"]').val();
 
-        if(kategori_biaya == ''){
-          jml_biaya++;
+            if(kategori_biaya == ''){
+              jml_biaya++;
+            }
+        });
+
+        $("#tabel-biaya tbody tr").each(function(){
+            var nominal_disetujui = $(this).find('input[name$="[nominal_disetujui]"]').val();
+
+            if(nominal_disetujui == ''){
+                  jml_disetujui++;
+            }
+        });
+        // Validasi Form pada saat akan disimpan
+        if(jml_disetujui > 0){
+            alert("Nominal Disetujui biaya harus diisi");
+            return false;
         }
-      });
-
-    // Validasi Form pada saat akan disimpan
-      if (jml_biaya > 0){
-        alert("Rincian Biaya harus diisi!");
-        return false;
-      }else{
-          return true;
-      }
+        if (jml_biaya > 0){
+            alert("Rincian Biaya harus diisi!");
+            return false;
+        }
+        $('#form-inputan').submit();
+        return true;
     }
 
     $(document).ready(function() {  
