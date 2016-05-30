@@ -185,9 +185,10 @@
               </td>
           </tr>
         </tfoot>
-                    </table>
-                </div><br><br>
-            </div>            
-        </div>
-    </div>
+      </table>
+  </div><br><br>
+  <a class="btn btn-danger" href="<?php echo base_url('keuangan/BukuBesar'); ?>"><< Kembali</a>
+</div>            
+</div>
+</div>
 </div>
