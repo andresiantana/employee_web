@@ -1,31 +1,23 @@
+<?php if(count($data) > 0){ ?>
 <?php foreach($data as $key => $v): ?>
     <tr>
         <td><?php echo $key+1; ?></td>
         <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
         <td><?php echo $v->kode_pengajuan; ?></td>
         <td><?php echo $v->nama_lengkap; ?></td>
-        <td><?php echo $v->nama_kategori; ?></td>
         <td><?php echo $v->semester; ?></td>
         <td><?php echo $v->jumlah_nominal; ?></td>                                    
-        <td>
-            <?php if(!empty($v->id_pencairan_dana)) { ?>
-            Dana Cair
-            <?php } ?>
-        </td>
         <td class="td-actions">
             <?php 
-                if($v->status_pengajuan == ''){
+                if(empty($v->id_pencairan_biaya)){
             ?>
-                <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve/Reject Pengajuan" onclick="popup_window_show('#sample', { pos : 'window-center',width : '800px' });setIdPengajuanBiaya(<?php echo $v->id_pengajuan_biaya; ?>);"><i class="fa fa-check"> </i></a>
-            <?php }else{ 
-                if($v->status_pengajuan == 'Approved'){
-                    $warna = 'color:green;';
-                }else{
-                    $warna = 'color:red;';
-                }
-            ?>
-            <font style="<?php echo $warna; ?>"><?php echo $v->status_pengajuan; ?></font>
+                <a href="<?php echo base_url('keuangan/PengajuanBiaya/pencairanBiaya?id_pengajuan_biaya='.$v->id_pengajuan_biaya); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Melakukan Pencairan Biaya"><i class="fa fa-check"> </i></a>
+            <?php }else{ ?>
+            <font>Sudah Dicairkan</font>
             <?php } ?>
         </td>
     </tr>
 <?php endforeach; ?>
+<?php }else{ ?>
+    <tr><td colspan="9">Data tidak ditemukan.</td></tr>
+<?php } ?>

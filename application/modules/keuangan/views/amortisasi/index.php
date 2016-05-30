@@ -6,7 +6,26 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <legend>Pencarian :</legend>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:10%"><label>NIP</label></td>
+                            <td style="width:1%;"></td>
+                            <td style="width:30%"> <input type="text" class="form-control" id="nip" name="nip"></td>
+
+                            <td style="width:9%"></td>
+
+                            <td><label>Nama</label></td>
+                            <td style="width:1%;"></td>
+                            <td><input type="text" class="form-control" id="nama" name="nama"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <a href='javascript:void(0);' onclick="setPencarian();" class="btn btn-small btn-success"><i class="fa fa-search"> </i> Cari</a>
+                    <a href='<?php echo base_url('keuangan/Amortisasi/index'); ?>' class="btn btn-small btn-info"><i class="fa fa-refresh"> </i> Ulangi</a>
+                    <br><br>
+
+                    <table class="table table-striped table-bordered table-hover" id="data-amortisasi">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -32,6 +51,7 @@
                             <?php } else { echo "<tr><td colspan='5'><i>Tidak ada data</i></td></tr>"; } ?>
                         </tbody>
                     </table>
+                    <?php echo isset($halaman) ? "Halaman" : ""; ?> :  <div class="halaman"><?php echo $halaman;?></div>
                 </div>
             </div>
         </div>
@@ -51,12 +71,12 @@ function setPencarian(){
     }
 
   $.ajax({
-      url     : "<?php echo base_url('sdm/kartuPID'); ?>",
+      url     : "<?php echo base_url('keuangan/Amortisasi'); ?>",
       type    : "POST",
       data    : data,
       dataType: 'json',
       success : function (data) {
-          $('#dataTables-example > tbody').html(data);
+          $('#data-amortisasi > tbody').html(data);
       }
     });
 }

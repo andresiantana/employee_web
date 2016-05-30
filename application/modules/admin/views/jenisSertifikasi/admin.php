@@ -32,6 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php if(count($data) > 0){ ?>
                             <?php foreach($data as $i=>$v): ?>
                                 <tr>
                                     <td><?php echo ($i+1); ?></td>
@@ -42,9 +43,12 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php }else{ ?>
+                            <tr><td colspan="3">Data tidak ditemukan.</td></tr>
+                            <?php } ?>
                         </tbody>
                     </table>
-                    Halaman :  <div class="halaman"><?php echo $halaman;?></div>
+                    <?php echo isset($halaman) ? "Halaman" : ""; ?> :  <div class="halaman"><?php echo $halaman;?></div>
                 </div>  
                 <br>              
                 <a class="btn btn-primary" href="<?php echo base_url('admin/jenisSertifikasi/tambah'); ?>"><i class="fa fa-plus"></i> Tambah Jenis Sertifikasi</a>

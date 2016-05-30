@@ -38,7 +38,7 @@
 		                            <td style="width:10%"><label>Bulan</label></td>
 		                            <td style="width:1%;"></td>
 		                            <td style="width:30%">
-		                            	<select id="bulan" nama="bulan" class="form-control" required>
+		                            	<select id="bulan" name="bulan" class="form-control" required>
 			                                <?php
 												if (isset($_POST['bulan'])){
 													$bln = $_POST['bulan'];

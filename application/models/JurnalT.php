@@ -10,8 +10,7 @@ class JurnalT extends CI_Model {
 		$this->db->from('jurnal');
 		$this->db->join('coa', 'coa.no_akun = jurnal.no_akun');
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan);
-		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
-		$this->db->where("id_pencairan_biaya != ''");
+		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.status_aktif is true");
 		$this->db->order_by("jurnal.id_jurnal","asc");
 		$query = $this->db->get();
@@ -23,9 +22,8 @@ class JurnalT extends CI_Model {
 		$this->db->from('jurnal');
 		$this->db->join('coa', 'coa.no_akun = jurnal.no_akun');
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan);
-		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
+		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
-		$this->db->where("jurnal.id_pencairan_biaya != ''");	
 		$this->db->where("jurnal.status_aktif is true");
 		$this->db->order_by("jurnal.id_jurnal","asc");
 		$this->db->order_by("jurnal.status","asc");
@@ -51,7 +49,7 @@ class JurnalT extends CI_Model {
 			$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan);	
 		}
 		
-		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
+		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
 		$this->db->where("jurnal.status_aktif is true");
 		$query = $this->db->get();
@@ -69,7 +67,7 @@ class JurnalT extends CI_Model {
 		$this->db->from('jurnal');
 		$this->db->join('coa', 'coa.no_akun = jurnal.no_akun');
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan_sebelumnya);
-		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
+		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
 		$this->db->where("jurnal.status", 'D');
 		$query = $this->db->get();
@@ -87,7 +85,7 @@ class JurnalT extends CI_Model {
 		$this->db->from('jurnal');
 		$this->db->join('coa', 'coa.no_akun = jurnal.no_akun');
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan_sebelumnya);
-		// $this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
+		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
 		$this->db->where("jurnal.status", 'K');
 		$this->db->where("jurnal.status_aktif is true");

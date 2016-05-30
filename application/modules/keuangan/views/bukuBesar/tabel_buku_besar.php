@@ -79,112 +79,112 @@
                         </thead>
                         <tbody>
                             <?php 
-          $akun = (substr($kode_akun,0,1));   
-          $total_debit = 0;
-          $total_kredit = 0;
-          $total1 = 0;
-          $total2 = 0;
-          $total = 0;
-          $total_saldoawal = 0;
-            if(($akun == 1) OR ($akun ==5)){
-              $total_saldoawal=$saldo_awal + ($saldo_debit - $saldo_kredit);
-            }else{
-              $total_saldoawal=$saldo_awal + ($saldo_kredit - $saldo_debit);
-            }
+                              $akun = (substr($kode_akun,0,1));   
+                              $total_debit = 0;
+                              $total_kredit = 0;
+                              $total1 = 0;
+                              $total2 = 0;
+                              $total = 0;
+                              $total_saldoawal = 0;
+                                if(($akun == 1) OR ($akun ==5)){
+                                  $total_saldoawal=$saldo_awal + ($saldo_debit - $saldo_kredit);
+                                }else{
+                                  $total_saldoawal=$saldo_awal + ($saldo_kredit - $saldo_debit);
+                                }
 
-            if($total_saldoawal <= 0){
-              $total_saldoawal = $total_saldoawal * (-1);
-            }
+                                if($total_saldoawal <= 0){
+                                  $total_saldoawal = $total_saldoawal * (-1);
+                                }
 
-          echo "<tr>";                
-          echo '<td></td>';
-          echo "<td><b><i>Saldo Awal :</i></b></td>";
-          echo "<td></td>";
-          echo "<td style='text-align:right;'>";  
-                 
-          if( ($akun == 1) OR ($akun ==5)){
-            //echo "<b>".number_format($total_saldoawal,0,'','.')."</b>";
-          }               
-          echo "</td>";
-          echo "<td style='text-align:right;'>";
-          if( ($akun != 1) OR ($akun !=5)){
-            //echo "<b>".number_format($total_saldoawal,0,'','.')."</b>";
-          }
-          echo "</td>";
-          echo "<td style='text-align:right;'><b>".number_format($total_saldoawal,0,'','.')."</b></td>";
-          echo "</tr>";
+                              echo "<tr>";                
+                              echo '<td></td>';
+                              echo "<td><b><i>Saldo Awal :</i></b></td>";
+                              echo "<td></td>";
+                              echo "<td style='text-align:right;'>";  
+                                     
+                              if( ($akun == 1) OR ($akun ==5)){
+                                //echo "<b>".number_format($total_saldoawal,0,'','.')."</b>";
+                              }               
+                              echo "</td>";
+                              echo "<td style='text-align:right;'>";
+                              if( ($akun != 1) OR ($akun !=5)){
+                                //echo "<b>".number_format($total_saldoawal,0,'','.')."</b>";
+                              }
+                              echo "</td>";
+                              echo "<td style='text-align:right;'><b>".number_format($total_saldoawal,0,'','.')."</b></td>";
+                              echo "</tr>";
 
-          $total_saldo = 0;
+                              $total_saldo = 0;
 
-          if(count($data) > 0){            
-            foreach($data as $v): 
-                if($v->status == 'D'){
-                    $total_debit += $v->biaya;
-                }else{
-                    $total_kredit += $v->biaya;
-                }
-          ?>
-            <tr>
-                <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
-                <td><?php echo $v->nama_akun; ?></td>
-                <td style="text-align:center;">JU1</td>
-                <td style="text-align:right;">
-                  <?php
-                    if($v->status == 'D'){
-                      echo number_format($v->biaya,0,'','.');
-                      $total1 += $v->biaya;
-                    }else{
-                      echo 0;
-                    }
-                  ?>
-                </td>
-                <td style="text-align:right;">
-                  <?php
-                    if($v->status == 'K'){
-                      echo number_format($v->biaya,0,'','.');
-                      $total2 += $v->biaya;
-                    }else{
-                      echo 0;
-                    }
-                  ?>
-                </td>
-                <td style="text-align:right;">
-                  <?php
-                    if((substr($kode_akun,0,1))==1 OR (substr($kode_akun,0,1))==5){
-                  //$total=($total2-$total1)+$total2;
-                      $total = $total_saldoawal + ($total1-$total2);
-                    }else{
-                      $total= $total_saldoawal + ($total1-$total2);
-                    }
-                    if($total>0){
-                      echo number_format($total,0,'','.');
-                    }else{
-                      echo number_format(-$total,0,'','.');
-                    }
-                  ?>
-                </td>
-            </tr>
-          <?php endforeach; ?>
-          <?php }else{ ?>
-          <tr>
-              <td colspan="6">Data tidak ditemukan.</td>
-          </tr>
-          <?php } ?>
-        </tbody>
-        <tfoot>
-          <tr>
-              <td colspan="5">Total (Rp.)</td>
-              <td style="text-align:right;">
-                <?php 
-                  if($total>0){
-                      echo number_format($total,0,'','.');
-                    }else{
-                      echo number_format(-$total,0,'','.');
-                    }
-                ?>
-              </td>
-          </tr>
-        </tfoot>
+                              if(count($data) > 0){            
+                                foreach($data as $v): 
+                                    if($v->status == 'D'){
+                                        $total_debit += $v->biaya;
+                                    }else{
+                                        $total_kredit += $v->biaya;
+                                    }
+                              ?>
+                            <tr>
+                                <td><?php echo isset($v->tanggal_jurnal) ? date('d M Y',strtotime($v->tanggal_jurnal)) : null; ?></td>
+                                <td><?php echo $v->nama_akun; ?></td>
+                                <td style="text-align:center;">JU1</td>
+                                <td style="text-align:right;">
+                                  <?php
+                                    if($v->status == 'D'){
+                                      echo number_format($v->biaya,0,'',',');
+                                      $total1 += $v->biaya;
+                                    }else{
+                                      echo 0;
+                                    }
+                                  ?>
+                                </td>
+                                <td style="text-align:right;">
+                                  <?php
+                                    if($v->status == 'K'){
+                                      echo number_format($v->biaya,0,'',',');
+                                      $total2 += $v->biaya;
+                                    }else{
+                                      echo 0;
+                                    }
+                                  ?>
+                                </td>
+                                <td style="text-align:right;">
+                                  <?php
+                                    if((substr($kode_akun,0,1))==1 OR (substr($kode_akun,0,1))==5){
+                                  //$total=($total2-$total1)+$total2;
+                                      $total = $total_saldoawal + ($total1-$total2);
+                                    }else{
+                                      $total= $total_saldoawal + ($total1-$total2);
+                                    }
+                                    if($total>0){
+                                      echo number_format($total,0,'',',');
+                                    }else{
+                                      echo number_format(-$total,0,'',',');
+                                    }
+                                  ?>
+                                </td>
+                            </tr>
+                          <?php endforeach; ?>
+                          <?php }else{ ?>
+                          <tr>
+                              <td colspan="6">Data tidak ditemukan.</td>
+                          </tr>
+                          <?php } ?>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                              <td colspan="5">Total (Rp.)</td>
+                              <td style="text-align:right;">
+                                <?php 
+                                  if($total>0){
+                                      echo number_format($total,0,'',',');
+                                    }else{
+                                      echo number_format(-$total,0,'',',');
+                                    }
+                                ?>
+                              </td>
+                          </tr>
+                        </tfoot>
                     </table>
                 </div><br><br>
             </div>            

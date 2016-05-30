@@ -13,43 +13,20 @@
 	                            <td style="width:10%"><label>Bulan</label></td>
 	                            <td style="width:1%;"></td>
 	                            <td style="width:30%">
-	                            	<select id="bulan" nama="bulan" class="form-control">
-		                                <?php
-											if (isset($_POST['bulan'])){
-												$bln = $_POST['bulan'];
-												switch ($bln){
-												case 01: $bl="Januari";break;
-												case 02: $bl="Februari";break;
-												case 03: $bl="Maret";break;
-												case 04: $bl="April";break;
-												case 05: $bl="Mei";break;
-												case 06: $bl="Juni";break;
-												case 07: $bl="Juli";break;
-												case 08: $bl="Agustus";break;
-												case 09: $bl="September";break;
-												case 10: $bl="Oktober";break;
-												case 11: $bl="November";break;
-												case 12: $bl="Desember";break;
-											}
-											?>
-											<option value="<?php echo $bln;?>"><?php echo $bl;?></option>
-											<?php
-											}
-											?>
-											
-											<option value="">--Pilih--</option>
-											<option value="01">Januari</option>
-											<option value="02">Februari</option>
-											<option value="03">Maret</option>
-											<option value="04">April</option>
-											<option value="05">Mei</option>
-											<option value="06">Juni</option>
-											<option value="07">Juli</option>
-											<option value="08">Agustus</option>
-											<option value="09">September</option>
-											<option value="10">Oktober</option>
-											<option value="11">November</option>
-											<option value="12">Desember</option>
+	                            	<select id="bulan" name="bulan" class="form-control">											
+										<option value="">--Pilih--</option>
+										<option value="01">Januari</option>
+										<option value="02">Februari</option>
+										<option value="03">Maret</option>
+										<option value="04">April</option>
+										<option value="05">Mei</option>
+										<option value="06">Juni</option>
+										<option value="07">Juli</option>
+										<option value="08">Agustus</option>
+										<option value="09">September</option>
+										<option value="10">Oktober</option>
+										<option value="11">November</option>
+										<option value="12">Desember</option>
 									</select>
 	                            </td>
 
@@ -65,7 +42,7 @@
 	                        <tr>
 	                            <td><label>Tahun</label></td>
 	                            <td style="width:1%;"></td>
-	                            <td> <input type="text" class="form-control" id="tahun" name="tahun"></td>
+	                            <td><input type="text" class="form-control" id="tahun" name="tahun"></td>
 
 	                            <td style="width:9%"></td>
 

@@ -16,23 +16,48 @@ class Amortisasi extends CI_Controller {
         $this->load->model('KUPegawai');
 	}
 
-	public function index()
+	public function index($id = NULL)
 	{
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['judulHeader'] = 'Amortisasi';
 		$data['menu'] = 'Amortisasi';
+
+		$jml = $this->db->get('pegawai');
+
+		//pengaturan pagination
+		 $config['base_url'] = base_url().'keuangan/Amortisasi/index';
+		 $config['total_rows'] = $jml->num_rows();
+		 $config['per_page'] = '10';
+		 $config['first_page'] = 'Awal';
+		 $config['last_page'] = 'Akhir';
+		 $config['next_page'] = '&laquo;';
+		 $config['prev_page'] = '&raquo;';
+
+		//inisialisasi config
+		 $this->pagination->initialize($config);
+
+		//buat pagination
+		 $data['halaman'] = $this->pagination->create_links();
+
 		$nip = $this->input->post('nip');
 		$nama = $this->input->post('nama');
 		if($nip != '' || $nama != ''){
-			$data['data'] =  $this->KUPegawai->tampilDataPegawaiAmortisasi($nip,$nama)->result_object();		
+			$data['data'] =  $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id,$nip,$nama)->result_object();	
+			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($nip,$nama)->row();
+			if(count($data['data_row']) > 0){
+				$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+1));		
+			}else{
+				$data['amortisasi'] = 0;
+			}
+			
 			$tr['tr'] = $this->load->view('keuangan/amortisasi/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$data['data']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->result_object();
-			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->row();
+			$data['data']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id)->result_object();
+			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id)->row();
 			$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+1));
 		}	
 		$this->template->display('keuangan/amortisasi/index',$data);

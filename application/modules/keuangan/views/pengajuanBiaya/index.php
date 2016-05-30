@@ -48,6 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php if(count($data) > 0){ ?>
                             <?php foreach($data as $key => $v): ?>
                                 <tr>
                                     <td><?php echo $key+1; ?></td>
@@ -67,6 +68,9 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php }else{ ?>
+                            <tr><td colspan="7">Data tidak ditemukan.</td></tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div><br><br>

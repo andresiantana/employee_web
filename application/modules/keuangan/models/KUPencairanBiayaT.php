@@ -16,7 +16,7 @@ class KUPencairanBiayaT extends PencairanBiayaT {
 			$this->db->like('pencairan_biaya.kode_pencairan', $kode_pencairan);
 		}
 		if($tanggal_awal != ''){
-			$this->db->where('pencairan_biaya.tanggal', $tanggal_awal);
+			$this->db->where('pencairan_biaya.tanggal_pencairan', $tanggal_awal);
 		}
 		$query = $this->db->get();
 		return $query;
@@ -33,21 +33,25 @@ class KUPencairanBiayaT extends PencairanBiayaT {
 		return $query;
 	}
 
-	public function tampilLaporanPengeluaran($nama_pegawai = null , $kode_pencairan = null, $tanggal_awal = null ,$tanggal_akhir = null){
+	public function tampilLaporanPengeluaran($num, $offset, $nip = null, $nama = null, $kode_pengeluaran = null, $tanggal_awal = null ,$tanggal_akhir = null){
 		$this->db->select('*');
-		$this->db->from('pencairan_biaya');
-		$this->db->join('pegawai', 'pegawai.id_pegawai = pencairan_biaya.id_pegawai');
-		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pengajuan_biaya = pencairan_biaya.id_pengajuan_biaya');
-		if($nama_pegawai != ''){
-			$this->db->like('pegawai.nama_lengkap', $nama_pegawai);
+		if($nip != ''){
+			$this->db->like('pegawai.nip', $nip);
 		}
-		if($kode_pencairan != ''){
-			$this->db->like('pencairan_biaya.kode_pencairan', $kode_pencairan);
+		if($nama != ''){
+			$this->db->like('pegawai.nama_lengkap', $nama);
+		}
+		if($kode_pengeluaran != ''){
+			$this->db->like('pencairan_biaya.kode_pencairan', $kode_pengeluaran);
 		}
 		if($tanggal_awal != ''){
-			$this->db->where('pencairan_biaya.tanggal', $tanggal_awal);
+			$this->db->where("pencairan_biaya.tanggal_pencairan BETWEEN '".$tanggal_awal."' AND '".$tanggal_akhir."'");
 		}
-		$query = $this->db->get();
+
+		$this->db->join('pegawai', 'pegawai.id_pegawai = pencairan_biaya.id_pegawai');
+		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pengajuan_biaya = pencairan_biaya.id_pengajuan_biaya');
+		
+		$query = $this->db->get('pencairan_biaya',$num,$offset);
 		return $query;
 	}
 }
