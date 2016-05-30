@@ -105,6 +105,7 @@
                             </tfoot>
                     </table>
                 </div><br><br>
+                <a class="btn btn-danger" href="<?php echo base_url('keuangan/Jurnal'); ?>"><< Kembali</a>
             </div>            
         </div>
     </div>

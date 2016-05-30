@@ -115,7 +115,6 @@
                               echo "</tr>";
 
                               $total_saldo = 0;
-
                               if(count($data) > 0){            
                                 foreach($data as $v): 
                                     if($v->status == 'D'){
@@ -187,7 +186,8 @@
                         </tfoot>
                     </table>
                 </div><br><br>
-            </div>            
-        </div>
-    </div>
+  <a class="btn btn-danger" href="<?php echo base_url('keuangan/BukuBesar'); ?>"><< Kembali</a>
+</div>            
+</div>
+</div>
 </div>
