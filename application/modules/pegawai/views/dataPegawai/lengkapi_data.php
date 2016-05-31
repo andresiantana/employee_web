@@ -68,7 +68,7 @@
                 <div id="dosen" style="display:none;">                    
                     <div class="form-group">
                         <label>Fakultas</label>
-                        <select class="form-control" name="kode_fakultas" id="kode_fakultas" onChange="setProdi();">
+                        <select class="form-control" name="kode_fakultas_dosen" id="kode_fakultas_dosen" onChange="setProdi();">
                             <option value="">-Pilih Fakultas-</option>
                             <?php foreach ($fakultas as $i => $val) { ?>
                                 <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
@@ -87,7 +87,7 @@
                 <div id="tpa" style="display:none;">                    
                     <div class="form-group">
                         <label>Fakultas - Unit Kerja</label>
-                        <select class="form-control" name="kode_fakultas" id="kode_fakultas">
+                        <select class="form-control" name="kode_fakultas_tpa" id="kode_fakultas_tpa">
                             <option value="">-Pilih-</option>
                             <?php foreach ($fakultas as $i => $val) { 
                                     if($datapegawai->kode_fakultas == $val->kode_fakultas){
@@ -224,7 +224,11 @@
                                             <?php } ?>
                                             <?php } ?>
                                         </select></td>
-                                    <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" value="<?php echo $datas->penyelenggara; ?>"></td>
+                                    <td>
+                                        <input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" value="<?php echo $datas->penyelenggara; ?>">
+                                        <input id="sertifikasi_0_id_sertifikasi" type="hidden" name="sertifikasi[0][id_sertifikasi]" class="form-control" value="<?php echo $datas->id_sertifikasi; ?>">
+                                        <input id="sertifikasi_0_file_upload" type="hidden" name="sertifikasi[0][file_upload]" class="form-control" value="<?php echo $datas->upload; ?>">
+                                    </td>
                                     <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control" value="<?php echo $datas->skor; ?>"></td>
                                     <td><a href="javascript:prd_download('<?php echo $datas->upload; ?>')"><?php echo $datas->upload; ?></a><br><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" class="form-control"></td>
                                     <td class="td-actions">
@@ -243,7 +247,11 @@
                                             <option value="<?php echo $val->id_jenis_sertifikasi; ?>"><?php echo $val->nama_jenis_sertifikasi; ?></option>
                                             <?php } ?>
                                         </select></td>
-                                    <td><input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" ></td>
+                                    <td>
+                                        <input id="sertifikasi_0_penyelenggara" type="text" name="sertifikasi[0][penyelenggara]" class="form-control" >
+                                        <input id="sertifikasi_0_id_sertifikasi" type="hidden" name="sertifikasi[0][id_sertifikasi]" class="form-control">
+                                        <input id="sertifikasi_0_file_upload" type="hidden" name="sertifikasi[0][file_upload]" class="form-control">
+                                    </td>
                                     <td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>
                                     <td><input id="sertifikasi_0_upload"  name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>
                                     <td class="td-actions">
@@ -272,10 +280,10 @@
 <script type="text/javascript">
     function setLokasiPendidikan(){
         var nama_lokasi = $('#nama_lokasi').val();
-        
+        var id_lokasi = '<?php echo isset($datapegawai->id_lokasi) ? $datapegawai->id_lokasi : ""; ?>';
         $.ajax({
             type: 'POST',
-            data: "nama_lokasi="+nama_lokasi,
+            data: "nama_lokasi="+nama_lokasi+"&id_lokasi="+id_lokasi,
             url: '<?php echo base_url('pegawai/DataPegawai/dropDownUniversitas'); ?>',
             success: function(result) {
                 $('#tampil_universitas').html(result);       
@@ -285,14 +293,24 @@
     }
 
     function setProdi(){
-        var kode_fakultas = $('#kode_fakultas').val();
-        
+        var kode_fakultas_dosen = $('#kode_fakultas_dosen').val();
+        var kode_fakultas_tpa= $('#kode_fakultas_tpa').val();
+        var status_pegawai= $('#status_pegawai').val();
+        var id_prodi = '<?php echo isset($datapegawai->id_prodi) ? $datapegawai->id_prodi : null; ?>';
+
+        if(status_pegawai == 'DOSEN'){
+           kode_fakultas = kode_fakultas_dosen;
+        }else{
+            kode_fakultas = kode_fakultas_tpa;
+        }
         $.ajax({
            type: 'POST',
            data: "kode_fakultas="+kode_fakultas,
            url: '<?php echo base_url('pegawai/DataPegawai/dropDownProdi'); ?>',
            success: function(result) {
-            $('#tampil_prodi').html(result);       }
+            $('#tampil_prodi').html(result);       
+            $('#id_prodi').val(id_prodi);
+            }
         });
 
     }
@@ -396,8 +414,12 @@
         }
 
         var fakultas = '<?php echo isset($datapegawai->kode_fakultas) ? $datapegawai->kode_fakultas : ""; ?>';
-        if(fakultas != ''){
-            $('#kode_fakultas').val(fakultas);
+        if(fakultas != ''){            
+             if(status_pegawai == 'DOSEN'){
+                $('#kode_fakultas_dosen').val(fakultas);
+            }else{
+                $('#kode_fakultas_tpa').val(fakultas);
+            }
             setProdi()
         }
 
@@ -414,7 +436,7 @@
               data    : data,
               dataType: 'json',
               success : function (data) {                    
-                    //$('#nama_lokasi').val(data.nama_lokasi);
+                    $('#nama_lokasi').val(data.nama_lokasi);
                     setLokasiPendidikan();
                     if(id_lokasi != ''){
                         $('#id_lokasi').val(id_lokasi);

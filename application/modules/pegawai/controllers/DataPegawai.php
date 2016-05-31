@@ -93,7 +93,12 @@ class DataPegawai extends CI_Controller {
 		$email = $this->input->post('email');
 		$no_telp_hp = $this->input->post('no_telp_hp');
 		$status_pegawai = $this->input->post('status_pegawai');
-		$kode_fakultas = $this->input->post('kode_fakultas');
+		$kode_fakultas = $this->input->post('kode_fakultas_dosen');
+		if(!empty($kode_fakultas)){
+			$kode_fakultas = $kode_fakultas;
+		}else{
+			$kode_fakultas = $this->input->post('kode_fakultas_tpa');
+		}
 		$id_prodi = $this->input->post('id_prodi');
 		$nama_bank = $this->input->post('nama_bank');
 		$id_cabang_bank = $this->input->post('id_cabang_bank');
@@ -141,7 +146,7 @@ class DataPegawai extends CI_Controller {
  		
 		// upload studi lanjut
 		$config2['upload_path']    = $this->file_path;
-     	$config2['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+     	$config2['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
      	$config2['max_size']       = '2000';
      	$config2['max_width']      = '2000';
      	$config2['max_height']     = '2000';
@@ -163,7 +168,7 @@ class DataPegawai extends CI_Controller {
  		
 		// uload surat lulus seleksi
 		$config3['upload_path']    = $this->file_path;
-     	$config3['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+     	$config3['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
      	$config3['max_size']       = '2000';
      	$config3['max_width']      = '2000';
      	$config3['max_height']     = '2000';
@@ -185,7 +190,7 @@ class DataPegawai extends CI_Controller {
 
  		// upload surat terima beasiswa
 		$config4['upload_path']    = $this->file_path;
-     	$config4['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+     	$config4['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
      	$config4['max_size']       = '2000';
      	$config4['max_width']      = '2000';
      	$config4['max_height']     = '2000';
@@ -229,7 +234,7 @@ class DataPegawai extends CI_Controller {
 			'surat_terima_beasiswa' => $surat_terima_beasiswa,
 			'biaya_spp' => $biaya_spp,
 			'id_user' => $id_user,
-			'tanggal_mulai_studi' => $tanggal_mulai_studi,
+			'tanggal_mulai_studi' => $tanggal_studi,
 			'lama_bulan_studi' => $lama_bulan_studi,
 		);
 
@@ -260,40 +265,53 @@ class DataPegawai extends CI_Controller {
 		$datapegawai = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
 			if(count($this->input->post('sertifikasi')) > 0) {
 				foreach ($this->input->post('sertifikasi') as $i => $data) {	
-					$id_pegawai = $datapegawai->id_pegawai;
-					$id_jenis_sertifikasi = $data['id_jenis_sertifikasi'];
-					$penyelenggara 	= $data['penyelenggara'];
-					$skor 	= $data['skor'];
-					$upload 	= isset($_FILES['sertifikasi']['name'][$i]['upload']) ? $_FILES['sertifikasi']['name'][0]['upload'] : null;
+					if($data['id_jenis_sertifikasi'] != '' || $data['penyelenggara'] != '' || $data['skor'] != ''){
+						$id_pegawai = $datapegawai->id_pegawai;
+						$id_jenis_sertifikasi = $data['id_jenis_sertifikasi'];
+						$id_sertifikasi = isset($data['id_sertifikasi']) ? $data['id_sertifikasi'] : null;
+						$penyelenggara 	= $data['penyelenggara'];
+						$skor 	= $data['skor'];
+						$file_upload 	= $data['file_upload'];
+						$upload 	= isset($_FILES['sertifikasi']['name'][$i]['upload']) ? $_FILES['sertifikasi']['name'][0]['upload'] : null;
 
-					$config5['upload_path']    = $this->file_path;
-			     	$config5['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|xls';
-			     	$config5['max_size']       = '2000';
-			     	$config5['max_width']      = '2000';
-			     	$config5['max_height']     = '2000';
-			     	$config5['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
-			     	$this->load->library('upload', $config5);	     	
-			     	$this->upload->initialize($config5);
-		 			if ($this->upload->do_upload($_FILES['sertifikasi']['name'][$i]['upload'])){
-			 			$upload = $this->upload->file_name;
-						$status_upload = true;
-						echo $upload;exit;
-			 		}else{
-			 			$status_upload = true;			
-			 		}
-			 		
-					$object = array(
-						'id_pegawai'=>$id_pegawai,
-						'id_jenis_sertifikasi'=>$id_jenis_sertifikasi,
-						'penyelenggara'=>$penyelenggara,
-						'skor'=>$skor,
-						'upload'=>$upload
-					);
+						$config5['upload_path']    = $this->file_path;
+				     	$config5['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
+				     	$config5['max_size']       = '2000';
+				     	$config5['max_width']      = '2000';
+				     	$config5['max_height']     = '2000';
+				     	$config5['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
+				     	$this->load->library('upload', $config5);	
+				     	$this->upload->initialize($config5);
+			 			if ($this->upload->do_upload($_FILES['sertifikasi']['name'][$i]['upload'])){
+				 			$upload = $this->upload->file_name;
+				 			if(empty($upload)){
+				 				$upload = $_FILES['sertifikasi']['name'][$i]['upload'];
+				 			}
+							$status_upload = true;
+				 		}else{
+				 			$status_upload = true;		
+				 			$upload = $file_upload;	
+				 		}
+				 		
 
-					$insert = $this->SertifikasiT->insert($object);
-					
-					if($insert){
-						$status = 'berhasil';
+						$object = array(
+							'id_pegawai'=>$id_pegawai,
+							'id_jenis_sertifikasi'=>$id_jenis_sertifikasi,
+							'penyelenggara'=>$penyelenggara,
+							'skor'=>$skor,
+							'upload'=>$upload
+						);
+						if(!empty($id_sertifikasi)){
+				 			$this->db->where('id_sertifikasi',$id_sertifikasi);
+							$this->db->update('sertifikasi',$object);
+							$this->db->affected_rows();
+				 		}else{
+				 			$insert = $this->SertifikasiT->insert($object);	
+				 		}					
+						
+						if($insert){
+							$status = 'berhasil';
+						}
 					}
 				}
 			}
@@ -369,7 +387,7 @@ class DataPegawai extends CI_Controller {
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
 		$data['tr'] .= '<td>'.form_dropdown('sertifikasi[0][id_jenis_sertifikasi]', $jenis_sertifikasi, $jenis_sertifikasi_selected, $jenis_sertifikasi_attributes).'</td>';
-		$data['tr'] .= '<td><input id="sertifikasi_0_penyelenggara" name="sertifikasi[0][penyelenggara]" type="text" class="form-control"></td>';
+		$data['tr'] .= '<td><input id="sertifikasi_0_penyelenggara" name="sertifikasi[0][penyelenggara]" type="text" class="form-control"><input id="sertifikasi_0_id_sertifikasi" name="sertifikasi[0][id_sertifikasi]" type="hidden" class="form-control"><input id="sertifikasi_0_file_upload" name="sertifikasi[0][file_upload]" type="hidden" class="form-control"></td>';
 		$data['tr'] .= '<td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>';
 		$data['tr'] .= '<td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusSertifikasi(this);" ><i class="fa fa-minus"> </i></a></td>';

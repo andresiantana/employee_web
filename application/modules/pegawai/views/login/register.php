@@ -15,17 +15,17 @@
             <?php echo form_open("pegawai/registrasi/register_proses"); ?>
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-                    <input class="form-control" name="username" placeholder="NIP">
+                    <input class="form-control" name="username" placeholder="NIP" required>
                 </div>
 
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                    <input class="form-control" type="password" id="password" name="password" placeholder="Kata Kunci">
+                    <input class="form-control" type="password" id="password" name="password" placeholder="Kata Kunci" required>
                 </div>
 
                 <div class="form-group input-group">
                     <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
-                    <input class="form-control" type="password" id="password_ulang" name="password_ulang" placeholder="Ulangi Kata Kunci" onblur="cekPassword(this);">
+                    <input class="form-control" type="password" id="password_ulang" name="password_ulang" placeholder="Ulangi Kata Kunci" onblur="cekPassword(this);" required>
                 </div>
                 <button class="button btn btn-danger btn-large">Registrasi</button> 
                 </i>&nbsp;<span><a href="<?php echo base_url('pegawai/login'); ?>">Masuk</a></span>

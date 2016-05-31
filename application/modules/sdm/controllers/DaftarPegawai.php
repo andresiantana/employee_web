@@ -144,7 +144,26 @@ class DaftarPegawai extends CI_Controller {
         // load data pegawai
         $pegawai = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
         $tanggal_mulai_studi = $pegawai->tanggal_mulai_studi;
-        $bulan =  $this->diffInMonths($tanggal_mulai_studi, $tanggal_selesai_studi);
+
+        // menghitung bulan
+        $tgl1 = strtotime($tanggal_selesai_studi);
+		$tgl2 = strtotime($tanggal_mulai_studi);
+		$diff_secs = abs($tgl1-$tgl2);
+		$base_year = min(date("Y", $tgl1), date("Y", $tgl2));
+		$diff = mktime(0, 0, $diff_secs, 1, 1, $base_year);
+		// return array( "years" => date(“Y”, $diff) – $base_year,
+		// “months_total” => (date(“Y”, $diff) – $base_year) * 12 + date(“n”, $diff) – 1,
+		// “months” => date(“n”, $diff) – 1,
+		// “days_total” => floor($diff_secs / (3600 * 24)),
+		// “days” => date(“j”, $diff) – 1,
+		// “hours_total” => floor($diff_secs / 3600),
+		// “hours” => date(“G”, $diff),
+		// “minutes_total” => floor($diff_secs / 60),
+		// “minutes” => (int) date(“i”, $diff),
+		// “seconds_total” => $diff_secs,
+		// “seconds” => (int) date(“s”, $diff)&nbsp; );
+
+        $bulan = (date("Y", $diff) - $base_year) * 12 + date("n", $diff) - 1;
 
         $object = array(
 			'status_kelulusan'=>$status_kelulusan,
@@ -204,15 +223,6 @@ class DaftarPegawai extends CI_Controller {
 		echo json_encode($data); 
 		exit;
 	}
-
-    public  function diffInMonths($date1, $date2)
-    {
-	    $diff =  $date1->diff($date2);
-
-	    $months = $diff->y * 12 + $diff->m + $diff->d / 30;
-
-	    return (int) round($months);
-    }
 
 }
 

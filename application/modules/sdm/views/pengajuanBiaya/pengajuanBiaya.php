@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('accept-charset'=>"utf-8",'id'=>'form-inputan','onsubmit'=>'return cekInputan();return false;')); ?>
+                        <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('id'=>'form-inputan','onsubmit'=>'return cekInputan();return false;')); ?>
                         <?php if(validation_errors()){ ?>
                         <div class="alert alert-warning">
                             <strong><?php echo validation_errors(); ?></strong>
@@ -70,7 +70,7 @@
                     <div class="col-md-12">
                          <div class="form-group">
                             <label>Status Pengajuan</label>
-                            <select class="form-control" name="status_pengajuan" id="status_pengajuan" onChange='setStatus(this);'>
+                            <select class="form-control" name="status_pengajuan" id="status_pengajuan" onChange='setStatus(this);' required>
                                 <option value="">-Pilih Status-</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Reject">Reject</option>
@@ -98,7 +98,7 @@
                                         foreach($uraian_biaya as $i=>$uraian){
                                 ?>
                                 <tr>
-                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]" disabled>
+                                    <td><select class="form-control kategori_biaya" id="rincian_0_id_kategori_biaya" name="rincian[0][id_kategori_biaya]" required>
                                             <option value="">-Pilih Kategori Biaya-</option>
                                             <?php foreach ($kategori as $i => $val) {
                                                 if($uraian->id_kategori_biaya == $val->id_kategori_biaya){
@@ -111,11 +111,11 @@
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true>
-                                        <input id="biaya_0_id_uraian" type="hidden" name="biaya[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
+                                        <input id="rincian_0_nominal" type="text" name="rincian[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true>
+                                        <input id="rincian_0_id_uraian" type="hidden" name="rincian[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
                                     </td>
                                     <td>
-                                        <input id="biaya_0_nominal_disetujui" type="text" name="biaya[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
+                                        <input id="rincian_0_nominal_disetujui" type="text" name="rincian[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
@@ -127,18 +127,18 @@
                                 ?>
 
                                 <tr>
-                                    <td><select class="form-control kategori_biaya" name="biaya[0][id_kategori_biaya]" id="biaya_0_id_kategori_biaya">
+                                    <td><select class="form-control kategori_biaya" name="rincian[0][id_kategori_biaya]" id="rincian_0_id_kategori_biaya" required>
                                             <option value="">-Pilih Kategori Biaya-</option>
                                             <?php foreach ($kategori as $i => $val) { ?>
                                             <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="biaya_0_nominal" type="text" name="biaya[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
-                                        <input id="biaya_0_id_uraian" type="hidden" name="biaya[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="rincian_0_nominal" type="text" name="rincian[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
+                                        <input id="rincian_0_id_uraian" type="hidden" name="rincian[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td>
-                                        <input id="biaya_0_nominal_disetujui" type="text" name="biaya[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="rincian_0_nominal_disetujui" type="text" name="rincian[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>

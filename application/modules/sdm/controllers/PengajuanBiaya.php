@@ -116,7 +116,10 @@ class PengajuanBiaya extends CI_Controller {
 			$data['kode_pengajuan'] = $data['datapengajuan']->kode_pengajuan;
 		}
 		if(isset($data['datapengajuan']->id_pengajuan_biaya)){
-			$data['uraian_biaya'] = $this->db->get_where('uraian_pengajuan_biaya',array('id_pengajuan_biaya'=>$data['datapengajuan']->id_pengajuan_biaya))->result_object();	
+			$data['uraian_biaya'] = $this->db->select('*')
+									->from('uraian_pengajuan_biaya')
+									->where('id_pengajuan_biaya',$data['datapengajuan']->id_pengajuan_biaya)
+									->get()->result_object();
 		}	
 		$this->template->display('sdm/pengajuanBiaya/pengajuanBiaya',$data);
 	}
@@ -127,6 +130,8 @@ class PengajuanBiaya extends CI_Controller {
 		$tgl = '';
 		$tanggal = '';
 
+		echo "<pre>";
+		print_r($_POST);exit;
 		$id_pengajuan_biaya = $this->input->post('id_pengajuan_biaya');
 		$id_pegawai = $this->input->post('id_pegawai');
 		$jumlah_nominal = $this->input->post('jumlah_nominal');		
@@ -164,8 +169,8 @@ class PengajuanBiaya extends CI_Controller {
 		}	
 
 		// input uraian
-		if(count($this->input->post('biaya')) > 0) {
-			foreach ($this->input->post('biaya') as $i => $data) {	
+		if(count($this->input->post('rincian')) > 0) {
+			foreach ($this->input->post('rincian') as $i => $data) {	
 				$id_pegawai = $datapegawai->id_pegawai;
 				$id_pengajuan_biaya = $id_pengajuan_biaya;
 				$id_kategori_biaya = isset($data['id_kategori_biaya']) ? $data['id_kategori_biaya'] : null;
@@ -214,16 +219,15 @@ class PengajuanBiaya extends CI_Controller {
 	}
 
 	public function setFormBiaya(){
-		$kategori_biaya_attribute = 'id="biaya_0_id_kategori_biaya" class="form-control kategori_biaya" required';
+		$kategori_biaya_attribute = 'id="rincian_0_id_kategori_biaya" name="rincian[0][id_kategori_biaya]" class="form-control kategori_biaya" required';
 		$kategori_biaya = $this->KategoriBiayaM->dd_kategori();
+		$kategori_selected = $this->input->post('id_kategori_biaya') ? $this->input->post('id_kategori_biaya') : '';
 
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
-		$data['tr'] .= '<td>'.form_dropdown('biaya[0][id_kategori_biaya]', $kategori_biaya, '', $kategori_biaya_attribute).'</td>';
-		$data['tr'] .= '<td><input id="biaya_0_nominal" name="biaya[0][nominal]" type="text" class="form-control numbers-only nominal" onblur="hitungTotalBiaya(this);" readonly=true>
-		<input id="biaya_0_id_uraian" name="biaya[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
-		</td>';
-		$data['tr'] .= '<td><input id="biaya_0_nominal_disetujui" name="biaya[0][nominal_disetujui]" type="text" class="form-control numbers-only nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required></td>';
+		$data['tr'] .= '<td>'.form_dropdown('rincian[0][id_kategori_biaya]', $kategori_biaya, $kategori_selected, $kategori_biaya_attribute).'</td>';
+		$data['tr'] .= '<td><input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only nominal" onblur="hitungTotalBiaya(this);" readonly=true><input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);"></td>';
+		$data['tr'] .= '<td><input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required></td>';
 		$data['tr'] .= '<td><a href="javascript:tambahBiaya(this);"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a> <a style="margin-left:10px;" href="javascript:hapusBiaya(this);"><button type="button" class="btn btn-small btn-danger" onClick="hapusBiaya(this);"><i class="fa fa-minus"></i></button></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 

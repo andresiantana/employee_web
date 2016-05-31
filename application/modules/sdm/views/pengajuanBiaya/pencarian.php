@@ -6,7 +6,7 @@
         <td><?php echo $v->nama_lengkap; ?></td>
         <td><?php echo $v->semester; ?></td>
         <td>
-            <?php if(!empty($v->id_pencairan_dana)) { ?>
+            <?php if(!empty($v->id_pencairan_biaya)) { ?>
             Dana Cair
             <?php }else{ ?>
             Belum Ada Verifikasi

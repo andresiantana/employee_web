@@ -114,12 +114,16 @@ class PengajuanBiaya extends CI_Controller {
 			$this->Notifikasi->insert($notif);
 		}	
 		$datapegawai = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
-		$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pegawai'=>$datapegawai->id_pegawai),array('limit'=>1))->row();
+		$datapengajuan_biaya = $this->db->select('*')
+							->where('id_pegawai',$datapegawai->id_pegawai)
+							->order_by("id_pengajuan_biaya","desc")
+							->limit('1')
+							->from('pengajuan_biaya')
+						    ->get()->row();
 		$kategori_biaya = $this->db->get_where('kategori_biaya',array('nama_kategori'=>'SPP'),array('limit'=>1))->row();
-		
 		// input detail pengajuan biaya untuk SPP
 		$id_pegawai = $datapegawai->id_pegawai;
-		$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
+		$id_pengajuan_biaya = $datapengajuan_biaya->id_pengajuan_biaya;
 
 		$object = array(
 			'id_pengajuan_biaya'=>$id_pengajuan_biaya,
