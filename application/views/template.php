@@ -16,6 +16,7 @@
     <link href="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.css');?>" rel="stylesheet" />
     <!-- Pagination Styles-->
     <link href="<?php echo base_url('assets/css/pagination.css');?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/css/datepicker.css');?>" rel="stylesheet" />
     <!-- Google Fonts-->
     <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
     <link rel="stylesheet" href="<?php echo base_url('assets/template/Bluebox/assets/js/Lightweight-Chart/cssCharts.css');?>">     
@@ -147,7 +148,7 @@
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
-
+    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="<?php echo base_url("assets/jquery/Remodal-master/libs/jquery/dist/jquery.min.js"); ?>"><\/script>')</script>
     <script src="<?php echo base_url('assets/jquery/Remodal-master/dist/remodal.js');?>"></script>
@@ -172,9 +173,12 @@
     
     <script src="<?php echo base_url('assets/datepicker/js/jquery-1.11.3.min.js');?>"></script>
     <script src="<?php echo base_url('assets/datepicker/js/ws-calendar-min.js');?>"></script>
+    <script src="<?php echo base_url('assets/jquery/datepicker_a.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/jquery/datepicker_b.min.js');?>"></script>
 
     <script type="text/javascript">
         $(function(){
+            $( ".datepickerNew" ).datepicker();
             $(document).on('opening', '.remodal', function () {
                 console.log('opening');
             });
