@@ -12,7 +12,7 @@ class PengajuanBiaya extends CI_Controller {
 		}		
 		$this->load->library('form_validation');
 		$this->load->helper('text');
-	 	$this->load->helper(array('url','html','form','download'));
+	 	$this->load->helper(array('url','html','form','download','string'));
 		$this->load->model('User');
 		$this->load->model('Pegawai');
 		$this->load->model('Notifikasi');
@@ -130,8 +130,6 @@ class PengajuanBiaya extends CI_Controller {
 		$tgl = '';
 		$tanggal = '';
 
-		echo "<pre>";
-		print_r($_POST);exit;
 		$id_pengajuan_biaya = $this->input->post('id_pengajuan_biaya');
 		$id_pegawai = $this->input->post('id_pegawai');
 		$jumlah_nominal = $this->input->post('jumlah_nominal');		

@@ -147,6 +147,11 @@
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="<?php echo base_url("assets/jquery/Remodal-master/libs/jquery/dist/jquery.min.js"); ?>"><\/script>')</script>
+    <script src="<?php echo base_url('assets/jquery/Remodal-master/dist/remodal.js');?>"></script>
+  
     <!-- Bootstrap Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/bootstrap.min.js');?>"></script>	 
     <!-- Metis Menu Js -->
@@ -163,26 +168,16 @@
     <script src="<?php echo base_url('assets/template/Bluebox/assets/popup/popup-window.js');?>"> </script>    
     <!-- Custom Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/custom-scripts.js');?>"></script>
-    <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
-    <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.js');?>"></script>
-    <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/jquery.modal.min.js');?>"></script>
     <script src="<?php echo base_url('assets/template/Bluebox/assets/modal/highlight/highlight.pack.js');?>"></script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="<?php echo base_url("assets/jquery/Remodal-master/libs/jquery/dist/jquery.min.js"); ?>"><\/script>')</script>
-    <script src="<?php echo base_url('assets/jquery/Remodal-master/dist/remodal.js');?>"></script>
     
     <script src="<?php echo base_url('assets/datepicker/js/jquery-1.11.3.min.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/datepicker/js/ws-calendar-min.js');?>"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $( ".myOwnClass" ).wsCalendar();    
-            // $('#dataTables-example').dataTable();
+    <script src="<?php echo base_url('assets/datepicker/js/ws-calendar-min.js');?>"></script>
 
-            // untuk dialog
+    <script type="text/javascript">
+        $(function(){
             $(document).on('opening', '.remodal', function () {
                 console.log('opening');
-              });
+            });
 
               $(document).on('opened', '.remodal', function () {
                 console.log('opened');
@@ -204,10 +199,17 @@
                 console.log('cancellation');
               });
         });
+        $(document).ready(function () {
+            $( ".myOwnClass" ).wsCalendar();    
+            // $('#dataTables-example').dataTable();
+
+            // untuk dialog
+        });
     </script>
+    
 
     <!-- Events -->
-    <script>
+    <!--<script>
       
 
     //  Usage:
@@ -226,7 +228,7 @@
       // $('[data-remodal-id=modal2]').remodal({
       //   modifier: 'with-red-theme'
       // });
-    </script>
+    </script>-->
 
     <script type="text/javascript">
         $('.numbers-only').keyup(function() {

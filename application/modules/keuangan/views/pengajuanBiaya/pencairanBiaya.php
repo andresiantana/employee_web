@@ -57,13 +57,13 @@
                             
                             <div class="form-group">
                                 <label>Jumlah Biaya</label>
-                                <input class="form-control" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>
+                                <input class="form-control" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" readonly=true required>
                             </div>
 
 
                             <div class="form-group">
                                 <label>Jumlah Berhasil Transfer</label>
-                                <input class="form-control" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->berhasil_transfer) ? $datapengajuan->berhasil_transfer : ""; ?>" onblur="setJmlBerhasil(this);" required>                                        
+                                <input class="form-control" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" onblur="setJmlBerhasil(this);" required>                                        
                             </div>
                             
                             <div class="form-group">
@@ -146,7 +146,7 @@
             $('#semester').val(semester);
         }
 
-        var jumlah_biaya = '<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>';
+        var jumlah_biaya = '<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui: ""; ?>';
         if(jumlah_biaya != ""){           
             $('#berhasil_transfer').val(jumlah_biaya);
             $('#gagal_transfer').val(0);

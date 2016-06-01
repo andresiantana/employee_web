@@ -81,6 +81,10 @@ class PengajuanBiaya extends CI_Controller {
 		}
 		if(!empty($id_pengajuan_biaya)){
 			$data['datapengajuan'] = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya))->row();
+			$data['uraian'] = $this->db->select('sum(nominal_disetujui) as nominal_disetujui')
+									->from('uraian_pengajuan_biaya')
+									->where('id_pengajuan_biaya',$id_pengajuan_biaya)
+									->get()->row();
 		}
 		$this->template->display('keuangan/pengajuanBiaya/pencairanBiaya',$data);
 	}
@@ -164,7 +168,8 @@ class PengajuanBiaya extends CI_Controller {
 					'no_akun'=>111,
 					'keterangan'=>'Pencairan Dana Gagal Transfer',
 					'status'=>'K',
-					'biaya'=>$berhasil_transfer
+					'biaya'=>$berhasil_transfer,
+					'status_aktif'=>TRUE
 				);	
 				$object_jurnal_debit = array(
 					'id_jurnal'=>'',
@@ -174,7 +179,8 @@ class PengajuanBiaya extends CI_Controller {
 					'no_akun'=>112,
 					'keterangan'=>'Pencairan Dana Gagal Transfer',
 					'status'=>'D',
-					'biaya'=>$berhasil_transfer
+					'biaya'=>$berhasil_transfer,
+					'status_aktif'=>TRUE
 				);	
 			}else{
 				// Jurnal Berhasil Transfer			
@@ -186,7 +192,8 @@ class PengajuanBiaya extends CI_Controller {
 					'no_akun'=>111,
 					'keterangan'=>'Pencairan Dana Berhasil Transfer',
 					'status'=>'K',
-					'biaya'=>$berhasil_transfer
+					'biaya'=>$berhasil_transfer,
+					'status_aktif'=>TRUE
 				);	
 				$object_jurnal_debit = array(
 					'id_jurnal'=>'',
@@ -196,7 +203,8 @@ class PengajuanBiaya extends CI_Controller {
 					'no_akun'=>113,
 					'keterangan'=>'Pencairan Dana Berhasil Transfer',
 					'status'=>'D',
-					'biaya'=>$berhasil_transfer
+					'biaya'=>$berhasil_transfer,
+					'status_aktif'=>TRUE
 				);	
 			}
 				 	

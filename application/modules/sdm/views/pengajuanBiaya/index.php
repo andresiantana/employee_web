@@ -107,7 +107,7 @@
                         </tbody>
                     </table>
                 </div><br><br>
-                <a href='javascript:void(0);' onclick="print();" class="btn btn-small btn-info"><i class="fa fa-print"> </i> Print</a>
+                <!-- <a href='javascript:void(0);' onclick="print();" class="btn btn-small btn-info"><i class="fa fa-print"> </i> Print</a> -->
             </div>            
         </div>
     </div>
@@ -128,7 +128,6 @@
 </div>
 
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
-<script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
 
 
@@ -197,13 +196,4 @@ function setPencarian(){
       }
     });
 }
-
-$(document).ready(function(){
-    // $('#tanggal_awal').datepicker({
-    //     format:'dd/mm/yyyy',
-    // });
-    // $('#tanggal_akhir').datepicker({
-    //     format:'dd/mm/yyyy',
-    // });
-});
 </script>

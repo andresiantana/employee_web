@@ -101,7 +101,7 @@
     <p id="modal1Desc">
         <div class="form-group">
             <label>Status Kelulusan</label>
-            <select class="form-control" name="status_lulus" id="status_lulus'>
+            <select class="form-control" name="status_lulus" id="status_lulus">
                 <option value="">-Pilih Status-</option>
                 <option value="Lulus">Lulus</option>
                 <option value="Belum Lulus">Belum Lulus</option>
@@ -120,7 +120,6 @@
 </div>
 
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
-<script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
 function prd_download(file)
 {   

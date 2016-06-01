@@ -5,14 +5,14 @@
                 Transaksi Pengajuan Biaya
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('id'=>'form-inputan','onsubmit'=>'return cekInputan();return false;')); ?>
-                        <?php if(validation_errors()){ ?>
-                        <div class="alert alert-warning">
-                            <strong><?php echo validation_errors(); ?></strong>
-                        </div>              
-                        <?php } ?>  
+                 <?php if(validation_errors()){ ?>
+                    <div class="alert alert-warning">
+                    <strong><?php echo validation_errors(); ?></strong>
+                </div>              
+                <?php } ?> 
+                <div class="row">                    
+                    <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('accept-charset'=>"utf-8",'onsubmit'=>'return cekInputan();return false;')); ?>
+                    <div class="col-lg-12">                    
                         <div class="form-group">
                             <label for="kode_pengajuan">Kode Pengajuan</label>
                             <input class="form-control" type="text" name="kode_pengajuan" placeholder="Isikan Kode Pengajuan" value="<?php echo isset($kode_pengajuan) ? $kode_pengajuan : ""; ?>" readonly=true required>
@@ -98,7 +98,7 @@
                                         foreach($uraian_biaya as $i=>$uraian){
                                 ?>
                                 <tr>
-                                    <td><select class="form-control kategori_biaya" id="rincian_0_id_kategori_biaya" name="rincian[0][id_kategori_biaya]" required>
+                                    <td><select  id="rincian_0_id_kategori_biaya" name="rincian[0][id_kategori_biaya]" class="form-control kategori_biaya" required>
                                             <option value="">-Pilih Kategori Biaya-</option>
                                             <?php foreach ($kategori as $i => $val) {
                                                 if($uraian->id_kategori_biaya == $val->id_kategori_biaya){
@@ -111,11 +111,11 @@
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="rincian_0_nominal" type="text" name="rincian[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true>
-                                        <input id="rincian_0_id_uraian" type="hidden" name="rincian[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
+                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true>
+                                        <input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
                                     </td>
                                     <td>
-                                        <input id="rincian_0_nominal_disetujui" type="text" name="rincian[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
+                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
@@ -127,18 +127,18 @@
                                 ?>
 
                                 <tr>
-                                    <td><select class="form-control kategori_biaya" name="rincian[0][id_kategori_biaya]" id="rincian_0_id_kategori_biaya" required>
+                                    <td><select id="rincian_0_id_kategori_biaya" name="rincian[0][id_kategori_biaya]"  class="form-control kategori_biaya" required>
                                             <option value="">-Pilih Kategori Biaya-</option>
                                             <?php foreach ($kategori as $i => $val) { ?>
                                             <option value="<?php echo $val->id_kategori_biaya; ?>"><?php echo $val->nama_kategori; ?></option>
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="rincian_0_nominal" type="text" name="rincian[0][nominal]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
-                                        <input id="rincian_0_id_uraian" type="hidden" name="rincian[0][id_uraian]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
+                                        <input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td>
-                                        <input id="rincian_0_nominal_disetujui" type="text" name="rincian[0][nominal_disetujui]" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
@@ -153,13 +153,15 @@
                         <button type="reset" class="btn btn-success">Reset</button>
                         <a class="btn btn-danger" href="<?php echo base_url('sdm/PengajuanBiaya'); ?>">Batal</a>
                     </div>
-                        <?php echo form_close(); ?>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
+<script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
     function setStatus(obj) {
         var status_pengajuan = $('#status_pengajuan').val();
@@ -283,7 +285,6 @@
             alert("Rincian Biaya harus diisi!");
             return false;
         }
-        $('#form-inputan').submit();
         return true;
     }
 
