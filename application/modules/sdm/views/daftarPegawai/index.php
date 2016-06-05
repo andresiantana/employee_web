@@ -109,9 +109,9 @@
         </div>   
         <div class="form-group">
           <label>Tanggal Selesai Studi</label>
-          <div class="myOwnClass">
-            <input type="text" class="form-control" id="tanggal_selesai_studi" name="tanggal_selesai_studi">
-          </div>
+          <!-- <div class="myOwnClass"> -->
+            <input type="text" class="form-control datepickerNew" id="tanggal_selesai_studi" name="tanggal_selesai_studi">
+          <!-- </div> -->
         </div>
     </p>
   </div>
@@ -224,10 +224,11 @@ function updateStatusLulus(id_pegawai){
     });
 }
 
-$(document).ready(function(){
-    $('#informasi_header').addClass('active');
-    $('#informasi').addClass('in');
-    $('#informasi').attr('aria-expanded',true);
-    $('#informasi').attr('style','');
+$(document).ready(function() {
+  $( ".datepicker" ).datepicker();
+  $('#informasi_header').addClass('active');
+  $('#informasi').addClass('in');
+  $('#informasi').attr('aria-expanded',true);
+  $('#informasi').attr('style','');
 });
 </script>
