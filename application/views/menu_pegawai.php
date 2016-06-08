@@ -11,6 +11,6 @@
         <?php 
     		}
 		?>
-        <a <?php if($menu == 'kartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPID'); ?>"><i class="fa fa-credit-card"></i> Kartu PID</a>
+        <a <?php if($menu == 'kartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPID?pages=pegawai'); ?>"><i class="fa fa-credit-card"></i> Kartu PID</a>
     </li>
 </ul>

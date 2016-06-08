@@ -202,6 +202,40 @@ class DaftarPegawai extends CI_Controller {
 
 				$this->JurnalT->insert($object_jurnal_debit);
 		 		$this->JurnalT->insert($object_jurnal_kredit);
+
+		 		$amortisasi = (2*$bulan)+12;
+        		$biaya_amortisasi = round($dataJurnal->biaya/$amortisasi);
+
+        		for($i = 0; $i<$amortisasi; $i++){
+        			// Jurnal Beban Amortisasi							
+					$object_jurnal_amortisasi_debit = array(
+						'id_jurnal'=>'',
+						'id_pencairan_biaya'=>NULL,
+						'id_pegawai'=>$id_pegawai,
+						'tanggal_jurnal'=>date('Y-m-d'),
+						'no_akun'=>114,
+						'keterangan'=>'Pegawai Studi Lanjut',
+						'status'=>'K',
+						'biaya'=>0,
+						'status_aktif'=>true
+					);	
+
+					$object_jurnal_amortisasi_kredit = array(
+						'id_jurnal'=>'',
+						'id_pencairan_biaya'=>NULL,
+						'id_pegawai'=>$id_pegawai,
+						'tanggal_jurnal'=>date('Y-m-d'),
+						'no_akun'=>511,
+						'keterangan'=>'Beban Amortisasi PID',
+						'status'=>'D',
+						'biaya'=>$biaya_amortisasi,
+						'status_aktif'=>true
+					);	
+
+					$this->JurnalT->insert($object_jurnal_amortisasi_debit);
+			 		$this->JurnalT->insert($object_jurnal_amortisasi_kredit);
+        		}
+
 			}
 
 			// update jurnal aktif = false

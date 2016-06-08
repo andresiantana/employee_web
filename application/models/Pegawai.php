@@ -26,6 +26,11 @@ class Pegawai extends CI_Model {
 		$this->db->join('user', 'user.id_user = pegawai.id_user');
 		$this->db->join('fakultas', 'fakultas.kode_fakultas = pegawai.kode_fakultas','left');
 		$this->db->join('prodi', 'prodi.id_prodi = pegawai.id_prodi','left');
+		if(isset($_GET['pages'])){
+			if(!empty($_GET['pages']) && $_GET['pages'] == 'pegawai'){
+				$this->db->where('pegawai.id_user',$this->session->userdata('id_user'));
+			}
+		}
 		$this->db->like('status_approve_sdm', $approve);
 		if($nidn != ''){
 			$this->db->like('nidn', $nidn);

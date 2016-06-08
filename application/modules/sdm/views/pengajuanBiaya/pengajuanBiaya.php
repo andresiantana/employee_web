@@ -232,6 +232,15 @@
         $('#jumlah_nominal').val(total_nominal);
     }
 
+    function hitungTotalBiayaDisetujui(obj){
+        total_nominal_disetujui = 0;
+        $('#tabel-biaya tbody tr').each(function(){
+            var nominal_disetujui = parseFloat($(this).find('input[name$="[nominal_disetujui]"]').val());
+            total_nominal_disetujui += nominal_disetujui;
+        });
+        $('#jumlah_disetujui').val(total_nominal_disetujui);
+    }
+
     function hitungTotalSemua(){
         total_nominal = 0;
         $('#tabel-biaya tbody tr').each(function(){

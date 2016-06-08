@@ -29,6 +29,8 @@ class KUPegawai extends Pegawai {
 		$this->db->where('pegawai.status_kelulusan','Lulus');
 		$this->db->where('jurnal.status_aktif',true);
 		$this->db->where('jurnal.no_akun',114);		
+		$this->db->where('jurnal.status','K');		
+		$this->db->where('jurnal.biaya > 0');
 		$query = $this->db->get('pegawai',$num, $offset);
 		return $query;
 	}
@@ -44,6 +46,8 @@ class KUPegawai extends Pegawai {
 		$this->db->where('pegawai.id_pegawai',$id);
 		$this->db->where('jurnal.status_aktif',true);
 		$this->db->where('jurnal.no_akun',114);
+		$this->db->where('jurnal.status','K');
+		$this->db->where('jurnal.biaya > 0');
 		$query =  $this->db->get();
 		return $query;
 	}

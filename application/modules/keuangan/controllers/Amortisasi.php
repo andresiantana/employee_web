@@ -47,7 +47,7 @@ class Amortisasi extends CI_Controller {
 			$data['data'] =  $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id,$nip,$nama)->result_object();	
 			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($nip,$nama)->row();
 			if(count($data['data_row']) > 0){
-				$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+1));		
+				$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+12));		
 			}else{
 				$data['amortisasi'] = 0;
 			}
@@ -59,7 +59,8 @@ class Amortisasi extends CI_Controller {
 			$data['data']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id)->result_object();
 			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id)->row();
 			if(count($data['data_row']) > 0){
-				$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+1));
+				// $data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+12));
+				$data['amortisasi'] = round($data['data_row']->biaya);
 			}
 		}	
 		$this->template->display('keuangan/amortisasi/index',$data);
