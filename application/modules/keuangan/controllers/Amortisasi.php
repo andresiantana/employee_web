@@ -76,4 +76,34 @@ class Amortisasi extends CI_Controller {
 		$this->load->view('keuangan/amortisasi/print', $data);
 	}
 
+	public function detail($id_pegawai=null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');		
+		$id_pegawai = $_POST['id_pegawai'];
+		$data['id_pegawai'] = $id_pegawai;
+		$data['detail'] =  $this->KUPegawai->tampilDataPegawaiAmortisasiDetail($id_pegawai)->result_object();
+		$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->row();
+		if(count($data['data_row']) > 0){
+			$data['amortisasi'] = round($data['data_row']->biaya);
+		}
+		$tr['tr'] = $this->load->view('keuangan/amortisasi/detail',$data,true);
+		echo json_encode($tr['tr']); 
+		exit;
+	}
+
+	public function printDetail($id_pegawai = null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');
+		$data['id_pegawai'] = $id_pegawai;
+		$data['detail'] =  $this->KUPegawai->tampilDataPegawaiAmortisasiDetail($id_pegawai)->result_object();
+		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
+		$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->row();
+		if(count($data['data_row']) > 0){
+			$data['amortisasi'] = round($data['data_row']->biaya);
+		}
+		$this->load->view('keuangan/amortisasi/detail', $data);
+	}
+
 }

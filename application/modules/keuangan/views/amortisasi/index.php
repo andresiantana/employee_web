@@ -45,7 +45,7 @@
                                         <td><?php echo $v->nip; ?></td>
                                         <td><?php echo 'Rp '.number_format($amortisasi).',00'; ?></td>
                                         <td class="td-actions">
-                                            <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Rincian Amortisasi" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-list"> </i></a>
+                                            <a href="#detail" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Melihat Detail Amortisasi" onclick="setIdPencairan(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-list"> </i></a>
                                         </td>
                                         <td class="td-actions">
                                             <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Rincian Amortisasi" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
@@ -62,9 +62,39 @@
     </div>
 </div>
 
+<!-- Dialog untuk detail -->
+<input type="hidden" id="id_pegawai">   
+<div class="remodal" data-remodal-id="detail" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Detail Amortisasi</h2>
+    <p id="modal1Desc">
+        <div id="data-detail">
+
+        </div>
+    </p>
+  </div>
+</div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script type="text/javascript">
+function setIdPencairan(id_pegawai){
+    $('#id_pegawai').val(id_pegawai);
+    var data = {
+      id_pegawai:id_pegawai,
+    }
 
+  $.ajax({
+      url     : "<?php echo base_url('keuangan/Amortisasi/detail'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          $('#data-detail').html(data);
+      }
+    });
+
+}
 function setPencarian(){
     var nip = $('#nip').val();
     var nama = $('#nama').val();
