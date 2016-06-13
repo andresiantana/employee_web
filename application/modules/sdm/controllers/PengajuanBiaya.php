@@ -34,6 +34,7 @@ class PengajuanBiaya extends CI_Controller {
 
 		$nip = $this->input->post('nip');
 		$kode_pengajuan = $this->input->post('kode_pengajuan');
+		$id_kategori_biaya = null;
 		$status_pengajuan = $this->input->post('status_pengajuan');
 		$tanggal_awal = $this->input->post('tanggal_awal');
 	

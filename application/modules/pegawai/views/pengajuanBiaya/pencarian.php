@@ -4,7 +4,6 @@
         <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
         <td><?php echo $v->kode_pengajuan; ?></td>
         <td><?php echo $v->nama_lengkap; ?></td>
-        <td><?php echo $v->nama_kategori; ?></td>
         <td><?php echo $v->semester; ?></td>
         <td><?php echo $v->jumlah_nominal; ?></td>
         <td>
@@ -35,9 +34,13 @@
                 }
             ?>
         </td>
-        <td>
-            <?php if(!empty($v->id_pencairan_dana)) { ?>
-            Dana Cair
+         <td>
+            <?php if(!empty($v->id_pencairan_biaya)) {
+                $button = "-";                                            
+            ?>
+            Sudah Dicairkan
+            <?php }else{ ?>
+            <?php echo "<font color=blue>Belum ada verifikasi</font>"; ?>
             <?php } ?>
         </td>
         <td class="td-actions">

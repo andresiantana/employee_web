@@ -22,9 +22,9 @@
                          <div class="form-group">
                             <label>Tanggal</label>
                             <br>
-                            <div class="myOwnClass">
-                                <input type="text" class="form-control" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>">
-                            </div>
+                            <!-- <div class="myOwnClass"> -->
+                                <input type="text" class="form-control datepickerNew" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>">
+                            <!-- </div> -->
                             <!-- <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : ""; ?>" required> -->
                         </div>
                         <div class="form-group">

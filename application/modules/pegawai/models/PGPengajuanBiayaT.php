@@ -15,8 +15,8 @@ class PGPengajuanBiayaT extends PengajuanBiayaT {
 		if($id_kategori_biaya != ''){
 			$this->db->where('id_kategori_biaya', $id_kategori_biaya);
 		}
-		if($tanggal_awal != ''){
-			$this->db->where('tanggal', $tanggal_awal);
+		if($tanggal_awal != '' && $tanggal_akhir != ''){
+			$this->db->where("tanggal BETWEEN '".$tanggal_awal."' AND '".$tanggal_akhir."' ");
 		}
 		$query = $this->db->get();
 		return $query;

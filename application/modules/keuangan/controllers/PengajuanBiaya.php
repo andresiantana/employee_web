@@ -43,7 +43,7 @@ class PengajuanBiaya extends CI_Controller {
 		}
 
 		$tanggal_akhir = $this->input->post('tanggal_akhir');
-		if(!empty($tgl_akhir)){
+		if(!empty($tanggal_akhir)){
 			$tgl_akhir = explode("/",$tanggal_akhir);		
 			$tgl_akhir = $tgl_akhir[2]."-".$tgl_akhir[1]."-".$tgl_akhir[0];
 			$tanggal_akhir = $tgl_akhir;

@@ -178,7 +178,13 @@
 
     <script type="text/javascript">
         $(function(){
-            $( ".datepickerNew" ).datepicker();
+            $( ".datepickerNew" ).datepicker(
+            { 
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,changeYear: true,
+                yearRange: "-80:+10"
+            }
+            );
             $(document).on('opening', '.remodal', function () {
                 console.log('opening');
             });

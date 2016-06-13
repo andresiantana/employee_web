@@ -172,12 +172,11 @@ class PengajuanBiaya extends CI_Controller {
 		}
 
 		$tanggal_akhir = $this->input->post('tanggal_akhir');
-		if(!empty($tgl_akhir)){
+		if(!empty($tanggal_akhir)){
 			$tgl_akhir = explode("/",$tanggal_akhir);		
 			$tgl_akhir = $tgl_akhir[2]."-".$tgl_akhir[1]."-".$tgl_akhir[0];
 			$tanggal_akhir = $tgl_akhir;
 		}
-	
 		if($semester != '' || $id_kategori_biaya != '' || $tanggal_awal != '' || $tanggal_akhir != ''){
 			$data['data'] =  $this->PGPengajuanBiayaT->tampilDataPengajuan($semester,$id_kategori_biaya,$tanggal_awal,$tanggal_akhir)->result_object();		
 			$tr['tr'] = $this->load->view('pegawai/pengajuanBiaya/pencarian',$data,true);

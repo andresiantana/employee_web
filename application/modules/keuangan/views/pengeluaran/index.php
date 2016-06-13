@@ -30,7 +30,7 @@
                             <td style="width:1%;"></td>
                             <td>
                                 <div class="myOwnClass">
-                                    <input type="text" class="form-control" id="tanggal_awal" name="tanggal_awal" value="<?php echo date('Y-m-d'); ?>">
+                                    <input type="text" class="form-control datepickerNew" id="tanggal_awal" name="tanggal_awal" value="<?php echo date('Y-m-d'); ?>">
                                 </div>
                             </td>
                         </tr>
@@ -45,7 +45,7 @@
                             <td style="width:1%;"></td>
                             <td>
                                 <div class="myOwnClass">
-                                    <input type="text" class="form-control" id="tanggal_akhir" name="tanggal_akhir" value="<?php echo date('Y-m-d'); ?>">
+                                    <input type="text" class="form-control datepickerNew" id="tanggal_akhir" name="tanggal_akhir" value="<?php echo date('Y-m-d'); ?>">
                                 </div>
                             </td>
                         </tr>

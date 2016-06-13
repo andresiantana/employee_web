@@ -26,13 +26,13 @@
                                 <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Tanggal Awal                                            
-                                        <input class="form-control" id="tanggal_awal" name="tanggal_awal" type="text" class="span3" required>
+                                        <input class="form-control datepickerNew" id="tanggal_awal" name="tanggal_awal" type="text" class="span3" required>
                                     </label>
                                 </div>
                                 <div id="dataTables-example_filter" class="dataTables_filter">
                                     <label>        
                                         Tanggal Akhir                                            
-                                        <input class="form-control" id="tanggal_akhir" name="tanggal_akhir" type="text" class="span3" required>
+                                        <input class="form-control datepickerNew" id="tanggal_akhir" name="tanggal_akhir" type="text" class="span3" required>
                                     </label>
                                 </div>
                             </div>
@@ -184,10 +184,14 @@ function setPencarian(){
 
 $(document).ready(function(){
     $('#tanggal_awal').datepicker({
-        format:'dd/mm/yyyy',
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,changeYear: true,
+        yearRange: "-80:+10"
     });
     $('#tanggal_akhir').datepicker({
-        format:'dd/mm/yyyy',
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,changeYear: true,
+        yearRange: "-80:+10"
     });
 });
 </script>

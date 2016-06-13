@@ -17,7 +17,7 @@
 
                             <td><label>Tanggal Awal</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text" onblur="setPencarian();" class="form-control" id="tanggal_awal" name="tanggal_awal"></td>
+                            <td><input type="text" onblur="setPencarian();" class="form-control datepickerNew" id="tanggal_awal" name="tanggal_awal"></td>
                         </tr>
                         <tr>
                             <td><label>Kode Pengajuan</label></td>
@@ -28,7 +28,7 @@
 
                             <td><label>Tangal Akhir</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text" onblur="setPencarian();" class="form-control" id="tanggal_akhir" name="tanggal_akhir"></td>
+                            <td><input type="text" onblur="setPencarian();" class="form-control datepickerNew" id="tanggal_akhir" name="tanggal_akhir"></td>
                         </tr>
                     </table>
                     <br>
@@ -181,11 +181,15 @@ function setPencarian(){
 }
 
 $(document).ready(function(){
-    $('#tanggal_awal').datepicker({
-        format:'dd/mm/yyyy',
+   $('#tanggal_awal').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,changeYear: true,
+        yearRange: "-80:+10"
     });
     $('#tanggal_akhir').datepicker({
-        format:'dd/mm/yyyy',
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,changeYear: true,
+        yearRange: "-80:+10"
     });
 });
 </script>

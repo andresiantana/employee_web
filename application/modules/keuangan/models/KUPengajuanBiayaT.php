@@ -15,8 +15,8 @@ class KUPengajuanBiayaT extends PengajuanBiayaT {
 		if($kode_pengajuan != ''){
 			$this->db->like('pengajuan_biaya.kode_pengajuan', $kode_pengajuan);
 		}
-		if($tanggal_awal != ''){
-			$this->db->where('pengajuan_biaya.tanggal', $tanggal_awal);
+		if($tanggal_awal != '' && $tanggal_akhir != ''){
+			$this->db->where("pengajuan_biaya.tanggal BETWEEN '".$tanggal_awal."' AND '".$tanggal_akhir."' ");
 		}
 		$query = $this->db->get();
 		return $query;

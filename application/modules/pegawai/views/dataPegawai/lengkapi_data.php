@@ -35,9 +35,9 @@
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
                     <br>
-                    <div class="myOwnClass">
-                        <input type="text" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?php echo isset($datapegawai->tanggal_lahir) ? date('Y-m-d',strtotime($datapegawai->tanggal_lahir)) : date('Y-m-d'); ?>" required> (Tahun-Bulan-Tanggal)
-                    </div>
+                    <!-- <div class="myOwnClass"> -->
+                        <input type="text" class="form-control datepickerNew" id="tanggal_lahir" name="tanggal_lahir" value="<?php echo isset($datapegawai->tanggal_lahir) ? date('Y-m-d',strtotime($datapegawai->tanggal_lahir)) : date('Y-m-d'); ?>" required> (Tahun-Bulan-Tanggal)
+                    <!-- </div> -->
                 </div>
                 <div class="form-group">
                     <label>E-mail</label>
@@ -119,9 +119,9 @@
                 <div class="form-group">
                     <label>Tanggal Mulai Studi</label>
                     <br>
-                    <div class="myOwnClass">
-                        <input type="text" class="form-control" id="tanggal_mulai_studi" name="tanggal_mulai_studi" value="<?php echo isset($datapegawai->tanggal_mulai_studi) ? date('Y-m-d',strtotime($datapegawai->tanggal_mulai_studi)) : date('Y-m-d'); ?>" required> (Tahun-Bulan-Tanggal)
-                    </div>
+                    <!-- <div class="myOwnClass"> -->
+                        <input type="text" class="form-control datepickerNew" id="tanggal_mulai_studi" name="tanggal_mulai_studi" value="<?php echo isset($datapegawai->tanggal_mulai_studi) ? date('Y-m-d',strtotime($datapegawai->tanggal_mulai_studi)) : date('Y-m-d'); ?>" required> (Tahun-Bulan-Tanggal)
+                    <!-- </div> -->
                 </div>
                 <div class="form-group">
                     <label>Lama Studi (Tahun)</label>
@@ -449,8 +449,7 @@
         if(id_prodi != ''){
             $('#id_prodi').val(id_prodi);
         }
-        $( ".myOwnClass" ).wsCalender({ "min-year" : ( new Date() ).getFullYear() - 80 });
-
+        // $( ".myOwnClass" ).wsCalender({ "min-year" : ( new Date() ).getFullYear() - 80 });
         $('.numbers-only').keyup(function() {
             console.log("a");
             var d = $(this).attr('numeric');
