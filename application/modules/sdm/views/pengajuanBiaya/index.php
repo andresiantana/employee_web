@@ -69,6 +69,7 @@
                                 <th>Nama Pegawai Pengaju</th>
                                 <th>Semester</th>
                                 <th>Status Pencairan</th>
+                                <th>Detail Pengajuan</th>
                                 <th class="td-actions">Aksi</th>
                             </tr>
                         </thead>
@@ -87,6 +88,12 @@
                                         Belum Ada Verifikasi
                                         <?php } ?>
                                     </td>
+                                    <td>
+                                        <?php 
+                                            $button = '<a href="#detail_pengajuan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk melihat Detail Pengajuan" onclick="setDetailPengajuan('.$v->id_pengajuan_biaya.');"><i class="fa fa-list"> </i></a>';
+                                        ?>
+                                        <?php echo isset($button) ? $button : ""; ?>
+                                    </td>  
                                     <td class="td-actions">
                                         <?php 
                                             if($v->status_pengajuan == ''){
@@ -127,6 +134,20 @@
   <button data-remodal-action="cancel" class="remodal-cancel">Batal</button>  
 </div>
 
+
+<!-- Dialog untuk detail pengajuan -->
+<input type="hidden" id="id_pegawai">   
+<div class="remodal" data-remodal-id="detail_pengajuan" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Detail Pengajuan Biaya</h2>
+    <p id="modal1Desc">
+        <div id="data-detail">
+
+        </div>
+    </p>
+  </div>
+</div>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script type="text/javascript">
 
@@ -195,5 +216,23 @@ function setPencarian(){
           $('#dataTables-example > tbody').html(data);
       }
     });
+}
+
+function setDetailPengajuan(id_pengajuan_biaya){
+    $('#id_pengajuan_biaya').val(id_pengajuan_biaya);
+    var data = {
+      id_pengajuan_biaya:id_pengajuan_biaya,
+    }
+
+  $.ajax({
+      url     : "<?php echo base_url('pegawai/PengajuanBiaya/detail'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          $('#data-detail').html(data);
+      }
+    });
+
 }
 </script>

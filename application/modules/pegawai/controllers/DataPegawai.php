@@ -390,7 +390,7 @@ class DataPegawai extends CI_Controller {
 		$data['tr'] .= '<td><input id="sertifikasi_0_penyelenggara" name="sertifikasi[0][penyelenggara]" type="text" class="form-control"><input id="sertifikasi_0_id_sertifikasi" name="sertifikasi[0][id_sertifikasi]" type="hidden" class="form-control"><input id="sertifikasi_0_file_upload" name="sertifikasi[0][file_upload]" type="hidden" class="form-control"></td>';
 		$data['tr'] .= '<td><input id="sertifikasi_0_skor" name="sertifikasi[0][skor]" type="text" class="form-control"></td>';
 		$data['tr'] .= '<td><input id="sertifikasi_0_upload" name="sertifikasi[0][upload]" type="file" accept="images/*" class="form-control"></td>';
-		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahSertifikasi();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusSertifikasi(this);" ><i class="fa fa-minus"> </i></a></td>';
+		$data['tr'] .= '<td><a href="javascript:tambahSertifikasi(this);"><button onclick="tambahSertifikasi();" id="tambahSertifikasi" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a> <a style="margin-left:10px;" href="javascript:hapusSertifikasi(this);"><button type="button" class="btn btn-small btn-danger" onClick="hapusSertifikasi(this);"><i class="fa fa-minus"></i></button></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 
 		exit;

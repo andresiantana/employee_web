@@ -47,7 +47,7 @@ class Amortisasi extends CI_Controller {
 			$data['data'] =  $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id,$nip,$nama)->result_object();	
 			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($nip,$nama)->row();
 			if(count($data['data_row']) > 0){
-				$data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+12));		
+				$data['amortisasi'] = ($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+12));		
 			}else{
 				$data['amortisasi'] = 0;
 			}
@@ -60,7 +60,7 @@ class Amortisasi extends CI_Controller {
 			$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi($config['per_page'],$id)->row();
 			if(count($data['data_row']) > 0){
 				// $data['amortisasi'] = round($data['data_row']->biaya / ((2*$data['data_row']->lama_bulan_studi)+12));
-				$data['amortisasi'] = round($data['data_row']->biaya);
+				$data['amortisasi'] = ($data['data_row']->biaya);
 			}
 		}	
 		$this->template->display('keuangan/amortisasi/index',$data);
@@ -83,9 +83,9 @@ class Amortisasi extends CI_Controller {
 		$id_pegawai = $_POST['id_pegawai'];
 		$data['id_pegawai'] = $id_pegawai;
 		$data['detail'] =  $this->KUPegawai->tampilDataPegawaiAmortisasiDetail($id_pegawai)->result_object();
-		$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->row();
+		$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasiJumlah($id_pegawai)->row();
 		if(count($data['data_row']) > 0){
-			$data['amortisasi'] = round($data['data_row']->biaya);
+			$data['amortisasi'] = ($data['data_row']->biaya);
 		}
 		$tr['tr'] = $this->load->view('keuangan/amortisasi/detail',$data,true);
 		echo json_encode($tr['tr']); 
@@ -101,7 +101,7 @@ class Amortisasi extends CI_Controller {
 		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
 		$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasi()->row();
 		if(count($data['data_row']) > 0){
-			$data['amortisasi'] = round($data['data_row']->biaya);
+			$data['amortisasi'] = ($data['data_row']->biaya);
 		}
 		$this->load->view('keuangan/amortisasi/detail', $data);
 	}

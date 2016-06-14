@@ -70,6 +70,7 @@ class JurnalT extends CI_Model {
 		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.no_akun", $no_akun);
 		$this->db->where("jurnal.status", 'D');
+		$this->db->where("jurnal.status_aktif is true");
 		$query = $this->db->get();
         return $query;
     }

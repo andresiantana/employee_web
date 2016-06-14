@@ -63,8 +63,19 @@
                                     <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
                                     <td><?php echo $v->kode_pengajuan; ?></td>
                                     <td><?php echo $v->nama_lengkap; ?></td>
-                                    <td><?php echo $v->semester; ?></td>                                    
-                                    <td><a class="btn btn-small btn-info" href="#" rel="tooltip" title="Lihat Detail" onclick="setDialogDetail(<?php echo $v->id_pengajuan_biaya; ?>);"><i class="fa fa-list"> </i></a></td>
+                                    <td><?php echo $v->semester; ?></td>        
+                                    <td>
+                                        <?php 
+                                            if($v->status_pengajuan == 'Approved'){
+                                                $button = '<a href="#detail_pengajuan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk melihat Detail Pengajuan" onclick="setDetailPengajuan('.$v->id_pengajuan_biaya.');"><i class="fa fa-list"> </i></a>';
+                                            }else if($v->status_pengajuan == 'Reject'){
+                                                $button = '<a href="#detail_pengajuan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk melihat Detail Pengajuan" onclick="setDetailPengajuan('.$v->id_pengajuan_biaya.')"><i class="fa fa-list"> </i></a>';
+                                            }else{
+                                                $button = '<font style="color:blue;">Pengajuan belum di Verifikasi di SDM</font>';
+                                            }
+                                        ?>
+                                            <?php echo isset($button) ? $button : ""; ?>
+                                    </td>                            
                                     <td>
                                         <?php 
                                             if($v->status_pengajuan == 'Approved'){
@@ -152,6 +163,21 @@
     </div>
 </div>
 
+
+<!-- Dialog untuk detail -->
+<input type="hidden" id="id_pegawai">   
+<div class="remodal" data-remodal-id="detail_pengajuan" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Detail Pengajuan Biaya</h2>
+    <p id="modal1Desc">
+        <div id="data-detail">
+
+        </div>
+    </p>
+  </div>
+</div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
@@ -187,6 +213,24 @@ function setPencarian(){
           $('#dataTables-example > tbody').html(data);
       }
     });
+}
+
+function setDetailPengajuan(id_pengajuan_biaya){
+    $('#id_pengajuan_biaya').val(id_pengajuan_biaya);
+    var data = {
+      id_pengajuan_biaya:id_pengajuan_biaya,
+    }
+
+  $.ajax({
+      url     : "<?php echo base_url('pegawai/PengajuanBiaya/detail'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          $('#data-detail').html(data);
+      }
+    });
+
 }
 
 $(document).ready(function(){

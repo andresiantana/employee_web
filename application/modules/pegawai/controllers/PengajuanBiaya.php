@@ -19,6 +19,7 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->model('KategoriBiayaM');
 		$this->load->model('PGPengajuanBiayaT');
 		$this->load->model('UraianPengajuanBiayaT');
+		$this->load->model('PGUraianPengajuanBiayaT');
 	}
 
 	public function index($id = null)
@@ -199,6 +200,41 @@ class PengajuanBiaya extends CI_Controller {
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 
 		exit;
+	}
+
+	public function detail($id_pegawai=null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');		
+		$id_pengajuan_biaya = $_POST['id_pengajuan_biaya'];
+		$data['id_pengajuan_biaya'] = $id_pengajuan_biaya;
+		$data['detail'] =  $this->PGUraianPengajuanBiayaT->tampilUraianPengajuan($id_pengajuan_biaya)->result_object();
+		$data['data_row'] = $this->db->select('*')
+							->from('pengajuan_biaya')
+							->where('id_pengajuan_biaya',$id_pengajuan_biaya)
+							->get()->row();
+
+		$tr['tr'] = $this->load->view('pegawai/pengajuanBiaya/detail',$data,true);
+		echo json_encode($tr['tr']); 
+		exit;
+	}
+
+	public function printDetail($id_pengajuan_biaya = null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');		
+		$id_pengajuan_biaya = $id_pengajuan_biaya;
+		$data['id_pengajuan_biaya'] = $id_pengajuan_biaya;
+		$data['detail'] =  $this->PGUraianPengajuanBiayaT->tampilUraianPengajuan($id_pengajuan_biaya)->result_object();
+		$data['data_row'] = $this->db->select('*')
+							->from('pengajuan_biaya')
+							->where('id_pengajuan_biaya',$id_pengajuan_biaya)
+							->get()->row();
+		$data['data_pegawai'] = $this->db->select('*')
+								->from('pegawai')
+								->where('id_pegawai',$data['data_row']->id_pegawai)
+								->get()->row();
+		$this->load->view('pegawai/pengajuanBiaya/detail', $data);
 	}
 
 }

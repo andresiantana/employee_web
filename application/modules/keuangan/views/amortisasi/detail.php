@@ -46,15 +46,23 @@
             if(count($detail) > 0){ 
         ?>
         <?php foreach($detail as $key => $v){ 
-                $jumlah = round($jml_amortisasi - $v->biaya);
+                $jumlah = ($jml_amortisasi - $v->biaya);
                 $jml_amortisasi = $jumlah;
+                if($jumlah < 0){
+                  $jumlah = 0;
+                }
         ?>
             <tr>
                 <td style="text-align:center;"><?php echo $key+1; ?></td>
                 <td style="text-align:right;"><?php echo number_format($v->biaya); ?></td>
                 <td style="text-align:right;"><?php echo number_format($jumlah); ?></td>
             </tr>
-        <?php $total = $jml_amortisasi;} ?>
+        <?php $total = $jml_amortisasi;
+              if($total < 0){
+                $total = 0;
+              }
+
+        } ?>
         <?php }else{ ?>
             <tr><td colspan="3" style="text-align:left;">Data tidak ditemukan.</td></tr>
         <?php } ?>

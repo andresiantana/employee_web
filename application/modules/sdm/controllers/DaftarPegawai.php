@@ -40,6 +40,7 @@ class DaftarPegawai extends CI_Controller {
 	function approveData()
     {
     	$status = '';
+    	$status_notifikasi = false;
 
         $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
         $object = array(
@@ -48,7 +49,24 @@ class DaftarPegawai extends CI_Controller {
 
 		$this->db->where('id_pegawai', $id_pegawai);
 		$this->db->update('pegawai', $object);
+
 		if($this->db->affected_rows()){
+			$tanggal = date('Y-m-d H:i:s');
+			$pesan = 'Data Pengajuan Pegawai sudah di Approve oleh SDM';
+			$data = array(
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>$tanggal,
+				'pesan'=>$pesan,
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$insert = $this->Notifikasi->insert($data);
+			if($insert){
+				$status_notifikasi = true;
+			}else{
+				$status_notifikasi = false;
+			}
+
 			$status = true;
 		}else{
 			$status = false;
@@ -204,11 +222,11 @@ class DaftarPegawai extends CI_Controller {
 		 		$this->JurnalT->insert($object_jurnal_kredit);
 
 		 		$amortisasi = (2*$bulan)+12;
-        		$biaya_amortisasi = round($dataJurnal->biaya/$amortisasi);
+        		$biaya_amortisasi = ($dataJurnal->biaya/$amortisasi);
 
         		for($i = 0; $i<$amortisasi; $i++){
         			// Jurnal Beban Amortisasi							
-					$object_jurnal_amortisasi_debit = array(
+					$object_jurnal_amortisasi_kredit = array(
 						'id_jurnal'=>'',
 						'id_pencairan_biaya'=>NULL,
 						'id_pegawai'=>$id_pegawai,
@@ -220,7 +238,7 @@ class DaftarPegawai extends CI_Controller {
 						'status_aktif'=>true
 					);	
 
-					$object_jurnal_amortisasi_kredit = array(
+					$object_jurnal_amortisasi_debit = array(
 						'id_jurnal'=>'',
 						'id_pencairan_biaya'=>NULL,
 						'id_pegawai'=>$id_pegawai,

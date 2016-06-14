@@ -41,7 +41,7 @@
             = <?php echo $detail->biaya; ?> - 0 / ((2 * <?php echo $detail->lama_bulan_studi; ?>) + 12
           </p>
           <p>
-            = <b>Rp. <?php echo number_format(round($detail->biaya/((2*$detail->lama_bulan_studi)+12))); ?>,00 </b>
+            = <b>Rp. <?php echo number_format(($detail->biaya/((2*$detail->lama_bulan_studi)+12))); ?>,00 </b>
           </p>
       </div>
      <p> Dengan ini menyatakan bahwa rincian amortisasi diatas dihasilkan dengan sebenar-benarnya. </p>

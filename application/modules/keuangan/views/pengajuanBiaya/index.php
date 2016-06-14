@@ -44,6 +44,7 @@
                                 <th>Nama Pegawai Pengaju</th>
                                 <th>Semester</th>
                                 <th>Jumlah Pengajuan</th>
+                                <th>Detail Pengajuan</th>
                                 <th class="td-actions">Cairkan Pengajuan</th>
                             </tr>
                         </thead>
@@ -56,7 +57,13 @@
                                     <td><?php echo $v->kode_pengajuan; ?></td>
                                     <td><?php echo $v->nama_lengkap; ?></td>
                                     <td><?php echo $v->semester; ?></td>
-                                    <td><?php echo $v->jumlah_nominal; ?></td>                                    
+                                    <td><?php echo $v->jumlah_nominal; ?></td>  
+                                    <td>
+                                        <?php 
+                                            $button = '<a href="#detail_pengajuan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk melihat Detail Pengajuan" onclick="setDetailPengajuan('.$v->id_pengajuan_biaya.');"><i class="fa fa-list"> </i></a>';
+                                        ?>
+                                        <?php echo isset($button) ? $button : ""; ?>
+                                    </td>                                    
                                     <td class="td-actions">
                                         <?php 
                                             if(empty($v->id_pencairan_biaya)){

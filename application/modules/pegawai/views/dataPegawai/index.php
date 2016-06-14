@@ -15,7 +15,7 @@
                                 <th>NIDN</th>
                                 <th>Tanggal Lahir</th>
                                 <th>E-mail</th>
-                                <th>No. Telp</th>
+                                <th>No. Telp/HP</th>
                                 <th>Foto</th>
                                 <th>Fakultas</th>
                                 <th>Prodi</th>

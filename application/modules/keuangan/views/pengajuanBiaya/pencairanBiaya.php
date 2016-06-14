@@ -57,18 +57,18 @@
                             
                             <div class="form-group">
                                 <label>Jumlah Biaya</label>
-                                <input class="form-control" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" readonly=true required>
+                                <input class="form-control numbers-only" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" readonly=true required>
                             </div>
 
 
                             <div class="form-group">
                                 <label>Jumlah Berhasil Transfer</label>
-                                <input class="form-control" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" onblur="setJmlBerhasil(this);" required>                                        
+                                <input class="form-control numbers-only" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" onblur="setJmlBerhasil(this);" required>                                        
                             </div>
                             
                             <div class="form-group">
                                 <label>Jumlah Gagal Transfer</label>
-                                <input class="form-control" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  value="0" required>
+                                <input class="form-control numbers-only" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  value="0" required>
                             </div>
 
                             <div class="form-group">
@@ -101,6 +101,10 @@
         var jml_berhasil = parseFloat($('#berhasil_transfer').val());
         var jml_gagal = parseFloat($('#gagal_transfer').val());
 
+        if(!jQuery.numeric(jml_berhasil)){
+            $('#berhasil_transfer').val(0);
+            $('#gagal_transfer').val(0);
+        }
         if(jml_berhasil > jml_biaya){
             alert("Jumlah berhasil transfer tidak boleh lebih dari Jumlah Biaya");
             return false;

@@ -26,11 +26,11 @@
                 </div>
                 <div class="form-group">
                     <label>NIDN</label>
-                    <input class="form-control nidn" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>" maxlength=7>
+                    <input class="form-control nidn" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>" maxlength=10>
                 </div>
                 <div class="form-group">
                     <label>Tempat Lahir</label>
-                    <input class="form-control" type="text" name="tempat_lahir" value="<?php echo isset($datapegawai->tempat_lahir) ? $datapegawai->tempat_lahir : ""; ?>">
+                    <input class="form-control tempat_lahir" type="text" name="tempat_lahir" id="tempat_lahir" value="<?php echo isset($datapegawai->tempat_lahir) ? $datapegawai->tempat_lahir : ""; ?>">
                 </div>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
@@ -44,8 +44,8 @@
                     <input class="form-control" type="text" onblur='validasiEmail();' name="email" id="email" value="<?php echo isset($datapegawai->email) ? $datapegawai->email : ""; ?>" >
                 </div>
                 <div class="form-group">
-                    <label>No. Telp</label>
-                    <input class="form-control notelp" type="text" name="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
+                    <label>No. Telp/HP</label>
+                    <input class="form-control notelp" type="text" name="no_telp_hp" id="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
                 </div>
                 <div class="form-group">
                     <label>Foto</label> 
@@ -132,11 +132,11 @@
                 <legend>Data Rekening</legend>
                 <div class="form-group ">
                     <label>Nama Bank</label>
-                    <input class="form-control" type="text" name="nama_bank" value="<?php echo isset($datapegawai->nama_bank) ? $datapegawai->nama_bank : ""; ?>">
+                    <input class="form-control nama_bank" type="text" id="nama_bank" name="nama_bank" value="<?php echo isset($datapegawai->nama_bank) ? $datapegawai->nama_bank : ""; ?>">
                 </div>
                 <div class="form-group ">
                     <label>Cabang Bank</label>
-                    <input class="form-control" type="text" name="cabang_bank" value="<?php echo isset($datapegawai->cabang_bank) ? $datapegawai->cabang_bank : ""; ?>">
+                    <input class="form-control cabang" type="text" id="cabang_bank" name="cabang_bank" value="<?php echo isset($datapegawai->cabang_bank) ? $datapegawai->cabang_bank : ""; ?>">
                 </div>
                 <!-- <div class="form-group">
                     <label>Cabang Bank</label>
@@ -149,11 +149,11 @@
                 </div> -->
                 <div class="form-group ">
                     <label>Nomor Rekening</label>
-                    <input class="form-control" type="text" name="nomor_rekening" value="<?php echo isset($datapegawai->nomor_rekening) ? $datapegawai->nomor_rekening : ""; ?>">
+                    <input class="form-control numbers-only" type="text" name="nomor_rekening" value="<?php echo isset($datapegawai->nomor_rekening) ? $datapegawai->nomor_rekening : ""; ?>">
                 </div>
                 <div class="form-group ">
                     <label>Atas Nama</label>
-                    <input class="form-control" type="text" name="atasnama_rekening" value="<?php echo isset($datapegawai->atasnama_rekening) ? $datapegawai->atasnama_rekening : ""; ?>">
+                    <input class="form-control atas_nama" type="text" id="atasnama_rekening" name="atasnama_rekening" value="<?php echo isset($datapegawai->atasnama_rekening) ? $datapegawai->atasnama_rekening : ""; ?>">
                 </div>
             </div>
             <div class="col-md-6">
@@ -204,7 +204,7 @@
                                     <th>Penyelenggara</th>
                                     <th>Skor</th>
                                     <th>Upload</th>
-                                    <th class="td-actions">Aksi</th>
+                                    <th style="width:110px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -488,31 +488,73 @@
         });
 
         $('.notelp').keyup(function() {
-            var d = $(this).attr('numeric');
-            var value = $(this).val();
-            var orignalValue = value;
-            value = value.replace(/[0-9() ]-*/g, "");
-            var msg = "Only Integer Values allowed.";
+            var no_telp_hp = document.getElementById('no_telp_hp');
+            var filter = /^([0-9\_\-\/])+$/;
 
-            if (d == 'decimal') {
-                value = value.replace(/\./, "");
-                msg = "Only Numeric Values allowed.";
-            }
-
-            if (value != '') {
-              orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
-              $(this).val(orignalValue);
+            if (!filter.test(no_telp_hp.value)) {
+                alert('No. Telepon/HP hanya boleh diisi dengan angka dan karakter!');
+                $('#no_telp_hp').val('');
+                no_telp_hp.focus;
+            return false;
             }
         });
 
         $('.nama').keyup(function() {
             var nama = document.getElementById('nama_lengkap');
-            var filter = /^([a-zA-Z _\`\,\.\-])+$/;
+            var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
 
             if (!filter.test(nama.value)) {
                 alert('Nama hanya boleh diisi dengan huruf dan karakter!');
-                nama('');
+                $('#nama_lengkap').val('');
                 nama.focus;
+            return false;
+            }
+        });
+
+        $('.cabang').keyup(function() {
+            var cabang_bank = document.getElementById('cabang_bank');
+            var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
+
+            if (!filter.test(cabang_bank.value)) {
+                alert('Cabang Bank hanya boleh diisi dengan huruf dan karakter!');
+                $('#cabang_bank').val('');
+                cabang_bank.focus;
+            return false;
+            }
+        });
+
+        $('.nama_bank').keyup(function() {
+            var nama_bank = document.getElementById('nama_bank');
+            var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
+
+            if (!filter.test(nama_bank.value)) {
+                alert('Nama Bank hanya boleh diisi dengan huruf dan karakter!');
+                $('#nama_bank').val('');
+                nama_bank.focus;
+            return false;
+            }
+        });
+
+        $('.atas_nama').keyup(function() {
+            var atasnama_rekening = document.getElementById('atasnama_rekening');
+            var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
+
+            if (!filter.test(atasnama_rekening.value)) {
+                alert('Atas Nama Rekening hanya boleh diisi dengan huruf dan karakter!');
+                $('#atasnama_rekening').val('');
+                atasnama_rekening.focus;
+            return false;
+            }
+        });
+
+        $('.tempat_lahir').keyup(function() {
+            var tempat_lahir = document.getElementById('tempat_lahir');
+            var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
+
+            if (!filter.test(tempat_lahir.value)) {
+                alert('Tempat Lahir hanya boleh diisi dengan huruf!');
+                $('#tempat_lahir').val('');
+                tempat_lahir.focus;
             return false;
             }
         });
