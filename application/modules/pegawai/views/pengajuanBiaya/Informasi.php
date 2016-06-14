@@ -96,7 +96,14 @@
                                         <?php } ?>
                                     </td>
                                     <td class="td-actions">
-                                        <?php echo isset($button) ? $button : ""; ?>
+                                        <?php 
+                                            // echo isset($button) ? $button : ""; 
+                                            if ($v->status_pengajuan == "Approved") {
+                                                echo "<font color=orange>Sudah di Approve, data tidak bisa diubah.</font>";
+                                            } else {
+                                                echo $button;
+                                            }
+                                        ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

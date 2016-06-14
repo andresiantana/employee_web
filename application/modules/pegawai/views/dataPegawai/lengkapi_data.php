@@ -44,7 +44,7 @@
                     <input class="form-control" type="text" onblur='validasiEmail();' name="email" id="email" value="<?php echo isset($datapegawai->email) ? $datapegawai->email : ""; ?>" >
                 </div>
                 <div class="form-group">
-                    <label>No. Telp / Ponsel</label>
+                    <label>No. Telp</label>
                     <input class="form-control notelp" type="text" name="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
                 </div>
                 <div class="form-group">

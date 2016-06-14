@@ -55,7 +55,7 @@
                                         ?>
                                         <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
                                         <?php }else { ?>
-                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);" disabled=true><i class="fa fa-print"> </i></a>
+                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Tidak bisa cetak kartu, karena pegawai belum lulus." onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);" disabled=true><i class="fa fa-print"> </i></a><br/>
                                         <?php } ?>
                                     </td>
                                 </tr>

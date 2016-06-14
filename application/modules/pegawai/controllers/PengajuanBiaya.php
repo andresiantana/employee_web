@@ -52,7 +52,6 @@ class PengajuanBiaya extends CI_Controller {
 	public function insert()
 	{
 		$status = true;
-
 		$tgl = '';
 		$tanggal = '';
 		$id_pengajuan_biaya = $this->input->post('id_pengajuan_biaya');
@@ -139,7 +138,7 @@ class PengajuanBiaya extends CI_Controller {
 
 		if ($insert && $status) {
 			echo "<script>alert('Pengajuan Biaya berhasil disimpan!');
-                    window.location.href='".base_url('pegawai/PengajuanBiaya')."';
+                    window.location.href='".base_url('pegawai/PengajuanBiaya/informasi')."';
                 </script>";
 		} else {
 			echo "<script>alert('Pengajuan Biaya gagal disimpan!');

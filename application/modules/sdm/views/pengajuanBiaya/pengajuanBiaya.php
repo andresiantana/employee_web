@@ -57,7 +57,7 @@
                                 <option value="D3">D3</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="jumlah_nominal">Biaya Yang Diajukan</label>
                             <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>
                         </div>  
@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <label for="jumlah_nominal">Biaya Yang Disetujui</label>
                             <input class="form-control numbers-only" type="text" name="jumlah_disetujui" id="jumlah_disetujui" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_disetujui) ? $datapengajuan->jumlah_disetujui : ""; ?>" readonly=true required>
-                        </div>                        
+                        </div> -->                        
                     </div>
                     <div class="col-md-12">
                          <div class="form-group">
