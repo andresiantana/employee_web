@@ -410,6 +410,38 @@ class DataPegawai extends CI_Controller {
 		echo json_encode($data); 
 		exit;
 	}
+
+	public function detailSertifikasi($id_pegawai=null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');		
+		$id_pegawai = $_POST['id_pegawai'];
+		$data['id_pegawai'] = $id_pegawai;
+		$data['detail'] =  $this->SertifikasiT->tampilUraianSertifikasi($id_pegawai)->result_object();
+		$data['data_pegawai'] = $this->db->select('*')
+							->from('pegawai')
+							->where('id_pegawai',$id_pegawai)
+							->get()->row();
+
+		$tr['tr'] = $this->load->view('pegawai/dataPegawai/detailSertifikasi',$data,true);
+		echo json_encode($tr['tr']); 
+		exit;
+	}
+
+	public function printDetailSertifikasi($id_pegawai = null) {
+		$data['username'] = $this->session->userdata('username');
+		$data['id_user'] = $this->session->userdata('id_user');
+		$data['nama_role'] = $this->session->userdata('nama_role');		
+		$id_pegawai = $id_pegawai;
+		$data['id_pegawai'] = $id_pegawai;
+		$data['detail'] =  $this->SertifikasiT->tampilUraianSertifikasi($id_pegawai)->result_object();
+		$data['data_pegawai'] = $this->db->select('*')
+							->from('pegawai')
+							->where('id_pegawai',$id_pegawai)
+							->get()->row();
+		$this->load->view('pegawai/dataPegawai/detailSertifikasi', $data);
+	}
+
 }
 
 /* End of file DataPegawai.php */
