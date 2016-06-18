@@ -125,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <label>Lama Studi (Tahun)</label>
-                    <input class="form-control notelp" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>">
+                    <input class="form-control numbers-only" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>">
                 </div>
             </div>
             <div class="col-md-6">
@@ -451,7 +451,6 @@
         }
         // $( ".myOwnClass" ).wsCalender({ "min-year" : ( new Date() ).getFullYear() - 80 });
         $('.numbers-only').keyup(function() {
-            console.log("a");
             var d = $(this).attr('numeric');
             var value = $(this).val();
             var orignalValue = value;
@@ -459,8 +458,8 @@
             var msg = "Only Integer Values allowed.";
 
             if (d == 'decimal') {
-            value = value.replace(/\./, "");
-            msg = "Only Numeric Values allowed.";
+                value = value.replace(/\./, "");
+                msg = "Only Numeric Values allowed.";
             }
 
             if (value != '') {
@@ -470,6 +469,24 @@
         });
 
         $('.nip').keyup(function() {
+            var d = $(this).attr('numeric');
+            var value = $(this).val();
+            var orignalValue = value;
+            value = value.replace(/[0-9]-*/g, "");
+            var msg = "Only Integer Values allowed.";
+
+            if (d == 'decimal') {
+                value = value.replace(/\./, "");
+                msg = "Only Numeric Values allowed.";
+            }
+
+            if (value != '') {
+              orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+              $(this).val(orignalValue);
+            }
+        });
+
+        $('.nidn').keyup(function() {
             var d = $(this).attr('numeric');
             var value = $(this).val();
             var orignalValue = value;

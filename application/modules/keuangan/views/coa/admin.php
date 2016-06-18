@@ -11,7 +11,7 @@
                             <td style="width:10%"><label>Nama Akun</label></td>
                             <td style="width:1%;"></td>
                             <td style="width:30%">
-                                <input type="text"  class="form-control" id="nama_akun" name="nama_akun">
+                                <input type="text"  class="form-control nama" id="nama_akun" name="nama_akun">
                             </td>
 
                             <td style="width:9%"></td>
@@ -79,4 +79,18 @@
             }
         });
     }
+
+    $(document).ready(function(){
+        $('.nama').keyup(function() {
+        var nama = document.getElementById('nama_akun');
+        var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
+
+        if (!filter.test(nama.value)) {
+            alert('Nama Akun hanya boleh diisi dengan huruf dan karakter!');
+            $('#nama_akun').val('');
+            nama.focus;
+        return false;
+        }
+    });
+    });
 </script>

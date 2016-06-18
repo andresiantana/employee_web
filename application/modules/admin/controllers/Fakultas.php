@@ -28,13 +28,13 @@ class Fakultas extends CI_Controller {
 	 	$jml = $this->db->get('fakultas');
 
 		//pengaturan pagination
-		 $config['base_url'] = base_url().'admin/fakultas/index';
-		 $config['total_rows'] = $jml->num_rows();
-		 $config['per_page'] = '10';
-		 $config['first_page'] = 'Awal';
-		 $config['last_page'] = 'Akhir';
-		 $config['next_page'] = '&laquo;';
-		 $config['prev_page'] = '&raquo;';
+		 $config['base_url'] 	= base_url().'admin/fakultas/index';
+		 $config['total_rows'] 	= $jml->num_rows();
+		 $config['per_page'] 	= '10';
+		 $config['first_page'] 	= 'Awal';
+		 $config['last_page'] 	= 'Akhir';
+		 $config['next_page'] 	= '&laquo;';
+		 $config['prev_page'] 	= '&raquo;';
 
 		//inisialisasi config
 		 $this->pagination->initialize($config);
@@ -47,33 +47,33 @@ class Fakultas extends CI_Controller {
 		$nama_fakultas = $this->input->post('nama_fakultas');
 		if($kode_fakultas != '' || $nama_fakultas != ''){
 			$jml = $this->db->select('*')
-						->from('fakultas')
-						->where('kode_fakultas',$kode_fakultas)
-						->like('nama_fakultas',$nama_fakultas)
-						->get();
+					->from('fakultas')
+					->where('kode_fakultas',$kode_fakultas)
+					->like('nama_fakultas',$nama_fakultas)
+					->get();
 
 			//pengaturan pagination
-			 $config['base_url'] = base_url().'admin/fakultas/index';
-			 $config['total_rows'] = $jml->num_rows();
-			 $config['per_page'] = '10';
-			 $config['first_page'] = 'Awal';
-			 $config['last_page'] = 'Akhir';
-			 $config['next_page'] = '&laquo;';
-			 $config['prev_page'] = '&raquo;';
+			 $config['base_url'] 	= base_url().'admin/fakultas/index';
+			 $config['total_rows'] 	= $jml->num_rows();
+			 $config['per_page'] 	= '10';
+			 $config['first_page'] 	= 'Awal';
+			 $config['last_page'] 	= 'Akhir';
+			 $config['next_page'] 	= '&laquo;';
+			 $config['prev_page'] 	= '&raquo;';
 
 			//inisialisasi config
 		 	$this->pagination->initialize($config);
 
 			//buat pagination
-		 	$data['halaman'] = $this->pagination->create_links();
-			$data['data'] =  $this->FakultasM->tampilDataFakultas($config['per_page'], $id, $kode_fakultas, $nama_fakultas);
-			$tr['tr'] = $this->load->view('admin/fakultas/pencarian',$data,true);
+		 	$data['halaman'] 	= $this->pagination->create_links();
+			$data['data'] 		=  $this->FakultasM->tampilDataFakultas($config['per_page'], $id, $kode_fakultas, $nama_fakultas);
+			$tr['tr'] 			= $this->load->view('admin/fakultas/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$nama_fakultas = null;
-			$kode_fakultas = null;
-			$data['data'] = $this->FakultasM->tampilDataFakultas($config['per_page'], $id, $kode_fakultas, $nama_fakultas);
+			$nama_fakultas 	= null;
+			$kode_fakultas 	= null;
+			$data['data'] 	= $this->FakultasM->tampilDataFakultas($config['per_page'], $id, $kode_fakultas, $nama_fakultas);
 		}
 
 		// $data['data']	= $this->FakultasM->tampilData()->result_object();				
@@ -82,11 +82,11 @@ class Fakultas extends CI_Controller {
 
 	public function tambah()
 	{
-		$data['username'] 	= $this->session->userdata('username');
-		$data['id_user'] 	= $this->session->userdata('id_user');
-		$data['nama_role'] 	= $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Fakultas';
-		$data['menu'] = 'fakultas';		
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Fakultas';
+		$data['menu'] 			= 'fakultas';		
 		$this->template->display('admin/fakultas/tambah',$data);
 	}
 
@@ -97,7 +97,7 @@ class Fakultas extends CI_Controller {
 		foreach ($this->input->post('fakultas') as $i => $data) {	
 			$kode_fakultas = $data['kode_fakultas'];
 			$nama_fakultas = $data['nama_fakultas'];
-			$status_aktif 	= true;
+			$status_aktif  = true;
 
 			$object = array(
 				'kode_fakultas'=>$kode_fakultas,
@@ -125,17 +125,17 @@ class Fakultas extends CI_Controller {
 
 	public function importFakultas($sukses = "")
 	{
-		$data['username'] 	= $this->session->userdata('username');
-		$data['id_user'] 	= $this->session->userdata('id_user');
-		$data['nama_role'] 	= $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Fakultas';
-		$data['menu'] = 'fakultas';		
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Fakultas';
+		$data['menu'] 			= 'fakultas';		
 		$this->template->display('admin/fakultas/import',$data);
 	}
 
 	public function do_upload(){
-        $config['upload_path'] = './data/uploads/';
-        $config['allowed_types'] = 'xlsx|xls';
+        $config['upload_path'] 		= './data/uploads/';
+        $config['allowed_types'] 	= 'xlsx|xls';
         
         $this->load->library('upload', $config);
         
@@ -146,9 +146,9 @@ class Fakultas extends CI_Controller {
         	if(isset($_POST['drop']) && $_POST['drop'] == 1){
         		$this->db->empty_table('fakultas');
         	}
-            $data = array('upload_data' => $this->upload->data());
-            $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
-            $filename = $upload_data['file_name'];//Nama File
+            $data 			= array('upload_data' => $this->upload->data());
+            $upload_data 	= $this->upload->data(); //Mengambil detail data yang di upload
+            $filename 		= $upload_data['file_name'];//Nama File
             $this->FakultasM->upload_data($filename);
             unlink('./data/uploads/'.$filename);
             redirect('admin/Fakultas/importFakultas/sukses','refresh');
@@ -169,12 +169,12 @@ class Fakultas extends CI_Controller {
 
 	public function edit($id = null)
 	{		
-		$data['judulHeader'] = 'Fakultas';
-		$data['menu'] = 'fakultas';
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['editdata'] = $this->db->get_where('fakultas',array('kode_fakultas'=>$id))->row();
+		$data['judulHeader'] 	= 'Fakultas';
+		$data['menu'] 			= 'fakultas';
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['editdata'] 		= $this->db->get_where('fakultas',array('kode_fakultas'=>$id))->row();
 		$this->template->display('admin/fakultas/edit',$data);
 	}
 

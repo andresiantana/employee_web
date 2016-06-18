@@ -234,22 +234,24 @@
     </script>-->
 
     <script type="text/javascript">
-        $('.numbers-only').keyup(function() {
-            var d = $(this).attr('numeric');
-            var value = $(this).val();
-            var orignalValue = value;
-            value = value.replace(/[0-9]*/g, "");
-            var msg = "Only Integer Values allowed.";
+        $(document).ready(function(){
+            $('.numbers-only').keyup(function() {
+                var d = $(this).attr('numeric');
+                var value = $(this).val();
+                var orignalValue = value;
+                value = value.replace(/[0-9]*/g, "");
+                var msg = "Only Integer Values allowed.";
 
-            if (d == 'decimal') {
+                if (d == 'decimal') {
                 value = value.replace(/\./, "");
                 msg = "Only Numeric Values allowed.";
-            }
+                }
 
-            if (value != '') {
-              orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
-              $(this).val(orignalValue);
-            }
+                if (value != '') {
+                  orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+                  $(this).val(orignalValue);
+                }
+            });
         });
     </script>
 </body>

@@ -11,7 +11,7 @@
                         <tr>
                             <td style="width:10%"><label>NIP</label></td>
                             <td style="width:1%;"></td>
-                            <td style="width:30%"> <input type="text" class="form-control" id="nip" name="nip"></td>
+                            <td style="width:30%"> <input type="text" class="form-control nip" id="nip" name="nip" maxlength=10></td>
 
                             <td style="width:9%"></td>
 
@@ -26,7 +26,7 @@
                         <tr>
                             <td><label>Kode Pengajuan</label></td>
                             <td style="width:1%;"></td>
-                            <td> <input type="text" class="form-control" id="kode_pengajuan" name="kode_pengajuan"></td>
+                            <td> <input type="text" class="form-control kode" id="kode_pengajuan" name="kode_pengajuan"></td>
 
                             <td style="width:9%"></td>
 
@@ -235,4 +235,37 @@ function setDetailPengajuan(id_pengajuan_biaya){
     });
 
 }
+
+$(document).ready(function(){
+
+    $('.nip').keyup(function() {
+    var d = $(this).attr('numeric');
+    var value = $(this).val();
+    var orignalValue = value;
+    value = value.replace(/[0-9]-*/g, "");
+    var msg = "Only Integer Values allowed.";
+
+    if (d == 'decimal') {
+        value = value.replace(/\./, "");
+        msg = "Only Numeric Values allowed.";
+    }
+
+    if (value != '') {
+      orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+      $(this).val(orignalValue);
+    }
+    });
+
+    $('.kode').keyup(function() {
+        var kode = document.getElementById('kode_pengajuan');
+        var filter = /^([a-zA-Z0-9 _\`\,\.\-\'])+$/;
+
+        if (!filter.test(kode.value)) {
+            alert('Kode Pengajuan hanya boleh diisi dengan huruf dan angka!');
+            $('#kode_pengajuan').val('');
+            kode.focus;
+        return false;
+        }
+    });
+});
 </script>

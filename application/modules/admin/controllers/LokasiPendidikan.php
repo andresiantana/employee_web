@@ -23,7 +23,7 @@ class LokasiPendidikan extends CI_Controller {
 		$data['id_user'] 		= $this->session->userdata('id_user');
 		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$data['judulHeader'] 	= 'Lokasi Pendidikan';
-		$data['menu'] 	= 'lokasiPendidikan';
+		$data['menu'] 			= 'lokasiPendidikan';
 
 		$jml = $this->db->get('lokasi_pendidikan');
 

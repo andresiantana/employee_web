@@ -50,7 +50,7 @@ class PengajuanBiaya extends CI_Controller {
 		$this->template->display('pegawai/pengajuanBiaya/index',$data);
 	}
 
-	public function insert()
+	public function insert($id = null)
 	{
 		$status = true;
 		$tgl = '';
@@ -85,11 +85,7 @@ class PengajuanBiaya extends CI_Controller {
 		);
 
 		if(!empty($id_pengajuan_biaya)){
-			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
-			$this->db->update('pengajuan_biaya', $data);
-			$insert = $this->db->affected_rows();
-
-	        $object = array(
+			 $object = array(
 				'tanggal' => $tanggal,
 				'kode_pengajuan'=>$kode_pengajuan,
 				'semester' => $semester,
@@ -100,6 +96,10 @@ class PengajuanBiaya extends CI_Controller {
 				'prodi' => $prodi,
 				'jenjang' => $jenjang
 			);
+
+			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
+			$this->db->update('pengajuan_biaya', $object);
+			$insert = $this->db->affected_rows();	       
 		}else{			
 			$insert = $this->PengajuanBiayaT->insert($data);
 			$datapengajuan = $this->db->get_where('pengajuan_biaya',array(),array('limit'=>1,'order'=>'id_pengajuan_biaya DESC'))->row();

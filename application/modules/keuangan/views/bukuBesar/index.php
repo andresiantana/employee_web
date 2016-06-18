@@ -90,7 +90,7 @@
 		                        <tr>
 		                            <td><label>Tahun</label></td>
 		                            <td style="width:1%;"></td>
-		                            <td> <input type="text" class="form-control" id="tahun" name="tahun" required></td>
+		                            <td> <input type="text" class="form-control numbers-only" id="tahun" name="tahun" required maxlength="4"></td>
 
 		                            <td style="width:9%"></td>
 
@@ -109,3 +109,23 @@
         </div>
     </div>
 </div>
+<script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
+<script type="text/javascript">
+	$('.numbers-only').keyup(function() {
+        var d = $(this).attr('numeric');
+        var value = $(this).val();
+        var orignalValue = value;
+        value = value.replace(/[0-9]*/g, "");
+        var msg = "Only Integer Values allowed.";
+
+        if (d == 'decimal') {
+        value = value.replace(/\./, "");
+        msg = "Only Numeric Values allowed.";
+        }
+
+        if (value != '') {
+          orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+          $(this).val(orignalValue);
+        }
+      });
+</script>

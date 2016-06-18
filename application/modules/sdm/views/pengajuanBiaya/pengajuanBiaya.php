@@ -57,6 +57,7 @@
                                 <option value="D3">D3</option>
                             </select>
                         </div>
+                        <input class="form-control numbers-only" type="hidden" name="jumlah_nominal" id="jumlah_nominal" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>
                         <!-- <div class="form-group">
                             <label for="jumlah_nominal">Biaya Yang Diajukan</label>
                             <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" onblur="proporsiUraian(this);" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>

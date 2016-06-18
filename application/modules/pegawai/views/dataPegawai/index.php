@@ -42,7 +42,7 @@
                                     <td><?php echo $v->no_telp_hp; ?></td>
                                     <td><img src="<?php echo base_url().'data/images/pegawai/'.$v->foto; ?>" width="50px" height="50px"></td>
                                     <td><?php echo $v->nama_fakultas; ?></td>
-                                    <td><?php echo $v->nama_prodi; ?></td>
+                                    <td><?php echo ($v->nama_prodi != '') ? $v->nama_prodi : "-"; ?></td>
                                     <td><?php echo $v->nama_bank; ?></td>
                                     <td><?php echo $v->nomor_rekening; ?></td>
                                     <td><?php echo $v->atasnama_rekening; ?></td>

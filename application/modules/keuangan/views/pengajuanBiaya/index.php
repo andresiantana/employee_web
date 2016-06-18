@@ -11,7 +11,7 @@
                         <tr>
                             <td style="width:10%"><label>NIP</label></td>
                             <td style="width:1%;"></td>
-                            <td style="width:30%"> <input type="text" class="form-control" id="nip" name="nip"></td>
+                            <td style="width:30%"> <input type="text" class="form-control nip" id="nip" name="nip" maxlength="10"></td>
 
                             <td style="width:9%"></td>
 
@@ -22,7 +22,7 @@
                         <tr>
                             <td><label>Kode Pengajuan</label></td>
                             <td style="width:1%;"></td>
-                            <td> <input type="text" class="form-control" id="kode_pengajuan" name="kode_pengajuan"></td>
+                            <td> <input type="text" class="form-control kode" id="kode_pengajuan" name="kode_pengajuan"></td>
 
                             <td style="width:9%"></td>
 
@@ -115,6 +115,20 @@
 </div>
 
 
+<!-- Dialog untuk detail pengajuan -->
+<input type="hidden" id="id_pegawai">   
+<div class="remodal" data-remodal-id="detail_pengajuan" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Detail Pengajuan Biaya</h2>
+    <p id="modal1Desc">
+        <div id="data-detail">
+
+        </div>
+    </p>
+  </div>
+</div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
@@ -187,6 +201,24 @@ function setPencarian(){
     });
 }
 
+function setDetailPengajuan(id_pengajuan_biaya){
+    $('#id_pengajuan_biaya').val(id_pengajuan_biaya);
+    var data = {
+      id_pengajuan_biaya:id_pengajuan_biaya,
+    }
+
+  $.ajax({
+      url     : "<?php echo base_url('pegawai/PengajuanBiaya/detail'); ?>",
+      type    : "POST",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          $('#data-detail').html(data);
+      }
+    });
+
+}
+
 $(document).ready(function(){
    $('#tanggal_awal').datepicker({
         dateFormat: 'dd/mm/yy',
@@ -197,6 +229,36 @@ $(document).ready(function(){
         dateFormat: 'dd/mm/yy',
         changeMonth: true,changeYear: true,
         yearRange: "-80:+10"
+    });
+
+    $('.nip').keyup(function() {
+    var d = $(this).attr('numeric');
+    var value = $(this).val();
+    var orignalValue = value;
+    value = value.replace(/[0-9]-*/g, "");
+    var msg = "Only Integer Values allowed.";
+
+    if (d == 'decimal') {
+        value = value.replace(/\./, "");
+        msg = "Only Numeric Values allowed.";
+    }
+
+    if (value != '') {
+      orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+      $(this).val(orignalValue);
+    }
+    });
+
+    $('.kode').keyup(function() {
+        var kode = document.getElementById('kode_pengajuan');
+        var filter = /^([a-zA-Z0-9 _\`\,\.\-\'])+$/;
+
+        if (!filter.test(kode.value)) {
+            alert('Kode Pengajuan hanya boleh diisi dengan huruf dan angka!');
+            $('#kode_pengajuan').val('');
+            kode.focus;
+        return false;
+        }
     });
 });
 </script>

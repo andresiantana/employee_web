@@ -11,13 +11,13 @@
                         <tr>
                             <td style="width:10%"><label>NIP</label></td>
                             <td style="width:1%;"></td>
-                            <td style="width:30%"> <input type="text" class="form-control" id="nip" name="nip"></td>
+                            <td style="width:30%"> <input type="text" class="form-control nip" id="nip" name="nip" maxlength="10"></td>
 
                             <td style="width:9%"></td>
 
                             <td><label>Nama</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text" class="form-control" id="nama" name="nama"></td>
+                            <td><input type="text" class="form-control nama" id="nama" name="nama"></td>
                         </tr>
                     </table>
                     <br>
@@ -119,4 +119,36 @@ function print(caraPrint,id_pegawai)
     var id_pegawai = id_pegawai;
     window.open('<?php echo base_url('keuangan/Amortisasi/printAmortisasi/'); ?>/'+id_pegawai,'printwin','left=100,top=100,width=1000,height=640');
 }
+
+$(document).ready(function(){
+  $('.nip').keyup(function() {
+    var d = $(this).attr('numeric');
+    var value = $(this).val();
+    var orignalValue = value;
+    value = value.replace(/[0-9]-*/g, "");
+    var msg = "Only Integer Values allowed.";
+
+    if (d == 'decimal') {
+        value = value.replace(/\./, "");
+        msg = "Only Numeric Values allowed.";
+    }
+
+    if (value != '') {
+      orignalValue = orignalValue.replace(/([^0-9].*)/g, "")
+      $(this).val(orignalValue);
+    }
+    });
+
+    $('.nama').keyup(function() {
+        var nama = document.getElementById('nama');
+        var filter = /^([a-zA-Z _\`\,\.\-\'])+$/;
+
+        if (!filter.test(nama.value)) {
+            alert('Nama hanya boleh diisi dengan huruf dan karakter!');
+            $('#nama').val('');
+            nama.focus;
+        return false;
+        }
+    });
+});
 </script>

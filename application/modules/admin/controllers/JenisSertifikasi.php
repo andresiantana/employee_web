@@ -25,14 +25,15 @@ class JenisSertifikasi extends CI_Controller {
 		$data['menu'] = 'jenisSertifikasi';
 
 		$jml = $this->db->get('jenis_sertifikasi');
+		
 		//pengaturan pagination
-		 $config['base_url'] = base_url().'admin/jenisSertifikasi/index';
-		 $config['total_rows'] = $jml->num_rows();
-		 $config['per_page'] = '10';
-		 $config['first_page'] = 'Awal';
-		 $config['last_page'] = 'Akhir';
-		 $config['next_page'] = '&laquo;';
-		 $config['prev_page'] = '&raquo;';
+		$config['base_url'] = base_url().'admin/jenisSertifikasi/index';
+		$config['total_rows'] = $jml->num_rows();
+		$config['per_page'] = '10';
+		$config['first_page'] = 'Awal';
+		$config['last_page'] = 'Akhir';
+		$config['next_page'] = '&laquo;';
+		$config['prev_page'] = '&raquo;';
 
 		//inisialisasi config
 		 $this->pagination->initialize($config);

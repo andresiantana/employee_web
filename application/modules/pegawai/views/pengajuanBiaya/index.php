@@ -29,11 +29,13 @@
                         </div>
                         <div class="form-group">
                             <label>Pilih Semester</label>
-                            <select class="form-control" name="semester" id="semester">
+                            <select class="form-control" name="semester" id="semester" required>
                                 <option value="">-Pilih Semester-</option>
                                 <?php for ($i = 0; $i < 8; $i++) {
-                                    if($pengajuan->semester < ($i+1)){
+                                    if($pengajuan->semester < ($i+1) && (count($datapengajuan) < 0)){
                                  ?>
+                                    <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
+                                <?php }else{ ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
                                 <?php } ?>
                                 <?php } ?>
@@ -65,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jenjang</label>
-                            <select class="form-control" name="jenjang" id="jenjang">
+                            <select class="form-control" name="jenjang" id="jenjang" required>
                                 <option value="">-Pilih Jenjang-</option>
                                 <option value="S3">S3</option>
                                 <option value="S2">S2</option>
