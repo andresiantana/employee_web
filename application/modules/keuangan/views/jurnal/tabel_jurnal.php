@@ -45,8 +45,10 @@
                         <thead>
                             <tr>
                               <th rowspan="2" style="text-align:center;">Tanggal</th>
+                              <th rowspan="2" style="text-align:center;">No. Akun</th>
+                              <th rowspan="2" style="text-align:center;">Nama Akun</th>                              
+                              <th rowspan="2" style="text-align:center;">Ref.</th>
                               <th rowspan="2" style="text-align:center;">Keterangan</th>
-                              <th rowspan="2" style="text-align:center;">Ref</th>
                               <th colspan="2" style="text-align:center;">Jumlah</th>
                             </tr>
                             <tr>
@@ -67,9 +69,11 @@
                                       }
                               ?>
                                 <tr>
-                                    <td><?php echo isset($v->tanggal_jurnal) ? date('d M Y',strtotime($v->tanggal_jurnal)) : null; ?></td>
-                                    <td><?php echo $v->nama_akun; ?></td>
+                                    <td style="text-align:center;"><?php echo isset($v->tanggal_jurnal) ? date('d M Y',strtotime($v->tanggal_jurnal)) : null; ?></td>
                                     <td style="text-align:center;"><?php echo $v->no_akun; ?></td>
+                                    <td><?php echo $v->nama_akun; ?></td>
+                                    <td style="text-align:center;"><?php echo $v->nip; ?></td>
+                                    <td><?php echo $v->keterangan; ?></td>
                                     <td style="text-align:right;">
                                       <?php
                                         if($v->status == 'D'){
@@ -92,13 +96,13 @@
                               <?php endforeach; ?>
                               <?php }else{ ?>
                               <tr>
-                                  <td colspan="5">Data tidak ditemukan.</td>
+                                  <td colspan="7">Data tidak ditemukan.</td>
                               </tr>
                               <?php } ?>
                             </tbody>
                             <tfoot>
                               <tr>
-                                  <td colspan="3">Total (Rp.)</td>
+                                  <td colspan="5">Total (Rp.)</td>
                                   <td style="text-align:right;"><?php echo number_format($total_debit); ?></td>
                                   <td style="text-align:right;"><?php echo number_format($total_kredit); ?></td>
                               </tr>

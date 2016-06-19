@@ -139,7 +139,8 @@ class PengajuanBiaya extends CI_Controller {
 		if(!empty($id_pengajuan_biaya)){
 			$object = array(
 				'jumlah_nominal' => $jumlah_nominal,
-				'status_pengajuan' => $status_pengajuan
+				'status_pengajuan' => $status_pengajuan,
+				'tanggal_approve'=>date('Y-m-d')
 			);
 
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);

@@ -9,6 +9,7 @@ class JurnalT extends CI_Model {
 	public function tampilJurnal($bulan = null, $tahun = null) {
 		$this->db->from('jurnal');
 		$this->db->join('coa', 'coa.no_akun = jurnal.no_akun');
+		$this->db->join('pegawai', 'pegawai.id_pegawai = jurnal.id_pegawai');
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan);
 		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.status_aktif is true");

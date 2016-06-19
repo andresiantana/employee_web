@@ -118,7 +118,8 @@ class PengajuanBiaya extends CI_Controller {
 			'jumlah_biaya' => $jumlah_biaya,
 			'berhasil_transfer' => $berhasil_transfer,
 			'gagal_transfer' => $gagal_transfer,
-			'keterangan' => $keterangan
+			'keterangan' => $keterangan,
+			'tanggal_approve_pencairan' => date('Y-m-d')
 		);
 
 		if(!empty($id_pencairan_biaya)){
@@ -134,7 +135,8 @@ class PengajuanBiaya extends CI_Controller {
 				'jumlah_biaya' => $jumlah_biaya,
 				'berhasil_transfer' => $berhasil_transfer,
 				'gagal_transfer' => $gagal_transfer,
-				'keterangan' => $keterangan
+				'keterangan' => $keterangan,
+				'tanggal_approve_pencairan' => date('Y-m-d')
 			);
 		}else{
 			$insert = $this->KUPencairanBiayaT->insert($data);	
