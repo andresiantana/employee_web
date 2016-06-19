@@ -53,6 +53,7 @@
                                 <th>Detail Pengajuan</th>
                                 <th>Status Pengajuan</th>
                                 <th>Status Pencairan</th>
+                                <th>Status Penerimaan Dana</th>
                                 <th class="td-actions">Aksi</th>
                             </tr>
                         </thead>
@@ -106,6 +107,7 @@
                                         <?php echo "<font color=blue>Belum ada verifikasi</font>"; ?>
                                         <?php } ?>
                                     </td>
+                                    <td></td>
                                     <td class="td-actions">
                                         <?php 
                                             // echo isset($button) ? $button : ""; 

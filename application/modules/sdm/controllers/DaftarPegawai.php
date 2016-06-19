@@ -44,7 +44,8 @@ class DaftarPegawai extends CI_Controller {
 
         $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
         $object = array(
-			'status_approve_sdm'=>'Approved'
+			'status_approve_sdm'=>'Approved',
+			'tanggal_approve_sdm'=>date('Y-m-d')
 		);
 
 		$this->db->where('id_pegawai', $id_pegawai);
@@ -191,7 +192,15 @@ class DaftarPegawai extends CI_Controller {
 
 		$this->db->where('id_pegawai', $id_pegawai);
 		$query = $this->db->update('pegawai', $object);
-		if($query){
+		if($query){			
+	        $object = array(
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>$tanggal,
+				'pesan'=>$pesan,
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$insert = $this->Notifikasi->insert($object);
 			if($status_kelulusan == 'Lulus'){
 				$dataJurnal = $this->SDJurnalT->tampilJurnalPegawai($id_pegawai)->row();
 				// Jurnal Pegawai Studi Lanjut		
@@ -234,7 +243,7 @@ class DaftarPegawai extends CI_Controller {
 						'no_akun'=>114,
 						'keterangan'=>'Pegawai Studi Lanjut',
 						'status'=>'K',
-						'biaya'=>0,
+						'biaya'=>$biaya_amortisasi,
 						'status_aktif'=>true
 					);	
 

@@ -121,6 +121,16 @@
             <div class="header"> 
                 <h1 class="page-header">
                     <?php echo isset($judulHeader) ? $judulHeader : ""; ?> <small></small>
+                    <div id="tanggal" style="width:200px;float:right;">                        
+                        <div class="form-group">
+                            <label>
+                                <font style="font-size:10px;margin-left:-50px;">Tanggal :</font>                                
+                            </label>                            
+                            <div class="controls">
+                                <input class="form-control" style="width:200px;float:right;margin-top:-30px;" type="text" name="tanggal_input" id="tanggal_input" value="<?php echo date('d M Y'); ?>" readonly=true>
+                            </div>
+                        </div>
+                    </div>
                 </h1>									
             </div>
             <div id="page-inner">

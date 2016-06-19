@@ -14,7 +14,6 @@
             <?php echo form_open_multipart("pegawai/DataPegawai/insert",array('accept-charset'=>"utf-8")); ?>
             <div class="col-md-6">
                 <legend>Data Pegawai</legend>
-
                 <div class="form-group">
                     <label>Nama Lengkap</label>
                     <input class="form-control nama" type="text" name="nama_lengkap" id="nama_lengkap" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>" maxlength="50">
@@ -71,7 +70,7 @@
                         <select class="form-control" name="kode_fakultas_dosen" id="kode_fakultas_dosen" onChange="setProdi();">
                             <option value="">-Pilih Fakultas-</option>
                             <?php foreach ($fakultas as $i => $val) { ?>
-                                <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->kode_fakultas." - ".$val->nama_fakultas; ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -92,9 +91,9 @@
                             <?php foreach ($fakultas as $i => $val) { 
                                     if($datapegawai->kode_fakultas == $val->kode_fakultas){
                             ?>
-                                <option value="<?php echo $val->kode_fakultas; ?>" selected><?php echo $val->nama_fakultas; ?></option>
+                                <option value="<?php echo $val->kode_fakultas; ?>" selected><?php echo $val->kode_fakultas." - ".$val->nama_fakultas; ?></option>
                             <?php }else{ ?>
-                                <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
+                                <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->kode_fakultas." - ".$val->nama_fakultas; ?></option>
                             <?php } ?>
                             <?php } ?>
                         </select>
@@ -117,14 +116,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Tanggal Mulai Studi</label>
+                    <label>Prediksi Tanggal Mulai Studi</label>
                     <br>
                     <!-- <div class="myOwnClass"> -->
                         <input type="text" class="form-control datepickerNew" id="tanggal_mulai_studi" name="tanggal_mulai_studi" value="<?php echo isset($datapegawai->tanggal_mulai_studi) ? date('Y-m-d',strtotime($datapegawai->tanggal_mulai_studi)) : date('Y-m-d'); ?>" required> (Tahun-Bulan-Tanggal)
                     <!-- </div> -->
                 </div>
                 <div class="form-group">
-                    <label>Lama Studi (Tahun)</label>
+                    <label>Target Semester</label>
                     <input class="form-control numbers-only" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>">
                 </div>
             </div>
@@ -157,6 +156,20 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <legend>Data Studi Lanjut</legend>
+                <div class="form-group ">
+                    <label>Fakultas Studi</label>
+                    <input class="form-control nama" type="text" id="fakultas_studi" name="fakultas_studi" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>">
+                </div>
+                <div class="form-group ">
+                    <label>Prodi Studi</label>
+                    <input class="form-control nama" type="text" id="prodi_studi" name="prodi_studi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>">
+                </div>
+                <div class="form-group ">
+                    <label>Jenjang Studi</label>
+                    <input class="form-control nama" type="text" id="jenjang_studi" name="jenjang_studi" value="<?php echo isset($datapegawai->jenjang_studi) ? $datapegawai->jenjang_studi : ""; ?>">
+                </div>
+
                 <legend>Data Pengajuan</legend>
                 <div class="form-group ">
                     <label>Surat Pengajuan Studi Lanjut</label>
@@ -190,7 +203,7 @@
                     
                 </div>
                 <div class="form-group ">
-                    <label>Biaya SPP</label>
+                    <label>Biaya SPP Yang Diajukan Per Semester</label>
                     <input class="form-control numbers-only" type="text" name="biaya_spp" value="<?php echo isset($datapegawai->biaya_spp) ? $datapegawai->biaya_spp : ""; ?>">
                 </div>
             </div>

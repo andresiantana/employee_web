@@ -113,12 +113,15 @@ class DataPegawai extends CI_Controller {
 		$id_user = $this->session->userdata('id_user');
 		$id_pegawai = ($this->input->post('id_pegawai')) ? $this->input->post('id_pegawai') : null;
 		$lama_bulan_studi = $this->session->userdata('lama_bulan_studi');
-
+		$tanggal_input = date('Y-m-d');
 		// daftar file yang sudah di upload
 		$file_foto = $this->input->post('file_foto');
 		$file_lulus_seleksi = $this->input->post('file_lulus_seleksi');
 		$file_studi_lanjut = $this->input->post('file_studi_lanjut');
 		$file_terima_beasiswa = $this->input->post('file_terima_beasiswa');
+		$fakultas_studi = $this->input->post('fakultas_studi');
+		$prodi_studi = $this->input->post('prodi_studi');
+		$jenjang_studi = $this->input->post('jenjang_studi');
 
 		// upload foto
 		$config['upload_path']    = $this->gallery_path;
@@ -236,6 +239,10 @@ class DataPegawai extends CI_Controller {
 			'id_user' => $id_user,
 			'tanggal_mulai_studi' => $tanggal_studi,
 			'lama_bulan_studi' => $lama_bulan_studi,
+			'tanggal_input'=>$tanggal_input,
+			'fakultas_studi'=>$fakultas_studi,
+			'prodi_studi'=>$prodi_studi,
+			'jenjang_studi'=>$jenjang_studi,
 		);
 
 		if(!empty($id_pegawai)){
@@ -370,7 +377,7 @@ class DataPegawai extends CI_Controller {
 		if(count($dataProdi) > 0){
 			echo "<select class='form-control' name='id_prodi' id='id_prodi'><option value=''>-Pilih Prodi-</option>";
 			foreach($dataProdi as $prodi){
-			   echo"<option value='".$prodi->id_prodi."'>".$prodi->nama_prodi."</option>";
+			   echo"<option value='".$prodi->id_prodi."'>".$prodi->kode_prodi." - ".$prodi->nama_prodi."</option>";
 		  	}     
 		  	echo"</select>";
 		}else{
