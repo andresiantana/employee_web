@@ -107,7 +107,15 @@
                                         <?php echo "<font color=blue>Belum ada verifikasi</font>"; ?>
                                         <?php } ?>
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <?php 
+                                            if($v->tanggal_penerimaan == ''){
+                                        ?>
+                                            <a href="#approvedPenerimaan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve Penerimaan Biaya" onclick="setIdPencairanBiaya(<?php echo $v->id_pencairan_biaya; ?>,<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
+                                        <?php }else{ ?>
+                                        <font style="color:green;"><?php echo "Dana Sudah Diterima pada tanggal ".date('d M Y',strtotime($v->tanggal_penerimaan)); ?></font>
+                                        <?php } ?>
+                                    </td>
                                     <td class="td-actions">
                                         <?php 
                                             // echo isset($button) ? $button : ""; 
@@ -180,6 +188,18 @@
   </div>
 </div>
 
+<!-- Dialog untuk Approve -->
+<input type="hidden" id="id_pencairan_biaya">     
+<div class="remodal" data-remodal-id="approvedPenerimaan" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Approved Penerimaan Biaya</h2>
+    <p id="modal1Desc"></p>
+  </div>
+  <button data-remodal-action="confirm" class="remodal-confirm" onclick="approvePenerimaan();">Approved</button>
+  <button data-remodal-action="cancel" class="remodal-cancel">Batal</button>  
+</div>
+
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
@@ -234,6 +254,37 @@ function setDetailPengajuan(id_pengajuan_biaya){
     });
 
 }
+
+function setIdPencairanBiaya(id_pencairan_biaya,id_pegawai){
+    $('#id_pencairan_biaya').val(id_pencairan_biaya);
+    $('#id_pegawai').val(id_pegawai);
+}
+
+function approvePenerimaan(){
+    var id_pencairan_biaya = $('#id_pencairan_biaya').val();
+    var id_pegawai = $('#id_pegawai').val();
+    var data = {
+      id_pencairan_biaya    : id_pencairan_biaya,
+      id_pegawai    : id_pegawai
+    }
+    $('#sample').attr('style','display:none');
+    $.ajax({
+      url     : "<?php echo base_url('pegawai/pengajuanBiaya/approvePenerimaan'); ?>",
+      type    : "GET",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          if(data.status == true){
+            alert('Data Penerimaan Biaya berhasil di approve');
+            window.location.reload();
+          }else{
+            alert('Data Penerimaan Biaya gagal di approve');
+              window.location.reload();
+          }
+      }
+    });
+}
+
 
 $(document).ready(function(){
     $('#tanggal_awal').datepicker({

@@ -237,6 +237,47 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->view('pegawai/pengajuanBiaya/detail', $data);
 	}
 
+	function approvePenerimaan()
+    {
+    	$status = '';
+    	$status_notifikasi = false;
+
+        $id_pencairan_biaya = isset($_GET['id_pencairan_biaya']) ? $_GET['id_pencairan_biaya'] : null;
+        $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
+        $object = array(
+			'tanggal_penerimaan'=>date('Y-m-d')
+		);
+
+		$this->db->where('id_pencairan_biaya', $id_pencairan_biaya);
+		$this->db->update('pencairan_biaya', $object);
+
+		if($this->db->affected_rows()){
+			$tanggal = date('Y-m-d H:i:s');
+			$pesan = 'Data Pencairan Biaya sudah di Terima oleh Pegawai';
+			$data = array(
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>$tanggal,
+				'pesan'=>$pesan,
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$insert = $this->Notifikasi->insert($data);
+			if($insert){
+				$status_notifikasi = true;
+			}else{
+				$status_notifikasi = false;
+			}
+
+			$status = true;
+		}else{
+			$status = false;
+		}
+
+		$data['status'] = $status;
+		echo json_encode($data); 
+		exit;
+	}
+
 }
 
 /* End of file PengajuanBiaya.php */

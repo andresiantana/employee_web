@@ -8,6 +8,7 @@ class PGPengajuanBiayaT extends PengajuanBiayaT {
 		$this->db->select('*');
 		$this->db->from('pengajuan_biaya');
 		$this->db->join('pegawai', 'pegawai.id_pegawai = pengajuan_biaya.id_pegawai');
+		$this->db->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left');
 		$this->db->where('pegawai.id_user',$this->session->userdata('id_user'));
 		if($semester != ''){
 			$this->db->where('semester', $semester);

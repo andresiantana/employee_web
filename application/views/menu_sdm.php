@@ -25,6 +25,9 @@
             <li>
                 <a <?php if($menu == 'amortisasi'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Amortisasi'); ?>">Amortisasi</a>
             </li>
+            <li>
+                <a <?php if($menu == 'posisiPendanaanBeasiswa'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/PosisiPendanaanBeasiswa'); ?>">Posisi Pendanaan Beasiswa</a>
+            </li>
         </ul>
     </li>
 </ul>

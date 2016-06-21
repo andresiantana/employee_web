@@ -43,6 +43,15 @@
             <?php echo "<font color=blue>Belum ada verifikasi</font>"; ?>
             <?php } ?>
         </td>
+        <td>
+            <?php 
+                if($v->tanggal_penerimaan == ''){
+            ?>
+                <a href="#approvedPenerimaan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve Penerimaan Biaya" onclick="setIdPencairanBiaya(<?php echo $v->id_pencairan_biaya; ?>,<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
+            <?php }else{ ?>
+            <font style="color:green;"><?php echo "Dana Sudah Diterima pada tanggal ".date('d M Y',strtotime($v->tanggal_penerimaan)); ?></font>
+            <?php } ?>
+        </td>
         <td class="td-actions">
             <?php echo isset($button) ? $button : ""; ?>
         </td>
