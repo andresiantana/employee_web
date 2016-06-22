@@ -165,9 +165,15 @@
                     <label>Prodi Studi</label>
                     <input class="form-control nama" type="text" id="prodi_studi" name="prodi_studi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>">
                 </div>
-                <div class="form-group ">
-                    <label>Jenjang Studi</label>
-                    <input class="form-control nama" type="text" id="jenjang_studi" name="jenjang_studi" value="<?php echo isset($datapegawai->jenjang_studi) ? $datapegawai->jenjang_studi : ""; ?>">
+                <div class="form-group">
+                    <label>Jenjang</label>
+                    <select class="form-control" name="jenjang_studi" id="jenjang_studi" required>
+                        <option value="">-Pilih Jenjang-</option>
+                        <option value="S3">S3</option>
+                        <option value="S2">S2</option>
+                        <option value="S1">S1</option>
+                        <option value="D3">D3</option>
+                    </select>
                 </div>
 
                 <legend>Data Pengajuan</legend>

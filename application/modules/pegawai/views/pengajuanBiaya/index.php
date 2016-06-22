@@ -59,11 +59,11 @@
                         </div>
                         <div class="form-group">
                             <label for="jurusan_fakultas">Fakultas</label>
-                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapengajuan->jurusan_fakultas) ? $datapengajuan->jurusan_fakultas : ""; ?>" required>
+                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="prodi">Prodi</label>
-                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapengajuan->prodi) ? $datapengajuan->prodi : ""; ?>" required>
+                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>" required>
                         </div>
                         <div class="form-group">
                             <label>Jenjang</label>
@@ -225,6 +225,11 @@
         }
 
     $(document).ready(function(){  
+        var jenjang = '<?php echo isset($datapegawai->jenjang_studi) ? $datapegawai->jenjang_studi : ""; ?>';
+        if(jenjang != ''){
+            $('#jenjang').val(jenjang);
+        }
+
         var biaya_spp = '<?php echo isset($datapegawai->biaya_spp) ? $datapegawai->biaya_spp : ""; ?>';
         if(biaya_spp != ''){
             $('#jumlah_nominal').val(biaya_spp);

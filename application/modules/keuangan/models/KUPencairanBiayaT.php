@@ -27,7 +27,7 @@ class KUPencairanBiayaT extends PencairanBiayaT {
 		$this->db->from('pencairan_biaya');
 		$this->db->join('pegawai', 'pegawai.id_pegawai = pencairan_biaya.id_pegawai');
 		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pengajuan_biaya = pencairan_biaya.id_pengajuan_biaya');
-		$this->db->join('kategori_biaya','kategori_biaya.id_kategori_biaya = pengajuan_biaya.id_kategori_biaya');
+		// $this->db->join('kategori_biaya','kategori_biaya.id_kategori_biaya = pengajuan_biaya.id_kategori_biaya');
 		$this->db->where('pencairan_biaya.id_pencairan_biaya', $id);
 		$query = $this->db->get();
 		return $query;

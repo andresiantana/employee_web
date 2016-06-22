@@ -48,11 +48,6 @@
                       <td><?php echo $datapencairan->kode_pengajuan; ?></td>
                     </tr>
                     <tr>
-                      <td>Kategori Biaya</td>
-                      <td>:</td>
-                      <td><?php echo $datapencairan->nama_kategori; ?></td>
-                    </tr>
-                    <tr>
                       <td>Jumlah Biaya</td>
                       <td>:</td>
                       <td><i><b>Rp. <?php echo number_format($datapencairan->jumlah_nominal,0,'',','); ?></b></i></td>

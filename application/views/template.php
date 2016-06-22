@@ -121,7 +121,7 @@
             <div class="header"> 
                 <h1 class="page-header">
                     <?php echo isset($judulHeader) ? $judulHeader : ""; ?> <small></small>
-                    <div id="tanggal" style="width:200px;float:right;">                        
+                    <div id="tgl" style="width:200px;float:right;">                        
                         <div class="form-group">
                             <label>
                                 <font style="font-size:10px;margin-left:-50px;">Tanggal :</font>                                
