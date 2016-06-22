@@ -38,7 +38,7 @@
 
                             <div class="form-group">
                                 <label for="jumlah_nominal">Jumlah Nominal</label>
-                                <input class="form-control numbers-only" type="text" name="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required>
+                                <input class="form-control numbers-only" type="text" name="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" readonly=true required style="text-align:right;width:150px;">
                             </div>
 
                             <legend> Data Pencairan Biaya </legend>
@@ -57,18 +57,18 @@
                             
                             <div class="form-group">
                                 <label>Jumlah Biaya</label>
-                                <input class="form-control numbers-only" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" readonly=true required>
+                                <input class="form-control numbers-only" id="jumlah_biaya" name="jumlah_biaya" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" readonly=true required style="text-align:right;width:150px;">
                             </div>
 
 
                             <div class="form-group">
                                 <label>Jumlah Berhasil Transfer</label>
-                                <input class="form-control numbers-only" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" onblur="setJmlBerhasil(this);" required>                                        
+                                <input class="form-control numbers-only" id="berhasil_transfer" name="berhasil_transfer" type="text" class="span3" value="<?php echo isset($uraian->nominal_disetujui) ? $uraian->nominal_disetujui : ""; ?>" onblur="setJmlBerhasil(this);" required style="text-align:right;width:150px;">                                        
                             </div>
                             
                             <div class="form-group">
                                 <label>Jumlah Gagal Transfer</label>
-                                <input class="form-control numbers-only" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  value="0" required>
+                                <input class="form-control numbers-only" id="gagal_transfer" name="gagal_transfer" type="text" class="span3" value="<?php echo isset($datapengajuan->gagal_transfer) ? $datapengajuan->gagal_transfer : ""; ?>" onblur="setJmlGagal(this);"  value="0" required style="text-align:right;width:150px;">
                             </div>
 
                             <div class="form-group">

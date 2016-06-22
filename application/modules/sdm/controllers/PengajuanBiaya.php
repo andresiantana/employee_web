@@ -226,8 +226,8 @@ class PengajuanBiaya extends CI_Controller {
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
 		$data['tr'] .= '<td>'.form_dropdown('rincian[0][id_kategori_biaya]', $kategori_biaya, $kategori_selected, $kategori_biaya_attribute).'</td>';
-		$data['tr'] .= '<td><input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only nominal" onblur="hitungTotalBiaya(this);" readonly=true><input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);"></td>';
-		$data['tr'] .= '<td><input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required></td>';
+		$data['tr'] .= '<td><input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only nominal" onblur="hitungTotalBiaya(this);" readonly=true><input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" style="text-align:right;width:150px;"></td>';
+		$data['tr'] .= '<td><input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required style="text-align:right;width:150px;"></td>';
 		$data['tr'] .= '<td><a href="javascript:tambahBiaya(this);"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a> <a style="margin-left:10px;" href="javascript:hapusBiaya(this);"><button type="button" class="btn btn-small btn-danger" onClick="hapusBiaya(this);"><i class="fa fa-minus"></i></button></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 

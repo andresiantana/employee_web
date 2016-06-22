@@ -112,11 +112,11 @@
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true>
+                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true style="text-align:right;width:150px;">
                                         <input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
                                     </td>
                                     <td>
-                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true>
+                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true style="text-align:right;width:150px;">
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
@@ -135,11 +135,11 @@
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true>
+                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" readonly=true style="text-align:right;width:150px;">
                                         <input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
                                     </td>
                                     <td>
-                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);">
+                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" style="text-align:right;width:150px;">
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>

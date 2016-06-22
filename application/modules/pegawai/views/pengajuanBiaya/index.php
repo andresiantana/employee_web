@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group">
                             <label for="prodi">Jumlah Nominal</label>
-                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required>
+                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required style="text-align:right;width:150px;">
                         </div>                        
                     </div>
                     <div class="col-md-12">

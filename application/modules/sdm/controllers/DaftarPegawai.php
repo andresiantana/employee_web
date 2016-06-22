@@ -181,7 +181,9 @@ class DaftarPegawai extends CI_Controller {
 		// “minutes” => (int) date(“i”, $diff),
 		// “seconds_total” => $diff_secs,
 		// “seconds” => (int) date(“s”, $diff)&nbsp; );
-
+		$bln = date('m');
+		$thn = date('Y');
+		$jumlah_hari = cal_days_in_month(CAL_GREGORIAN,$bln, $thn);
         $bulan = (date("Y", $diff) - $base_year) * 12 + date("n", $diff) - 1;
 
         $object = array(
@@ -195,8 +197,8 @@ class DaftarPegawai extends CI_Controller {
 		if($query){			
 	        $object = array(
 				'id_pegawai'=>$id_pegawai,
-				'tanggal'=>$tanggal,
-				'pesan'=>$pesan,
+				'tanggal'=>date('Y-m')."-".$jumlah_hari,
+				'pesan'=>"Pegawai sudah Lulus Studi",
 				'id_user'=>$this->session->userdata('id_user')
 			);
 
@@ -208,7 +210,7 @@ class DaftarPegawai extends CI_Controller {
 					'id_jurnal'=>'',
 					'id_pencairan_biaya'=>NULL,
 					'id_pegawai'=>$id_pegawai,
-					'tanggal_jurnal'=>date('Y-m-d'),
+					'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
 					'no_akun'=>111,
 					'keterangan'=>'Pegawai Studi Lanjut',
 					'status'=>'K',
@@ -219,7 +221,7 @@ class DaftarPegawai extends CI_Controller {
 					'id_jurnal'=>'',
 					'id_pencairan_biaya'=>NULL,
 					'id_pegawai'=>$id_pegawai,
-					'tanggal_jurnal'=>date('Y-m-d'),
+					'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
 					'no_akun'=>114,
 					'keterangan'=>'Pegawai Studi Lanjut',
 					'status'=>'D',
@@ -239,7 +241,7 @@ class DaftarPegawai extends CI_Controller {
 						'id_jurnal'=>'',
 						'id_pencairan_biaya'=>NULL,
 						'id_pegawai'=>$id_pegawai,
-						'tanggal_jurnal'=>date('Y-m-d'),
+						'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
 						'no_akun'=>114,
 						'keterangan'=>'Pegawai Studi Lanjut',
 						'status'=>'K',
@@ -251,7 +253,7 @@ class DaftarPegawai extends CI_Controller {
 						'id_jurnal'=>'',
 						'id_pencairan_biaya'=>NULL,
 						'id_pegawai'=>$id_pegawai,
-						'tanggal_jurnal'=>date('Y-m-d'),
+						'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
 						'no_akun'=>511,
 						'keterangan'=>'Beban Amortisasi PID',
 						'status'=>'D',
