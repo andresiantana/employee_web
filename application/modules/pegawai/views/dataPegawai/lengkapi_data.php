@@ -16,20 +16,20 @@
                 <legend>Data Pegawai</legend>
                 <div class="form-group">
                     <label>Nama Lengkap</label>
-                    <input class="form-control nama" type="text" name="nama_lengkap" id="nama_lengkap" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>" maxlength="50">
+                    <input class="form-control nama" type="text" name="nama_lengkap" id="nama_lengkap" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>" maxlength="50" required>
                     <input class="form-control" type="hidden" name="id_pegawai" value="<?php echo isset($datapegawai->id_pegawai) ? $datapegawai->id_pegawai : ""; ?>">
                 </div>
                 <div class="form-group">
                     <label>NIP</label>
-                    <input class="form-control nip" type="text" name="nip" value="<?php echo isset($datapegawai->nip) ? $datapegawai->nip : ""; ?>" maxlength=10 readonly=true>
+                    <input class="form-control nip" type="text" name="nip" value="<?php echo isset($datapegawai->nip) ? $datapegawai->nip : ""; ?>" maxlength=10 readonly=true required>
                 </div>
                 <div class="form-group">
                     <label>NIDN</label>
-                    <input class="form-control nidn" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>" maxlength=10>
+                    <input class="form-control nidn" type="text" name="nidn" value="<?php echo isset($datapegawai->nidn) ? $datapegawai->nidn : ""; ?>" maxlength=10 required>
                 </div>
                 <div class="form-group">
                     <label>Tempat Lahir</label>
-                    <input class="form-control tempat_lahir" type="text" name="tempat_lahir" id="tempat_lahir" value="<?php echo isset($datapegawai->tempat_lahir) ? $datapegawai->tempat_lahir : ""; ?>">
+                    <input class="form-control tempat_lahir" type="text" name="tempat_lahir" id="tempat_lahir" value="<?php echo isset($datapegawai->tempat_lahir) ? $datapegawai->tempat_lahir : ""; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
@@ -40,11 +40,11 @@
                 </div>
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input class="form-control" type="text" onblur='validasiEmail();' name="email" id="email" value="<?php echo isset($datapegawai->email) ? $datapegawai->email : ""; ?>" >
+                    <input class="form-control" type="text" onblur='validasiEmail();' name="email" id="email" value="<?php echo isset($datapegawai->email) ? $datapegawai->email : ""; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>No. Telp/HP</label>
-                    <input class="form-control notelp" type="text" name="no_telp_hp" id="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>">
+                    <input class="form-control notelp" type="text" name="no_telp_hp" id="no_telp_hp" value="<?php echo isset($datapegawai->no_telp_hp) ? $datapegawai->no_telp_hp : ""; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Foto</label> 
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group ">
                     <label>Status Pegawai</label>
-                    <select class="form-control" name="status_pegawai" id="status_pegawai" onchange="setStatusPegawai();">
+                    <select class="form-control" name="status_pegawai" id="status_pegawai" onchange="setStatusPegawai();" required>
                         <option value="">-Pilih Status Pegawai-</option>
                         <option value="DOSEN">Dosen</option>
                         <option value="TPA">TPA</option>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="form-group">
                     <label>Lokasi Pendidikan</label>
-                    <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();">
+                    <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();" required>
                         <option value="">-Pilih Lokasi-</option>
                         <option value="Dalam Negeri">Dalam Negeri</option>
                         <option value="Luar Negeri">Luar Negeri</option>
@@ -110,7 +110,7 @@
                 <div class="form-group">
                     <label>Nama Universitas</label>
                     <div class="controls" id="tampil_universitas">
-                       <select class="form-control" name="id_lokasi" id="id_lokasi">
+                       <select class="form-control" name="id_lokasi" id="id_lokasi" required>
                             <option value="">-Pilih Universitas-</option>
                         </select>                            
                     </div>
@@ -124,18 +124,18 @@
                 </div>
                 <div class="form-group">
                     <label>Target Semester</label>
-                    <input class="form-control numbers-only" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>">
+                    <input class="form-control numbers-only" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <legend>Data Rekening</legend>
                 <div class="form-group ">
                     <label>Nama Bank</label>
-                    <input class="form-control nama_bank" type="text" id="nama_bank" name="nama_bank" value="<?php echo isset($datapegawai->nama_bank) ? $datapegawai->nama_bank : ""; ?>">
+                    <input class="form-control nama_bank" type="text" id="nama_bank" name="nama_bank" value="<?php echo isset($datapegawai->nama_bank) ? $datapegawai->nama_bank : ""; ?>" required>
                 </div>
                 <div class="form-group ">
                     <label>Cabang Bank</label>
-                    <input class="form-control cabang" type="text" id="cabang_bank" name="cabang_bank" value="<?php echo isset($datapegawai->cabang_bank) ? $datapegawai->cabang_bank : ""; ?>">
+                    <input class="form-control cabang" type="text" id="cabang_bank" name="cabang_bank" value="<?php echo isset($datapegawai->cabang_bank) ? $datapegawai->cabang_bank : ""; ?>" required>
                 </div>
                 <!-- <div class="form-group">
                     <label>Cabang Bank</label>
@@ -148,22 +148,22 @@
                 </div> -->
                 <div class="form-group ">
                     <label>Nomor Rekening</label>
-                    <input class="form-control numbers-only" type="text" name="nomor_rekening" value="<?php echo isset($datapegawai->nomor_rekening) ? $datapegawai->nomor_rekening : ""; ?>">
+                    <input class="form-control numbers-only" type="text" name="nomor_rekening" value="<?php echo isset($datapegawai->nomor_rekening) ? $datapegawai->nomor_rekening : ""; ?>" required>
                 </div>
                 <div class="form-group ">
                     <label>Atas Nama</label>
-                    <input class="form-control atas_nama" type="text" id="atasnama_rekening" name="atasnama_rekening" value="<?php echo isset($datapegawai->atasnama_rekening) ? $datapegawai->atasnama_rekening : ""; ?>">
+                    <input class="form-control atas_nama" type="text" id="atasnama_rekening" name="atasnama_rekening" value="<?php echo isset($datapegawai->atasnama_rekening) ? $datapegawai->atasnama_rekening : ""; ?>" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <legend>Data Studi Lanjut</legend>
                 <div class="form-group ">
                     <label>Fakultas Studi</label>
-                    <input class="form-control nama" type="text" id="fakultas_studi" name="fakultas_studi" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>">
+                    <input class="form-control nama" type="text" id="fakultas_studi" name="fakultas_studi" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>" required>
                 </div>
                 <div class="form-group ">
                     <label>Prodi Studi</label>
-                    <input class="form-control nama" type="text" id="prodi_studi" name="prodi_studi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>">
+                    <input class="form-control nama" type="text" id="prodi_studi" name="prodi_studi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Jenjang</label>
