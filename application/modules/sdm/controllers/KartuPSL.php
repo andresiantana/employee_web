@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class KartuPID extends CI_Controller {
+class KartuPSL extends CI_Controller {
 
 	public function __construct()
 	{
@@ -23,20 +23,20 @@ class KartuPID extends CI_Controller {
 		$data['username'] = $this->session->userdata('username');
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Kartu PID';
-		$data['menu'] = 'KartuPID';
+		$data['judulHeader'] = 'Kartu PSL (Pegawai Studi Lanjut)';
+		$data['menu'] = 'KartuPSL';
 		$nidn = $this->input->post('nidn');
 		$nip = $this->input->post('nip');
 		$nama = $this->input->post('nama');
 		if($nidn != '' || $nip != '' || $nama != ''){
 			$data['data'] =  $this->SDPegawai->tampilDataPegawaiApprove($nidn,$nip,$nama)->result_object();		
-			$tr['tr'] = $this->load->view('sdm/kartuPID/pencarian',$data,true);
+			$tr['tr'] = $this->load->view('sdm/KartuPSL/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
 			$data['data']	= $this->SDPegawai->tampilDataPegawaiApprove()->result_object();		
 		}	
-		$this->template->display('sdm/kartuPID/index',$data);
+		$this->template->display('sdm/KartuPSL/index',$data);
 	}
 
 	function file_download()
@@ -55,10 +55,10 @@ class KartuPID extends CI_Controller {
 		$data['detail'] = $this->SDPegawai->tampilKartuPegawai($id_pegawai)->row();
 		$data['detail_pengajuan'] = $this->SDPengajuanBiayaT->tampilDetailPengajuan($id_pegawai)->result_object();
 		$data['detail_rincian'] = $this->SDUraianPengajuanBiayaT->tampilUraian($id_pegawai)->result_object();
-		$this->load->view('sdm/kartuPID/cetak_kartu', $data);
+		$this->load->view('sdm/KartuPSL/cetak_kartu', $data);
 	}
 
 }
 
-/* End of file KartuPID.php */
-/* Location: ./application/modules/admin/controllers/KartuPID.php */
+/* End of file KartuPSL.php */
+/* Location: ./application/modules/admin/controllers/KartuPSL.php */

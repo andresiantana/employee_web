@@ -39,7 +39,13 @@ class PengajuanBiaya extends CI_Controller {
 		}
 
 		// untuk load data pengajuan biaya		
-		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_user'=>$this->session->userdata('id_user')),array('limit'=>1))->row();
+		$data['datapegawai'] =  $this->db->select('*')
+							->from('pegawai')
+							->join('fakultas', 'pegawai.kode_fakultas = fakultas.kode_Fakultas')
+							->join('prodi', 'pegawai.id_prodi = prodi.id_prodi')
+							->where('id_user',$this->session->userdata('id_user'))
+							->limit('1')
+						    ->get()->row();
 	 	$data['pengajuan'] =  $this->db->select('*')
 							->where('id_pegawai',$data['datapegawai']->id_pegawai)
 							->order_by("id_pengajuan_biaya","desc")

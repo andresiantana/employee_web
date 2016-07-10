@@ -34,7 +34,7 @@
                 <a <?php if($menu == 'bukuBesar'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/BukuBesar'); ?>">Buku Besar</a>
             </li>
             <li>
-                <a <?php if($menu == 'KartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPID'); ?>">Kartu PID</a>
+                <a <?php if($menu == 'KartuPSL'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPSL'); ?>">Kartu PSL (Pegawai Studi Lanjut)</a>
             </li>
             <li>
                 <a <?php if($menu == 'pengeluaran'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Pengeluaran'); ?>">Pengeluaran</a>

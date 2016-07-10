@@ -7,6 +7,39 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
+                        <legend>Data Pegawai</legend>
+                        <div class="form-group">
+                            <label for="nip">NIP</label>
+                            <input class="form-control" type="text" name="nip" value="<?php echo isset($datapegawai->nip) ? $datapegawai->nip : ""; ?>" readonly=true required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama_lengkap">Nama Pegawai</label>
+                            <input class="form-control" type="text" name="nama_pegawai" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>" readonly=true required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status_pegawai">Status Pegawai</label>
+                            <input class="form-control" type="text" name="status_pegawai" value="<?php echo isset($datapegawai->status_pegawai) ? $datapegawai->status_pegawai : ""; ?>" readonly=true required>
+                        </div>
+
+                        <?php if($datapegawai->status_pegawai == 'DOSEN'){ ?>
+                        <div class="form-group">
+                            <label for="nama_fakultas">Fakultas Asal</label>
+                            <input class="form-control" type="text" name="nama_fakultas" value="<?php echo isset($datapegawai->nama_fakultas) ? $datapegawai->nama_fakultas : ""; ?>" readonly=true required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama_prodi">Prodi</label>
+                            <input class="form-control" type="text" name="nama_prodi" value="<?php echo isset($datapegawai->nama_prodi) ? $datapegawai->nama_prodi : ""; ?>" readonly=true required>
+                        </div>
+                        <?php }else{ ?>
+                        <div class="form-group">
+                            <label for="nama_fakultas">Unit Kerja</label>
+                            <input class="form-control" type="text" name="nama_fakultas_tpa" value="<?php echo isset($datapegawai->nama_fakultas) ? $datapegawai->nama_fakultas : ""; ?>" readonly=true required>
+                        </div>
+                        <?php } ?>
+                        <legend>Data Pengajuan Biaya</legend>
                         <?php echo form_open_multipart('pegawai/PengajuanBiaya/insert',array('accept-charset'=>"utf-8"));  ?>
                         <?php if(validation_errors()){ ?>
                         <div class="alert alert-warning">

@@ -8,7 +8,7 @@
 		?>
         	<a <?php if($menu == 'pengajuanBiaya'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('pegawai/PengajuanBiaya'); ?>"><i class="fa fa-file-text"></i> Pengajuan Biaya</a>
         	<a <?php if($menu == 'informasiPengajuanBiaya'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('pegawai/PengajuanBiaya/informasi'); ?>"><i class="fa fa-table"></i> Informasi Pengajuan Biaya</a>
-            <a <?php if($menu == 'kartuPID'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPID?pages=pegawai'); ?>"><i class="fa fa-credit-card"></i> Kartu PID</a>
+            <a <?php if($menu == 'KartuPSL'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPSL?pages=pegawai'); ?>"><i class="fa fa-credit-card"></i> Kartu PSL (Pegawai Studi Lanjut)</a>
             <a <?php if($menu == 'posisiPendanaanBeasiswa'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/PosisiPendanaanBeasiswa?pages=pegawai'); ?>"><i class="fa fa-money"></i> Posisi Pendanaan Beasiswa</a>
         <?php 
             }
