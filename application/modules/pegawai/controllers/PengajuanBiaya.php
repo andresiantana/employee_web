@@ -61,10 +61,6 @@ class PengajuanBiaya extends CI_Controller {
 		$jumlah_nominal = $this->input->post('jumlah_nominal');
 		$id_pegawai = $this->Pegawai->tampilUserPegawai($this->session->userdata('id_user'))->row();
 		$id_pegawai = $id_pegawai->id_pegawai;
-		$nama_lokasi = $this->input->post('nama_lokasi');
-		$jurusan_fakultas = $this->input->post('jurusan_fakultas');
-		$prodi = $this->input->post('prodi');
-		$jenjang = $this->input->post('jenjang');
 
 		$tanggal = $this->input->post('tanggal');
 		// $tgl = explode("/",$tanggal);		
@@ -77,11 +73,7 @@ class PengajuanBiaya extends CI_Controller {
 			'kode_pengajuan'=>$kode_pengajuan,
 			'semester' => $semester,
 			'jumlah_nominal' => $jumlah_nominal,
-			'id_pegawai' => $id_pegawai,
-			'nama_lokasi' => $nama_lokasi,
-			'jurusan_fakultas' => $jurusan_fakultas,
-			'prodi' => $prodi,
-			'jenjang' => $jenjang
+			'id_pegawai' => $id_pegawai
 		);
 
 		if(!empty($id_pengajuan_biaya)){
@@ -90,11 +82,7 @@ class PengajuanBiaya extends CI_Controller {
 				'kode_pengajuan'=>$kode_pengajuan,
 				'semester' => $semester,
 				'jumlah_nominal' => $jumlah_nominal,
-				'id_pegawai' => $id_pegawai,
-				'nama_lokasi' => $nama_lokasi,
-				'jurusan_fakultas' => $jurusan_fakultas,
-				'prodi' => $prodi,
-				'jenjang' => $jenjang
+				'id_pegawai' => $id_pegawai
 			);
 
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
@@ -276,6 +264,32 @@ class PengajuanBiaya extends CI_Controller {
 		$data['status'] = $status;
 		echo json_encode($data); 
 		exit;
+	}
+
+	function dropDownUniversitas()
+    {
+        $nama_lokasi = isset($_POST['nama_lokasi']) ? $_POST['nama_lokasi'] : null;
+        $id_lokasi = isset($_POST['id_lokasi']) ? $_POST['id_lokasi'] : null;
+
+        $this->db->select('*');
+		$this->db->like('nama_lokasi', $nama_lokasi);
+		$dataLokasi = $this->db->get('lokasi_pendidikan')->result_object();
+
+		if(count($dataLokasi) > 0){
+			echo "<select class='form-control' name='id_lokasi' id='id_lokasi' disabled=true><option value=''>-Pilih Universitas-</option>";
+			foreach($dataLokasi as $lokasi){
+				if($lokasi->id_lokasi == $id_lokasi){
+					echo"<option value='".$lokasi->id_lokasi."' selected>".$lokasi->nama_universitas."</option>";	
+				}else{
+					echo"<option value='".$lokasi->id_lokasi."'>".$lokasi->nama_universitas."</option>";
+				}
+			   
+		  	}     
+		  	echo"</select>";
+		}else{
+			echo "<select class='form-control' name='id_lokasi' id='id_lokasi'><option value=''>-Pilih Universitas-</option>";
+		  	echo"</select>";
+		}
 	}
 
 }

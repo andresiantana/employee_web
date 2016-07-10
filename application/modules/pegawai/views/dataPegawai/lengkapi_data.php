@@ -88,7 +88,7 @@
                         <label>Fakultas - Unit Kerja</label>
                         <select class="form-control" name="kode_fakultas_tpa" id="kode_fakultas_tpa">
                             <option value="">-Pilih-</option>
-                            <?php foreach ($fakultas as $i => $val) { 
+                            <?php foreach ($fakultas_tpa as $i => $val) { 
                                     if($datapegawai->kode_fakultas == $val->kode_fakultas){
                             ?>
                                 <option value="<?php echo $val->kode_fakultas; ?>" selected><?php echo $val->kode_fakultas." - ".$val->nama_fakultas; ?></option>

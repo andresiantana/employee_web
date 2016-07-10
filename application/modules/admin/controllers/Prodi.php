@@ -11,7 +11,7 @@ class Prodi extends CI_Controller {
 		}
 		$this->load->library('template');
 		$this->load->library("PHPExcel");	
-		$this->load->helper(array('form','url'));			
+		$this->load->helper(array('url','html','form','download'));			
 		$this->load->library('form_validation');
 		$this->load->library('session');      
         $this->load->model('ProdiM');
@@ -141,13 +141,20 @@ class Prodi extends CI_Controller {
 	}
 
 	public function do_upload(){
-        $config['upload_path'] = './data/uploads/';
-        $config['allowed_types'] = 'xlsx|xls';
+     	$config['upload_path'] 		= './data/uploads/';
+        $config['allowed_types'] 	= 'xlsx|csv|xls';
+	    $config['max_size'] 		= '10000'; 
+	    $config['overwrite'] 		= true;
+	    $config['encrypt_name'] 	= FALSE;
+	    $config['remove_spaces'] 	= TRUE;
         
         $this->load->library('upload', $config);
         
-        if (!$this->upload->do_upload("file")){
+        if (!$this->upload->do_upload('file')){
             $error = array('error' => $this->upload->display_errors());
+            echo "<script>alert('Data Gagal diupload. File harus .xls/.xlsx/.csv!');
+                    window.location.href='".base_url('admin/Prodi/index')."';
+                </script>";
         }
         else{
         	if(isset($_POST['drop']) && $_POST['drop'] == 1){

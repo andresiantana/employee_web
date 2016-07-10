@@ -36,16 +36,20 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="nama_lokasi">Nama Lokasi</label>
-                            <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapengajuan->nama_lokasi) ? $datapengajuan->nama_lokasi : ""; ?>" readonly=true required>
+                            <label for="nama_lokasi">Lokasi Pendidikan</label>
+                            <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapegawai->nama_lokasi) ? $datapegawai->nama_lokasi : ""; ?>" readonly=true required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_lokasi">Nama Universitas</label>
+                            <input class="form-control" type="text" name="nama_lokasi" value="<?php echo isset($datapegawai->nama_universitas) ? $datapegawai->nama_universitas : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label for="jurusan_fakultas">Jurusan/Fakultas</label>
-                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapengajuan->jurusan_fakultas) ? $datapengajuan->jurusan_fakultas : ""; ?>" readonly=true required>
+                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label for="prodi">Prodi</label>
-                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapengajuan->prodi) ? $datapengajuan->prodi : ""; ?>" readonly=true required>
+                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label>Jenjang</label>
@@ -333,7 +337,7 @@
             $('#semester').val(semester);
         }
 
-        var jenjang = '<?php echo isset($datapengajuan->jenjang) ? $datapengajuan->jenjang : ""; ?>';
+        var jenjang = '<?php echo isset($datapegawai->jenjang_studi) ? $datapegawai->jenjang_studi : ""; ?>';
         if(jenjang != ""){           
             $('#jenjang').val(jenjang);
         }

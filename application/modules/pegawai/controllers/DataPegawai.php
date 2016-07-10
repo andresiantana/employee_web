@@ -57,6 +57,11 @@ class DataPegawai extends CI_Controller {
 						->get()->result_object();
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
+						->where("kode_fakultas LIKE '5%'")
+						->get()->result_object();
+		$data['fakultas_tpa'] = $this->db->select('*')
+						->from('fakultas')
+						->where("kode_fakultas NOT LIKE '5%'")
 						->get()->result_object();
 		$data['prodi'] = $this->db->select('*')
 						->from('prodi')

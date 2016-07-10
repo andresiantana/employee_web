@@ -215,8 +215,9 @@ class PengajuanBiaya extends CI_Controller {
 		}	
 
 		if ($insert) {
-			echo "<script>alert('Pencairan Biaya berhasil disimpan!');
-                    window.location.href='".base_url('keuangan/PengajuanBiaya/pencairanBiaya?id='.$datapencairan->id_pencairan_biaya).'&id_pengajuan_biaya='.$id_pengajuan_biaya."';
+			// window.location.href='".base_url('keuangan/PengajuanBiaya/pencairanBiaya?id='.$datapencairan->id_pencairan_biaya).'&id_pengajuan_biaya='.$id_pengajuan_biaya."';
+			echo "<script>alert('Pencairan Biaya berhasil disimpan!');                    
+                    window.location.href='".base_url('keuangan/PengajuanBiaya/index')."';
                 </script>";
 		} else {
 			echo "<script>alert('Pencairan Biaya gagal disimpan!');

@@ -23,7 +23,7 @@
                             <label>Tanggal</label>
                             <br>
                             <!-- <div class="myOwnClass"> -->
-                                <input type="text" class="form-control datepickerNew" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>">
+                                <input type="text" class="form-control datepickerNew" id="tanggal" name="tanggal" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : date('Y-m-d'); ?>" readonly=true>
                             <!-- </div> -->
                             <!-- <input class="form-control" id="tanggal" name="tanggal" type="text" class="span3" value="<?php echo isset($datapengajuan->tanggal) ? date('d/m/Y',strtotime($datapengajuan->tanggal)) : ""; ?>" required> -->
                         </div>
@@ -31,19 +31,17 @@
                             <label>Pilih Semester</label>
                             <select class="form-control" name="semester" id="semester" required>
                                 <option value="">-Pilih Semester-</option>
-                                <?php for ($i = 0; $i < 8; $i++) {
-                                    if($pengajuan->semester < ($i+1) && (count($datapengajuan) < 0)){
+                                <?php 
+                                $i = !empty($pengajuan->semester) ? $pengajuan->semester : 0;
+                                for ($i = $i; $i < 8; $i++) {                                    
                                  ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
-                                <?php }else{ ?>
-                                    <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
-                                <?php } ?>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Lokasi Pendidikan</label>
-                            <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();">
+                            <select class="form-control" name="nama_lokasi" id="nama_lokasi" onchange="setLokasiPendidikan();" disabled=true>
                                 <option value="">-Pilih Lokasi-</option>
                                 <option value="Dalam Negeri">Dalam Negeri</option>
                                 <option value="Luar Negeri">Luar Negeri</option>
@@ -52,22 +50,22 @@
                         <div class="form-group">
                             <label>Nama Universitas</label>
                             <div class="controls" id="tampil_universitas">
-                               <select class="form-control" name="id_lokasi" id="id_lokasi">
+                               <select class="form-control" name="id_lokasi" id="id_lokasi" disabled=true>
                                     <option value="">-Pilih Universitas-</option>
                                 </select>                            
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="jurusan_fakultas">Fakultas</label>
-                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>" required>
+                            <input class="form-control" type="text" name="jurusan_fakultas" value="<?php echo isset($datapegawai->fakultas_studi) ? $datapegawai->fakultas_studi : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label for="prodi">Prodi</label>
-                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>" required>
+                            <input class="form-control" type="text" name="prodi" value="<?php echo isset($datapegawai->prodi_studi) ? $datapegawai->prodi_studi : ""; ?>" readonly=true required>
                         </div>
                         <div class="form-group">
                             <label>Jenjang</label>
-                            <select class="form-control" name="jenjang" id="jenjang" required>
+                            <select class="form-control" name="jenjang" id="jenjang" disabled=true required>
                                 <option value="">-Pilih Jenjang-</option>
                                 <option value="S3">S3</option>
                                 <option value="S2">S2</option>
@@ -77,7 +75,7 @@
                         </div>
                         <div class="form-group">
                             <label for="prodi">Jumlah Nominal</label>
-                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required style="text-align:right;width:150px;">
+                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required style="text-align:right;width:150px;" readonly=true>
                         </div>                        
                     </div>
                     <div class="col-md-12">
@@ -126,7 +124,7 @@
         $.ajax({
             type: 'POST',
             data: "nama_lokasi="+nama_lokasi+"&id_lokasi="+id_lokasi,
-            url: '<?php echo base_url('pegawai/DataPegawai/dropDownUniversitas'); ?>',
+            url: '<?php echo base_url('pegawai/PengajuanBiaya/dropDownUniversitas'); ?>',
             success: function(result) {
                 $('#tampil_universitas').html(result);       
             }

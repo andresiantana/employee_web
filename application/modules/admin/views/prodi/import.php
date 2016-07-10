@@ -8,7 +8,7 @@
                 <h3>Sebelum mengupload, pastikan file anda berformat .xls/.xlsx</h3>
                 <br>
                 <div class="row">
-                    <?php echo form_open_multipart('admin/Prodi/do_upload');  ?>         
+                    <?php echo form_open_multipart('admin/Prodi/do_upload',array('accept-charset'=>"utf-8"));  ?>         
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Unduh Format Prodi</label>
@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             <label>File Prodi</label>
-                            <input class="form-control" type="file" name="file">
+                            <input class="form-control" type="file" name="file" id="file">
                             <label><input type="checkbox" name="drop" value="1" /> <u>Kosongkan tabel sql terlebih dahulu.</u> </label>
                         </div>
                     </div>

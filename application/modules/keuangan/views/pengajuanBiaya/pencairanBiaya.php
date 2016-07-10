@@ -78,10 +78,10 @@
                             <?php
                                 if(isset($_GET['id']) && isset($_GET['id_pengajuan_biaya'])){
                             ?>
-                                <button type="submit" class="btn btn-primary" disabled=true>Simpan</button>
+                                <button type="submit" class="btn btn-primary" disabled=true>Cairkan</button>
                                 <button type="button" class="btn btn-info" onclick="print('PRINT');"><i class="fa fa-print"></i> Cetak </button>
                             <?php }else{ ?>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary">Cairkan</button>
                             <button type="button" class="btn btn-info" onclick="print('PRINT');" disabled=true><i class="fa fa-print"></i> Cetak </button>
                             <?php } ?>
                             <button type="reset" class="btn btn-success">Reset</button>

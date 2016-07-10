@@ -113,7 +113,14 @@ class PengajuanBiaya extends CI_Controller {
 									->get()->result_object();
 		$data['kode_pengajuan'] = $this->SDPengajuanBiayaT->noPengajuanBiaya();
 		if(!empty($id)){
-			$data['datapengajuan'] = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id))->row();
+			$data['datapengajuan']	= $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id))->row();
+			$data['datapegawai']	= $this->db->select('*')
+									->from('pegawai')
+									->join('lokasi_pendidikan', 'pegawai.id_lokasi = lokasi_pendidikan.id_lokasi')
+									->join('fakultas', 'pegawai.kode_fakultas = fakultas.kode_fakultas')
+									->join('prodi', 'pegawai.id_prodi = prodi.id_prodi')
+									->where('id_pegawai',$data['datapengajuan']->id_pegawai)
+									->get()->row();
 			$data['kode_pengajuan'] = $data['datapengajuan']->kode_pengajuan;
 		}
 		if(isset($data['datapengajuan']->id_pengajuan_biaya)){
