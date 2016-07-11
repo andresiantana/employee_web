@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PGPengajuanBiayaT extends PengajuanBiayaT {
 	public function tampilDataPengajuan($semester = null ,$id_kategori_biaya = null ,$tanggal_awal = null ,$tanggal_akhir = null){
-		$this->db->select('*');
+		$this->db->select('pengajuan_biaya.id_pengajuan_biaya,pengajuan_biaya.id_pencairan_biaya,pengajuan_biaya.id_pegawai,pengajuan_biaya.kode_pengajuan,pengajuan_biaya.tanggal,pengajuan_biaya.semester,pengajuan_biaya.jumlah_nominal,pengajuan_biaya.jumlah_disetujui,pengajuan_biaya.status_pengajuan,pengajuan_biaya.alasan_status,pengajuan_biaya.tanggal_approve,pegawai.nama_lengkap,pencairan_biaya.tanggal_penerimaan');
 		$this->db->from('pengajuan_biaya');
 		$this->db->join('pegawai', 'pegawai.id_pegawai = pengajuan_biaya.id_pegawai');
 		$this->db->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left');

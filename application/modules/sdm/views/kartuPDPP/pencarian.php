@@ -13,18 +13,13 @@
         <td><?php echo $v->nama_bank; ?></td>
         <td><?php echo $v->nomor_rekening; ?></td>
         <td><?php echo $v->atasnama_rekening; ?></td>
+        <td><?php echo $v->semester; ?></td>
         <td><a href="javascript:prd_download('<?php echo $v->surat_studi_lanjut; ?>')"><?php echo $v->surat_studi_lanjut; ?></a></td>
         <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
         <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
         <td style="text-align:right;"><?php echo $v->username; ?></td>
         <td class="td-actions">
-            <?php
-                if($v->status_kelulusan == 'Lulus'){
-            ?>
-                <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
-            <?php }else { ?>
-                <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Tidak bisa cetak kartu, karena pegawai belum lulus." onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);" disabled=true><i class="fa fa-print"> </i></a><br/>
-            <?php } ?>
+            <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>,<?php echo $v->id_pengajuan_biaya; ?>);"><i class="fa fa-print"> </i></a>
         </td>
     </tr>
 <?php endforeach; ?>

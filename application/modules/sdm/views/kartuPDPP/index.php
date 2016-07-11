@@ -22,6 +22,7 @@
                                 <th>Nama Bank</th>
                                 <th>Nomor Rekening</th>
                                 <th>Atas Nama</th>
+                                <th>Semester Pengajuan</th>
                                 <th>Surat Studi Lanjut</th>
                                 <th>Surat Lulus Seleksi</th>
                                 <th>Surat Terima Beasiswa</th>
@@ -45,18 +46,13 @@
                                     <td><?php echo $v->nama_bank; ?></td>
                                     <td><?php echo $v->nomor_rekening; ?></td>
                                     <td><?php echo $v->atasnama_rekening; ?></td>
+                                    <td><?php echo $v->semester; ?></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_studi_lanjut; ?>')"><?php echo $v->surat_studi_lanjut; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
                                     <td style="text-align:right;"><?php echo number_format($v->biaya_spp,0,'',','); ?></td>
                                     <td class="td-actions">
-                                        <?php
-                                            if($v->status_kelulusan == 'Lulus'){
-                                        ?>
-                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
-                                        <?php }else { ?>
-                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Tidak bisa cetak kartu, karena pegawai belum lulus." onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);" disabled=true><i class="fa fa-print"> </i></a><br/>
-                                        <?php } ?>
+                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>,<?php echo $v->id_pengajuan_biaya; ?>);"><i class="fa fa-print"> </i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -75,7 +71,7 @@ function prd_download(file)
     file_name = file;
     window.location.href =  "<?php echo site_url('sdm/daftarPegawai/file_download') ?>?file_name="+ file_name;
 }
-function cetakKartuPID(id_pegawai){
+function cetakKartuPDPP(id_pegawai){
     alert(id_pegawai);
 }
 function setPencarian(){
@@ -90,7 +86,7 @@ function setPencarian(){
     }
 
   $.ajax({
-      url     : "<?php echo base_url('sdm/kartuPID'); ?>",
+      url     : "<?php echo base_url('sdm/kartuPDPP'); ?>",
       type    : "POST",
       data    : data,
       dataType: 'json',
@@ -99,9 +95,9 @@ function setPencarian(){
       }
     });
 }
-function print(caraPrint,id_pegawai)
+function print(caraPrint,id_pegawai,id_pengajuan_biaya)
 {
     var id_pegawai = id_pegawai;
-    window.open('<?php echo base_url('sdm/kartuPID/printKartu/'); ?>/'+id_pegawai,'printwin','left=100,top=100,width=1000,height=640');
+    window.open('<?php echo base_url('sdm/kartuPDPP/printKartu/'); ?>?id_pegawai='+id_pegawai+'&id_pengajuan_biaya='+id_pengajuan_biaya,'printwin','left=100,top=100,width=1000,height=640');
 }
 </script>

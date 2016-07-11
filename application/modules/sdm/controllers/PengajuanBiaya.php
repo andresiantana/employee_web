@@ -19,6 +19,9 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->model('KategoriBiayaM');
 		$this->load->model('SDPengajuanBiayaT');
 		$this->load->model('SDUraianPengajuanBiayaT');
+
+		$this->file_path = realpath(APPPATH . '../data/file/surat_keputusan/');
+       	$this->file_path_url = base_url() . 'data/file/surat_keputusan/';
 	}
 
 	public function index()
@@ -142,12 +145,38 @@ class PengajuanBiaya extends CI_Controller {
 		$id_pegawai = $this->input->post('id_pegawai');
 		$jumlah_nominal = $this->input->post('jumlah_nominal');		
 		$status_pengajuan = $this->input->post('status_pengajuan');
+		$file_surat_keputusan = $this->input->post('file_surat_keputusan');
+
+		// upload foto
+		$config['upload_path']    = $this->file_path;
+     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+     	$config['max_size']       = '2000';
+     	$config['max_width']      = '2000';
+     	$config['max_height']     = '2000';
+     	$config['file_name']      = 'SK-'.trim(str_replace(" ","",date('dmYHis')));
+     	$this->load->library('upload', $config);
+ 	 	$this->upload->initialize($config);
+
+ 		if ($this->upload->do_upload("surat_keputusan")){
+ 			$surat_keputusan = $this->upload->file_name;
+			$status_upload = true;
+ 		}else{			
+ 			$status_upload = true;
+ 		} 
+ 	 	
+
+ 		if($surat_keputusan != ''){
+			$surat_keputusan = $surat_keputusan;
+		}else{
+			$surat_keputusan = $file_surat_keputusan;
+		}
 
 		if(!empty($id_pengajuan_biaya)){
 			$object = array(
 				'jumlah_nominal' => $jumlah_nominal,
 				'status_pengajuan' => $status_pengajuan,
-				'tanggal_approve'=>date('Y-m-d')
+				'tanggal_approve'=>date('Y-m-d'),
+				'surat_keputusan'=>$surat_keputusan
 			);
 
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
@@ -233,12 +262,20 @@ class PengajuanBiaya extends CI_Controller {
 		$data['tr'] = '';
 		$data['tr'] .= '<tr>';
 		$data['tr'] .= '<td>'.form_dropdown('rincian[0][id_kategori_biaya]', $kategori_biaya, $kategori_selected, $kategori_biaya_attribute).'</td>';
-		$data['tr'] .= '<td><input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only nominal" onblur="hitungTotalBiaya(this);" readonly=true><input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" style="text-align:right;width:150px;"></td>';
-		$data['tr'] .= '<td><input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required style="text-align:right;width:150px;"></td>';
+		$data['tr'] .= '<td><input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control integer nominal" onblur="hitungTotalBiaya(this);" readonly=true><input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" style="text-align:right;width:150px;"></td>';
+		$data['tr'] .= '<td><input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control integer nominal_disetujui" onblur="hitungTotalBiayaDisetujui(this);" required style="text-align:right;width:150px;"></td>';
 		$data['tr'] .= '<td><a href="javascript:tambahBiaya(this);"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a> <a style="margin-left:10px;" href="javascript:hapusBiaya(this);"><button type="button" class="btn btn-small btn-danger" onClick="hapusBiaya(this);"><i class="fa fa-minus"></i></button></a></td>';
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 
 		exit;
+	}
+
+	function file_download()
+    {
+        $nama_file = $_GET['file_name'];
+        $data = file_get_contents(base_url()."data/file/surat_keputusan/".$nama_file);
+
+        force_download($nama_file, $data);
 	}
 }
 

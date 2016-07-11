@@ -86,7 +86,7 @@ class PengajuanBiaya extends CI_Controller {
 			 $object = array(
 				'tanggal' => $tanggal,
 				'kode_pengajuan'=>$kode_pengajuan,
-				'semester' => $semester,
+				// 'semester' => $semester,
 				'jumlah_nominal' => $jumlah_nominal,
 				'id_pegawai' => $id_pegawai
 			);

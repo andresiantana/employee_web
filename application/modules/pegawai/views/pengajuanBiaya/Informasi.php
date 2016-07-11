@@ -58,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($data as $key => $v): ?>
+                            <?php foreach($data as $key => $v){ ?>
                                 <tr>
                                     <td><?php echo $key+1; ?></td>
                                     <td><?php echo date('d M Y',strtotime($v->tanggal)); ?></td>
@@ -83,7 +83,7 @@
                                                 $data = 'Approved';
                                                 $warna = 'green';
                                                 $huruf = '<a href="#"><font style="color:'.$warna.';">'.$data.'</font></a>';
-                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).'" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
+                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).' class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
                                             }else if($v->status_pengajuan == 'Reject'){
                                                 $data = 'Reject';
                                                 $warna = 'red';
@@ -93,7 +93,7 @@
                                                 $data = 'Belum ada verifikasi';
                                                 $warna = 'blue';
                                                 $huruf = $huruf = '<a href="#"><font style="color:'.$warna.';">'.$data.'</font></a>';;
-                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).'" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
+                                                $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).' class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
                                             }
                                         ?>
                                             <?php echo isset($huruf) ? $huruf : ""; ?>
@@ -127,7 +127,7 @@
                                         ?>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

@@ -7,7 +7,7 @@
         <td><?php echo $v->nip; ?></td>
         <td><?php echo $v->nama_lengkap; ?></td>
         <td style="text-align:center;"><?php echo $v->semester; ?></td>
-        <td style="text-align:right;"><?php echo $v->berhasil_transfer; ?></td>                                    
+        <td style="text-align:right;"><?php echo number_format($v->berhasil_transfer,0,'',','); ?></td>                                    
         <td class="td-actions">
             <a href="<?php echo base_url('keuangan/Pengeluaran/pencairanBiaya?id_pengajuan_biaya='.$v->id_pengajuan_biaya); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Melihat Detail Pengeluaran"><i class="fa fa-list"> </i></a>
         </td>

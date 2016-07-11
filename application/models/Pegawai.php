@@ -45,6 +45,33 @@ class Pegawai extends CI_Model {
 		return $query;
 	}
 
+	public function tampilDataPegawaiApprovePDPP($nidn = null, $nip = null, $nama = null){
+		$approve = 'Approved';
+		$this->db->select('*');
+		$this->db->from('pegawai');
+		$this->db->join('user', 'user.id_user = pegawai.id_user');
+		$this->db->join('fakultas', 'fakultas.kode_fakultas = pegawai.kode_fakultas','left');
+		$this->db->join('prodi', 'prodi.id_prodi = pegawai.id_prodi','left');
+		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pegawai = pegawai.id_pegawai','left');
+		if(isset($_GET['pages'])){
+			if(!empty($_GET['pages']) && $_GET['pages'] == 'pegawai'){
+				$this->db->where('pegawai.id_user',$this->session->userdata('id_user'));
+			}
+		}
+		$this->db->like('status_approve_sdm', $approve);
+		if($nidn != ''){
+			$this->db->like('nidn', $nidn);
+		}
+		if($nip != ''){
+			$this->db->like('nip', $nip);
+		}
+		if($nama != ''){
+			$this->db->like('nama', $nama);
+		}
+		$query = $this->db->get();
+		return $query;
+	}
+	
 	public function tampilDataPegawaiBaru(){
 		$approve = 'Approved';
 		$this->db->select('*');

@@ -12,7 +12,41 @@
                 <?php } ?> 
                 <div class="row">                    
                     <?php echo form_open_multipart("sdm/PengajuanBiaya/insert",array('accept-charset'=>"utf-8",'onsubmit'=>'return cekInputan();return false;')); ?>
-                    <div class="col-lg-12">                    
+                    <div class="col-lg-12"> 
+                        <legend>Data Pegawai</legend>
+                        <div class="form-group">
+                            <label for="nip">NIP</label>
+                            <input class="form-control" type="text" name="nip" value="<?php echo isset($datapegawai->nip) ? $datapegawai->nip : ""; ?>" readonly=true required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama_lengkap">Nama Pegawai</label>
+                            <input class="form-control" type="text" name="nama_pegawai" value="<?php echo isset($datapegawai->nama_lengkap) ? $datapegawai->nama_lengkap : ""; ?>" readonly=true required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status_pegawai">Status Pegawai</label>
+                            <input class="form-control" type="text" name="status_pegawai" value="<?php echo isset($datapegawai->status_pegawai) ? $datapegawai->status_pegawai : ""; ?>" readonly=true required>
+                        </div>
+
+                        <?php if($datapegawai->status_pegawai == 'DOSEN'){ ?>
+                        <div class="form-group">
+                            <label for="nama_fakultas">Fakultas Asal</label>
+                            <input class="form-control" type="text" name="nama_fakultas" value="<?php echo isset($datapegawai->nama_fakultas) ? $datapegawai->nama_fakultas : ""; ?>" readonly=true required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nama_prodi">Prodi</label>
+                            <input class="form-control" type="text" name="nama_prodi" value="<?php echo isset($datapegawai->nama_prodi) ? $datapegawai->nama_prodi : ""; ?>" readonly=true required>
+                        </div>
+                        <?php }else{ ?>
+                        <div class="form-group">
+                            <label for="nama_fakultas">Unit Kerja</label>
+                            <input class="form-control" type="text" name="nama_fakultas_tpa" value="<?php echo isset($datapegawai->nama_fakultas) ? $datapegawai->nama_fakultas : ""; ?>" readonly=true required>
+                        </div>
+                        <?php } ?>
+
+                        <legend>Data Pengajuan Biaya</legend>                   
                         <div class="form-group">
                             <label for="kode_pengajuan">Kode Pengajuan</label>
                             <input class="form-control" type="text" name="kode_pengajuan" placeholder="Isikan Kode Pengajuan" value="<?php echo isset($kode_pengajuan) ? $kode_pengajuan : ""; ?>" readonly=true required>
@@ -85,7 +119,18 @@
                             <label>Alasan</label>
                             <textarea class="form-control" name="alasan_pengajuan" id="alasan_pengajuan"></textarea>
                         </div>
-                    </div>
+
+                        <div class="form-group ">
+                            <label>SK (Surat Keputusan)</label>
+                            <div class="controls">
+                                <?php if((count($datapengajuan) > 0) && $datapengajuan->surat_keputusan != '') { ?>
+                                File yang sudah di upload: <a href="javascript:prd_download('<?php echo $datapengajuan->surat_keputusan; ?>')"><?php echo $datapengajuan->surat_keputusan; ?></a><br>
+                                <?php } ?>
+                                <input class="form-control" type="file" name="surat_keputusan">
+                                <input class="form-control" type="hidden" name="file_surat_keputusan" value="<?php echo isset($datapengajuan->surat_keputusan) ? $datapengajuan->surat_keputusan : ""; ?>">
+                            </div>                    
+                        </div>
+                    </div>                    
                     <div class="col-md-12" id="approved_biaya">
                         <legend>Data Rincian Biaya</legend>
                         <table class="table table-striped table-bordered table-hover" id="tabel-biaya">
@@ -116,11 +161,11 @@
                                             <?php } ?>
                                         </select></td>
                                     <td>
-                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true style="text-align:right;width:150px;">
-                                        <input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control numbers-only" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
+                                        <input id="rincian_0_nominal" name="rincian[0][nominal]" type="text" class="form-control integer" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->nominal; ?>" readonly=true style="text-align:right;width:150px;">
+                                        <input id="rincian_0_id_uraian" name="rincian[0][id_uraian]" type="hidden" class="form-control integer" onblur="hitungTotalBiaya(this);" value="<?php echo $uraian->id_uraian; ?>">
                                     </td>
                                     <td>
-                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control numbers-only" onblur="hitungTotalBiayaDisetujui(this);" readonly=true style="text-align:right;width:150px;">
+                                        <input id="rincian_0_nominal_disetujui" name="rincian[0][nominal_disetujui]" type="text" class="form-control integer" onblur="hitungTotalBiayaDisetujui(this);" readonly=true style="text-align:right;width:150px;">
                                     </td>
                                     <td class="td-actions">
                                         <a href="javascript:tambahBiaya();"><button id="tambahBiaya" type="button" class="btn btn-small btn-success"><i class="fa fa-plus"></i></button></a>
@@ -168,6 +213,12 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">
+    function prd_download(file)
+    {   
+        file_name = file;
+        window.location.href =  "<?php echo site_url('sdm/pengajuanBiaya/file_download') ?>?file_name="+ file_name;
+    }
+
     function setStatus(obj) {
         var status_pengajuan = $('#status_pengajuan').val();
         if (status_pengajuan == 'Reject') {
@@ -216,9 +267,11 @@
             data    : data,
             dataType: 'json',
             success : function (data) {
-              $('#tabel-biaya tbody').append(data.tr);
-              renameInput($('#table-biaya'));  
-              setNumber();
+                $('#tabel-biaya tbody').append(data.tr);
+                $("#tabel-biaya").find('input[name*="[nominal_disetujui]"][class*="integer"]').maskMoney(
+                    {"symbol":"","defaultZero":true,"allowZero":true,"decimal":".","thousands":",","precision":0}
+                );
+                renameInput($('#table-biaya'));
             }
         });
                           
@@ -274,6 +327,7 @@
 
     function cekInputan(){
         // Menghitung jumlah data yang akan disimpan
+        unformatNumberSemua();
         var jml_biaya = 0;
         var jml_disetujui = 0;
         $("#tabel-biaya tbody tr").each(function(){

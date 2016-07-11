@@ -80,7 +80,7 @@
                                     <td><?php echo $v->nip; ?></td>
                                     <td><?php echo $v->nama_lengkap; ?></td>
                                     <td style="text-align:center;"><?php echo $v->semester; ?></td>
-                                    <td style="text-align:right;"><?php echo $v->berhasil_transfer; ?></td>                                    
+                                    <td style="text-align:right;"><?php echo number_format($v->berhasil_transfer,0,'',','); ?></td>                                    
                                     <td class="td-actions">
                                         <a href="#detail" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Melihat Detail Pengeluaran" onclick="setIdPencairan(<?php echo $v->id_pencairan_biaya; ?>,<?php echo $v->id_pegawai; ?>);"><i class="fa fa-list"> </i></a>
                                     </td>

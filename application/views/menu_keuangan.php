@@ -37,6 +37,9 @@
                 <a <?php if($menu == 'KartuPSL'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPSL'); ?>">Kartu PSL (Pegawai Studi Lanjut)</a>
             </li>
             <li>
+                <a <?php if($menu == 'KartuPDPP'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('sdm/KartuPDPP'); ?>">Kartu PDPP (Pegawai Dalam Proses Pendidikan)</a>
+            </li>
+            <li>
                 <a <?php if($menu == 'pengeluaran'){ ?> class="active-menu" <?php } ?> href="<?php echo base_url('keuangan/Pengeluaran'); ?>">Pengeluaran</a>
             </li>
             <li>

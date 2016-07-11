@@ -30,6 +30,8 @@
 <table <?php echo $style; ?> class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
+            <th>Bulan Amortisasi</th>
+            <th>Tahun Amortisasi</th>
             <th>Bulan Ke-</th>
             <th>Amortisasi</th>
             <th>Nilai Sisa</th>
@@ -37,6 +39,8 @@
     </thead>
     <tbody>
         <tr>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td style="text-align:right;"><?php echo number_format($amortisasi); ?></td>
@@ -52,7 +56,38 @@
                   $jumlah = 0;
                 }
         ?>
+        <?php
+            $bulan = date('m',strtotime($v->tanggal_jurnal));
+            $bl = '';
+            if($bulan == 01){
+              $bl = "Januari";
+            }else if($bulan == 02){
+              $bl = "Februari";
+            }else if($bulan == 03){
+              $bl = "Maret";
+            }else if($bulan == 04){
+              $bl = "April";
+            }else if($bulan == 05){
+              $bl = "Mei";
+            }else if($bulan == 06){
+              $bl = "Juni";
+            }else if($bulan == 07){
+              $bl = "Juli";
+            }else if($bulan == 08 || $bulan == 8){
+              $bl = "Agustus";
+            }else if($bulan == 09 || $bulan == 9){
+              $bl = "September";
+            }else if($bulan == 10){
+              $bl = "Oktober";
+            }else if($bulan == 11){
+              $bl = "Nopember";
+            }else if($bulan == 12){
+              $bl = "Desember";
+            }
+          ?>
             <tr>
+                <td style="text-align:center;"><?php echo $bl; ?></td>
+                <td style="text-align:center;"><?php echo date('Y',strtotime($v->tanggal_jurnal)); ?></td>
                 <td style="text-align:center;"><?php echo $key+1; ?></td>
                 <td style="text-align:right;"><?php echo number_format($v->biaya); ?></td>
                 <td style="text-align:right;"><?php echo number_format($jumlah); ?></td>

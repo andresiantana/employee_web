@@ -20,8 +20,8 @@
                 <td><?php echo date('d M Y',strtotime($v->tanggal_pencairan)); ?></td>
                 <td><?php echo $v->kode_pencairan; ?></td>
                 <td><?php echo $v->nama_kategori; ?></td>
-                <td style="text-align:right;"><?php echo $v->nominal; ?></td>
-                <td style="text-align:right;"><?php echo $v->nominal_disetujui; ?></td>
+                <td style="text-align:right;"><?php echo number_format($v->nominal,0,'',','); ?></td>
+                <td style="text-align:right;"><?php echo number_format($v->nominal_disetujui,0,'',','); ?></td>
             </tr>
         <?php $total += $v->nominal_disetujui;} ?>
         <?php }else{ ?>

@@ -57,7 +57,7 @@
                                     <td>
                                         <a href="#detail_sertifikasi" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk melihat Detail Sertifikasi Pegawai" onclick="setDetailSertifikasi(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-list"> </i></a>
                                     </td>
-                                    <td style="text-align:right;"><?php echo $v->biaya_spp; ?></td>
+                                    <td style="text-align:right;"><?php echo number_format($v->biaya_spp,0,'',','); ?></td>
                                     <td class="td-actions">
                                         <?php 
                                             if($v->status_approve_sdm != "Approved" || $v->status_approve_sdm == ''){

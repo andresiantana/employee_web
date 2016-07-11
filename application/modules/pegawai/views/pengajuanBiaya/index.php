@@ -40,7 +40,7 @@
                         </div>
                         <?php } ?>
                         <legend>Data Pengajuan Biaya</legend>
-                        <?php echo form_open_multipart('pegawai/PengajuanBiaya/insert',array('accept-charset'=>"utf-8"));  ?>
+                        <?php echo form_open_multipart('pegawai/PengajuanBiaya/insert',array('accept-charset'=>"utf-8",'onSubmit'=>'checkFormat();'));  ?>
                         <?php if(validation_errors()){ ?>
                         <div class="alert alert-warning">
                             <strong><?php echo validation_errors(); ?></strong>
@@ -62,12 +62,20 @@
                         </div>
                         <div class="form-group">
                             <label>Pilih Semester</label>
-                            <select class="form-control" name="semester" id="semester" required>
+                            <?php
+                                $i = !empty($pengajuan->semester) ? $pengajuan->semester : 0;                                    
+                                if(!empty($datapengajuan->id_pengajuan_biaya)){
+                                    $i=0;
+                                    $disabled='disabled=true';
+                                }else{
+                                    $disabled='';
+                                }
+                            ?>
+                            <select class="form-control" name="semester" id="semester" required <?php echo $disabled; ?>>
                                 <option value="">-Pilih Semester-</option>
-                                <?php 
-                                $i = !empty($pengajuan->semester) ? $pengajuan->semester : 0;
-                                for ($i = $i; $i < 8; $i++) {                                    
-                                 ?>
+                                <?php                                     
+                                    for ($i = $i; $i < 8; $i++) {                                    
+                                ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
                                 <?php } ?>
                             </select>
@@ -108,7 +116,7 @@
                         </div>
                         <div class="form-group">
                             <label for="prodi">Jumlah Nominal</label>
-                            <input class="form-control numbers-only" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required style="text-align:right;width:150px;" readonly=true>
+                            <input class="form-control integer" type="text" name="jumlah_nominal" id="jumlah_nominal" value="<?php echo isset($datapengajuan->jumlah_nominal) ? $datapengajuan->jumlah_nominal : ""; ?>" required style="text-align:right;width:150px;" readonly=true>
                         </div>                        
                     </div>
                     <div class="col-md-12">

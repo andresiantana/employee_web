@@ -185,6 +185,9 @@
     <script src="<?php echo base_url('assets/datepicker/js/ws-calendar-min.js');?>"></script>
     <script src="<?php echo base_url('assets/jquery/datepicker_a.min.js');?>"></script>
     <script src="<?php echo base_url('assets/jquery/datepicker_b.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/jquery/jquery.maskMoney.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/jquery/accounting.min.js');?>"></script>
+    <script src="<?php echo base_url('assets/jquery/accounting.js');?>"></script>
 
     <script type="text/javascript">
         $(function(){
@@ -244,7 +247,16 @@
     </script>-->
 
     <script type="text/javascript">
+        function checkFormat(){
+            unformatNumberSemua();
+            return true;
+        }
+
         $(document).ready(function(){
+            formatNumberSemua();
+            $(".integer").maskMoney(
+                {"symbol":"","defaultZero":true,"allowZero":true,"decimal":".","thousands":",","precision":0}
+            );
             $('.numbers-only').keyup(function() {
                 var d = $(this).attr('numeric');
                 var value = $(this).val();

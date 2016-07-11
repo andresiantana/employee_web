@@ -85,6 +85,13 @@ class PengajuanBiaya extends CI_Controller {
 									->from('uraian_pengajuan_biaya')
 									->where('id_pengajuan_biaya',$id_pengajuan_biaya)
 									->get()->row();
+			$data['datapegawai']	= $this->db->select('*')
+									->from('pegawai')
+									->join('lokasi_pendidikan', 'pegawai.id_lokasi = lokasi_pendidikan.id_lokasi')
+									->join('fakultas', 'pegawai.kode_fakultas = fakultas.kode_fakultas')
+									->join('prodi', 'pegawai.id_prodi = prodi.id_prodi')
+									->where('id_pegawai',$data['datapengajuan']->id_pegawai)
+									->get()->row();
 		}
 		$this->template->display('keuangan/pengajuanBiaya/pencairanBiaya',$data);
 	}
@@ -152,7 +159,7 @@ class PengajuanBiaya extends CI_Controller {
 			// send notifikasi
 			$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya))->row();
 			$object = array(
-				'id_pegawai'=>$datapengajuan->id_pengajuan_biaya,
+				'id_pegawai'=>$datapengajuan->id_pegawai,
 				'tanggal'=>date('Y-m-d H:i:s'),
 				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' Sudah dicairkan oleh Bagian Keuangan',
 				'id_user'=>$this->session->userdata('id_user')

@@ -11,7 +11,7 @@
             </div>              
             <?php } ?>
     
-            <?php echo form_open_multipart("pegawai/DataPegawai/insert",array('accept-charset'=>"utf-8")); ?>
+            <?php echo form_open_multipart("pegawai/DataPegawai/insert",array('accept-charset'=>"utf-8",'onsubmit'=>'return checkFormat();')); ?>
             <div class="col-md-6">
                 <legend>Data Pegawai</legend>
                 <div class="form-group">
@@ -210,7 +210,7 @@
                 </div>
                 <div class="form-group ">
                     <label>Biaya SPP Yang Diajukan Per Semester</label>
-                    <input class="form-control numbers-only" type="text" name="biaya_spp" value="<?php echo isset($datapegawai->biaya_spp) ? $datapegawai->biaya_spp : ""; ?>">
+                    <input class="form-control integer" type="text" name="biaya_spp" value="<?php echo isset($datapegawai->biaya_spp) ? $datapegawai->biaya_spp : ""; ?>" style="text-align:right;">
                 </div>
             </div>
             <div class="col-md-12">
@@ -414,13 +414,14 @@
       });
 
     // Validasi Form pada saat akan disimpan
-      if (jml_sertifikasi > 0){
-        alert("Jenis Sertifikasi baru harus diisi!");
-        return false;
-      }else{
-          return true;
-      }
+        if (jml_sertifikasi > 0){
+            alert("Jenis Sertifikasi baru harus diisi!");
+            return false;
+        }else{
+            return true;
+        }
     }
+   
     $(document).ready(function(){             
         var status_pegawai = '<?php echo isset($datapegawai->status_pegawai) ? $datapegawai->status_pegawai : ""; ?>';
         if(status_pegawai != ""){           
@@ -441,6 +442,9 @@
             }
             setProdi()
         }
+
+        var jenjang_studi = '<?php echo isset($datapegawai->jenjang_studi) ? $datapegawai->jenjang_studi : ""; ?>';
+        $('#jenjang_studi').val(jenjang_studi);
 
         var id_lokasi = '<?php echo isset($datapegawai->id_lokasi) ? $datapegawai->id_lokasi : ""; ?>';
         if(id_lokasi != ''){
