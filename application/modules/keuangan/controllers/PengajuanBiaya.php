@@ -19,6 +19,7 @@ class PengajuanBiaya extends CI_Controller {
 		$this->load->model('KategoriBiayaM');
 		$this->load->model('KUPengajuanBiayaT');
 		$this->load->model('KUPencairanBiayaT');
+		$this->load->model('UraianPencairanBiayaT');
 		$this->load->model('JurnalT');
 	}
 
@@ -153,6 +154,8 @@ class PengajuanBiaya extends CI_Controller {
 				'id_pencairan_biaya'=>$datapencairan->id_pencairan_biaya
 			);
 
+		 	$id_pencairan_biaya = $datapencairan->id_pencairan_biaya;
+
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
 			$this->db->update('pengajuan_biaya', $pengajuan);
 
@@ -220,6 +223,20 @@ class PengajuanBiaya extends CI_Controller {
 		 	$this->JurnalT->insert($object_jurnal_debit);
 		 	$this->JurnalT->insert($object_jurnal_kredit);
 		}	
+
+		$datauraianpengajuan = $this->db->get_where('uraian_pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya))->result_object();
+		if(count($datauraianpengajuan) > 0){
+			foreach ($datauraianpengajuan as $key => $uraian) {
+				$datauraian = array(
+					'id_pencairan_biaya' =>$id_pencairan_biaya,
+					'id_kategori_biaya' =>$uraian->id_kategori_biaya,
+					'nominal_pengajuan' => $uraian->nominal,
+					'nominal_dicairkan'=>$uraian->nominal_disetujui,
+					'keterangan' => $uraian->keterangan
+				);
+				$this->UraianPencairanBiayaT->insert($datauraian);
+			}
+		}
 
 		if ($insert) {
 			// window.location.href='".base_url('keuangan/PengajuanBiaya/pencairanBiaya?id='.$datapencairan->id_pencairan_biaya).'&id_pengajuan_biaya='.$id_pengajuan_biaya."';

@@ -57,7 +57,7 @@
                                     <td><?php echo $v->kode_pengajuan; ?></td>
                                     <td><?php echo $v->nama_lengkap; ?></td>
                                     <td><?php echo $v->semester; ?></td>
-                                    <td><?php echo number_format($v->jumlah_nominal,0,'',','); ?></td>  
+                                    <td style='text-align:right;'><?php echo number_format($v->jumlah_nominal,0,'',','); ?></td>  
                                     <td>
                                         <?php 
                                             $button = '<a href="#detail_pengajuan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk melihat Detail Pengajuan" onclick="setDetailPengajuan('.$v->id_pengajuan_biaya.');"><i class="fa fa-list"> </i></a>';

@@ -130,6 +130,7 @@
 <script src="<?php echo base_url('assets/template/Bluebox/assets/datepicker/js/bootstrap-datepicker.js');?>"></script>
 <script type="text/javascript">  
     function setJmlBerhasil(obj){
+        unformatNumberSemua();
         var jml_biaya = parseFloat($('#jumlah_biaya').val());
         var jml_berhasil = parseFloat($('#berhasil_transfer').val());
         var jml_gagal = parseFloat($('#gagal_transfer').val());
@@ -149,9 +150,11 @@
 
         $('#berhasil_transfer').val(jml_berhasil);
         $('#gagal_transfer').val(jml_gagal);
+        formatNumberSemua();
     }
 
     function setJmlGagal(obj){
+        unformatNumberSemua();
         var jml_biaya = parseFloat($('#jumlah_biaya').val());
         var jml_berhasil = parseFloat($('#berhasil_transfer').val());
         var jml_gagal = parseFloat($('#gagal_transfer').val());
@@ -165,6 +168,7 @@
         }
         $('#berhasil_transfer').val(jml_berhasil);
         $('#gagal_transfer').val(jml_gagal);
+        formatNumberSemua();
     }
     function print(caraPrint)
     {

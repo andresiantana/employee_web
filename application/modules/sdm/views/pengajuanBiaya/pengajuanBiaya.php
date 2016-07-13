@@ -220,6 +220,7 @@
     }
 
     function setStatus(obj) {
+        unformatNumberSemua();
         var status_pengajuan = $('#status_pengajuan').val();
         if (status_pengajuan == 'Reject') {
             $('#reject').removeAttr('style','display:none;');
@@ -246,15 +247,18 @@
             });
             $('#tambahBiaya').hide();
         }
+        formatNumberSemua();
     }
 
     function proporsiUraian(obj){
+        unformatNumberSemua();
         var jumlah_nominal = parseFloat(obj.value);
         var jml_row = $('#tabel-biaya tbody').length;
         var jml_proporsi = jumlah_nominal / jml_row;
         $('#tabel-biaya tbody tr').each(function(){
             $(this).find('input[name$="[nominal]"]').val(jml_proporsi);
         });
+        formatNumberSemua();
     }
     function tambahBiaya(){
         var data = {
@@ -283,30 +287,36 @@
     }
 
     function hitungTotalBiaya(obj){
+        unformatNumberSemua();
         total_nominal = 0;
         $('#tabel-biaya tbody tr').each(function(){
             var nominal = parseFloat($(this).find('input[name$="[nominal]"]').val());
             total_nominal += nominal;
         });
         $('#jumlah_nominal').val(total_nominal);
+        formatNumberSemua();
     }
 
     function hitungTotalBiayaDisetujui(obj){
+        unformatNumberSemua();
         total_nominal_disetujui = 0;
         $('#tabel-biaya tbody tr').each(function(){
             var nominal_disetujui = parseFloat($(this).find('input[name$="[nominal_disetujui]"]').val());
             total_nominal_disetujui += nominal_disetujui;
         });
         $('#jumlah_disetujui').val(total_nominal_disetujui);
+        formatNumberSemua();
     }
 
     function hitungTotalSemua(){
+        unformatNumberSemua();
         total_nominal = 0;
         $('#tabel-biaya tbody tr').each(function(){
             var nominal = parseFloat($(this).find('input[name$="[nominal]"]').val());
             total_nominal += nominal;
         });
         $('#jumlah_nominal').val(total_nominal);
+        formatNumberSemua();
     }
 
     function renameInput(obj_table){

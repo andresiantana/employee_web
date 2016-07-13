@@ -69,7 +69,7 @@ class PengajuanBiaya extends CI_Controller {
         if($status_pengajuan == 'Approved'){
         	$object = array(
 				'status_pengajuan'=>$status_pengajuan,
-				'jumlah_nominal'=>$jumlah_nominal,
+				'jumlah_nominal'=>$jumlah_disetujui,
 				'jumlah_disetujui'=>$jumlah_disetujui
 			);
         }else{
@@ -137,6 +137,8 @@ class PengajuanBiaya extends CI_Controller {
 
 	public function insert()
 	{
+		// echo "<pre>";
+		// print_r($_POST);exit;
 		$status = true;
 		$tgl = '';
 		$tanggal = '';
@@ -149,7 +151,7 @@ class PengajuanBiaya extends CI_Controller {
 
 		// upload foto
 		$config['upload_path']    = $this->file_path;
-     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
      	$config['max_size']       = '2000';
      	$config['max_width']      = '2000';
      	$config['max_height']     = '2000';

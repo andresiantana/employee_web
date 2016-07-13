@@ -130,7 +130,7 @@ class DataPegawai extends CI_Controller {
 
 		// upload foto
 		$config['upload_path']    = $this->gallery_path;
-     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar';
+     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
      	$config['max_size']       = '2000';
      	$config['max_width']      = '2000';
      	$config['max_height']     = '2000';
