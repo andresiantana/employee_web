@@ -60,7 +60,7 @@
 </style>
 <table align="center">
     <tr>
-        <th height="50" colspan="9" class="judul">KARTU PID</th>
+        <th height="50" colspan="9" class="judul">KARTU PDPP</th>
     </tr>
     <tr>
         <td>Pegawai</td>
@@ -86,7 +86,7 @@
 
         <td>Jenjang</td>
         <td>:</td>
-        <td><?php echo $detail->jenjang; ?></td>
+        <td><?php echo $detail->jenjang_studi; ?></td>
     </tr>
 </table>
 <table align="center">
