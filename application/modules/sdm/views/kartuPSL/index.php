@@ -53,7 +53,7 @@
                                         <?php
                                             if($v->status_kelulusan == 'Lulus'){
                                         ?>
-                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
+                                        <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PSL" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
                                         <?php }else { ?>
                                         <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Tidak bisa cetak kartu, karena pegawai belum lulus." onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);" disabled=true><i class="fa fa-print"> </i></a><br/>
                                         <?php } ?>
@@ -102,6 +102,6 @@ function setPencarian(){
 function print(caraPrint,id_pegawai)
 {
     var id_pegawai = id_pegawai;
-    window.open('<?php echo base_url('sdm/kartuPID/printKartu/'); ?>/'+id_pegawai,'printwin','left=100,top=100,width=1000,height=640');
+    window.open('<?php echo base_url('sdm/kartuPSL/printKartu/'); ?>/'+id_pegawai,'printwin','left=100,top=100,width=1000,height=640');
 }
 </script>
