@@ -103,13 +103,13 @@ class Prodi extends CI_Controller {
 			$kode_fakultas = $this->input->post('kode_fakultas');
 			$kode_prodi = $data['kode_prodi'];
 			$nama_prodi = $data['nama_prodi'];
-			$status_prodi 	= true;
+			$status_aktif 	= true;
 
 			$object = array(
 				'kode_fakultas'=>$kode_fakultas,
 				'kode_prodi'=>$kode_prodi,
 				'nama_prodi'=>$nama_prodi,
-				'status_prodi'=>$status_prodi
+				'status_aktif'=>$status_aktif
 			);
 
 			$insert = $this->ProdiM->insert($object);
@@ -228,6 +228,32 @@ class Prodi extends CI_Controller {
 		$data['tr'] .= '</tr>';
 		echo json_encode($data); 
 		exit;
+	}
+
+	public function block_aktif($id)
+	{
+		$aksi = $this->input->get('aksi');
+		$status = '';
+
+		if($aksi == 'aktif'){
+			$status = true;
+		}else{
+			$status = false;
+		}
+		$object = array(
+			'status_aktif'=>$status,
+		);
+
+		$this->db->where('id_prodi', $id);
+		$this->db->update('prodi', $object);
+
+		if($this->db->affected_rows()){
+			$this->session->set_flashdata('info','Data berhasil Diblokir.');
+			redirect('admin/Prodi');
+		}else{
+			$this->session->set_flashdata('info','Data gagal Diblokir.');
+			redirect('admin/Prodi');
+		}
 	}
 }
 

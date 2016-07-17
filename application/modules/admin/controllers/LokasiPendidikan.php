@@ -224,6 +224,32 @@ class LokasiPendidikan extends CI_Controller {
         }
     }
 
+    public function block_aktif($id)
+	{
+		$aksi = $this->input->get('aksi');
+		$status = '';
+
+		if($aksi == 'aktif'){
+			$status = true;
+		}else{
+			$status = false;
+		}
+		$object = array(
+			'lokasi_aktif'=>$status,
+		);
+
+		$this->db->where('id_lokasi', $id);
+		$this->db->update('lokasi_pendidikan', $object);
+
+		if($this->db->affected_rows()){
+			$this->session->set_flashdata('info','Data berhasil Diblokir.');
+			redirect('admin/LokasiPendidikan');
+		}else{
+			$this->session->set_flashdata('info','Data gagal Diblokir.');
+			redirect('admin/LokasiPendidikan');
+		}
+	}
+
 }
 
 /* End of file LokasiPendidikan.php */

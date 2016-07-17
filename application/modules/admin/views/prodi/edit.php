@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php echo form_open('admin/LokasiPendidikan/update');  ?>
+                        <?php echo form_open('admin/Prodi/update');  ?>
                             <?php if(validation_errors()){ ?>
                             <div class="alert alert-warning">
                                 <strong><?php echo validation_errors(); ?></strong>
