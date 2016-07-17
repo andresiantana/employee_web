@@ -23,21 +23,21 @@ class Prodi extends CI_Controller {
 		$data['id_user'] 		= $this->session->userdata('id_user');
 		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$data['judulHeader'] 	= 'Prodi';
-		$data['menu'] 	= 'prodi';
+		$data['menu'] 			= 'prodi';
 		// $data['data']	= $this->ProdiM->tampilData()->result_object();		
-		$data['fakultas'] = $this->db->select('*')
-						->from('fakultas')
-						->get()->result_object();
+		$data['fakultas'] 		= $this->db->select('*')
+								->from('fakultas')
+								->get()->result_object();
 
 		$jml = $this->db->get('prodi');
 		//pengaturan pagination
-		 $config['base_url'] = base_url().'admin/prodi/index';
-		 $config['total_rows'] = $jml->num_rows();
-		 $config['per_page'] = '10';
-		 $config['first_page'] = 'Awal';
-		 $config['last_page'] = 'Akhir';
-		 $config['next_page'] = '&laquo;';
-		 $config['prev_page'] = '&raquo;';
+		 $config['base_url'] 	= base_url().'admin/prodi/index';
+		 $config['total_rows'] 	= $jml->num_rows();
+		 $config['per_page'] 	= '10';
+		 $config['first_page'] 	= 'Awal';
+		 $config['last_page'] 	= 'Akhir';
+		 $config['next_page'] 	= '&laquo;';
+		 $config['prev_page'] 	= '&raquo;';
 
 		//inisialisasi config
 		 $this->pagination->initialize($config);
@@ -56,27 +56,27 @@ class Prodi extends CI_Controller {
 						->join('fakultas', 'fakultas.kode_fakultas = prodi.kode_fakultas','Left')
 						->get();
 			//pengaturan pagination
-			 $config['base_url'] = base_url().'admin/prodi/index';
-			 $config['total_rows'] = $jml->num_rows();
-			 $config['per_page'] = '10';
-			 $config['first_page'] = 'Awal';
-			 $config['last_page'] = 'Akhir';
-			 $config['next_page'] = '&laquo;';
-			 $config['prev_page'] = '&raquo;';
+			 $config['base_url'] 	= base_url().'admin/prodi/index';
+			 $config['total_rows'] 	= $jml->num_rows();
+			 $config['per_page'] 	= '10';
+			 $config['first_page'] 	= 'Awal';
+			 $config['last_page'] 	= 'Akhir';
+			 $config['next_page'] 	= '&laquo;';
+			 $config['prev_page'] 	= '&raquo;';
 
 			//inisialisasi config
 		 	$this->pagination->initialize($config);
 
 			//buat pagination
-		 	$data['halaman'] = $this->pagination->create_links();
-			$data['data'] =  $this->ProdiM->tampilDataProdi($config['per_page'], $id, $kode_fakultas, $nama_prodi);
-			$tr['tr'] = $this->load->view('admin/prodi/pencarian',$data,true);
+		 	$data['halaman'] 	= $this->pagination->create_links();
+			$data['data'] 		=  $this->ProdiM->tampilDataProdi($config['per_page'], $id, $kode_fakultas, $nama_prodi);
+			$tr['tr'] 			= $this->load->view('admin/prodi/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$nama_prodi = null;
-			$kode_fakultas = null;
-			$data['data'] = $this->ProdiM->tampilDataProdi($config['per_page'], $id, $kode_fakultas, $nama_prodi);
+			$nama_prodi 	= null;
+			$kode_fakultas 	= null;
+			$data['data'] 	= $this->ProdiM->tampilDataProdi($config['per_page'], $id, $kode_fakultas, $nama_prodi);
 		}		 
 		
 		$this->template->display('admin/prodi/admin',$data);
@@ -84,14 +84,14 @@ class Prodi extends CI_Controller {
 
 	public function tambah()
 	{
-		$data['username'] 	= $this->session->userdata('username');
-		$data['id_user'] 	= $this->session->userdata('id_user');
-		$data['nama_role'] 	= $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Prodi';
-		$data['menu'] = 'prodi';	
-		$data['fakultas'] = $this->db->select('*')
-						->from('fakultas')
-						->get()->result_object();	
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Prodi';
+		$data['menu'] 			= 'prodi';	
+		$data['fakultas'] 		= $this->db->select('*')
+								->from('fakultas')
+								->get()->result_object();	
 		$this->template->display('admin/prodi/tambah',$data);
 	}
 
@@ -100,9 +100,9 @@ class Prodi extends CI_Controller {
 		$status = '';
 
 		foreach ($this->input->post('prodi') as $i => $data) {	
-			$kode_fakultas = $this->input->post('kode_fakultas');
-			$kode_prodi = $data['kode_prodi'];
-			$nama_prodi = $data['nama_prodi'];
+			$kode_fakultas 	= $this->input->post('kode_fakultas');
+			$kode_prodi 	= $data['kode_prodi'];
+			$nama_prodi 	= $data['nama_prodi'];
 			$status_aktif 	= true;
 
 			$object = array(
@@ -160,9 +160,10 @@ class Prodi extends CI_Controller {
         	if(isset($_POST['drop']) && $_POST['drop'] == 1){
         		$this->db->empty_table('prodi');
         	}
-            $data = array('upload_data' => $this->upload->data());
-            $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
-            $filename = $upload_data['file_name'];//Nama File
+            $data 			= array('upload_data' => $this->upload->data());
+            $upload_data 	= $this->upload->data(); //Mengambil detail data yang di upload
+            $filename 		= $upload_data['file_name'];//Nama File
+
             $this->ProdiM->upload_data($filename);
             unlink('./data/uploads/'.$filename);
             redirect('admin/Prodi/importProdi/sukses','refresh');
@@ -183,24 +184,24 @@ class Prodi extends CI_Controller {
 
 	public function edit($id = null)
 	{		
-		$data['judulHeader'] = 'Prodi';
-		$data['menu'] = 'prodi';
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['fakultas'] = $this->db->select('*')
-						->from('fakultas')
-						->get()->result_object();
-		$data['editdata'] = $this->db->get_where('prodi',array('id_prodi'=>$id))->row();
+		$data['judulHeader'] 	= 'Prodi';
+		$data['menu'] 			= 'prodi';
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['fakultas'] 		= $this->db->select('*')
+								->from('fakultas')
+								->get()->result_object();
+		$data['editdata'] 		= $this->db->get_where('prodi',array('id_prodi'=>$id))->row();
 		$this->template->display('admin/prodi/edit',$data);
 	}
 
 	public function update()
 	{
-		$id_prodi = $this->input->post('id_prodi');
-		$kode_fakultas = $this->input->post('kode_fakultas');
-		$kode_prodi = $this->input->post('kode_prodi');
-		$nama_prodi = $this->input->post('nama_prodi');
+		$id_prodi 		= $this->input->post('id_prodi');
+		$kode_fakultas 	= $this->input->post('kode_fakultas');
+		$kode_prodi 	= $this->input->post('kode_prodi');
+		$nama_prodi 	= $this->input->post('nama_prodi');
 
 		$object = array(
 			'kode_fakultas'=>$kode_fakultas,
@@ -232,7 +233,7 @@ class Prodi extends CI_Controller {
 
 	public function block_aktif($id)
 	{
-		$aksi = $this->input->get('aksi');
+		$aksi 	= $this->input->get('aksi');
 		$status = '';
 
 		if($aksi == 'aktif'){

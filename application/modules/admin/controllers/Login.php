@@ -13,6 +13,7 @@ class Login extends CI_Controller {
 		$this->load->library('session');
         $this->load->library('form_validation');
         $this->load->model('ADUserM');
+
         // menentukan path photo (folder penyimpanan)
         $this->gallery_path = realpath(APPPATH.'../data/images/user');
         $this->gallery_path_url = base_url().'data/images/user';
@@ -34,9 +35,9 @@ class Login extends CI_Controller {
         $hasil = $this->user->cek_user_role($data);
         if ($hasil->num_rows() == 1) {
             foreach ($hasil->result() as $sess) {
-                $sess_data['login'] = 'Sudah Login';
-                $sess_data['username'] = $sess->username;
-                $sess_data['id_user'] = $sess->id_user;
+                $sess_data['login']     = 'Sudah Login';
+                $sess_data['username']  = $sess->username;
+                $sess_data['id_user']   = $sess->id_user;
                 $sess_data['nama_user'] = $sess->nama_lengkap;
                 $sess_data['nama_role'] = $sess->nama_role;
                 $this->session->set_userdata($sess_data);
@@ -71,11 +72,11 @@ class Login extends CI_Controller {
             $data = null;
             $this->template->displayLogin('admin/Login/register',$data);
         }else{
-            $username = $this->input->post('username');
-            $nama_lengkap = $this->input->post('nama_lengkap');
-            $password = $this->input->post('password');
-            $no_telp = $this->input->post('no_telp');
-            $alamat = $this->input->post('alamat');
+            $username       = $this->input->post('username');
+            $nama_lengkap   = $this->input->post('nama_lengkap');
+            $password       = $this->input->post('password');
+            $no_telp        = $this->input->post('no_telp');
+            $alamat         = $this->input->post('alamat');
 
             $object = array(
                 'username'=>$username,
@@ -160,13 +161,13 @@ class Login extends CI_Controller {
         $this->db->update('user', $object);
         if($this->db->affected_rows()){
             $status = true;
-            $pass = $pass;
+            $pass   = $pass;
         }else{
             $status = false;
-            $pass = null;
+            $pass   = null;
         }
 
-        $data['status'] = $status;
+        $data['status']         = $status;
         $data['password_baru']  = $pass;
         echo json_encode($data); 
         exit;

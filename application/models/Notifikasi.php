@@ -72,5 +72,5 @@ class Notifikasi extends CI_Model {
 	}
 }
 
-/* End of file CoaM.php */
-/* Location: ./application/models/CoaM.php */
+/* End of file Notifikasi.php */
+/* Location: ./application/models/Notifikasi.php */

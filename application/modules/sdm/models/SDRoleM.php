@@ -23,5 +23,5 @@ class SDRoleM extends RoleM {
 	}
 }
 
-/* End of file Role.php */
-/* Location: ./application/models/Role.php */
+/* End of file SDRoleM.php */
+/* Location: ./application/modules/sdm/models/SDRoleM.php */

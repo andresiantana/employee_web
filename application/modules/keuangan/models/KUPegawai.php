@@ -92,5 +92,5 @@ class KUPegawai extends Pegawai {
 	}
 }
 
-/* End of file PGPegawai.php */
-/* Location: ./application/modules/pegawai/models/PGPegawai.php */
+/* End of file KUPegawai.php */
+/* Location: ./application/modules/keuangan/models/KUPegawai.php */

@@ -33,7 +33,7 @@ class CabangBankM extends CI_Model {
     }
 
     public function dd_cabang(){
-		// ambil data dari db
+		// ambil data dari db		
 		$this->db->order_by('cabang_bank','asc');
 		$result = $this->db->get('cabang_bank');
 

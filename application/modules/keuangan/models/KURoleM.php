@@ -26,5 +26,5 @@ class KURoleM extends RoleM {
 	}
 }
 
-/* End of file Role.php */
-/* Location: ./application/models/Role.php */
+/* End of file KURoleM.php */
+/* Location: ./application/modules/keuangan/models/KURoleM.php */

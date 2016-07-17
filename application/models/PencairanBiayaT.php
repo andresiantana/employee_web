@@ -33,5 +33,5 @@ class PencairanBiayaT extends CI_Model {
     }
 }
 
-/* End of file PengajuanBiayaT.php */
-/* Location: ./application/models/PengajuanBiayaT.php */
+/* End of file PencairanBiayaT.php */
+/* Location: ./application/models/PencairanBiayaT.php */

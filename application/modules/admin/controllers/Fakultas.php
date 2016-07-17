@@ -208,7 +208,7 @@ class Fakultas extends CI_Controller {
 
 	public function block_aktif($id)
 	{
-		$aksi = $this->input->get('aksi');
+		$aksi 	= $this->input->get('aksi');
 		$status = '';
 
 		if($aksi == 'aktif'){
@@ -233,8 +233,8 @@ class Fakultas extends CI_Controller {
 	}
 
 	public function setFormFakultas(){
-		$data['tr'] = '';
-		$data['tr'] .= '<tr>';
+		$data['tr']	= '';
+		$data['tr']	.= '<tr>';
 		$data['tr'] .= '<td><input id="fakultas_0_kode_fakultas" class="form-control kode_fakultas" name="fakultas[0][kode_fakultas]" type="text"></td>';
 		$data['tr'] .= '<td><input id="fakultas_0_nama_fakultas" name="fakultas[0][nama_fakultas]" type="text" class="form-control"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahFakultas();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusFakultas(this);" ><i class="fa fa-minus"> </i></a></td>';

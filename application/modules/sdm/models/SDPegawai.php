@@ -15,5 +15,5 @@ class SDPegawai extends Pegawai {
 	}
 }
 
-/* End of file PGPegawai.php */
-/* Location: ./application/modules/pegawai/models/PGPegawai.php */
+/* End of file SDPegawai.php */
+/* Location: ./application/modules/sdm/models/SDPegawai.php */

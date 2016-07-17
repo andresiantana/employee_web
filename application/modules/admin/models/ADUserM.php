@@ -14,5 +14,5 @@ class ADUserM extends User {
 	}
 }
 
-/* End of file Role.php */
-/* Location: ./application/models/Role.php */
+/* End of file ADUserM.php */
+/* Location: ./application/modules/admin/models/ADUserM.php */

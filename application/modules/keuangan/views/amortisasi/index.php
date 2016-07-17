@@ -33,7 +33,7 @@
                                 <th>NIP</th>
                                 <th>Jumlah Amortisasi</th>
                                 <th class="td-actions">Detail</th>
-                                <th class="td-actions">Print</th>
+                                <!-- <th class="td-actions">Print</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -47,9 +47,9 @@
                                         <td class="td-actions">
                                             <a href="#detail" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Melihat Detail Amortisasi" onclick="setIdPencairan(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-list"> </i></a>
                                         </td>
-                                        <td class="td-actions">
+                                       <!--  <td class="td-actions">
                                             <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Rincian Amortisasi" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>);"><i class="fa fa-print"> </i></a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php endforeach; ?>
                             <?php } else { echo "<tr><td colspan='5'><i>Tidak ada data</i></td></tr>"; } ?>

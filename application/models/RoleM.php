@@ -35,5 +35,5 @@ class RoleM extends CI_Model {
 		return $dd;
 	}
 }
-/* End of file Role.php */
-/* Location: ./application/models/Role.php */
+/* End of file RoleM.php */
+/* Location: ./application/models/RoleM.php */

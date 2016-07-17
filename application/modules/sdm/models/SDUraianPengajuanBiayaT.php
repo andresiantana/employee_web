@@ -31,4 +31,4 @@ class SDUraianPengajuanBiayaT extends UraianPengajuanBiayaT {
 }
 
 /* End of file SDUraianPengajuanBiayaT.php */
-/* Location: ./application/modules/pegawai/models/SDUraianPengajuanBiayaT.php */
+/* Location: ./application/modules/sdm/models/SDUraianPengajuanBiayaT.php */
