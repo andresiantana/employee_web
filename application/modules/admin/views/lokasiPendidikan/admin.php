@@ -11,7 +11,7 @@
                             <td style="width:10%"><label>Lokasi Pendidikan</label></td>
                             <td style="width:1%;"></td>
                             <td style="width:30%">
-                                <select class="form-control input-sm" id="nama_lokasi" name="nama_lokasi" aria-controls="dataTables-example">
+                                <select class="form-control input-sm" id="nama_lokasi" name="nama_lokasi" aria-controls="dataTables-example" onchange="setPencarian();">
                                     <option value="">-Pilih Lokasi-</option>
                                     <option value="Dalam Negeri">Dalam Negeri</option>
                                     <option value="Luar Negeri">Luar Negeri</option>
@@ -22,7 +22,7 @@
 
                             <td><label>Nama Universitas</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text"  class="form-control" id="nama_universitas" name="nama_universitas"></td>
+                            <td><input type="text"  class="form-control" id="nama_universitas" name="nama_universitas" onkeypress="setPencarian();"></td>
                         </tr>
                     </table>
                     <br>

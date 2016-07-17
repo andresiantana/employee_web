@@ -9,7 +9,7 @@
                     <table style="width:100%;">
                         <tr>
                             <td style="width:20%"><label>Jenis Sertifikasi</label></td>
-                            <td style="width:30%"><input type="text"  class="form-control" id="nama_sertifikasi" name="nama_sertifikasi"></td>
+                            <td style="width:30%"><input type="text"  class="form-control" id="nama_sertifikasi" name="nama_sertifikasi" onkeypress="setPencarian();"></td>
 
                             <td style="width:9%"></td>
 
@@ -41,7 +41,7 @@
                                         <a href="<?php echo base_url('admin/jenisSertifikasi/edit/'.$v->id_jenis_sertifikasi); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Jenis Sertifikasi"><i class="fa fa-edit"> </i></a>
                                         <!-- <a href="<?php echo base_url('admin/jenisSertifikasi/hapus/'.$v->id_jenis_sertifikasi); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk hapus Jenis Sertifikasi" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')"><i class="fa fa-times"> </i></a> -->
                                         <?php
-                                            if($v->status == 1){
+                                            if($v->jenis_sertifikasi_aktif == 1){
                                         ?>
                                             <a href="<?php echo base_url('admin/jenisSertifikasi/block_aktif/'.$v->id_jenis_sertifikasi.'?aksi=block'); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk blokir Jenis Sertifikasi" onclick="return confirm('Apakah anda yakin akan memblokir Jenis Sertifikasi ini ?')"><i class="fa fa-ban"> </i></a>
                                         <?php } else { ?>

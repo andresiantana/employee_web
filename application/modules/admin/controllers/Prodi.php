@@ -103,13 +103,13 @@ class Prodi extends CI_Controller {
 			$kode_fakultas 	= $this->input->post('kode_fakultas');
 			$kode_prodi 	= $data['kode_prodi'];
 			$nama_prodi 	= $data['nama_prodi'];
-			$status_aktif 	= true;
+			$prodi_aktif 	= true;
 
 			$object = array(
 				'kode_fakultas'=>$kode_fakultas,
 				'kode_prodi'=>$kode_prodi,
 				'nama_prodi'=>$nama_prodi,
-				'status_aktif'=>$status_aktif
+				'prodi_aktif'=>$prodi_aktif
 			);
 
 			$insert = $this->ProdiM->insert($object);
@@ -242,7 +242,7 @@ class Prodi extends CI_Controller {
 			$status = false;
 		}
 		$object = array(
-			'status_aktif'=>$status,
+			'prodi_aktif'=>$status,
 		);
 
 		$this->db->where('id_prodi', $id);

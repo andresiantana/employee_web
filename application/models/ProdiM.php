@@ -42,6 +42,7 @@ class ProdiM extends CI_Model {
 
     public function dd_prodi(){
 		// ambil data dari db
+		$this->db->where('prodi_aktif is TRUE');
 		$this->db->order_by('nama_prodi','asc');
 		$result = $this->db->get('prodi');
 
@@ -72,7 +73,7 @@ class ProdiM extends CI_Model {
                 "kode_fakultas"	=> $worksheet[$i]["A"],
                 "kode_prodi"	=> $worksheet[$i]["B"],
                 "nama_prodi"	=> $worksheet[$i]["C"],
-                "status_aktif"	=>true
+                "prodi_aktif"	=>true
            	); 
             $this->db->insert('prodi', $ins);
         }

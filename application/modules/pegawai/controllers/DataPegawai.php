@@ -37,7 +37,7 @@ class DataPegawai extends CI_Controller {
 		$data['aa']	= file_get_contents(base_url()."data/");
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
-						->where('status_aktif is TRUE')
+						->where('fakultas_aktif is TRUE')
 						->get()->result_object();
 		$this->template->display('pegawai/dataPegawai/index',$data);
 	}
@@ -58,19 +58,19 @@ class DataPegawai extends CI_Controller {
 						->get()->result_object();
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
-						->where("kode_fakultas LIKE '5%' AND status_aktif is TRUE")
+						->where("kode_fakultas LIKE '5%' AND fakultas_aktif is TRUE")
 						->get()->result_object();
 		$data['fakultas_tpa'] = $this->db->select('*')
 						->from('fakultas')
-						->where("kode_fakultas NOT LIKE '5%' AND status_aktif is TRUE")
+						->where("kode_fakultas NOT LIKE '5%' AND fakultas_aktif is TRUE")
 						->get()->result_object();
 		$data['prodi'] = $this->db->select('*')
 						->from('prodi')
-						->where("status_aktif is TRUE")
+						->where("prodi_aktif is TRUE")
 						->get()->result_object();
 		$data['jenis_sertifikasi'] = $this->db->select('*')
 						->from('jenis_sertifikasi')
-						->where("status is TRUE")
+						->where("jenis_sertifikasi_aktif is TRUE")
 						->get()->result_object();
 		$this->template->display('pegawai/dataPegawai/lengkapi_data', $data);
 	}

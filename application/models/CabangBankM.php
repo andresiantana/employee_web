@@ -34,6 +34,7 @@ class CabangBankM extends CI_Model {
 
     public function dd_cabang(){
 		// ambil data dari db		
+		$this->db->where('cabang_bank_aktif is TRUE');
 		$this->db->order_by('cabang_bank','asc');
 		$result = $this->db->get('cabang_bank');
 

@@ -34,6 +34,7 @@ class JenisSertifikasiM extends CI_Model {
 
     public function dd_jenis_sertifikasi(){
 		// ambil data dari db
+		$this->db->where('jenis_sertifikasi_aktif is TRUE');
 		$this->db->order_by('nama_jenis_sertifikasi','asc');
 		$result = $this->db->get('jenis_sertifikasi');
 

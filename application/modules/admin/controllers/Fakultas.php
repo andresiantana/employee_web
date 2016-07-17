@@ -97,12 +97,12 @@ class Fakultas extends CI_Controller {
 		foreach ($this->input->post('fakultas') as $i => $data) {	
 			$kode_fakultas = $data['kode_fakultas'];
 			$nama_fakultas = $data['nama_fakultas'];
-			$status_aktif  = true;
+			$fakultas_aktif  = true;
 
 			$object = array(
 				'kode_fakultas'=>$kode_fakultas,
 				'nama_fakultas'=>$nama_fakultas,
-				'status_aktif'=>$status_aktif
+				'fakultas_aktif'=>$fakultas_aktif
 			);
 
 			$insert = $this->FakultasM->insert($object);
@@ -217,7 +217,7 @@ class Fakultas extends CI_Controller {
 			$status = false;
 		}
 		$object = array(
-			'status_aktif'=>$status,
+			'fakultas_aktif'=>$status,
 		);
 
 		$this->db->where('kode_fakultas', $id);

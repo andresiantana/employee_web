@@ -29,6 +29,7 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>Tanggal Amortisasi</th>
                                 <th>Nama Lengkap</th>
                                 <th>NIP</th>
                                 <th>Jumlah Amortisasi</th>
@@ -41,6 +42,7 @@
                                 <?php foreach($data as $key => $v): ?>
                                     <tr>
                                         <td><?php echo $key+1; ?></td>
+                                        <td><?php echo date('d M Y',strtotime($v->tanggal_jurnal)); ?></td>
                                         <td><?php echo $v->nama_lengkap; ?></td>
                                         <td><?php echo $v->nip; ?></td>
                                         <td style="text-align:right;"><?php echo 'Rp '.number_format($v->biaya).',00'; ?></td>

@@ -114,7 +114,7 @@ class JenisSertifikasi extends CI_Controller {
 			$status = false;
 		}
 		$object = array(
-			'status'=>$status,
+			'jenis_sertifikasi_aktif'=>$status,
 		);
 
 		$this->db->where('id_jenis_sertifikasi', $id);

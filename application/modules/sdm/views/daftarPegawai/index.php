@@ -62,7 +62,7 @@
                                         <?php 
                                             if($v->status_approve_sdm != "Approved" || $v->status_approve_sdm == ''){
                                         ?>
-                                            <a href="#approved" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
+                                            <font style="color:red;"><?php echo $v->status_approve_sdm; ?></font> <a href="#approved" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve" onclick="setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
                                         <?php }else{ ?>
                                         <font style="color:green;"><?php echo $v->status_approve_sdm; ?></font>
                                         <?php } ?>
@@ -94,6 +94,7 @@
     <p id="modal1Desc"></p>
   </div>
   <button data-remodal-action="confirm" class="remodal-confirm" onclick="approveData();">Approved</button>
+  <button data-remodal-action="confirm" class="remodal-cancel" onclick="rejectData();">Reject</button>
   <button data-remodal-action="cancel" class="remodal-cancel">Batal</button>  
 </div>
 
@@ -161,6 +162,29 @@ function approveData(id_pegawai){
             window.location.reload();
           }else{
             alert('Data Pegawai gagal di approve');
+              window.location.reload();
+          }
+      }
+    });
+}
+
+function rejectData(id_pegawai){
+    var id_pegawai = $('#pegawai_id').val();
+    var data = {
+      id_pegawai    : id_pegawai
+    }
+    $('#sample').attr('style','display:none');
+    $.ajax({
+      url     : "<?php echo base_url('sdm/daftarPegawai/rejectData'); ?>",
+      type    : "GET",
+      data    : data,
+      dataType: 'json',
+      success : function (data) {
+          if(data.status == true){
+            alert('Data Pegawai berhasil di reject');
+            window.location.reload();
+          }else{
+            alert('Data Pegawai gagal di reject');
               window.location.reload();
           }
       }

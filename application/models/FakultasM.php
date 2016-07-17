@@ -37,6 +37,7 @@ class FakultasM extends CI_Model {
 
     public function dd_fakultas(){
 		// ambil data dari db
+		$this->db->where('fakultas_aktif is TRUE');
 		$this->db->order_by('nama_fakultas','asc');
 		$result = $this->db->get('fakultas');
 
@@ -66,7 +67,7 @@ class FakultasM extends CI_Model {
             $ins = array(
                 "kode_fakultas"	=> $worksheet[$i]["A"],
                 "nama_fakultas"	=> $worksheet[$i]["B"],
-                "status_aktif"	=>true
+                "fakultas_aktif"=>true
            	); 
             $this->db->insert('fakultas', $ins);
         }
