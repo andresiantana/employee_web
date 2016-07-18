@@ -69,7 +69,7 @@
 
         <td>Status Pegawai</td>
         <td>:</td>
-        <td><?php echo $detail->nip; ?></td>
+        <td><?php echo $detail->status_pegawai; ?></td>
 
         <td>Tempat Studi</td>
         <td>:</td>

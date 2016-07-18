@@ -137,8 +137,6 @@ class PengajuanBiaya extends CI_Controller {
 
 	public function insert()
 	{
-		// echo "<pre>";
-		// print_r($_POST);exit;
 		$status = true;
 		$tgl = '';
 		$tanggal = '';
@@ -149,28 +147,32 @@ class PengajuanBiaya extends CI_Controller {
 		$status_pengajuan = $this->input->post('status_pengajuan');
 		$file_surat_keputusan = $this->input->post('file_surat_keputusan');
 
-		// upload foto
-		$config['upload_path']    = $this->file_path;
-     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
-     	$config['max_size']       = '2000';
-     	$config['max_width']      = '2000';
-     	$config['max_height']     = '2000';
-     	$config['file_name']      = 'SK-'.trim(str_replace(" ","",date('dmYHis')));
-     	$this->load->library('upload', $config);
- 	 	$this->upload->initialize($config);
+		if(isset($_POST['surat_keputusan'])){
+			// upload foto
+			$config['upload_path']    = $this->file_path;
+	     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
+	     	$config['max_size']       = '2000';
+	     	$config['max_width']      = '2000';
+	     	$config['max_height']     = '2000';
+	     	$config['file_name']      = 'SK-'.trim(str_replace(" ","",date('dmYHis')));
+	     	$this->load->library('upload', $config);
+	 	 	$this->upload->initialize($config);
 
- 		if ($this->upload->do_upload("surat_keputusan")){
- 			$surat_keputusan = $this->upload->file_name;
-			$status_upload = true;
- 		}else{			
- 			$status_upload = true;
- 		} 
- 	 	
+	 		if ($this->upload->do_upload("surat_keputusan")){
+	 			$surat_keputusan = $this->upload->file_name;
+				$status_upload = true;
+	 		}else{			
+	 			$status_upload = true;
+	 		} 
+	 	 	
 
- 		if($surat_keputusan != ''){
-			$surat_keputusan = $surat_keputusan;
+	 		if($surat_keputusan != ''){
+				$surat_keputusan = $surat_keputusan;
+			}else{
+				$surat_keputusan = $file_surat_keputusan;
+			}
 		}else{
-			$surat_keputusan = $file_surat_keputusan;
+			$surat_keputusan = null;
 		}
 
 		if(!empty($id_pengajuan_biaya)){
@@ -183,7 +185,18 @@ class PengajuanBiaya extends CI_Controller {
 
 			$this->db->where('id_pengajuan_biaya', $id_pengajuan_biaya);
 			$this->db->update('pengajuan_biaya', $object);
-			$insert = $this->db->affected_rows();	        
+			$insert = $this->db->affected_rows();	
+
+			$datapengajuan = $this->db->get_where('pengajuan_biaya',array('id_pengajuan_biaya'=>$id_pengajuan_biaya),array('limit'=>1,'order'=>'id_pengajuan_biaya DESC'))->row();
+			$notif = array(
+				'id_notifikasi'=>'',
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>date('Y-m-d H:i:s'),
+				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' <br> Pengajuan Dana Baru <br> di-'.$status_pengajuan,
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$this->Notifikasi->insert($notif);        
 		}else{		
 			$insert = $this->PengajuanBiayaT->insert($data);
 			$datapengajuan = $this->db->get_where('pengajuan_biaya',array(),array('limit'=>1,'order'=>'id_pengajuan_biaya DESC'))->row();
@@ -191,7 +204,7 @@ class PengajuanBiaya extends CI_Controller {
 				'id_notifikasi'=>'',
 				'id_pegawai'=>$id_pegawai,
 				'tanggal'=>date('Y-m-d H:i:s'),
-				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' <br> Pengajuan Dana Baru',
+				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' <br> Pengajuan Dana Baru <br> di-'.$status_pengajuan,
 				'id_user'=>$this->session->userdata('id_user')
 			);
 
@@ -205,6 +218,16 @@ class PengajuanBiaya extends CI_Controller {
 		}else{
 			$id_pengajuan_biaya = $datapengajuan->id_pengajuan_biaya;
 		}	
+
+		$notif = array(
+				'id_notifikasi'=>'',
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>date('Y-m-d H:i:s'),
+				'pesan'=>'Kode Pengajuan : '.$datapengajuan->kode_pengajuan.' <br> Pengajuan Dana Baru <br> di-'.$status_pengajuan,
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$this->Notifikasi->insert($notif);
 
 		// input uraian
 		if(count($this->input->post('rincian')) > 0) {

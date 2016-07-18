@@ -34,7 +34,7 @@ class KategoriBiayaM extends CI_Model {
 
     public function dd_kategori(){
 		// ambil data dari db
-		$this->db->where('kategori_biaya_aktif is TRUE');
+		$this->db->where('kategori_aktif is TRUE');
 		$this->db->order_by('nama_kategori','asc');
 		$result = $this->db->get('kategori_biaya');
 
