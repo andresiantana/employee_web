@@ -37,6 +37,7 @@ class DataPegawai extends CI_Controller {
 		$data['aa']	= file_get_contents(base_url()."data/");
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
+						->where('fakultas_aktif is TRUE')
 						->get()->result_object();
 		$this->template->display('pegawai/dataPegawai/index',$data);
 	}
@@ -57,17 +58,19 @@ class DataPegawai extends CI_Controller {
 						->get()->result_object();
 		$data['fakultas'] = $this->db->select('*')
 						->from('fakultas')
-						->where("kode_fakultas LIKE '5%'")
+						->where("kode_fakultas LIKE '5%' AND fakultas_aktif is TRUE")
 						->get()->result_object();
 		$data['fakultas_tpa'] = $this->db->select('*')
 						->from('fakultas')
-						->where("kode_fakultas NOT LIKE '5%'")
+						->where("kode_fakultas NOT LIKE '5%' AND fakultas_aktif is TRUE")
 						->get()->result_object();
 		$data['prodi'] = $this->db->select('*')
 						->from('prodi')
+						->where("prodi_aktif is TRUE")
 						->get()->result_object();
 		$data['jenis_sertifikasi'] = $this->db->select('*')
 						->from('jenis_sertifikasi')
+						->where("jenis_sertifikasi_aktif is TRUE")
 						->get()->result_object();
 		$this->template->display('pegawai/dataPegawai/lengkapi_data', $data);
 	}
@@ -119,6 +122,7 @@ class DataPegawai extends CI_Controller {
 		$id_pegawai = ($this->input->post('id_pegawai')) ? $this->input->post('id_pegawai') : null;
 		$lama_bulan_studi =  $this->input->post('lama_bulan_studi');
 		$tanggal_input = date('Y-m-d');
+
 		// daftar file yang sudah di upload
 		$file_foto = $this->input->post('file_foto');
 		$file_lulus_seleksi = $this->input->post('file_lulus_seleksi');
@@ -155,7 +159,7 @@ class DataPegawai extends CI_Controller {
 		// upload studi lanjut
 		$config2['upload_path']    = $this->file_path;
      	$config2['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
-     	$config2['max_size']       = '2000';
+     	// $config2['max_size']       = '2000';
      	$config2['max_width']      = '2000';
      	$config2['max_height']     = '2000';
      	//$config2['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
@@ -177,7 +181,7 @@ class DataPegawai extends CI_Controller {
 		// uload surat lulus seleksi
 		$config3['upload_path']    = $this->file_path;
      	$config3['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
-     	$config3['max_size']       = '2000';
+     	// $config3['max_size']       = '2000';
      	$config3['max_width']      = '2000';
      	$config3['max_height']     = '2000';
      	// $config3['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));
@@ -199,7 +203,7 @@ class DataPegawai extends CI_Controller {
  		// upload surat terima beasiswa
 		$config4['upload_path']    = $this->file_path;
      	$config4['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
-     	$config4['max_size']       = '2000';
+     	// $config4['max_size']       = '2000';
      	$config4['max_width']      = '2000';
      	$config4['max_height']     = '2000';
      	// $config4['file_name']      = 'file-'.trim(str_replace(" ","",date('dmYHis')));

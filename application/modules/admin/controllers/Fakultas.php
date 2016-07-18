@@ -97,12 +97,12 @@ class Fakultas extends CI_Controller {
 		foreach ($this->input->post('fakultas') as $i => $data) {	
 			$kode_fakultas = $data['kode_fakultas'];
 			$nama_fakultas = $data['nama_fakultas'];
-			$status_aktif  = true;
+			$fakultas_aktif  = true;
 
 			$object = array(
 				'kode_fakultas'=>$kode_fakultas,
 				'nama_fakultas'=>$nama_fakultas,
-				'status_aktif'=>$status_aktif
+				'fakultas_aktif'=>$fakultas_aktif
 			);
 
 			$insert = $this->FakultasM->insert($object);
@@ -206,9 +206,35 @@ class Fakultas extends CI_Controller {
 		}
 	}
 
+	public function block_aktif($id)
+	{
+		$aksi 	= $this->input->get('aksi');
+		$status = '';
+
+		if($aksi == 'aktif'){
+			$status = true;
+		}else{
+			$status = false;
+		}
+		$object = array(
+			'fakultas_aktif'=>$status,
+		);
+
+		$this->db->where('kode_fakultas', $id);
+		$this->db->update('fakultas', $object);
+
+		if($this->db->affected_rows()){
+			$this->session->set_flashdata('info','Data berhasil Diblokir.');
+			redirect('admin/Fakultas');
+		}else{
+			$this->session->set_flashdata('info','Data gagal Diblokir.');
+			redirect('admin/Fakultas');
+		}
+	}
+
 	public function setFormFakultas(){
-		$data['tr'] = '';
-		$data['tr'] .= '<tr>';
+		$data['tr']	= '';
+		$data['tr']	.= '<tr>';
 		$data['tr'] .= '<td><input id="fakultas_0_kode_fakultas" class="form-control kode_fakultas" name="fakultas[0][kode_fakultas]" type="text"></td>';
 		$data['tr'] .= '<td><input id="fakultas_0_nama_fakultas" name="fakultas[0][nama_fakultas]" type="text" class="form-control"></td>';
 		$data['tr'] .= '<td><a href="#" class="btn btn-small btn-success" onclick="tambahFakultas();"><i class="fa fa-plus"> </i></a><a style="margin-left:10px;" href="#" class="btn btn-small btn-success" onClick="hapusFakultas(this);" ><i class="fa fa-minus"> </i></a></td>';

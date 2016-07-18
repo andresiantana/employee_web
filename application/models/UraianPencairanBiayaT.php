@@ -7,5 +7,5 @@ class UraianPencairanBiayaT extends CI_Model {
 	}
 }
 
-/* End of file UraianPengajuanBiayaT.php */
-/* Location: ./application/models/UraianPengajuanBiayaT.php */
+/* End of file UraianPencairanBiayaT.php */
+/* Location: ./application/models/UraianPencairanBiayaT.php */

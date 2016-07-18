@@ -49,4 +49,4 @@ class SDPengajuanBiayaT extends PengajuanBiayaT {
 }
 
 /* End of file SDPengajuanBiayaT.php */
-/* Location: ./application/modules/pegawai/models/SDPengajuanBiayaT.php */
+/* Location: ./application/modules/sdm/models/SDPengajuanBiayaT.php */

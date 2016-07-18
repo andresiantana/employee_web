@@ -9,7 +9,6 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>No.</th>
                                 <th>Nama Lengkap</th>
                                 <th>NIP</th>
                                 <th>NIDN</th>
@@ -33,7 +32,6 @@
                         <tbody>
                             <?php foreach($data as $key => $v): ?>
                                 <tr>
-                                    <td><?php echo $key+1; ?></td>
                                     <td><?php echo $v->nama_lengkap; ?></td>
                                     <td><?php echo $v->nip; ?></td>
                                     <td><?php echo $v->nidn; ?></td>

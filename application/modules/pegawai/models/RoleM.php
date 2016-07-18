@@ -66,5 +66,5 @@ class RoleM extends CI_Model {
 	}
 }
 
-/* End of file Role.php */
-/* Location: ./application/models/Role.php */
+/* End of file RoleM.php */
+/* Location: ./application/modules/pegawai/models/RoleM.php */

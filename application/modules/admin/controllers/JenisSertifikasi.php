@@ -27,13 +27,13 @@ class JenisSertifikasi extends CI_Controller {
 		$jml = $this->db->get('jenis_sertifikasi');
 		
 		//pengaturan pagination
-		$config['base_url'] = base_url().'admin/jenisSertifikasi/index';
-		$config['total_rows'] = $jml->num_rows();
-		$config['per_page'] = '10';
-		$config['first_page'] = 'Awal';
-		$config['last_page'] = 'Akhir';
-		$config['next_page'] = '&laquo;';
-		$config['prev_page'] = '&raquo;';
+		$config['base_url']		= base_url().'admin/jenisSertifikasi/index';
+		$config['total_rows'] 	= $jml->num_rows();
+		$config['per_page'] 	= '10';
+		$config['first_page'] 	= 'Awal';
+		$config['last_page'] 	= 'Akhir';
+		$config['next_page'] 	= '&laquo;';
+		$config['prev_page'] 	= '&raquo;';
 
 		//inisialisasi config
 		 $this->pagination->initialize($config);
@@ -49,27 +49,27 @@ class JenisSertifikasi extends CI_Controller {
 						->like('nama_jenis_sertifikasi',$nama_sertifikasi)
 						->get();
 			//pengaturan pagination
-			 $config['base_url'] = base_url().'admin/jenisSertifikasi/index';
-			 $config['total_rows'] = $jml->num_rows();
-			 $config['per_page'] = '10';
-			 $config['first_page'] = 'Awal';
-			 $config['last_page'] = 'Akhir';
-			 $config['next_page'] = '&laquo;';
-			 $config['prev_page'] = '&raquo;';
+			 $config['base_url'] 	= base_url().'admin/jenisSertifikasi/index';
+			 $config['total_rows'] 	= $jml->num_rows();
+			 $config['per_page'] 	= '10';
+			 $config['first_page'] 	= 'Awal';
+			 $config['last_page'] 	= 'Akhir';
+			 $config['next_page'] 	= '&laquo;';
+			 $config['prev_page'] 	= '&raquo;';
 
 			//inisialisasi config
 		 	$this->pagination->initialize($config);
 
 			//buat pagination
-		 	$data['halaman'] = $this->pagination->create_links();
-			$data['data'] =  $this->JenisSertifikasiM->tampilDataSertifikasi($config['per_page'], $id, $nama_sertifikasi);
-			$tr['tr'] = $this->load->view('admin/jenisSertifikasi/pencarian',$data,true);
+		 	$data['halaman'] 	= $this->pagination->create_links();
+			$data['data'] 		=  $this->JenisSertifikasiM->tampilDataSertifikasi($config['per_page'], $id, $nama_sertifikasi);
+			$tr['tr'] 			= $this->load->view('admin/jenisSertifikasi/pencarian',$data,true);
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$nama_prodi = null;
-			$kode_fakultas = null;
-			$data['data'] = $this->JenisSertifikasiM->tampilDataSertifikasi($config['per_page'], $id, $nama_sertifikasi);
+			$nama_prodi 	= null;
+			$kode_fakultas 	= null;
+			$data['data'] 	= $this->JenisSertifikasiM->tampilDataSertifikasi($config['per_page'], $id, $nama_sertifikasi);
 		}	
 		// $data['data']	= $this->JenisSertifikasiM->tampilData()->result_object();		
 		$this->template->display('admin/jenisSertifikasi/admin',$data);
@@ -77,11 +77,11 @@ class JenisSertifikasi extends CI_Controller {
 
 	public function tambah()
 	{
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Jenis Sertifikasi';
-		$data['menu'] = 'jenisSertifikasi';		
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Jenis Sertifikasi';
+		$data['menu'] 			= 'jenisSertifikasi';		
 		$this->template->display('admin/jenisSertifikasi/tambah',$data);
 	}
 
@@ -89,7 +89,7 @@ class JenisSertifikasi extends CI_Controller {
 	{
 		$nama_jenis_sertifikasi = $this->input->post('nama_jenis_sertifikasi');
 		$status = true;
-		$data = array(
+		$data 	= array(
 					'nama_jenis_sertifikasi' => $nama_jenis_sertifikasi,
 					'status' => $status
 				);
@@ -103,10 +103,9 @@ class JenisSertifikasi extends CI_Controller {
 		}
 	}
 
-
 	public function block_aktif($id)
 	{
-		$aksi = $this->input->get('aksi');
+		$aksi 	= $this->input->get('aksi');
 		$status = '';
 
 		if($aksi == 'aktif'){
@@ -115,7 +114,7 @@ class JenisSertifikasi extends CI_Controller {
 			$status = false;
 		}
 		$object = array(
-			'status'=>$status,
+			'jenis_sertifikasi_aktif'=>$status,
 		);
 
 		$this->db->where('id_jenis_sertifikasi', $id);
@@ -144,18 +143,18 @@ class JenisSertifikasi extends CI_Controller {
 
 	public function edit($id = null)
 	{		
-		$data['judulHeader'] = 'Jenis Sertifikasi';
-		$data['menu'] = 'jenisSertifikasi';
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['editdata'] = $this->db->get_where('jenis_sertifikasi',array('id_jenis_sertifikasi'=>$id))->row();
+		$data['judulHeader'] 	= 'Jenis Sertifikasi';
+		$data['menu'] 			= 'jenisSertifikasi';
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['editdata'] 		= $this->db->get_where('jenis_sertifikasi',array('id_jenis_sertifikasi'=>$id))->row();
 		$this->template->display('admin/jenisSertifikasi/edit',$data);
 	}
 
 	public function update()
 	{
-		$id_jenis_sertifikasi = $this->input->post('id_jenis_sertifikasi');
+		$id_jenis_sertifikasi 	= $this->input->post('id_jenis_sertifikasi');
 		$nama_jenis_sertifikasi = $this->input->post('nama_jenis_sertifikasi');
 
 		$object = array(

@@ -20,7 +20,7 @@
                             <td><label>Role</label></td>
                             <td style="width:1%;"></td>
                             <td style="width:30%">
-                                <select class="form-control" name="id_role" id="id_role">
+                                <select class="form-control" name="id_role" id="id_role" onchange="setPencarian();">
                                     <option value="">-Pilih Role-</option>
                                     <?php foreach ($role as $i => $val) { ?>
                                         <option value="<?php echo $val->id_role; ?>"><?php echo $val->nama_role; ?></option>
@@ -32,7 +32,7 @@
 
                             <td><label>Nama User</label></td>
                             <td style="width:1%;"></td>
-                            <td><input type="text"  class="form-control" id="username" name="username"></td>
+                            <td><input type="text"  class="form-control" id="username" name="username" onkeypress="setPencarian()"></td>
                         </tr>
                     </table>
                     <br>

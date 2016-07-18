@@ -63,5 +63,5 @@ class LokasiPendidikanM extends CI_Model {
     }
 }
 
-/* End of file User.php */
-/* Location: ./application/models/User.php */
+/* End of file LokasiPendidikanM.php */
+/* Location: ./application/models/LokasiPendidikanM.php */

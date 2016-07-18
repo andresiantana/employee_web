@@ -19,22 +19,22 @@ class Role extends CI_Controller {
 
 	public function index()
 	{
-		$data['judulHeader'] = 'Role';
-		$data['menu'] = 'master';
-		$data['data']	= $this->ADRoleM->tampilData()->result_object();
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Role';
+		$data['menu'] 			= 'master';
+		$data['data']			= $this->ADRoleM->tampilData()->result_object();
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$this->template->display('admin/role/admin',$data);
 	}
 
 	public function tambah()
 	{
-		$data['judulHeader'] = 'Role';
-		$data['menu'] = 'master';
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Role';
+		$data['menu'] 			= 'master';
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
 		$this->template->display('admin/role/tambah',$data);
 		
 	}
@@ -44,16 +44,17 @@ class Role extends CI_Controller {
 		$this->form_validation->set_rules('nama_role', 'Nama Role', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
-			$data['judulHeader'] = 'Role';
-			$data['menu'] = 'master';
-			$data['username'] = $this->session->userdata('username');
-			$data['id_user'] = $this->session->userdata('id_user');
-			$data['nama_role'] = $this->session->userdata('nama_role');
+			$data['judulHeader'] 	= 'Role';
+			$data['menu'] 			= 'master';
+			$data['username'] 		= $this->session->userdata('username');
+			$data['id_user'] 		= $this->session->userdata('id_user');
+			$data['nama_role'] 		= $this->session->userdata('nama_role');
+
 			$this->template->display('admin/role/tambah',$data);
 		} else {			
-			$nama_role = $this->input->post('nama_role');
+			$nama_role 	= $this->input->post('nama_role');
 
-			$cek_data = $this->ADRoleM->cekNama($nama_role)->num_rows();
+			$cek_data 	= $this->ADRoleM->cekNama($nama_role)->num_rows();
 			if($cek_data > 0){
 				echo "<script>alert('Nama Role ".$nama_role." sudah ada pada database sebelumnya !');
                     window.location.href='".base_url('admin/role/tambah')."';
@@ -88,19 +89,19 @@ class Role extends CI_Controller {
 
 	public function edit($id = null)
 	{		
-		$data['judulHeader'] = 'Role';
-		$data['menu'] = 'master';
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['editdata'] = $this->db->get_where('role',array('id_role'=>$id))->row();
+		$data['judulHeader'] 	= 'Role';
+		$data['menu'] 			= 'master';
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['editdata'] 		= $this->db->get_where('role',array('id_role'=>$id))->row();
 		$this->template->display('admin/role/edit',$data);
 	}
 
 	public function update()
 	{
-		$id_role = $this->input->post('id_role');
-		$nama_role = $this->input->post('nama_role');
+		$id_role 	= $this->input->post('id_role');
+		$nama_role 	= $this->input->post('nama_role');
 
 		$object = array(
 			'nama_role'=>$nama_role
@@ -116,7 +117,6 @@ class Role extends CI_Controller {
 			redirect('admin/role');
 		}
 	}
-
 }
 
 /* End of file Role.php */

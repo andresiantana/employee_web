@@ -28,13 +28,13 @@ class LokasiPendidikan extends CI_Controller {
 		$jml = $this->db->get('lokasi_pendidikan');
 
 		//pengaturan pagination
-		 $config['base_url'] = base_url().'admin/lokasiPendidikan/index';
-		 $config['total_rows'] = $jml->num_rows();
-		 $config['per_page'] = '10';
-		 $config['first_page'] = 'Awal';
-		 $config['last_page'] = 'Akhir';
-		 $config['next_page'] = '&laquo;';
-		 $config['prev_page'] = '&raquo;';
+		 $config['base_url'] 	= base_url().'admin/lokasiPendidikan/index';
+		 $config['total_rows'] 	= $jml->num_rows();
+		 $config['per_page'] 	= '10';
+		 $config['first_page'] 	= 'Awal';
+		 $config['last_page'] 	= 'Akhir';
+		 $config['next_page'] 	= '&laquo;';
+		 $config['prev_page'] 	= '&raquo;';
 
 		//inisialisasi config
 		 $this->pagination->initialize($config);
@@ -52,13 +52,13 @@ class LokasiPendidikan extends CI_Controller {
 						->like('nama_universitas',$nama_universitas)
 						->get();
 			//pengaturan pagination
-			 $config['base_url'] = base_url().'admin/lokasiPendidikan/index';
-			 $config['total_rows'] = $jml->num_rows();
-			 $config['per_page'] = '10';
-			 $config['first_page'] = 'Awal';
-			 $config['last_page'] = 'Akhir';
-			 $config['next_page'] = '&laquo;';
-			 $config['prev_page'] = '&raquo;';
+			 $config['base_url'] 	= base_url().'admin/lokasiPendidikan/index';
+			 $config['total_rows'] 	= $jml->num_rows();
+			 $config['per_page'] 	= '10';
+			 $config['first_page'] 	= 'Awal';
+			 $config['last_page'] 	= 'Akhir';
+			 $config['next_page'] 	= '&laquo;';
+			 $config['prev_page'] 	= '&raquo;';
 
 			//inisialisasi config
 		 	$this->pagination->initialize($config);
@@ -81,11 +81,11 @@ class LokasiPendidikan extends CI_Controller {
 
 	public function tambah()
 	{
-		$data['username'] 	= $this->session->userdata('username');
-		$data['id_user'] 	= $this->session->userdata('id_user');
-		$data['nama_role'] 	= $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Lokasi Pendidikan';
-		$data['menu'] = 'lokasiPendidikan';		
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Lokasi Pendidikan';
+		$data['menu'] 			= 'lokasiPendidikan';		
 		$this->template->display('admin/lokasiPendidikan/tambah',$data);
 	}
 
@@ -94,10 +94,10 @@ class LokasiPendidikan extends CI_Controller {
 		$status = '';
 
 		foreach ($this->input->post('pendidikan') as $i => $data) {	
-			$nama_lokasi = $this->input->post('nama_lokasi');
-			$nama_universitas = $data['nama_universitas'];
-			$alamat 	= $data['alamat'];
-			$no_telp 	= $data['no_telp'];
+			$nama_lokasi 		= $this->input->post('nama_lokasi');
+			$nama_universitas 	= $data['nama_universitas'];
+			$alamat 			= $data['alamat'];
+			$no_telp 			= $data['no_telp'];
 
 			$object = array(
 				'nama_lokasi'=>$nama_lokasi,
@@ -138,22 +138,22 @@ class LokasiPendidikan extends CI_Controller {
 
 	public function edit($id = null)
 	{		
-		$data['judulHeader'] = 'Lokasi Pendidikan';
-		$data['menu'] = 'lokasiPendikan';
-		$data['username'] = $this->session->userdata('username');
-		$data['id_user'] = $this->session->userdata('id_user');
-		$data['nama_role'] = $this->session->userdata('nama_role');
-		$data['editdata'] = $this->db->get_where('lokasi_pendidikan',array('id_lokasi'=>$id))->row();
+		$data['judulHeader'] 	= 'Lokasi Pendidikan';
+		$data['menu'] 			= 'lokasiPendikan';
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['editdata'] 		= $this->db->get_where('lokasi_pendidikan',array('id_lokasi'=>$id))->row();
 		$this->template->display('admin/lokasiPendidikan/edit',$data);
 	}
 
 	public function update()
 	{
-		$id_lokasi = $this->input->post('id_lokasi');
-		$nama_lokasi = $this->input->post('nama_lokasi');
-		$nama_universitas = $this->input->post('nama_universitas');
-		$alamat = $this->input->post('alamat');
-		$no_telp = $this->input->post('no_telp');
+		$id_lokasi 			= $this->input->post('id_lokasi');
+		$nama_lokasi 		= $this->input->post('nama_lokasi');
+		$nama_universitas 	= $this->input->post('nama_universitas');
+		$alamat 			= $this->input->post('alamat');
+		$no_telp 			= $this->input->post('no_telp');
 
 		$object = array(
 			'nama_lokasi'=>$nama_lokasi,
@@ -187,11 +187,11 @@ class LokasiPendidikan extends CI_Controller {
 
 	public function importLokasiPendidikan($sukses = "")
 	{
-		$data['username'] 	= $this->session->userdata('username');
-		$data['id_user'] 	= $this->session->userdata('id_user');
-		$data['nama_role'] 	= $this->session->userdata('nama_role');
-		$data['judulHeader'] = 'Lokasi Pendidikan';
-		$data['menu'] = 'lokasiPendidikan';		
+		$data['username'] 		= $this->session->userdata('username');
+		$data['id_user'] 		= $this->session->userdata('id_user');
+		$data['nama_role'] 		= $this->session->userdata('nama_role');
+		$data['judulHeader'] 	= 'Lokasi Pendidikan';
+		$data['menu'] 			= 'lokasiPendidikan';		
 		$this->template->display('admin/lokasiPendidikan/import',$data);
 	}
 
@@ -215,15 +215,41 @@ class LokasiPendidikan extends CI_Controller {
         	if(isset($_POST['drop']) && $_POST['drop'] == 1){
         		$this->db->empty_table('lokasi_pendidikan');
         	}
-            $data = array('upload_data' => $this->upload->data());
-            $upload_data = $this->upload->data(); //Mengambil detail data yang di upload
-            $filename = $upload_data['file_name'];//Nama File
+            $data 			= array('upload_data' => $this->upload->data());
+            $upload_data 	= $this->upload->data(); //Mengambil detail data yang di upload
+            $filename 		= $upload_data['file_name'];//Nama File
+
             $this->LokasiPendidikanM->upload_data($filename);
             unlink('./data/uploads/'.$filename);
             redirect('admin/LokasiPendidikan/importLokasiPendidikan/sukses','refresh');
         }
     }
 
+    public function block_aktif($id)
+	{
+		$aksi 	= $this->input->get('aksi');
+		$status = '';
+
+		if($aksi == 'aktif'){
+			$status = true;
+		}else{
+			$status = false;
+		}
+		$object = array(
+			'lokasi_aktif'=>$status,
+		);
+
+		$this->db->where('id_lokasi', $id);
+		$this->db->update('lokasi_pendidikan', $object);
+
+		if($this->db->affected_rows()){
+			$this->session->set_flashdata('info','Data berhasil Diblokir.');
+			redirect('admin/LokasiPendidikan');
+		}else{
+			$this->session->set_flashdata('info','Data gagal Diblokir.');
+			redirect('admin/LokasiPendidikan');
+		}
+	}
 }
 
 /* End of file LokasiPendidikan.php */

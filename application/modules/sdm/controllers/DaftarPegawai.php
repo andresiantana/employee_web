@@ -78,6 +78,47 @@ class DaftarPegawai extends CI_Controller {
 		exit;
 	}
 
+	function rejectData()
+    {
+    	$status = '';
+    	$status_notifikasi = false;
+
+        $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
+        $object = array(
+			'status_approve_sdm'=>'Reject',
+			'tanggal_approve_sdm'=>date('Y-m-d')
+		);
+
+		$this->db->where('id_pegawai', $id_pegawai);
+		$this->db->update('pegawai', $object);
+
+		if($this->db->affected_rows()){
+			$tanggal = date('Y-m-d H:i:s');
+			$pesan = 'Data Pengajuan Pegawai di Reject oleh SDM';
+			$data = array(
+				'id_pegawai'=>$id_pegawai,
+				'tanggal'=>$tanggal,
+				'pesan'=>$pesan,
+				'id_user'=>$this->session->userdata('id_user')
+			);
+
+			$insert = $this->Notifikasi->insert($data);
+			if($insert){
+				$status_notifikasi = true;
+			}else{
+				$status_notifikasi = false;
+			}
+
+			$status = true;
+		}else{
+			$status = false;
+		}
+
+		$data['status'] = $status;
+		echo json_encode($data); 
+		exit;
+	}
+
 	public function notifikasi($id = null)
 	{		
 		$data['judulHeader'] = 'Pemberitahuan';

@@ -16,5 +16,5 @@ class SDJurnalT extends JurnalT {
 	}
 }
 
-/* End of file SDUraianPengajuanBiayaT.php */
-/* Location: ./application/modules/pegawai/models/SDUraianPengajuanBiayaT.php */
+/* End of file SDJurnalT.php */
+/* Location: ./application/modules/sdm/models/SDJurnalT.php */

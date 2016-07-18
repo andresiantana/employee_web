@@ -155,6 +155,7 @@
             </div>
         </div>
     </div>
+
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
@@ -223,28 +224,6 @@
               });
         });
     </script>
-
-    <!-- Events -->
-    <!--<script>
-      
-
-    //  Usage:
-    //  $(function() {
-    //
-    //    // In this case the initialization function returns the already created instance
-    //    var inst = $('[data-remodal-id=modal]').remodal();
-    //
-    //    inst.open();
-    //    inst.close();
-    //    inst.getState();
-    //    inst.destroy();
-    //  });
-
-      //  The second way to initialize:
-      // $('[data-remodal-id=modal2]').remodal({
-      //   modifier: 'with-red-theme'
-      // });
-    </script>-->
 
     <script type="text/javascript">
         function checkFormat(){

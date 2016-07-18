@@ -26,5 +26,5 @@ class PGUraianPengajuanBiayaT extends UraianPengajuanBiayaT {
 	}
 }
 
-/* End of file SDUraianPengajuanBiayaT.php */
-/* Location: ./application/modules/pegawai/models/SDUraianPengajuanBiayaT.php */
+/* End of file PGUraianPengajuanBiayaT.php */
+/* Location: ./application/modules/pegawai/models/PGUraianPengajuanBiayaT.php */

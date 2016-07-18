@@ -17,5 +17,5 @@ class SertifikasiT extends CI_Model {
 	}
 }
 
-/* End of file PengajuanBiayaT.php */
-/* Location: ./application/models/PengajuanBiayaT.php */
+/* End of file SertifikasiT.php */
+/* Location: ./application/models/SertifikasiT.php */

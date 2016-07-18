@@ -32,5 +32,5 @@ class ADRoleM extends RoleM {
 	}
 }
 
-/* End of file Role.php */
-/* Location: ./application/models/Role.php */
+/* End of file ADRoleM.php */
+/* Location: ./application/modules/admin/models/ADRoleM.php */

@@ -11,7 +11,7 @@
                             <td style="width:10%"><label>Fakultas</label></td>
                             <td style="width:1%;"></td>
                             <td style="width:30%">
-                                <select class="form-control" name="kode_fakultas" id="kode_fakultas">
+                                <select class="form-control" name="kode_fakultas" id="kode_fakultas" onchange="setPencarian();">
                                     <option value="">-Pilih Fakultas-</option>
                                     <?php foreach ($fakultas as $i => $val) { ?>
                                         <option value="<?php echo $val->kode_fakultas; ?>"><?php echo $val->nama_fakultas; ?></option>
@@ -21,7 +21,7 @@
 
                             <td style="width:9%"></td>
                             <td><label>Prodi</label></td>
-                            <td><input type="text" class="form-control" id="nama_prodi" name="nama_prodi"></td>
+                            <td><input type="text" class="form-control" id="nama_prodi" name="nama_prodi" onkeypress="setPencarian();"></td>
                         </tr>
                     </table>
                     <br>
@@ -51,7 +51,14 @@
                                     <td><?php echo $v->nama_prodi; ?></td>
                                     <td class="td-actions">
                                         <a href="<?php echo base_url('admin/prodi/edit/'.$v->id_prodi); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Prodi"><i class="fa fa-edit"> </i></a>
-                                        <a href="<?php echo base_url('admin/prodi/hapus/'.$v->id_prodi); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk hapus Prodi" onclick="return confirm('Apakah anda yakin akan menghapus prodi ini ?')"><i class="fa fa-times"> </i></a>
+                                        <!-- <a href="<?php echo base_url('admin/prodi/hapus/'.$v->id_prodi); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk hapus Prodi" onclick="return confirm('Apakah anda yakin akan menghapus prodi ini ?')"><i class="fa fa-times"> </i></a> -->
+                                        <?php
+                                            if($v->prodi_aktif == 1){
+                                        ?>
+                                            <a href="<?php echo base_url('admin/prodi/block_aktif/'.$v->id_prodi.'?aksi=block'); ?>" class="btn btn-small btn-danger" rel="tooltip" title="Klik untuk blokir Prodi" onclick="return confirm('Apakah anda yakin akan memblokir Prodi ini ?')"><i class="fa fa-ban"> </i></a>
+                                        <?php } else { ?>
+                                            <a href="<?php echo base_url('admin/prodi/block_aktif/'.$v->id_prodi.'?aksi=aktif'); ?>" class="btn btn-small btn-info" rel="tooltip" title="Klik untuk aktifkan Prodi" onclick="return confirm('Apakah anda yakin akan mengaktifkan Prodi ini ?')"><i class="fa fa-check"> </i></a>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
