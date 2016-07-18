@@ -78,6 +78,14 @@
             <td colspan="5"><b><i>Total</i></b></td>
             <td style="text-align:right;"><?php echo number_format($total); ?></td>
         </tr>
+        <tr>
+            <td colspan="5"><b><i>Total Gagal Di Transfer</i></b></td>
+            <td style="text-align:right;"><?php echo number_format($data_row->gagal_transfer); ?></td>
+        </tr>
+        <tr>
+            <td colspan="5"><b><i>Total Berhasil Di Transfer</i></b></td>
+            <td style="text-align:right;"><?php echo number_format($data_row->berhasil_transfer); ?></td>
+        </tr>
     </tfoot>
 </table>
 <?php if(!isset($_GET['caraPrint'])){ ?>
