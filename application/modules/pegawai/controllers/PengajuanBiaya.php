@@ -223,7 +223,8 @@ class PengajuanBiaya extends CI_Controller {
 		$data['detail'] =  $this->PGUraianPengajuanBiayaT->tampilUraianPengajuan($id_pengajuan_biaya)->result_object();
 		$data['data_row'] = $this->db->select('*')
 							->from('pengajuan_biaya')
-							->where('id_pengajuan_biaya',$id_pengajuan_biaya)
+							->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left')
+							->where('pengajuan_biaya.id_pengajuan_biaya',$id_pengajuan_biaya)
 							->get()->row();
 		$data['data_pegawai'] = $this->db->select('*')
 								->from('pegawai')
