@@ -15,7 +15,7 @@
                             <?php } ?>  
                             <div class="form-group">
                                 <label for="username">No. Akun</label>
-                                <input class="form-control" type="text" name="no_akun" placeholder="Isikan No. Akun" readonly=true value="<?php echo $editdata->no_akun; ?>" required >
+                                <input class="form-control" type="text" name="no_akun" placeholder="Isikan No. Akun" readonly=true value="<?php echo $editdata->no_akun; ?>" required readonly>
                             </div>
                             <div class="form-group">
                                 <label for="password">Nama Akun</label>
