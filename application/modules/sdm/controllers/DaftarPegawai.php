@@ -245,7 +245,7 @@ class DaftarPegawai extends CI_Controller {
 
 			$insert = $this->Notifikasi->insert($object);
 			if($status_kelulusan == 'Lulus'){
-				$dataJurnal = $this->SDJurnalT->tampilJurnalPegawai($id_pegawai)->row();
+				$dataJurnal = $this->SDJurnalT->tampilJurnalPegawaiBiaya($id_pegawai)->row();
 				// Jurnal Pegawai Studi Lanjut		
 				$object_jurnal_kredit = array(
 					'id_jurnal'=>'',
