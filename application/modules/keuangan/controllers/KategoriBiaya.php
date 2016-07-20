@@ -176,7 +176,7 @@ class KategoriBiaya extends CI_Controller {
 			$status = false;
 		}
 		$object = array(
-			'status_aktif'=>$status,
+			'kategori_aktif'=>$status,
 		);
 
 		$this->db->where('id_kategori_biaya', $id);

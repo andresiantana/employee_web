@@ -81,7 +81,7 @@
                         </tbody>
                     </table>
                 </div><br><br>
-                <a href='javascript:void(0);' onclick="print();" class="btn btn-small btn-info"><i class="fa fa-print"> </i> Print</a>
+                <!--<a href='javascript:void(0);' onclick="print();" class="btn btn-small btn-info"><i class="fa fa-print"> </i> Print</a>-->
             </div>            
         </div>
     </div>
