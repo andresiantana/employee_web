@@ -52,6 +52,12 @@ class PengajuanBiaya extends CI_Controller {
 							->limit('1')
 							->from('pengajuan_biaya')
 						    ->get()->row();
+	    $data['dataPengajuan'] =  $this->PGPengajuanBiayaT->tampilPengajuanPegawai($data['datapegawai']->id_pegawai)->row();
+	    if(count($data['dataPengajuan']) > 0){
+	    	echo "<script>alert('Data Pengajuan Biaya masih ada yang belum dilakukan Approved di SDM!');
+                    window.location.href='".base_url('pegawai/Dashboard')."';
+                </script>";
+	    }
 
 		$this->template->display('pegawai/pengajuanBiaya/index',$data);
 	}

@@ -256,12 +256,12 @@ class PengajuanBiaya extends CI_Controller {
 				if(!empty($id_uraian)){
 					$this->db->where('id_uraian', $id_uraian);
 					$this->db->update('uraian_pengajuan_biaya', $uraian);
-					$insert = $this->db->affected_rows();
+					$insert_uraian = $this->db->affected_rows();
 				}else{
-					$insert = $this->SDUraianPengajuanBiayaT->insert($uraian_baru);	
+					$insert_uraian = $this->SDUraianPengajuanBiayaT->insert($uraian_baru);	
 				}
 
-				if($insert){
+				if($insert_uraian){
 					$status = true;
 				}					
 			}	

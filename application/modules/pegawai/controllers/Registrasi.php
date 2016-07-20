@@ -38,6 +38,9 @@ class Registrasi extends CI_Controller {
             	$nama_lengkap = $username;
             }
             $id_role = $role->row()->id_role;
+            if($id_role == null){
+                $id_role = 2;
+            }
             $object = array(
                 'username'=>$username,
                 'password'=>$password,

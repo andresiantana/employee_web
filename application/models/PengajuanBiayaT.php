@@ -31,6 +31,19 @@ class PengajuanBiayaT extends CI_Model {
         $noPengajuanBaru =$prefix.(isset($noPengajuan['nomaksimal']) ? (str_pad($noPengajuan['nomaksimal']+1, strlen($default), 0,STR_PAD_LEFT)) : $default);
         return $noPengajuanBaru;
     }
+
+	public function tampilPengajuanPegawai($id_pegawai){
+		$approve = 'Approved';
+		$this->db->select('*');
+		$this->db->from('pengajuan_biaya');
+		$this->db->where('status_pengajuan is NULL OR id_pencairan_biaya is NULL');
+		if($id_pegawai != ''){
+			$this->db->where('id_pegawai', $id_pegawai);
+		}
+		$this->db->limit = 1;
+		$query = $this->db->get();
+		return $query;
+	}
 }
 
 /* End of file PengajuanBiayaT.php */

@@ -6,6 +6,7 @@ class Template{
         $this->_ci =&get_instance();
         $this->_ci->load->model('Notifikasi');
         $this->_ci->load->model('Pegawai');
+        $this->_ci->load->model('PengajuanBiayaT');
     }
     
     function display($template,$data=null){ 
@@ -13,8 +14,8 @@ class Template{
         $data['_content'] = $this->_ci->load->view($template,$data,true);   
         $data['isi_notifikasi'] = array();
         $data['isi_notifikasi2'] = array();
-        $data['userPegawai'] =  $this->_ci->Pegawai->tampilUserPegawai($data['id_user'])->row();
-
+        $data['userPegawai'] =  $this->_ci->Pegawai->tampilUserPegawai($data['id_user'])->row();        
+        
         if($data['nama_role'] == 'Admin'){
             $data['_menu'] = $this->_ci->load->view('menu_admin',$data,true); 
             $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasi()->result_object();
@@ -33,7 +34,7 @@ class Template{
             $data['_menu'] = $this->_ci->load->view('menu_pegawai',$data,true); 
             $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasiDariSDM()->result_object();
             $data['isi_notifikasi2'] = $this->_ci->Notifikasi->tampilNotifikasiDariKeuangan()->result_object();
-            $data['_notifikasi'] = $this->_ci->load->view('notifikasi_pegawai',$data,true);             
+            $data['_notifikasi'] = $this->_ci->load->view('notifikasi_pegawai',$data,true);               
         }else{
             $data['_menu'] = $this->_ci->load->view('menu_admin',$data,true); 
             $data['isi_notifikasi'] = $this->_ci->Notifikasi->tampilNotifikasi()->result_object();

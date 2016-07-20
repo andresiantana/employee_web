@@ -64,6 +64,13 @@ class Dashboard extends CI_Controller {
 		$this->db->where('id_user', $id_user);
 		$this->db->update('user', $object);
 		if($this->db->affected_rows()){
+			$object = array(
+				'nama_lengkap'=>$nama_lengkap,
+				'no_telp_hp'=>$no_telp
+			);
+
+			$this->db->where('id_user', $id_user);
+			$this->db->update('pegawai', $object);
 			echo "<script>alert('Data Profile berhasil diubah!');
                     window.location.href='".base_url('pegawai/dashboard')."';
                 </script>";
