@@ -71,7 +71,13 @@
                                 <tr>
                                     <td style="text-align:center;"><?php echo isset($v->tanggal_jurnal) ? date('d M Y',strtotime($v->tanggal_jurnal)) : null; ?></td>
                                     <td style="text-align:center;"><?php echo $v->no_akun; ?></td>
-                                    <td><?php echo $v->nama_akun; ?></td>
+                                    <?php 
+                                    if ($v->status == 'D') {
+                                      echo "<td>".$v->nama_akun."</td>";
+                                    } else {
+                                      echo "<td align='right'>".$v->nama_akun."</td>";
+                                    }
+                                    ?>
                                     <td style="text-align:center;"><?php echo $v->nip; ?></td>
                                     <td><?php echo $v->keterangan; ?></td>
                                     <td style="text-align:right;">
