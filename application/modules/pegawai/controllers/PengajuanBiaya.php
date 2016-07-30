@@ -48,6 +48,7 @@ class PengajuanBiaya extends CI_Controller {
 						    ->get()->row();
 	 	$data['pengajuan'] =  $this->db->select('*')
 							->where('id_pegawai',$data['datapegawai']->id_pegawai)
+							->where('status_pengajuan','Approved')
 							->order_by("id_pengajuan_biaya","desc")
 							->limit('1')
 							->from('pengajuan_biaya')
@@ -209,12 +210,16 @@ class PengajuanBiaya extends CI_Controller {
 		$id_pengajuan_biaya = $_POST['id_pengajuan_biaya'];
 		$data['id_pengajuan_biaya'] = $id_pengajuan_biaya;
 		$data['detail'] =  $this->PGUraianPengajuanBiayaT->tampilUraianPengajuan($id_pengajuan_biaya)->result_object();
-		$data['data_row'] = $this->db->select('*')
+		$data['data_row'] = $this->db->select('pengajuan_biaya.id_pegawai,pengajuan_biaya.tanggal,pengajuan_biaya.kode_pengajuan,pengajuan_biaya.id_pencairan_biaya,pengajuan_biaya.semester,
+							pencairan_biaya.jumlah_biaya,pencairan_biaya.berhasil_transfer,pencairan_biaya.gagal_transfer')
 							->from('pengajuan_biaya')
 							->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left')
 							->where('pengajuan_biaya.id_pengajuan_biaya',$id_pengajuan_biaya)
 							->get()->row();
-
+		$data['data_pegawai'] = $this->db->select('*')
+								->from('pegawai')
+								->where('id_pegawai',$data['data_row']->id_pegawai)
+								->get()->row();
 		$tr['tr'] = $this->load->view('pegawai/pengajuanBiaya/detail',$data,true);
 		echo json_encode($tr['tr']); 
 		exit;
@@ -227,7 +232,8 @@ class PengajuanBiaya extends CI_Controller {
 		$id_pengajuan_biaya = $id_pengajuan_biaya;
 		$data['id_pengajuan_biaya'] = $id_pengajuan_biaya;
 		$data['detail'] =  $this->PGUraianPengajuanBiayaT->tampilUraianPengajuan($id_pengajuan_biaya)->result_object();
-		$data['data_row'] = $this->db->select('*')
+		$data['data_row'] = $this->db->select('pengajuan_biaya.id_pegawai,pengajuan_biaya.tanggal,pengajuan_biaya.kode_pengajuan,pengajuan_biaya.id_pencairan_biaya,pengajuan_biaya.semester,
+							pencairan_biaya.jumlah_biaya,pencairan_biaya.berhasil_transfer,pencairan_biaya.gagal_transfer')
 							->from('pengajuan_biaya')
 							->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left')
 							->where('pengajuan_biaya.id_pengajuan_biaya',$id_pengajuan_biaya)

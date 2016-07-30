@@ -22,6 +22,7 @@ class SDJurnalT extends JurnalT {
 		$this->db->where('jurnal.id_pegawai',$id_pegawai);
 		$this->db->where('jurnal.status','D');
 		$this->db->where('jurnal.status_aktif is true');
+		$this->db->where('jurnal.id_pencairan_biaya is not null');
 		$query = $this->db->get();
 		return $query;
 	}

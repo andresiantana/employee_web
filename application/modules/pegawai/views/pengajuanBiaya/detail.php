@@ -25,24 +25,23 @@
                 <th height="50" colspan="9" class="judul">DETAIL PENGAJUAN</th>
             </tr>
         </table>
-        <table align="center">            
-            <tr>
-                <th>No. Pengajuan:</th>
-                <td><?php echo $data_row->kode_pengajuan; ?></td>
-
-                <th>Nama Pegawai:</th>
-                <td><?php echo $data_pegawai->nama_lengkap; ?></td>
-            </tr>
-            <tr>
-                <th>Tgl. Pengajuan:</th>
-                <td><?php echo date('d M Y',strtotime($data_row->tanggal)); ?></td>
-
-                <th>NIP:</th>
-                <td><?php echo $data_pegawai->nip; ?></td>
-            </tr>
-        </table>
-
 <?php }else { $style=''; } ?>
+<table <?php echo $style; ?> class="table table-striped table-bordered table-hover">            
+  <tr>
+      <th>Nama Pegawai:</th>
+      <td><?php echo $data_pegawai->nama_lengkap; ?></td>
+
+      <th>Semester:</th>
+      <td><?php echo $data_row->semester; ?></td>
+  </tr>
+  <tr>
+      <th>NIP:</th>
+      <td><?php echo $data_pegawai->nip; ?></td>
+
+      <th>NIDN:</th>
+      <td><?php echo $data_pegawai->nidn; ?></td>      
+  </tr>
+</table>
 <table <?php echo $style; ?> class="table table-striped table-bordered table-hover">
     <thead>
         <tr>

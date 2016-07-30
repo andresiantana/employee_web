@@ -36,7 +36,7 @@ class PengajuanBiayaT extends CI_Model {
 		$approve = 'Approved';
 		$this->db->select('*');
 		$this->db->from('pengajuan_biaya');
-		$this->db->where('status_pengajuan is NULL OR id_pencairan_biaya is NULL');
+		$this->db->where('status_pengajuan is NULL');
 		if($id_pegawai != ''){
 			$this->db->where('id_pegawai', $id_pegawai);
 		}

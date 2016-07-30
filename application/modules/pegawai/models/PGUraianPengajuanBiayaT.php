@@ -16,11 +16,12 @@ class PGUraianPengajuanBiayaT extends UraianPengajuanBiayaT {
 	}
 
 	public function tampilUraianPengajuan($id_pengajuan_biaya = null){
-		$this->db->select('*');
+		$this->db->select('uraian_pengajuan_biaya.id_kategori_biaya,sum(uraian_pengajuan_biaya.nominal) as nominal, sum(uraian_pengajuan_biaya.nominal_disetujui) as nominal_disetujui,pengajuan_biaya.kode_pengajuan,pengajuan_biaya.tanggal,kategori_biaya.nama_kategori');
 		$this->db->from('uraian_pengajuan_biaya');
 		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pengajuan_biaya = uraian_pengajuan_biaya.id_pengajuan_biaya');
 		$this->db->join('kategori_biaya', 'kategori_biaya.id_kategori_biaya = uraian_pengajuan_biaya.id_kategori_biaya');
 		$this->db->where('pengajuan_biaya.id_pengajuan_biaya',$id_pengajuan_biaya);
+		$this->db->group_by('uraian_pengajuan_biaya.id_kategori_biaya');
 		$query = $this->db->get();
 		return $query;
 	}

@@ -106,12 +106,29 @@
     <p id="modal1Desc">
         <div class="form-group">
             <label>Status Kelulusan</label>
-            <select class="form-control" name="status_lulus" id="status_lulus">
+            <select class="form-control" name="status_lulus" id="status_lulus" onchange="setIjazah(this);">
                 <option value="">-Pilih Status-</option>
                 <option value="Lulus">Lulus</option>
                 <option value="Belum Lulus">Belum Lulus</option>
+                <option value="Drop Out">Drop Out (DO)</option>
             </select>
         </div>   
+        <div id="ijazah">
+          <div class="form-group">
+            <label>Tanggal Ijazah</label>
+              <input type="text" class="form-control datepickerNew" id="tanggal_ijazah" name="tanggal_ijazah" required>
+          </div>
+          <div class="form-group">
+            <label>No. Ijazah</label>
+              <input type="text" class="form-control" id="no_ijazah" name="no_ijazah" required>
+          </div>
+          <div class="form-group ">
+              <label>Upload Ijazah</label>
+              <div class="controls">
+                  <input class="form-control" type="file" name="upload_ijazah" id="upload_ijazah">
+              </div>                    
+          </div>
+        </div>
         <div class="form-group">
           <label>Tanggal Selesai Studi</label>
           <!-- <div class="myOwnClass"> -->
@@ -140,6 +157,19 @@
 
 <script src="<?php echo base_url('assets/template/Bluebox/assets/js/jquery-1.10.2.js');?>"></script>
 <script type="text/javascript">
+$('#ijazah').hide();
+function setIjazah(obj){
+  var status = obj.value;
+  if(status == "Lulus"){
+    $('#ijazah').show();
+    $('#tanggal_ijazah').attr('required');
+    $('#no_ijazah').attr('required');
+  }else{
+    $('#ijazah').hide();
+    $('#tanggal_ijazah').removeAttr('required');
+    $('#no_ijazah').removeAttr('required');
+  }
+}
 function prd_download(file)
 {   
     file_name = file;
@@ -235,12 +265,28 @@ function updateStatusLulus(id_pegawai){
     var id_pegawai = $('#pegawai_id').val();
     var status_lulus = $('#status_lulus').val();
     var tanggal_selesai_studi = $('#tanggal_selesai_studi').val();
+    var tanggal_ijazah = $('#tanggal_ijazah').val();
+    var no_ijazah = $('#no_ijazah').val();
+    var upload_ijazah = $('#upload_ijazah').val();
     var data = {
       id_pegawai    : id_pegawai,
       status_kelulusan : status_lulus,
-      tanggal_selesai_studi:tanggal_selesai_studi
+      tanggal_selesai_studi:tanggal_selesai_studi,
+      tanggal_ijazah:tanggal_ijazah,
+      no_ijazah:no_ijazah,
+      upload_ijazah:upload_ijazah
     }
 
+    if(status_lulus == "Lulus"){
+        if(tanggal_ijazah == ''){
+        alert("Tanggal Ijazah wajib diisi");
+        return false;
+      }
+      if(no_ijazah == ''){
+        alert("No. Ijazah wajib diisi");
+        return false;
+      }
+    }
     if(status_lulus == ''){
       alert("Status Lulus wajib diisi");
       return false;
@@ -251,7 +297,7 @@ function updateStatusLulus(id_pegawai){
     }
     $.ajax({
       url     : "<?php echo base_url('sdm/daftarPegawai/updateStatusLulus'); ?>",
-      type    : "GET",
+      type    : "POST",
       data    : data,
       dataType: 'json',
       success : function (data) {

@@ -16,6 +16,9 @@ class DaftarPegawai extends CI_Controller {
         $this->load->model('SDPegawai');
         $this->load->model('Notifikasi');
         $this->load->model('SDJurnalT');
+
+        $this->file_path = realpath(APPPATH . '../data/file/pegawai/ijazah/');
+       	$this->file_path_url = base_url() . 'data/file/pegawai/ijazah/';
 	}
 
 	public function index()
@@ -197,10 +200,33 @@ class DaftarPegawai extends CI_Controller {
     {
     	$status = '';
 
-        $id_pegawai = isset($_GET['id_pegawai']) ? $_GET['id_pegawai'] : null;
-        $status_kelulusan = isset($_GET['status_kelulusan']) ? $_GET['status_kelulusan'] : null;
-        $tanggal_selesai_studi = isset($_GET['tanggal_selesai_studi']) ? $_GET['tanggal_selesai_studi'] : null;
+        $id_pegawai = isset($_POST['id_pegawai']) ? $_POST['id_pegawai'] : null;
+        $status_kelulusan = isset($_POST['status_kelulusan']) ? $_POST['status_kelulusan'] : null;
+        $tanggal_selesai_studi = isset($_POST['tanggal_selesai_studi']) ? $_POST['tanggal_selesai_studi'] : null;
+        $tanggal_ijazah = isset($_POST['tanggal_ijazah']) ? $_POST['tanggal_ijazah'] : null;
+        $no_ijazah = isset($_POST['no_ijazah']) ? $_POST['no_ijazah'] : null;
+        $upload_ijazah = isset($_POST['upload_ijazah']) ? $_POST['upload_ijazah'] : null;
+        $upload = '';
+        $status_upload = false;
+        echo $_POST['upload_ijazah'];exit;
+        // upload foto
+			$config['upload_path']    = $this->file_path;
+	     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
+	     	$config['max_size']       = '2000';
+	     	$config['max_width']      = '2000';
+	     	$config['max_height']     = '2000';
+	     	$config['file_name']      = 'ijazah-'.trim(str_replace(" ","",date('dmYHis')));
+	     	$this->load->library('upload', $config);
+	 	 	$this->upload->initialize($config);
 
+	 		if ($this->upload->do_upload('upload_ijazah')){
+	 			$upload = $this->upload->file_name;
+				$status_upload = true;
+	 		}else{			
+	 			$status_upload = true;
+	 		} 
+
+	 		echo $upload;
         // load data pegawai
         $pegawai = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
         $tanggal_mulai_studi = $pegawai->tanggal_mulai_studi;
@@ -230,7 +256,10 @@ class DaftarPegawai extends CI_Controller {
         $object = array(
 			'status_kelulusan'=>$status_kelulusan,
 			'tanggal_selesai_studi'=>$tanggal_selesai_studi,
-			'lama_bulan_studi'=>$bulan
+			'lama_bulan_studi'=>$bulan,
+			'tanggal_ijazah'=>$tanggal_ijazah,
+			'no_ijazah'=>$no_ijazah,
+			'upload_ijazah'=>$upload
 		);
 
 		$this->db->where('id_pegawai', $id_pegawai);
@@ -246,66 +275,67 @@ class DaftarPegawai extends CI_Controller {
 			$insert = $this->Notifikasi->insert($object);
 			if ($status_kelulusan == 'Lulus') {
 				$dataJurnal = $this->SDJurnalT->tampilJurnalPegawaiBiaya($id_pegawai)->row();
-				// Jurnal Pegawai Studi Lanjut		
-				$object_jurnal_kredit = array(
-					'id_jurnal'=>'',
-					'id_pencairan_biaya'=>NULL,
-					'id_pegawai'=>$id_pegawai,
-					'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
-					'no_akun'=>111,
-					'keterangan'=>'Pegawai Studi Lanjut',
-					'status'=>'K',
-					'biaya'=>$dataJurnal->biaya,
-					'status_aktif'=>true
-				);	
-				$object_jurnal_debit = array(
-					'id_jurnal'=>'',
-					'id_pencairan_biaya'=>NULL,
-					'id_pegawai'=>$id_pegawai,
-					'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
-					'no_akun'=>114,
-					'keterangan'=>'Pegawai Studi Lanjut',
-					'status'=>'D',
-					'biaya'=>$dataJurnal->biaya,
-					'status_aktif'=>true
-				);	
-
-				$this->JurnalT->insert($object_jurnal_debit);
-		 		$this->JurnalT->insert($object_jurnal_kredit);
-
-		 		$amortisasi = (2*$bulan)+12;
-        		$biaya_amortisasi = ($dataJurnal->biaya/$amortisasi);
-
-        		for($i = 0; $i<$amortisasi; $i++){
-        			// Jurnal Beban Amortisasi							
-					$object_jurnal_amortisasi_kredit = array(
+				if($dataJurnal->biaya != ''){
+					// Jurnal Pegawai Studi Lanjut		
+					$object_jurnal_kredit = array(
+						'id_jurnal'=>'',
+						'id_pencairan_biaya'=>NULL,
+						'id_pegawai'=>$id_pegawai,
+						'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
+						'no_akun'=>111,
+						'keterangan'=>'Pegawai Studi Lanjut',
+						'status'=>'K',
+						'biaya'=>$dataJurnal->biaya,
+						'status_aktif'=>true
+					);	
+					$object_jurnal_debit = array(
 						'id_jurnal'=>'',
 						'id_pencairan_biaya'=>NULL,
 						'id_pegawai'=>$id_pegawai,
 						'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
 						'no_akun'=>114,
 						'keterangan'=>'Pegawai Studi Lanjut',
-						'status'=>'K',
-						'biaya'=>$biaya_amortisasi,
-						'status_aktif'=>true
-					);	
-
-					$object_jurnal_amortisasi_debit = array(
-						'id_jurnal'=>'',
-						'id_pencairan_biaya'=>NULL,
-						'id_pegawai'=>$id_pegawai,
-						'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
-						'no_akun'=>511,
-						'keterangan'=>'Beban Amortisasi PID',
 						'status'=>'D',
-						'biaya'=>$biaya_amortisasi,
+						'biaya'=>$dataJurnal->biaya,
 						'status_aktif'=>true
 					);	
 
-					$this->JurnalT->insert($object_jurnal_amortisasi_debit);
-			 		$this->JurnalT->insert($object_jurnal_amortisasi_kredit);
-        		}
+					$this->JurnalT->insert($object_jurnal_debit);
+			 		$this->JurnalT->insert($object_jurnal_kredit);
 
+			 		$amortisasi = (2*$bulan)+12;
+	        		$biaya_amortisasi = ($dataJurnal->biaya/$amortisasi);
+
+	        		for($i = 0; $i<$amortisasi; $i++){
+	        			// Jurnal Beban Amortisasi							
+						$object_jurnal_amortisasi_kredit = array(
+							'id_jurnal'=>'',
+							'id_pencairan_biaya'=>NULL,
+							'id_pegawai'=>$id_pegawai,
+							'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
+							'no_akun'=>114,
+							'keterangan'=>'Pegawai Studi Lanjut',
+							'status'=>'K',
+							'biaya'=>$biaya_amortisasi,
+							'status_aktif'=>true
+						);	
+
+						$object_jurnal_amortisasi_debit = array(
+							'id_jurnal'=>'',
+							'id_pencairan_biaya'=>NULL,
+							'id_pegawai'=>$id_pegawai,
+							'tanggal_jurnal'=>date('Y-m')."-".$jumlah_hari,
+							'no_akun'=>511,
+							'keterangan'=>'Beban Amortisasi PID',
+							'status'=>'D',
+							'biaya'=>$biaya_amortisasi,
+							'status_aktif'=>true
+						);	
+
+						$this->JurnalT->insert($object_jurnal_amortisasi_debit);
+				 		$this->JurnalT->insert($object_jurnal_amortisasi_kredit);
+	        		}
+				}
 			}
 
 			// update jurnal aktif = false

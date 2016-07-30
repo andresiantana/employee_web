@@ -125,9 +125,13 @@
                     <ol style="list-style:none;">
                         <?php 
                             $total = 0;
+                            $nominal_pengajuan = 0;
+                            $nominal_disetujui = 0;
                             foreach($detail_rincian as $i => $rincian){
                             if($v->id_pengajuan_biaya == $rincian->id_pengajuan_biaya){
                                 $total += $rincian->nominal_disetujui;
+                                $nominal_pengajuan += $rincian->nominal;
+                                $nominal_disetujui += $rincian->nominal_disetujui;
                          ?>
                             <li style='text-align:right;'><?php echo number_format($rincian->nominal_disetujui); ?></li>
                         <?php } ?>
@@ -135,6 +139,14 @@
                     </ol>
                 </td>
                 <td></td>
+            </tr>            
+            <tr>
+                <td colspan="3" style="text-align:right;"><b><i>Biaya Pengajuan</i></a></td>
+                <td style='text-align:right;'><?php echo number_format($nominal_pengajuan); ?></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align:right;"><b><i>Biaya Disetujui</i></a></td>
+                <td style='text-align:right;'><?php echo number_format($nominal_disetujui); ?></td>
             </tr>
             <tr>
                 <td colspan="3" style="text-align:right;"><b><i>Total</i></a></td>
