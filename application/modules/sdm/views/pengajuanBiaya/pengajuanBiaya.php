@@ -112,7 +112,8 @@
                             <select class="form-control" name="status_pengajuan" id="status_pengajuan" onChange='setStatus(this);' required>
                                 <option value="">-Pilih Status-</option>
                                 <option value="Approved">Approved</option>
-                                <option value="Reject">Reject</option>
+                                <option value="Reject Semester">Reject Semester</option>
+                                <option value="Reject Seterusnya">Reject Seterusnya</option>
                             </select>
                         </div>  
                         <div class="form-group" id="reject" style="display:none;">
@@ -222,7 +223,7 @@
     function setStatus(obj) {
         unformatNumberSemua();
         var status_pengajuan = $('#status_pengajuan').val();
-        if (status_pengajuan == 'Reject') {
+        if (status_pengajuan == 'Reject Semester') {
             $('#reject').removeAttr('style','display:none;');
             $('#approved').attr('style','display:none;');
             $('#approved_biaya').attr('style','display:none;');
@@ -230,7 +231,15 @@
                 $(this).find('input[name$="[nominal_disetujui]"]').attr('readonly',true);
             });
             $('#tambahBiaya').hide();
-        } else if(status_pengajuan == 'Approved'){
+        } else if (status_pengajuan == 'Reject Seterusnya') {
+            $('#reject').removeAttr('style','display:none;');
+            $('#approved').attr('style','display:none;');
+            $('#approved_biaya').attr('style','display:none;');
+            $('#tabel-biaya > tbody > tr').each(function(){
+                $(this).find('input[name$="[nominal_disetujui]"]').attr('readonly',true);
+            });
+            $('#tambahBiaya').hide();
+        }else if(status_pengajuan == 'Approved'){
             $('#reject').attr('style','display:none;');
             $('#approved').removeAttr('style','display:none;');
             $('#approved_biaya').removeAttr('style','display:none;');
