@@ -84,8 +84,13 @@
                                                 $warna = 'green';
                                                 $huruf = '<a href="#"><font style="color:'.$warna.';">'.$data.'</font></a>';
                                                 $button = '<a href='.base_url('pegawai/PengajuanBiaya/index/'.$v->id_pengajuan_biaya).' class="btn btn-small btn-success" rel="tooltip" title="Klik untuk ubah Pengajuan Biaya Pegawai"><i class="fa fa-edit"> </i></a>';
-                                            }else if($v->status_pengajuan == 'Reject'){
-                                                $data = 'Reject';
+                                            }else if($v->status_pengajuan == 'Reject Semester'){
+                                                $data = 'Reject Semester';
+                                                $warna = 'red';
+                                                $huruf = '<a href="#" rel="tooltip" title="Lihat Alasan" onclick="setDialog(\''.$v->alasan_status.'\');"><font style="color:'.$warna.';">'.$data.'</font></a>';
+                                                $button = '-';
+                                            }else if($v->status_pengajuan == 'Reject Seterusnya'){
+                                                $data = 'Reject Seterusnya';
                                                 $warna = 'red';
                                                 $huruf = '<a href="#" rel="tooltip" title="Lihat Alasan" onclick="setDialog(\''.$v->alasan_status.'\');"><font style="color:'.$warna.';">'.$data.'</font></a>';
                                                 $button = '-';
@@ -109,10 +114,13 @@
                                     </td>
                                     <td>
                                         <?php 
-                                            if($v->tanggal_penerimaan == ''){
+                                            if($v->tanggal_penerimaan == '' && $v->status_pengajuan == "Approved"){
                                         ?>
                                             <a href="#approvedPenerimaan" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Approve Penerimaan Biaya" onclick="setIdPencairanBiaya(<?php echo $v->id_pencairan_biaya; ?>,<?php echo $v->id_pegawai; ?>);"><i class="fa fa-check"> </i></a>
-                                        <?php }else{ ?>
+                                        <?php }
+                                        else if($v->status_pengajuan != "Approved"){
+                                            echo "-";
+                                        }else{ ?>
                                         <font style="color:green;"><?php echo "Dana Sudah Diterima pada tanggal ".date('d M Y',strtotime($v->tanggal_penerimaan)); ?></font>
                                         <?php } ?>
                                     </td>

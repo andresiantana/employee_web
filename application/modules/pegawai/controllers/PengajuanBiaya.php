@@ -271,6 +271,12 @@ class PengajuanBiaya extends CI_Controller {
 
 			$insert = $this->Notifikasi->insert($data);
 			if($insert){
+				$update_jurnal = array(
+					'konfirmasi_terima'=>TRUE
+				);
+
+				$this->db->where('id_pencairan_biaya', $id_pencairan_biaya);
+				$this->db->update('jurnal', $update_jurnal);
 				$status_notifikasi = true;
 			}else{
 				$status_notifikasi = false;

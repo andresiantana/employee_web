@@ -13,6 +13,7 @@ class JurnalT extends CI_Model {
 		$this->db->where("MONTH(jurnal.tanggal_jurnal)", $bulan);
 		$this->db->where("YEAR(jurnal.tanggal_jurnal)", $tahun);
 		$this->db->where("jurnal.status_aktif is true");
+		$this->db->where("jurnal.konfirmasi_terima is true");
 		$this->db->order_by("jurnal.id_jurnal","asc");
 		$query = $this->db->get();
         return $query;
