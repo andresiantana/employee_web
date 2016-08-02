@@ -27,6 +27,7 @@
                                 <th>Surat Lulus Seleksi</th>
                                 <th>Surat Terima Beasiswa</th>
                                 <th>Biaya SPP</th>
+                                <th>Biaya Disetujui</th>
                                 <th class="td-actions">Aksi</th>
                             </tr>
                         </thead>
@@ -51,6 +52,7 @@
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_lulus_seleksi; ?>')"><?php echo $v->surat_lulus_seleksi; ?></a></td>
                                     <td><a href="javascript:prd_download('<?php echo $v->surat_terima_beasiswa; ?>')"><?php echo $v->surat_terima_beasiswa; ?></a></td>
                                     <td style="text-align:right;"><?php echo number_format($v->biaya_spp,0,'',','); ?></td>
+                                    <td style="text-align:right;"><?php echo number_format($v->berhasil_transfer,0,'',','); ?></td>
                                     <td class="td-actions">
                                         <a href="javascript:void(0)" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Cetak Kartu PID" onclick="print('PRINT',<?php echo $v->id_pegawai; ?>,<?php echo $v->id_pengajuan_biaya; ?>);"><i class="fa fa-print"> </i></a>
                                     </td>

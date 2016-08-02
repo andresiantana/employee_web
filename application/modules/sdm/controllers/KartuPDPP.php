@@ -34,7 +34,7 @@ class KartuPDPP extends CI_Controller {
 			echo json_encode($tr['tr']); 
 			exit;
 		}else{
-			$data['data']	= $this->SDPegawai->tampilDataPegawaiApprovePDPP()->result_object();		
+			$data['data']	= $this->SDPegawai->tampilDataPegawaiApprovePDPP()->result_object();
 		}	
 		$this->template->display('sdm/KartuPDPP/index',$data);
 	}
@@ -47,7 +47,8 @@ class KartuPDPP extends CI_Controller {
         force_download($nama_file, $data);
 	}
 
-	public function printKartu($id_pegawai = null, $id_pengajuan_biaya = null){
+	public function printKartu($id_pegawai = null, $id_pengajuan_biaya = null)
+	{
 		$id_pegawai = $_GET['id_pegawai'];
 		$id_pengajuan_biaya = $_GET['id_pengajuan_biaya'];
 		$data['username'] = $this->session->userdata('username');

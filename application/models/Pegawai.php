@@ -53,6 +53,7 @@ class Pegawai extends CI_Model {
 		$this->db->join('fakultas', 'fakultas.kode_fakultas = pegawai.kode_fakultas','left');
 		$this->db->join('prodi', 'prodi.id_prodi = pegawai.id_prodi','left');
 		$this->db->join('pengajuan_biaya', 'pengajuan_biaya.id_pegawai = pegawai.id_pegawai','left');
+		$this->db->join('pencairan_biaya','pengajuan_biaya.id_pengajuan_biaya = pencairan_biaya.id_pengajuan_biaya');
 		if(isset($_GET['pages'])){
 			if(!empty($_GET['pages']) && $_GET['pages'] == 'pegawai'){
 				$this->db->where('pegawai.id_user',$this->session->userdata('id_user'));
