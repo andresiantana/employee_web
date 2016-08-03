@@ -208,7 +208,6 @@ class DaftarPegawai extends CI_Controller {
         $upload_ijazah = isset($_POST['upload_ijazah']) ? $_POST['upload_ijazah'] : null;
         $upload = '';
         $status_upload = false;
-        echo $_POST['upload_ijazah'];exit;
         // upload foto
 			$config['upload_path']    = $this->file_path;
 	     	$config['allowed_types']  = 'gif|jpg|png|jpeg|pdf|doc|txt|xml|zip|rar|docx|xls|xlsx';
@@ -225,8 +224,6 @@ class DaftarPegawai extends CI_Controller {
 	 		}else{			
 	 			$status_upload = true;
 	 		} 
-
-	 		echo $upload;
         // load data pegawai
         $pegawai = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
         $tanggal_mulai_studi = $pegawai->tanggal_mulai_studi;
@@ -305,6 +302,7 @@ class DaftarPegawai extends CI_Controller {
 
 			 		$amortisasi = (2*$bulan)+12;
 	        		$biaya_amortisasi = ($dataJurnal->biaya/$amortisasi);
+	        		echo $amortisasi;exit;
 
 	        		for($i = 0; $i<$amortisasi; $i++){
 	        			// Jurnal Beban Amortisasi							

@@ -120,7 +120,7 @@ class DataPegawai extends CI_Controller {
 		$biaya_spp = $this->input->post('biaya_spp');
 		$id_user = $this->session->userdata('id_user');
 		$id_pegawai = ($this->input->post('id_pegawai')) ? $this->input->post('id_pegawai') : null;
-		$lama_bulan_studi =  $this->input->post('lama_bulan_studi');
+		$target_semester =  $this->input->post('target_semester');
 		$tanggal_input = date('Y-m-d');
 
 		// daftar file yang sudah di upload
@@ -247,7 +247,7 @@ class DataPegawai extends CI_Controller {
 			'biaya_spp' => $biaya_spp,
 			'id_user' => $id_user,
 			'tanggal_mulai_studi' => $tanggal_studi,
-			'lama_bulan_studi' => $lama_bulan_studi,
+			'target_semester' => $target_semester,
 			'tanggal_input'=>$tanggal_input,
 			'fakultas_studi'=>$fakultas_studi,
 			'prodi_studi'=>$prodi_studi,

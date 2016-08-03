@@ -72,7 +72,11 @@
                                         <a href="<?php echo base_url('sdm/daftarPegawai/notifikasi/'.$v->id_pegawai); ?>" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk kirim notifikasi"><i class="fa fa-bell"> </i></a>
                                     </td>
                                     <td>
-                                        <a href="#update_lulus" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Update Lulus" onclick="setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-pencil"> </i></a>
+                                      <?php if($v->status_kelulusan == '' ){ ?>
+                                          <a href="#update_lulus" class="btn btn-small btn-success" rel="tooltip" title="Klik untuk Update Lulus" onclick="setIdPegawai(<?php echo $v->id_pegawai; ?>);"><i class="fa fa-pencil"> </i></a>
+                                      <?php }else{ ?>
+                                      <?php echo $v->status_kelulusan; ?>
+                                      <?php } ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

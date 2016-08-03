@@ -71,14 +71,16 @@
                                     $disabled='';
                                 }
                             ?>
-                            <select class="form-control" name="semester" id="semester" required <?php echo $disabled; ?>>
+                            <span class="required" style="color:red;">Anda dianjurkan mengajukan semester <?php echo $i+1; ?></span>
+                            <input type="hidden" id="semester_dianjurkan" value="<?php echo $i+1; ?>">
+                            <select class="form-control" name="semester" id="semester" onchange="cekSemester(this);" required <?php echo $disabled; ?>>
                                 <option value="">-Pilih Semester-</option>
                                 <?php                                     
                                     for ($i = $i; $i < 8; $i++) {                                    
                                 ?>
                                     <option value="<?php echo ($i+1); ?>"><?php echo ($i+1); ?></option>
                                 <?php } ?>
-                            </select>
+                            </select>                            
                         </div>
                         <div class="form-group">
                             <label>Lokasi Pendidikan</label>
@@ -219,6 +221,17 @@
             row++;
         });
         
+    }
+
+    function cekSemester(obj){
+        var semester_dipilih = obj.value;
+        var semester_dianjurkan = $('#semester_dianjurkan').val();
+
+        if(semester_dianjurkan != semester_dipilih){
+            alert('Anda harus mengajukan semester ke '+semester_dianjurkan+' terlebih dahulu!');
+            $('#semester').val(semester_dianjurkan);
+            return false;
+        }
     }
 
     function cekInputan(){

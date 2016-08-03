@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php $total = 0; if(count($detail) > 0){ ?>
+        <?php $total = 0; $nominal_pengajuan = 0; $nominal_disetujui = 0; if(count($detail) > 0){ ?>
         <?php foreach($detail as $key => $v){ ?>
             <tr>
                 <td><?php echo $key+1; ?></td>
@@ -23,12 +23,23 @@
                 <td style="text-align:right;"><?php echo number_format($v->nominal,0,'',','); ?></td>
                 <td style="text-align:right;"><?php echo number_format($v->nominal_disetujui,0,'',','); ?></td>
             </tr>
-        <?php $total += $v->nominal_disetujui;} ?>
+        <?php $total += $v->nominal_disetujui;
+                $nominal_pengajuan += $v->nominal;
+                $nominal_disetujui += $v->nominal_disetujui;
+        } ?>
         <?php }else{ ?>
             <tr><td colspan="5" style="text-align:left;">Data tidak ditemukan.</td></tr>
         <?php } ?>
     </tbody>
     <tfoot>
+        <tr>
+            <td colspan="5" style="text-align:right;"><b><i>Biaya Pengajuan</i></a></td>
+            <td style='text-align:right;'><?php echo number_format($nominal_pengajuan); ?></td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align:right;"><b><i>Biaya Disetujui</i></a></td>
+            <td style='text-align:right;'><?php echo number_format($nominal_disetujui); ?></td>
+        </tr>
         <tr>
             <td colspan="5"><b><i>Total</i></b></td>
             <td style="text-align:right;"><?php echo number_format($total); ?></td>

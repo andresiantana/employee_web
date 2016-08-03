@@ -264,6 +264,10 @@ function setDetailPengajuan(id_pengajuan_biaya){
 }
 
 function setIdPencairanBiaya(id_pencairan_biaya,id_pegawai){
+    if(id_pencairan_biaya == ''){
+        alert('Status Penerimaan tidak dapat diubah karena belum dicairkan di Bagian Keuangan!');
+        return false;
+    }
     $('#id_pencairan_biaya').val(id_pencairan_biaya);
     $('#id_pegawai').val(id_pegawai);
 }

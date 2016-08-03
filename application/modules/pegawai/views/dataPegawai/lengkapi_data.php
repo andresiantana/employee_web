@@ -124,7 +124,7 @@
                 </div>
                 <div class="form-group">
                     <label>Target Semester</label>
-                    <input class="form-control numbers-only" type="text" name="lama_bulan_studi" value="<?php echo isset($datapegawai->lama_bulan_studi) ? $datapegawai->lama_bulan_studi : ""; ?>" required>
+                    <input class="form-control numbers-only" type="text" name="target_semester" value="<?php echo isset($datapegawai->target_semester) ? $datapegawai->target_semester : ""; ?>" required>
                 </div>
             </div>
             <div class="col-md-6">
