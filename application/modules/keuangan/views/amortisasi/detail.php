@@ -28,6 +28,22 @@
 
 <?php }else { $style=''; } ?>
 <table <?php echo $style; ?> class="table table-striped table-bordered table-hover">
+       <tr>
+          <th>Nama Pegawai:</th>
+          <td><?php echo $datapegawai->nama_lengkap; ?></td>
+
+          <th>Jenjang Studi:</th>
+          <td><?php echo $datapegawai->jenjang_studi; ?></td>
+      </tr>
+      <tr>
+          <th>NIP:</th>
+          <td><?php echo $datapegawai->nip; ?></td>
+
+          <th>NIDN:</th>
+          <td><?php echo $datapegawai->nidn; ?></td>      
+      </tr>
+</table><br/>
+<table <?php echo $style; ?> class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th>Bulan Amortisasi</th>

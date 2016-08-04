@@ -84,6 +84,7 @@ class Amortisasi extends CI_Controller {
 		$data['id_pegawai'] = $id_pegawai;
 		$data['detail'] =  $this->KUPegawai->tampilDataPegawaiAmortisasiDetail($id_pegawai)->result_object();
 		$data['data_row']	= $this->KUPegawai->tampilDataPegawaiAmortisasiJumlah($id_pegawai)->row();
+		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
 		if(count($data['data_row']) > 0){
 			$data['amortisasi'] = ($data['data_row']->biaya);
 		}
