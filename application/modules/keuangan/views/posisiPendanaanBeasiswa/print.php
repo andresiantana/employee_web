@@ -18,15 +18,19 @@
   </table>
   <center><b>PENGELUARAN BIAYA</b></center><br/>
   <table>
-      <tr>
-          <td>NIP</td>
-          <td>:</td>
-          <td><?php echo $datapegawai->nip; ?></td>
+       <tr>
+          <th>Nama Pegawai:</th>
+          <td><?php echo $datapegawai->nama_lengkap; ?></td>
+
+          <th>Semester:</th>
+          <td><?php echo $data_row->semester; ?></td>
       </tr>
       <tr>
-          <td>Nama</td>
-          <td>:</td>
-          <td><?php echo $datapegawai->nama_lengkap; ?></td>
+          <th>NIP:</th>
+          <td><?php echo $datapegawai->nip; ?></td>
+
+          <th>NIDN:</th>
+          <td><?php echo $datapegawai->nidn; ?></td>      
       </tr>
 </table><br/>
 <table border="1" width="100%" cellpadding="0" cellspacing="0">

@@ -70,7 +70,13 @@ class PosisiPendanaanBeasiswa extends CI_Controller {
 		$data['id_pencairan_biaya'] = $id_pencairan_biaya;
 		$data['id_pegawai'] = $id_pegawai;
 		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
-		$data['detail'] = $this->KUUraianPengajuanBiayaT->detailPengajuan($id_pencairan_biaya)->result_object();
+		$data['data_row'] = $this->db->select('pengajuan_biaya.id_pegawai,pengajuan_biaya.tanggal,pengajuan_biaya.kode_pengajuan,pengajuan_biaya.id_pencairan_biaya,pengajuan_biaya.semester,
+							pencairan_biaya.jumlah_biaya,pencairan_biaya.berhasil_transfer,pencairan_biaya.gagal_transfer')
+							->from('pengajuan_biaya')
+							->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left')
+							->where('pengajuan_biaya.id_pencairan_biaya',$id_pencairan_biaya)
+							->get()->row();
+		$data['detail'] = $this->KUUraianPengajuanBiayaT->detailPengajuanPencairan($id_pencairan_biaya)->result_object();
 		$tr['tr'] = $this->load->view('keuangan/posisiPendanaanBeasiswa/detail',$data,true);
 		echo json_encode($tr['tr']); 
 		exit;
@@ -81,7 +87,13 @@ class PosisiPendanaanBeasiswa extends CI_Controller {
 		$data['id_user'] = $this->session->userdata('id_user');
 		$data['nama_role'] = $this->session->userdata('nama_role');
 		$data['id_pengeluaran_biaya'] = $id_pengeluaran_biaya;
-		$data['detail'] = $this->KUUraianPengajuanBiayaT->detailPengajuan($id_pengeluaran_biaya)->result_object();
+		$data['detail'] = $this->KUUraianPengajuanBiayaT->detailPengajuanPencairan($id_pengeluaran_biaya)->result_object();
+		$data['data_row'] = $this->db->select('pengajuan_biaya.id_pegawai,pengajuan_biaya.tanggal,pengajuan_biaya.kode_pengajuan,pengajuan_biaya.id_pencairan_biaya,pengajuan_biaya.semester,
+							pencairan_biaya.jumlah_biaya,pencairan_biaya.berhasil_transfer,pencairan_biaya.gagal_transfer')
+							->from('pengajuan_biaya')
+							->join('pencairan_biaya', 'pencairan_biaya.id_pencairan_biaya = pengajuan_biaya.id_pencairan_biaya','left')
+							->where('pengajuan_biaya.id_pencairan_biaya',$id_pencairan_biaya)
+							->get()->row();
 		$data['datapegawai'] = $this->db->get_where('pegawai',array('id_pegawai'=>$id_pegawai))->row();
 		$this->load->view('keuangan/posisiPendanaanBeasiswa/print', $data);
 	}

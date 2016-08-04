@@ -106,6 +106,8 @@
         <tr>
             <td colspan="2" style="text-align:right;"><b><i>Total</i></b></td>
             <td style="text-align:right;"><?php echo number_format($total); ?></td>
+            <td></td>
+            <td></td>
         </tr>
     </tfoot>
 </table>

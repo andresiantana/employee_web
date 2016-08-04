@@ -283,7 +283,8 @@ class DaftarPegawai extends CI_Controller {
 						'keterangan'=>'Pegawai Studi Lanjut',
 						'status'=>'K',
 						'biaya'=>$dataJurnal->biaya,
-						'status_aktif'=>true
+						'status_aktif'=>true,
+						'konfirmasi_terima'=>true
 					);	
 					$object_jurnal_debit = array(
 						'id_jurnal'=>'',
@@ -294,7 +295,8 @@ class DaftarPegawai extends CI_Controller {
 						'keterangan'=>'Pegawai Studi Lanjut',
 						'status'=>'D',
 						'biaya'=>$dataJurnal->biaya,
-						'status_aktif'=>true
+						'status_aktif'=>true,
+						'konfirmasi_terima'=>true
 					);	
 
 					$this->JurnalT->insert($object_jurnal_debit);
@@ -302,7 +304,6 @@ class DaftarPegawai extends CI_Controller {
 
 			 		$amortisasi = (2*$bulan)+12;
 	        		$biaya_amortisasi = ($dataJurnal->biaya/$amortisasi);
-	        		echo $amortisasi;exit;
 
 	        		for($i = 0; $i<$amortisasi; $i++){
 	        			// Jurnal Beban Amortisasi							
@@ -315,7 +316,8 @@ class DaftarPegawai extends CI_Controller {
 							'keterangan'=>'Pegawai Studi Lanjut',
 							'status'=>'K',
 							'biaya'=>$biaya_amortisasi,
-							'status_aktif'=>true
+							'status_aktif'=>true,
+							'konfirmasi_terima'=>true
 						);	
 
 						$object_jurnal_amortisasi_debit = array(
@@ -327,7 +329,8 @@ class DaftarPegawai extends CI_Controller {
 							'keterangan'=>'Beban Amortisasi PID',
 							'status'=>'D',
 							'biaya'=>$biaya_amortisasi,
-							'status_aktif'=>true
+							'status_aktif'=>true,
+							'konfirmasi_terima'=>true
 						);	
 
 						$this->JurnalT->insert($object_jurnal_amortisasi_debit);

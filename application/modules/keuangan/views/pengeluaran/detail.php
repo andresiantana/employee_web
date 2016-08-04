@@ -1,3 +1,19 @@
+<table class="table table-striped table-bordered table-hover">            
+  <tr>
+      <th>Nama Pegawai:</th>
+      <td><?php echo $datapegawai->nama_lengkap; ?></td>
+
+      <th>Semester:</th>
+      <td><?php echo $data_row->semester; ?></td>
+  </tr>
+  <tr>
+      <th>NIP:</th>
+      <td><?php echo $datapegawai->nip; ?></td>
+
+      <th>NIDN:</th>
+      <td><?php echo $datapegawai->nidn; ?></td>      
+  </tr>
+</table>
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
