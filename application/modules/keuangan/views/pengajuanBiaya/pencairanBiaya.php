@@ -84,7 +84,7 @@
 
                             <div class="form-group">
                                 <label for="kode_pencairan">No. Transafer Bank</label>
-                                <input class="form-control numbers-only" type="text" name="kode_pencairan" placeholder="Isikan Nomor Transafer Bank" value="<?php echo isset($kode_pencairan) ? $kode_pencairan : ""; ?>" required>
+                                <input class="form-control numbers-only" type="text" name="kode_pencairan" placeholder="Isikan Nomor Transfer Bank" value="<?php echo isset($kode_pencairan) ? $kode_pencairan : ""; ?>" required>
                                 <input class="form-control" type="hidden" name="id_pencairan_biaya" value="<?php echo isset($datapencairan->id_pencairan_biaya) ? $datapencairan->id_pencairan_biaya : ""; ?>" readonly=true required>
                             </div>
                             
