@@ -20,7 +20,7 @@
                             <td style="width:30%"> <input type="text" class="form-control nama" id="nama" name="nama"></td>
                         </tr>
                         <tr>
-                            <td><label>Kode Pengeluaran</label></td>
+                            <td><label>No. Transfer Bank</label></td>
                             <td style="width:1%;"></td>
                             <td> <input type="text" class="form-control kode" id="kode_pengeluaran" name="kode_pengeluaran"></td>
 
@@ -59,7 +59,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Tanggal Pengeluaran</th>
-                                <th>Kode Pengeluaran</th>
+                                <th>No. Transfer Bank</th>
                                 <th>NIP</th>
                                 <th>Nama Pegawai</th>
                                 <th>Semester</th>

@@ -76,16 +76,16 @@
 
                             <legend> Data Pencairan Biaya </legend>
                             <div class="form-group">
-                                <label for="kode_pencairan">Kode Pencairan</label>
-                                <input class="form-control" type="text" name="kode_pencairan" placeholder="Isikan Kode Pencairan" value="<?php echo isset($kode_pencairan) ? $kode_pencairan : ""; ?>" readonly=true required>
-                                <input class="form-control" type="hidden" name="id_pencairan_biaya" value="<?php echo isset($datapencairan->id_pencairan_biaya) ? $datapencairan->id_pencairan_biaya : ""; ?>" readonly=true required>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Tanggal Pencairan</label>
                                 <div class="myOwnClass">
                                     <input type="text" class="form-control"  id="tanggal_pencairan" name="tanggal_pencairan" value="<?php echo isset($datapencairan->tanggal_pencairan) ? date('Y-m-d',strtotime($datapencairan->tanggal_pencairan)) : date('Y-m-d'); ?>">
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kode_pencairan">No. Transafer Bank</label>
+                                <input class="form-control numbers-only" type="text" name="kode_pencairan" placeholder="Isikan Nomor Transafer Bank" value="<?php echo isset($kode_pencairan) ? $kode_pencairan : ""; ?>" required>
+                                <input class="form-control" type="hidden" name="id_pencairan_biaya" value="<?php echo isset($datapencairan->id_pencairan_biaya) ? $datapencairan->id_pencairan_biaya : ""; ?>" readonly=true required>
                             </div>
                             
                             <div class="form-group">

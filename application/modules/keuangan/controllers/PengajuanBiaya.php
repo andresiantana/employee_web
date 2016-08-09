@@ -75,7 +75,7 @@ class PengajuanBiaya extends CI_Controller {
 		$data['kategori'] 		= $this->db->select('*')
 									->from('kategori_biaya')
 									->get()->result_object();
-		$data['kode_pencairan'] = $this->KUPencairanBiayaT->noPencairanBiaya();
+		// $data['kode_pencairan'] = $this->KUPencairanBiayaT->noPencairanBiaya();
 		if(!empty($id)){			
 			$data['datapencairan'] = $this->db->get_where('pencairan_biaya',array('id_pencairan_biaya'=>$id))->row();
 			$data['kode_pencairan'] = $data['datapencairan']->kode_pencairan;
@@ -111,11 +111,7 @@ class PengajuanBiaya extends CI_Controller {
 		$berhasil_transfer = $this->input->post('berhasil_transfer');
 		$gagal_transfer = $this->input->post('gagal_transfer');
 		$keterangan = $this->input->post('keterangan');
-
 		$tanggal = $this->input->post('tanggal_pencairan');
-		// $tgl = explode("/",$tanggal);		
-		// $tanggal = $tgl[2]."-".$tgl[1]."-".$tgl[0];
-		// $tanggal = $tanggal;
 
 		$data = array(
 			'id_pencairan_biaya' =>'',
